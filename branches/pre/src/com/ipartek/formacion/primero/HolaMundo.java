@@ -6,7 +6,7 @@ public class HolaMundo {
 
 	public static void main(String[] args) {
 		
-		
+		//cambio Mario
 		String cadena = "Hola";
 		String nombre = "Pepe";
 		
