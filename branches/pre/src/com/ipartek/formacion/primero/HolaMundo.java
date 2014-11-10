@@ -10,7 +10,7 @@ public class HolaMundo {
 		String cadena = "Hola";
 		String nombre = "Pepe";
 		
-		int repeticion = 10;
+		int repeticion = 12;
 		
 		for (int i = 0; i < repeticion; i++) {
 			
