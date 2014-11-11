@@ -1,17 +1,17 @@
 package com.ipartek.formacion.primero.bean;
 
-public class Profesor extends Persona {
+public class Formador extends Persona {
 
 	private float sueldo;
 
-	public static final float MIN_SUELDO = 1.0f;
-	public Profesor() {
+	public static final float MIN_SUELDO = 0.0f;
+	public Formador() {
 		super();
 		sueldo = MIN_SUELDO;
 	}
 
-	public Profesor(float sueldo) {
-		super();
+	public Formador(String nombre, String apellido1, String dni, int edad, float sueldo) {
+		super(nombre,apellido1,edad,dni);
 		setSueldo(sueldo);
 	}
 
