@@ -1,6 +1,8 @@
 package com.ipartek.formacion.proyectoclase.pojo.herencia;
 
-public class VehiculoElectrico extends Vehiculo {
+import java.io.Serializable;
+
+public class VehiculoElectrico extends Vehiculo implements Arrancable, Serializable {
 
 	private Double capaBateria; 
 	/**
@@ -33,6 +35,13 @@ public class VehiculoElectrico extends Vehiculo {
 	public void setCapaBateria(Double capaBateria) {
 		if(capaBateria>=MIN_CAP_BATERIA)
 			this.capaBateria = capaBateria;
+	}
+
+
+	@Override
+	public Boolean arrancar() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
