@@ -5,9 +5,9 @@ import java.util.ArrayList;
 /**
  * Hereda de la clase Persona
  * Se compone de los siguientes campos
- * <ul>
+ * <ol>
  *   <li>calificaciones {@code ArrayList<Calificacion>}}
- * </ul> 
+ * </ol> 
  * @author Jose A. Perez
  *
  */

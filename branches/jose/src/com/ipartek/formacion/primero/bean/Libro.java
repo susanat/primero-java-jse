@@ -23,6 +23,15 @@ public class Libro {
 	 */
 	private String titulo;
 	
+	/**
+	 * Numero de paginas que tiene por defecto un libro
+	 */
+	public static final int NUM_PAGINAS_POR_DEFECTO = 0;
+	
+	/**
+	 * Titulo que tiene por defecto un libro
+	 */
+	public static final String TITULO_POR_DEFECTO ="Sin definir";
 	
 	//constructor vacio
 	/**
@@ -35,16 +44,16 @@ public class Libro {
 	 */
 	public Libro() {
 		super();
-		this.paginas = 0;
-		this.titulo = "Sin definir";
+		setPaginas(NUM_PAGINAS_POR_DEFECTO);
+		setTitulo(TITULO_POR_DEFECTO);
 	}
 	
 	//construcor con parametros
 	
 	public Libro(int paginas, String titulo) {
 		super();
-		this.paginas = paginas;
-		this.titulo = titulo;
+		setPaginas(paginas);
+		setTitulo(titulo);
 	}
 
 		
@@ -56,7 +65,11 @@ public class Libro {
 	}
 
 	public void setPaginas(int paginas) {
-		this.paginas = paginas;
+		if (paginas<=NUM_PAGINAS_POR_DEFECTO){
+			this.paginas = NUM_PAGINAS_POR_DEFECTO;
+		}else{
+			this.paginas = paginas;
+		}
 	}
 
 	public String getTitulo() {
@@ -65,8 +78,8 @@ public class Libro {
 
 	public void setTitulo(String titulo) {
 		
-		if ( "".equalsIgnoreCase(titulo) ){	
-			this.titulo = "Sin Determinar";
+		if ( titulo.isEmpty()){	
+			this.titulo = TITULO_POR_DEFECTO;
 		}else{
 			this.titulo = titulo;
 		}	
