@@ -1,6 +1,8 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-public class VehiculoElectrico extends Vehiculo {
+import java.io.Serializable;
+
+public class VehiculoElectrico extends Vehiculo implements Arrancable, Serializable{
 
 	// Atributos
 	private float capacidadBaterias;
@@ -44,6 +46,11 @@ public class VehiculoElectrico extends Vehiculo {
 		return "VehiculoElectrico [capacidadBaterias=" + capacidadBaterias
 				+ ", numPlazas=" + numPlazas + ", dimensiones=" + dimensiones
 				+ ", potencia=" + potencia + "]";
+	}
+
+	@Override
+	public boolean arrancar() {
+		return true;
 	}
 	
 	
