@@ -20,8 +20,9 @@ public class Persona {
 	
 	static final int MAYOR_EDAD = 18;
 	
-	static final String NOMBRE_NULO = "sin determinar";
-	
+	static final String NOMBRE_DEFECTO = "Jhon";
+	static final String APELLIDO_DEFECTO = "Doe";
+	static final String DNI_DEFECTO = "xxxxxxxxx";
 	
 	// Atributos
 	protected String nombre;
@@ -39,9 +40,9 @@ public class Persona {
 	// Constructor
 	public Persona() {
 		super();
-		this.nombre = "Jhon";
-		this.apellido1 = "Doe";
-		this.dni = "xxxxxxxxx";
+		this.nombre = NOMBRE_DEFECTO;
+		this.apellido1 = APELLIDO_DEFECTO;
+		this.dni = DNI_DEFECTO;
 		
 	}
 	

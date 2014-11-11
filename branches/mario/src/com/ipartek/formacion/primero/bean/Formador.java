@@ -5,6 +5,7 @@ public class Formador extends Persona {
 	private float sueldo;
 
 	public static final float MIN_SUELDO = 0.0f;
+
 	public Formador() {
 		super();
 		sueldo = MIN_SUELDO;
