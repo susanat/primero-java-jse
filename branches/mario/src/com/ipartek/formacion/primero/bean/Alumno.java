@@ -12,14 +12,14 @@ public class Alumno extends Persona {
 		calificaciones = new ArrayList<Calificacion>();
 	}
 	
-	public Alumno(ArrayList<Calificacion> calificaciones) {
-		super();
-		setCalificaciones(calificaciones);
-		
-	}
-
 	public ArrayList<Calificacion> getCalificaciones() {
 		return calificaciones;
+	}
+
+	public Alumno( String nombre, String apellido1, String dni, int edad, ArrayList<Calificacion> calificaciones) {
+		super(nombre, apellido1, edad, dni);
+		setCalificaciones(calificaciones);
+		
 	}
 
 	public void setCalificaciones(ArrayList<Calificacion> calificaciones) {
@@ -28,7 +28,6 @@ public class Alumno extends Persona {
 		}else{
 			this.calificaciones = calificaciones;
 		}
-		
 	}
 
 	@Override
