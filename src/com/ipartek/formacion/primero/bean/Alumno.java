@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import com.ipartek.formacion.primero.util.Utilidades;
 
 /**
- * Clase para representar un alumno. Se compone de:
- * <ol>
- * 		<li>Nombre {@code String} obligatorio</li>
- * 		
- * </ol>
+ * Clase Alumno que hereda de la clase Persona. Tiene como unico atributo distintivo un ArrayList de calificaciones
  * @author Joseba Carrión Blanco
  *
  */
@@ -29,6 +25,14 @@ public class Alumno extends Persona{
 
 	public Alumno(ArrayList<Calificacion> calificaciones) {
 		super();
+		this.calificaciones = calificaciones;
+	}
+
+	public ArrayList<Calificacion> getCalificaciones() {
+		return calificaciones;
+	}
+
+	public void setCalificaciones(ArrayList<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
 	}
 	
