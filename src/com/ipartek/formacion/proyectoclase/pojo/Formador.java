@@ -3,7 +3,6 @@ package com.ipartek.formacion.proyectoclase.pojo;
 import java.util.Calendar;
 
 public class Formador extends Persona {
-	
 	private Double sueldo;
 
 	public final static Double SUELDO_MINIMO = 756.00;
