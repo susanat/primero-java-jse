@@ -42,7 +42,7 @@ public class Main {
 		else
 			System.out.println("no es vocal");
 		
-
+		
 		/*
 		f_nacimiento.set(1976, 10, 24);		
 		al.setF_nacimiento(f_nacimiento);
@@ -69,7 +69,7 @@ public class Main {
 	public static String dimeNombre(Alumno al){
 		String nombre = Main.class.getName();
 		nombre = Main.class.getSimpleName();
-		return nombre+": "+"";
+		return nombre+": "+al.getNombre();
 	}
 
 }

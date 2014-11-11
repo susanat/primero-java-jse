@@ -16,9 +16,56 @@ public class Persona {
 	protected Integer n_hermanos;
 	protected Libro libro;
 	
+	public static final Integer MIN_HERMANOS = 0;
+	
+	
 	public Persona() {
 		super();
 		// TODO Auto-generated constructor stub
+		setNombre("");
+		setP_apellido("");
+		setS_apellido ("");
+		setDni("");
+		setPoblacion("");
+		setF_nacimiento(Calendar.getInstance());
+		setTelefono("");
+		setSexo('v');
+		setTrabajando(false);
+		setN_hermanos(MIN_HERMANOS);
+		setLibro(new Libro());
+		
+	}
+	
+	public Persona(String nombre, String p_apellido, String s_apellido,
+			String dni, String telefono) {
+		super();
+		this.nombre = nombre;
+		this.p_apellido = p_apellido;
+		this.s_apellido = s_apellido;
+		this.dni = dni;
+		this.telefono = telefono;
+	}
+
+	public Persona(String nombre, String p_apellido, String s_apellido,
+			String dni, String poblacion, Calendar f_nacimiento,
+			String telefono, Character sexo, Boolean trabajando,
+			Integer n_hermanos, Libro libro) {
+		super();
+		setNombre(nombre);
+		setP_apellido(p_apellido);
+		setS_apellido (s_apellido);
+		setDni(dni);
+		setPoblacion(poblacion);
+		setF_nacimiento(f_nacimiento);
+		setTelefono(telefono);
+		setSexo(sexo);
+		setTrabajando(trabajando);
+		setN_hermanos(n_hermanos);
+		setLibro(libro);
+	}
+
+	public void setSexo(Character sexo) {
+		this.sexo = sexo;
 	}
 
 	public String getNombre() {
@@ -98,6 +145,7 @@ public class Persona {
 	}
 
 	public void setN_hermanos(Integer n_hermanos) {
+		if(n_hermanos>=MIN_HERMANOS)
 		this.n_hermanos = n_hermanos;
 	}
 
