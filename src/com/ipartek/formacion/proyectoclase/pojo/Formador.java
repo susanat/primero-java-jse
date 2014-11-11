@@ -1,5 +1,7 @@
 package com.ipartek.formacion.proyectoclase.pojo;
 
+import java.util.Calendar;
+
 public class Formador extends Persona {
 	
 	private Double sueldo;
@@ -11,7 +13,22 @@ public class Formador extends Persona {
 		setSueldo(SUELDO_MINIMO);
 		
 	}
+	
+	public Formador(String nombre, String p_apellido, String s_apellido,
+			String dni, String telefono,Double sueldo) {
+		super(nombre, p_apellido, s_apellido, dni, telefono);
+		// TODO Auto-generated constructor stub
+		setSueldo(sueldo);
+	}
 
+	public Formador(String nombre, String p_apellido, String s_apellido,
+			String dni, String poblacion, Calendar f_nacimiento,
+			String telefono, char sexo, Boolean trabajando, Integer n_hermanos,Libro libro,Double sueldo){
+		super(nombre,p_apellido,s_apellido,dni,poblacion,f_nacimiento,telefono,sexo,trabajando,
+				n_hermanos,libro);
+		setSueldo(sueldo);
+		
+	}
 	public Double getSueldo() {
 		return sueldo;
 	}
