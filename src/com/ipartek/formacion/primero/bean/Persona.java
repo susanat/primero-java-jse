@@ -38,7 +38,7 @@ public class Persona {
 				super();
 			}
 	
-		//Constructor con varios parametros (en este caso 3)
+		//Constructor con varios parametros (en este caso 3) e inicializamos el sexo en "otros"
 	
 			public Persona(String nombre, String apellido1, String apellido2) {
 				super();
@@ -46,6 +46,8 @@ public class Persona {
 				setNombre(nombre);
 				setApellido1(apellido1);
 				setApellido2(apellido2);
+				setSexo(this.SEXO_OTROS);
+				
 				
 			}
 			
