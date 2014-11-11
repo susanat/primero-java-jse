@@ -16,8 +16,19 @@ import java.sql.Timestamp;
  */
 public class Calificacion {
 
+	/**
+	 * Nombre de una asignatura por defecto
+	 */
 	public static final String ASIGNATURA_EMPTY = "Sin determinar";
+	
+	/**
+	 * Maxima nota que puede tener una asignatura
+	 */
 	public static final float  MAX_NOTA = 10f;
+	
+	/**
+	 * Minima nota que puede tener una asignatura
+	 */
 	public static final float  MIN_NOTA =  0f;
 	
 	//Atributos
@@ -73,12 +84,5 @@ public class Calificacion {
 	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 }

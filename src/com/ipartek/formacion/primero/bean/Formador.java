@@ -3,9 +3,9 @@ package com.ipartek.formacion.primero.bean;
 /**
  * Hereda de la clase Persona
  * Se compone de los siguientes atributos
- * <ul>
+ * <ol>
  * 	<li>sueldo {@code float}</li> 	
- * </ul>
+ * </ol>
  * @author Jose A. Perez
  *
  */
