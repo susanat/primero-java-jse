@@ -69,7 +69,7 @@ public class Main {
 	public static String dimeNombre(Alumno al){
 		String nombre = Main.class.getName();
 		nombre = Main.class.getSimpleName();
-		return nombre+": "+al.getNombre() ;
+		return nombre+": "+"";
 	}
 
 }
