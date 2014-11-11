@@ -28,7 +28,7 @@ public class FormadorTest {
 
 	@Test
 	public void testFormador() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 }

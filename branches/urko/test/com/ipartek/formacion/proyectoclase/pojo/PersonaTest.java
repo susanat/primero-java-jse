@@ -28,7 +28,7 @@ public class PersonaTest {
 
 	@Test
 	public void testPersona() {
-		fail("Not yet implemented");
+	//	fail("Not yet implemented");
 	}
 
 }

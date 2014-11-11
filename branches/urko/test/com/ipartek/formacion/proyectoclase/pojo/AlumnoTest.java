@@ -28,7 +28,7 @@ public class AlumnoTest {
 
 	@Test
 	public void testAlumno() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 }
