@@ -2,68 +2,130 @@ package com.ipartek.formacion.proyectoclase.pojo;
 
 import java.util.Calendar;
 
-
+/**
+ * 
+ * @author Urko Villanueva
+ *
+ */
 public class Persona {
+
+	/**
+	 * 
+	 */
 	protected String nombre;
-	protected String p_apellido;
-	protected String s_apellido;
+	/**
+	 * 
+	 */
+	protected String papellido;
+	/**
+	 * 
+	 */
+	protected String sapellido;
+	/**
+	 * 
+	 */
 	protected String dni;
+	/**
+	 * 
+	 */
 	protected String poblacion;
-	protected Calendar f_nacimiento;
+	/**
+	 * 
+	 */
+	protected Calendar fnacimiento;
+	/**
+	 * 
+	 */
 	protected String telefono;
+	/**
+	 * 
+	 */
 	protected Character sexo;
+	/**
+	 * 
+	 */
 	protected Boolean trabajando;
-	protected Integer n_hermanos;
+	/**
+	 * 
+	 */
+	protected Integer nhermanos;
+	/**
+	 * 
+	 */
 	protected Libro libro;
-	
+	/**
+	 * 
+	 */
 	public static final Integer MIN_HERMANOS = 0;
 	
-	
+	/**
+	 * 
+	 */
 	public Persona() {
 		super();
 		// TODO Auto-generated constructor stub
 		setNombre("");
-		setP_apellido("");
-		setS_apellido ("");
+		setPapellido("");
+		setSapellido("");
 		setDni("");
 		setPoblacion("");
-		setF_nacimiento(Calendar.getInstance());
+		setFnacimiento(Calendar.getInstance());
 		setTelefono("");
 		setSexo('v');
 		setTrabajando(false);
-		setN_hermanos(MIN_HERMANOS);
+		setNhermanos(MIN_HERMANOS);
 		setLibro(new Libro());
-		
 	}
-	
-	public Persona(String nombre, String p_apellido, String s_apellido,
+	/**
+	 * @param nombre
+	 * @param papellido
+	 * @param sapellido
+	 * @param dni
+	 * @param telefono
+	 */
+	public Persona(String nombre, String papellido, String sapellido,
 			String dni, String telefono) {
 		super();
 		this.nombre = nombre;
-		this.p_apellido = p_apellido;
-		this.s_apellido = s_apellido;
+		this.papellido = papellido;
+		this.sapellido = sapellido;
 		this.dni = dni;
 		this.telefono = telefono;
 	}
-
-	public Persona(String nombre, String p_apellido, String s_apellido,
+	/**
+	 * 
+	 * @param nombre
+	 * @param papellido
+	 * @param sapellido
+	 * @param dni
+	 * @param poblacion
+	 * @param f_nacimiento
+	 * @param telefono
+	 * @param sexo
+	 * @param trabajando
+	 * @param nhermanos
+	 * @param libro
+	 */
+	public Persona(String nombre, String papellido, String sapellido,
 			String dni, String poblacion, Calendar f_nacimiento,
 			String telefono, Character sexo, Boolean trabajando,
-			Integer n_hermanos, Libro libro) {
+			Integer nhermanos, Libro libro) {
 		super();
 		setNombre(nombre);
-		setP_apellido(p_apellido);
-		setS_apellido (s_apellido);
+		setPapellido(papellido);
+		setSapellido(sapellido);
 		setDni(dni);
 		setPoblacion(poblacion);
-		setF_nacimiento(f_nacimiento);
+		setFnacimiento(f_nacimiento);
 		setTelefono(telefono);
 		setSexo(sexo);
 		setTrabajando(trabajando);
-		setN_hermanos(n_hermanos);
+		setNhermanos(nhermanos);
 		setLibro(libro);
 	}
-
+/**
+ * @param sexo
+ */
 	public void setSexo(Character sexo) {
 		this.sexo = sexo;
 	}
@@ -76,20 +138,20 @@ public class Persona {
 		this.nombre = nombre;
 	}
 
-	public String getP_apellido() {
-		return p_apellido;
+	public String getPapellido() {
+		return papellido;
 	}
 
-	public void setP_apellido(String p_apellido) {
-		this.p_apellido = p_apellido;
+	public void setPapellido(String p_apellido) {
+		this.papellido = p_apellido;
 	}
 
-	public String getS_apellido() {
-		return s_apellido;
+	public String getSapellido() {
+		return sapellido;
 	}
 
-	public void setS_apellido(String s_apellido) {
-		this.s_apellido = s_apellido;
+	public void setSapellido(String sapellido) {
+		this.sapellido = sapellido;
 	}
 
 	public String getDni() {
@@ -108,12 +170,12 @@ public class Persona {
 		this.poblacion = poblacion;
 	}
 
-	public Calendar getF_nacimiento() {
-		return f_nacimiento;
+	public Calendar getFnacimiento() {
+		return fnacimiento;
 	}
 
-	public void setF_nacimiento(Calendar f_nacimiento) {
-		this.f_nacimiento = f_nacimiento;
+	public void setFnacimiento(Calendar fnacimiento) {
+		this.fnacimiento = fnacimiento;
 	}
 
 	public String getTelefono() {
@@ -140,13 +202,14 @@ public class Persona {
 		this.trabajando = trabajando;
 	}
 
-	public Integer getN_hermanos() {
-		return n_hermanos;
+	public Integer getNhermanos() {
+		return nhermanos;
 	}
 
-	public void setN_hermanos(Integer n_hermanos) {
-		if(n_hermanos>=MIN_HERMANOS)
-		this.n_hermanos = n_hermanos;
+	public void setNhermanos(Integer nhermanos) {
+		if (nhermanos >= MIN_HERMANOS) {
+			this.nhermanos = nhermanos;
+		}
 	}
 
 	public Libro getLibro() {
