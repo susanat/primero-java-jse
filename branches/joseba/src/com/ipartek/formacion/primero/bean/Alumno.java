@@ -22,6 +22,10 @@ public class Alumno extends Persona{
 	public Alumno(){
 		super();
 	}
+	
+	public Alumno(String nombre, String apellido1, String apellido2){
+		super(nombre, apellido1, apellido2);
+	}
 
 	public Alumno(ArrayList<Calificacion> calificaciones) {
 		super();
