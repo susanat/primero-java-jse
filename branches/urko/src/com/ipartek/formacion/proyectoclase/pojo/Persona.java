@@ -83,8 +83,8 @@ public class Persona {
 	 * @param dni
 	 * @param telefono
 	 */
-	public Persona(String nombre, String papellido, String sapellido,
-			String dni, String telefono) {
+	public Persona(final String nombre, final String papellido, final String sapellido,
+			final String dni, final String telefono) {
 		super();
 		this.nombre = nombre;
 		this.papellido = papellido;
@@ -93,7 +93,6 @@ public class Persona {
 		this.telefono = telefono;
 	}
 	/**
-	 * 
 	 * @param nombre
 	 * @param papellido
 	 * @param sapellido
@@ -124,7 +123,8 @@ public class Persona {
 		setLibro(libro);
 	}
 /**
- * @param sexo
+ * setSexo permite cambiar el genero de la persona
+ * @param sexo {@code Character} sexo los valores validos son V o H
  */
 	public void setSexo(Character sexo) {
 		this.sexo = sexo;
