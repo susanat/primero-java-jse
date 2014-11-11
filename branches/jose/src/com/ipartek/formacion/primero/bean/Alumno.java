@@ -13,22 +13,22 @@ import java.util.ArrayList;
  */
 public class Alumno extends Persona {
 	// Atributos
-	protected ArrayList<Calificacion> calificaciones;
+	private ArrayList<Calificacion> calificaciones;
 	
 	// Constructores
 	public Alumno() {
 		super();
-		// TODO Auto-generated constructor stub
+		calificaciones = new ArrayList<Calificacion>();
 	}
 
 	public Alumno(String nombre, String apellido1, String dni) {
 		super(nombre, apellido1, dni);
-		// TODO Auto-generated constructor stub
+		calificaciones = new ArrayList<Calificacion>();
 	}
 
 	public Alumno(String nombre, String apellido1, int edad, String dni) {
 		super(nombre, apellido1, edad, dni);
-		// TODO Auto-generated constructor stub
+		calificaciones = new ArrayList<Calificacion>();
 	}
 
 	

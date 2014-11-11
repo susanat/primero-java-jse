@@ -17,7 +17,7 @@ public class Formador extends Persona {
 	/**
 	 * Sueldo mensual minimo que recibe el formador
 	 */
-	public static final float SUELDO_MINIMO = 2000f;
+	public static final float SUELDO_MINIMO = 646.56f;
 
 
 	// Constructores
@@ -46,10 +46,13 @@ public class Formador extends Persona {
 		return sueldo;
 	}
 
+	/**
+	 * Sueldo mensual en euros y bruto
+	 * Siempre sera mayor o igual al minimo <code>SUELDO_MINIMO</code>
+	 * @param sueldo
+	 */
 	public void setSueldo(float sueldo) {
-		if (sueldo<=SUELDO_MINIMO){
-			this.sueldo=SUELDO_MINIMO;
-		}else{
+		if (sueldo>SUELDO_MINIMO){
 			this.sueldo = sueldo;
 		}
 	}
