@@ -1,11 +1,23 @@
 package com.ipartek.formacion.proyectoclase.pojo;
 
 import java.util.Calendar;
-
+/**
+ * 
+ * @author Urko Villanueva
+ *
+ */
 public class Formador extends Persona {
+	/**
+	 * 
+	 */
 	private Double sueldo;
-
-	public final static Double SUELDO_MINIMO = 756.00;
+	/**
+	 * 
+	 */
+	public static final  Double SUELDO_MINIMO = 756.00;
+	/**
+	 * 
+	 */
 	public Formador() {
 		// TODO Auto-generated constructor stub
 		super();
