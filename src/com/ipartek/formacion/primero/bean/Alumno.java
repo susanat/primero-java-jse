@@ -1,16 +1,16 @@
 package com.ipartek.formacion.primero.bean;
 
+import java.util.ArrayList;
+
 public class Alumno extends Persona {
 
-	public static final int MIN_CALIFICACIONES = 0;
-
 	// Properties
-	private float calificaciones;
+	private ArrayList<Calificacion> calificaciones;
 
 	// Constructores
 	public Alumno() {
 		super();
-		setCalificaciones(MIN_CALIFICACIONES);
+		calificaciones = new ArrayList<Calificacion>();
 	}
 
 	public Alumno(String nombre, String apellido1, int edad, String dni) {
@@ -18,19 +18,19 @@ public class Alumno extends Persona {
 	}
 
 	// Getters & Setters
-	public float getCalificaciones() {
+	public ArrayList<Calificacion> getCalificaciones() {
 		return calificaciones;
 	}
 
-	public void setCalificaciones(float calificaciones) {
+	public void setCalificaciones(ArrayList<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
 	}
 
 	// Methods
-	@Override
-	public String toString() {
-		return "Alumno " + this.getNombre() + " " + this.getApellido1()
-				+ ", calificaciones = " + this.getCalificaciones() + ".";
-	}
+	/*
+	 * @Override public String toString() { return "Alumno " + this.getNombre()
+	 * + " " + this.getApellido1() + ", calificaciones = " +
+	 * this.getCalificaciones() + "."; }
+	 */
 
 }
