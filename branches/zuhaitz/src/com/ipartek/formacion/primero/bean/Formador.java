@@ -2,7 +2,7 @@ package com.ipartek.formacion.primero.bean;
 
 public class Formador extends Persona {
 
-	public static final int MIN_SUELDO = 0;
+	public static final float MIN_SUELDO = 646.56f;
 
 	// Properties
 	private float sueldo;
@@ -22,8 +22,18 @@ public class Formador extends Persona {
 		return sueldo;
 	}
 
+	/**
+	 * Sueldo mensual en euros y bruto. Siempre será el mínimo
+	 * <code>MIN_SUELDO</code>
+	 * 
+	 * @param sueldo
+	 *            en euros
+	 */
 	public void setSueldo(float sueldo) {
-		this.sueldo = sueldo;
+		this.sueldo = MIN_SUELDO;
+		if (sueldo > MIN_SUELDO) {
+			this.sueldo = sueldo;
+		}
 	}
 
 	// Methods
