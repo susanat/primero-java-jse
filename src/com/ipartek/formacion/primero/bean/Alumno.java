@@ -6,12 +6,13 @@ public class Alumno extends Persona {
 	
 	private ArrayList<Calificacion> calificaciones;
 	
-	
+	//contructor
 	public Alumno() {
 		super();
 		calificaciones = new ArrayList<Calificacion>();
 	}
 	
+	//getters y setters
 	public ArrayList<Calificacion> getCalificaciones() {
 		return calificaciones;
 	}

@@ -4,7 +4,7 @@ public class Formador extends Persona {
 
 	private float sueldo;
 
-	public static final float MIN_SUELDO = 0.0f;
+	public static final float MIN_SUELDO = 646.53f; //bruto por mes en euros
 
 	public Formador() {
 		super();
@@ -19,14 +19,19 @@ public class Formador extends Persona {
 	public float getSueldo() {
 		return sueldo;
 	}
-
-	public void setSueldo(float sueldo) {
-		if (sueldo < 0) {
-			sueldo = MIN_SUELDO;
-		}else{
-			this.sueldo = sueldo;
-		}
 	
+	/**
+	 * Sueldo mensual en euros y en bruto.
+	 * Siempre será minimo <code>MIN_SUELDO</code>
+	 * @param sueldo en euros
+	 */
+	public void setSueldo(float sueldo) {
+		if (sueldo > MIN_SUELDO) {
+			this.sueldo = sueldo;
+		}else{
+			this.sueldo = MIN_SUELDO;
+		}
+			
 	}
 
 	@Override
