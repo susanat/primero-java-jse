@@ -13,12 +13,12 @@ public class Linea extends Figura implements IRedimensionable{
 	 * 
 	 * @param p
 	 */
-	public Linea(Point p) {
+	public Linea(Punto p) {
 		super(p);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Linea(Point p, int longitud) {
+	public Linea(Punto p, int longitud) {
 		super(p);
 		setLongitud(IRedimensionable.LONG_MIN);
 	}

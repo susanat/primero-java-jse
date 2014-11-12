@@ -4,7 +4,7 @@ import java.awt.Point;
 
 public class Triangulo extends Figura{
 
-	public Triangulo(Point p) {
+	public Triangulo(Punto p) {
 		super(p);
 		// TODO Auto-generated constructor stub
 	}
