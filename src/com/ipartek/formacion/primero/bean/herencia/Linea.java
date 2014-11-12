@@ -37,5 +37,4 @@ public class Linea extends Figura implements Redimensionable {
 	public void setLongitud(int longitud) {
 		this.longitud = longitud;
 	}
-
 }

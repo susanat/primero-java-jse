@@ -2,10 +2,12 @@ package com.ipartek.formacion.primero.bean.herencia;
 
 /**
  * Clase que representa un vehiculo electrico, extiende de la clase vehiculo
+ * 
  * @author Fran
  *
  */
-public class VehiculoElectrico extends Vehiculo implements Arrancable {
+public class VehiculoElectrico extends Vehiculo implements Arrancable,
+		Ordenable {
 	private float capacidadBaterias;
 	/**
 	 * Capacidad de batería mínima que debe tener un vehículo eléctrico
@@ -26,7 +28,7 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable {
 	public void setPotencia(float potencia) {
 		super.setPotencia(potencia);
 	}
-	
+
 	public float getCapacidadBaterias() {
 		return capacidadBaterias;
 	}
@@ -44,6 +46,17 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable {
 
 	@Override
 	public boolean arrancar() {
-		return true;		
-	} 
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/*
+	 * @see com.ipartek.formacion.primero.bean.herencia.Ordenable#getPeso()
+	 */
+	@Override
+	public float getPeso() {
+		float resul = getPotencia();
+		return resul;
+	}
+
 }

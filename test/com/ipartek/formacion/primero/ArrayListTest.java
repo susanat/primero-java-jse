@@ -1,8 +1,8 @@
 package com.ipartek.formacion.primero;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 
-import java.net.PortUnreachableException;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -32,7 +32,7 @@ public class ArrayListTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		listaPaises = new ArrayList();
+		listaPaises = new ArrayList<String>();
 		listaPaises.add(ESPANA); // Ocupa la posición 0
 		listaPaises.add(FRANCIA); // Ocupa la posición 1
 		listaPaises.add(PORTUGAL); // Ocupa la posición 2

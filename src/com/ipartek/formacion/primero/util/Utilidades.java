@@ -18,7 +18,7 @@ public class Utilidades {
 	 */
 	public static void pintarLinea(char c, int longitud) {
 		
-		String[] vab = Dado.alumnos;
+		//String[] vab = Dado.alumnos;
 		
 		for (int i = 0; i < longitud; i++) {
 			System.out.print(c);
