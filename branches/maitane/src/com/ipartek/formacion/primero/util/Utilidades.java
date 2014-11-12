@@ -101,9 +101,28 @@ public class Utilidades {
 		return resul;
 	}
 
+	public static float[] ordenarArrayFloat(float[] miArray) {
+
+		float numAuxi;
+
+		for (int i = 0; i < (miArray.length - 1); i++) {
+			for (int j = i + 1; j < miArray.length; j++) {
+				if (miArray[i] > miArray[j]) {
+					// Intercambiamos valores
+					numAuxi = miArray[i];
+					miArray[i] = miArray[j];
+					miArray[j] = numAuxi;
+
+				}
+			}
+		}
+
+		return miArray;
+	}
+
 	/**
 	 * Comprueba que sea una vocal: a,e,i,o,u,A,E,I,O,U y con acento
-	 * 
+	 *
 	 * @param caracter
 	 *            char a comprobar
 	 * @return true si es un caracter vocal
