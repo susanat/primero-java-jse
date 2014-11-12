@@ -1,6 +1,6 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-public class VehiculoElectrico extends Vehiculo {
+public class VehiculoElectrico extends Vehiculo implements IOrdenable{
 
 	//constantes
 	public static final float MIN_CAPACIDAD_BATERIA = 10f;
@@ -55,6 +55,12 @@ public class VehiculoElectrico extends Vehiculo {
 				+ "dimensiones=" + dimensiones
 				+ ", potencia=" + potencia 
 				+ "]";
+	}
+
+	@Override
+	public float getPeso() {
+		// TODO Auto-generated method stub
+		return capacidadBaterias;
 	}
 
 	
