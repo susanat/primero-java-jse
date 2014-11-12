@@ -1,4 +1,4 @@
-package com.ipartek.formacion.primero.bean.herencia;
+package com.ipartek.formacion.primero.bean;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.ipartek.formacion.primero.bean.herencia.VehiculoElectrico;
 
 public class VehiculoElectricoTest {
 

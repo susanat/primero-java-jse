@@ -1,6 +1,6 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-public class Churro {
+public class Churro implements Ordenable {
 
 	// Crear array de churros y CocheElectricos para ordenar con la interfaz
 
@@ -20,5 +20,11 @@ public class Churro {
 
 	public void setCalorias(int calorias) {
 		this.calorias = calorias;
+	}
+
+	// Métodos
+	@Override
+	public float getPeso() {
+		return 0;
 	}
 }
