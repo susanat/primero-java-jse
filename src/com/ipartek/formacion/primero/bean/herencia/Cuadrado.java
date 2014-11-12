@@ -55,6 +55,7 @@ public class Cuadrado extends Figura implements Redimensionable {
 	@Override
 	void dibujar() {
 		// TODO Auto-generated method stub
+		System.out.println("Soy un cuadrado");
 
 	}
 
