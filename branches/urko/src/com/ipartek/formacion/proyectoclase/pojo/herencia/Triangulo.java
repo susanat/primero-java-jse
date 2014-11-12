@@ -1,8 +1,9 @@
 package com.ipartek.formacion.proyectoclase.pojo.herencia;
 
-import java.awt.Point;
-
-public class Triangulo extends Figura{
+public class Triangulo extends Figura {
+	public Triangulo() {
+		super();
+	}
 
 	public Triangulo(Punto p) {
 		super(p);
@@ -12,7 +13,7 @@ public class Triangulo extends Figura{
 	@Override
 	public void dibujar() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
