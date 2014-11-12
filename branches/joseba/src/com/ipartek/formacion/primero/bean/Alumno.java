@@ -2,24 +2,24 @@ package com.ipartek.formacion.primero.bean;
 
 import java.util.ArrayList;
 
-import com.ipartek.formacion.primero.util.Utilidades;
-
 /**
- * Clase Alumno que hereda de la clase Persona. Tiene como unico atributo distintivo un ArrayList de calificaciones
+ * Clase Alumno que hereda de la clase Persona. Tiene como unico atributo
+ * distintivo un ArrayList de calificaciones
+ * 
  * @author Joseba Carrión Blanco
  *
  */
 
-public class Alumno extends Persona{
-	
+public class Alumno extends Persona {
+
 	private ArrayList<Calificacion> calificaciones;
-	
-	//Constructores
-	public Alumno(){
+
+	// Constructores
+	public Alumno() {
 		super();
 	}
-	
-	public Alumno(String nombre, String apellido1, String apellido2){
+
+	public Alumno(String nombre, String apellido1, String apellido2) {
 		super(nombre, apellido1, apellido2);
 	}
 
@@ -35,6 +35,5 @@ public class Alumno extends Persona{
 	public void setCalificaciones(ArrayList<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
 	}
-	
-	
+
 }

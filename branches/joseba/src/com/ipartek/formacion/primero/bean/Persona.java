@@ -9,14 +9,13 @@ public class Persona {
 	static final char SEXO_VARON = 'v';
 	static final char SEXO_MUJER = 'm';
 	static final char SEXO_OTROS = 'o';
-	
-	static final int MAYOR_EDAD = 18;
-	
-	static final String SIN_DETERMINAR = "Sin Determinar";
-	
-	//Atributos
 
-	
+	static final int MAYOR_EDAD = 18;
+
+	static final String SIN_DETERMINAR = "Sin Determinar";
+
+	// Atributos
+
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
@@ -28,44 +27,42 @@ public class Persona {
 	private char sexo = 'o';
 	private Libro libro;
 	private ArrayList<Libro> Libros;
-	
-	
-	//Constructores
-	
-		//Constructor vacio
-	
-			public Persona() {
-				super();
-			}
-	
-		//Constructor con varios parametros (en este caso 3) e inicializamos el sexo en "otros"
-	
-			public Persona(String nombre, String apellido1, String apellido2) {
-				super();
-				//Llamamos a los setters para poder tener un control sobre lo que se introduce
-				setNombre(nombre);
-				setApellido1(apellido1);
-				setApellido2(apellido2);
-				setSexo(this.SEXO_OTROS);
-				
-				
-			}
-			
-	
-	//Getters
 
+	// Constructores
+
+	// Constructor vacio
+
+	public Persona() {
+		super();
+	}
+
+	// Constructor con varios parametros (en este caso 3) e inicializamos el
+	// sexo en "otros"
+
+	public Persona(String nombre, String apellido1, String apellido2) {
+		super();
+		// Llamamos a los setters para poder tener un control sobre lo que se
+		// introduce
+		setNombre(nombre);
+		setApellido1(apellido1);
+		setApellido2(apellido2);
+		setSexo(Persona.SEXO_OTROS);
+
+	}
+
+	// Getters
 
 	public String getNombre() {
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
-		if("".equals(nombre) || nombre == null){
+		if ("".equals(nombre) || nombre == null) {
 			this.nombre = SIN_DETERMINAR;
-		}else{
+		} else {
 			this.nombre = nombre;
 		}
-		
+
 	}
 
 	public String getApellido1() {
@@ -73,12 +70,12 @@ public class Persona {
 	}
 
 	public void setApellido1(String apellido1) {
-		if("".equals(apellido1) || apellido1 == null ){
+		if ("".equals(apellido1) || apellido1 == null) {
 			this.apellido1 = SIN_DETERMINAR;
-		}else{
+		} else {
 			this.apellido1 = apellido1;
 		}
-		
+
 	}
 
 	public String getApellido2() {
@@ -86,23 +83,23 @@ public class Persona {
 	}
 
 	public void setApellido2(String apellido2) {
-		if("".equals(apellido2) || apellido2 == null){
+		if ("".equals(apellido2) || apellido2 == null) {
 			this.apellido2 = SIN_DETERMINAR;
-		}else{
+		} else {
 			this.apellido2 = apellido2;
 		}
-		
+
 	}
 
 	public int getEdad() {
 		return edad;
 	}
-	
-	public ArrayList<Libro> getLibros(){
+
+	public ArrayList<Libro> getLibros() {
 		return Libros;
 	}
-	
-	//Setters
+
+	// Setters
 
 	public void setEdad(int edad) {
 		this.edad = edad;
@@ -113,14 +110,14 @@ public class Persona {
 	}
 
 	public void setDni(String dni) {
-		if(Utilidades.comprobarDni(dni)){
-			//El dni es correcto
+		if (Utilidades.comprobarDni(dni)) {
+			// El dni es correcto
 			this.dni = dni;
-		}else{
-			//El dni es incorrecto
+		} else {
+			// El dni es incorrecto
 			this.dni = SIN_DETERMINAR;
 		}
-		
+
 	}
 
 	public String getPoblacion() {
@@ -128,12 +125,12 @@ public class Persona {
 	}
 
 	public void setPoblacion(String poblacion) {
-		if("".equals(poblacion) || poblacion == null){
+		if ("".equals(poblacion) || poblacion == null) {
 			this.poblacion = SIN_DETERMINAR;
-		}else{
+		} else {
 			this.poblacion = poblacion;
 		}
-		
+
 	}
 
 	public boolean isMayoredad() {
@@ -157,20 +154,14 @@ public class Persona {
 	}
 
 	public void setSexo(char sexo) {
-		if(sexo != SEXO_VARON && sexo != SEXO_MUJER && sexo != SEXO_OTROS){
+		if (sexo != SEXO_VARON && sexo != SEXO_MUJER && sexo != SEXO_OTROS) {
 			this.sexo = SEXO_OTROS;
 		}
 		this.sexo = sexo;
 	}
 
-	
-	
-	
-	
-	
-	//Metodos
-	
-	
+	// Metodos
+
 	@Override
 	public String toString() {
 		return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
@@ -178,5 +169,5 @@ public class Persona {
 				+ dni + ", poblacion=" + poblacion + ", mayoredad=" + mayoredad
 				+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
 	}
-	
+
 }
