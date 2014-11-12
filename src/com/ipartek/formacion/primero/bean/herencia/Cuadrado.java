@@ -1,17 +1,17 @@
 /**
- * 
+ *
  */
 package com.ipartek.formacion.primero.bean.herencia;
 
 /**
- * 
+ *
  * @author Mario Alvaro
  *
  */
-public class Cuadrado extends Figura implements Redimensionable{
+public class Cuadrado extends Figura implements Redimensionable {
 
-	private int cara; //longitud de la cara del cuadrado
-	
+	private int cara; // longitud de la cara del cuadrado
+
 	/**
 	 * @param x
 	 * @param y
@@ -28,7 +28,7 @@ public class Cuadrado extends Figura implements Redimensionable{
 		setCara(cara);
 	}
 
-	//getter y setter
+	// getter y setter
 	public int getCara() {
 		return cara;
 	}
@@ -36,15 +36,15 @@ public class Cuadrado extends Figura implements Redimensionable{
 	public void setCara(int cara) {
 		this.cara = cara;
 	}
-	
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ipartek.formacion.primero.bean.herencia.Figura#dibujar()
 	 */
 	@Override
 	void dibujar() {
-		
+		System.out.println("Soy un Cuadrado");
 
 	}
 
