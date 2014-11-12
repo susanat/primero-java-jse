@@ -3,7 +3,9 @@ package com.ipartek.formacion.primero.bean.herencia;
 import java.io.Serializable;
 
 public class VehiculoGasolina extends Vehiculo implements Arrancable,
-		Serializable {
+Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	// Atributos
 	private boolean gasolina;
