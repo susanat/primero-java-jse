@@ -39,6 +39,10 @@ public class Concesionario {
 		return ventas;
 	}
 
+	public static void setVentasGlobales(int ventas) {
+		ventasGlobales = ventas;
+	}
+
 	/**
 	 * compramos un vehiculo que puede ser VehiculoElectrico o VehiculoGasolina
 	 *
@@ -57,12 +61,5 @@ public class Concesionario {
 			resul = new VehiculoGasolina();
 		}
 		return resul;
-	}
-
-	/**
-	 * pone a cero el contador de ventasGlobales
-	 */
-	public void resetearComprasGlobales() {
-		this.ventasGlobales = 0;
 	}
 }

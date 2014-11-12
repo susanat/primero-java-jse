@@ -1,13 +1,11 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-import java.io.Serializable;
 
-public class VehiculoElectrico extends Vehiculo implements Arrancable, Serializable{
+public class VehiculoElectrico extends Vehiculo implements Arrancable {
 
 	// Atributos
 	private float capacidadBaterias;
-	
-	
+
 	// Constantes
 	/**
 	 * Capacidad minima para una bateria
@@ -15,20 +13,19 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable, Serializa
 	public static final float MIN_CAP_BATERIA = 0f;
 	public static final float MIN_POTENCIA = 150f;
 
-	
 	// Constructor
 	public VehiculoElectrico() {
 		super();
 		setCapacidadBaterias(MIN_CAP_BATERIA);
-		setPotencia(VehiculoElectrico.MIN_POTENCIA); 		// NOTA 
+		setPotencia(VehiculoElectrico.MIN_POTENCIA); // NOTA
 	}
-	
-	public VehiculoElectrico(float potencia){
-		//super()		-- si no se indica el SUPER siempre accede al constructor vacio del padre
+
+	public VehiculoElectrico(float potencia) {
+		// super() -- si no se indica el SUPER siempre accede al constructor
+		// vacio del padre
 		setCapacidadBaterias(MIN_CAP_BATERIA);
 		setPotencia(potencia);
-	} 
-
+	}
 
 	// Getters and Setters
 	public float getCapacidadBaterias() {
@@ -38,7 +35,6 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable, Serializa
 	public void setCapacidadBaterias(float capacidadBaterias) {
 		this.capacidadBaterias = capacidadBaterias;
 	}
-
 
 	// Otros
 	@Override
@@ -52,7 +48,5 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable, Serializa
 	public boolean arrancar() {
 		return true;
 	}
-	
-	
-	
+
 }

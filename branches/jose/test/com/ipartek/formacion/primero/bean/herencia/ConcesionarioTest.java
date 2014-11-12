@@ -1,6 +1,7 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
@@ -24,6 +25,9 @@ public class ConcesionarioTest {
 	@Before
 	public void setUp() throws Exception {
 		concesionario = new Concesionario();
+		// ponemos a cero las ventasGlobales de los concesionarios
+		Concesionario.setVentasGlobales(0);
+
 	}
 
 	@After
@@ -85,8 +89,6 @@ public class ConcesionarioTest {
 	@Test
 	public void testVentas() {
 		Concesionario concesionario2 = new Concesionario();
-		// ponemos a cero las ventasGlobales de los concesionarios
-		concesionario2.resetearComprasGlobales();
 
 		// Venta de coches en el concesionario
 		for (int i = 0; i < 3; i++) {
@@ -99,14 +101,14 @@ public class ConcesionarioTest {
 		}
 
 		// Comprobar ventas del concesionario
-		assertTrue(3 == concesionario.getVentas());
+		assertSame("Ventas por concesionario", 3, concesionario.getVentas());
 
 		// Comprobar ventas del concesionario2
-		assertTrue(5 == concesionario2.getVentas());
+		assertSame("Ventas por concesionario", 5, concesionario2.getVentas());
 
 		// Comprobar ventas globales del concesionario y concesionario2
-		assertTrue(concesionario.getVentasGlobales() == concesionario2
-				.getVentasGlobales());
-		assertTrue(8 == concesionario.getVentasGlobales());
+		assertSame("Ventas globales", 8, Concesionario.getVentasGlobales());
+		assertSame("Ventas globales", 8, concesionario.getVentasGlobales());
+		assertSame("Ventas globales", 8, concesionario2.getVentasGlobales());
 	}
 }
