@@ -14,7 +14,7 @@ public abstract class Figura {
 	private Point p;
 /**
  * 
- * @param p
+ * @param p {@code Point} 
  */
 	public Figura(Point p) {
 		super();
@@ -40,15 +40,15 @@ public abstract class Figura {
 	 */
 	public boolean mover(Point p) {
 		boolean exito = false;
-		if (!p.equals(getP())){
+		if (!p.equals(getP())) {
 			exito = true;
-			System.out.println(" Movido el objeto a la posicion ["+ p.getX() +"," + p.getY() + "]");
+			System.out.println(" Movido el objeto a la posicion ["
+			 + p.getX() + "," + p.getY() + "]");
 		}
-		
 		return exito;
 	}
 	/**
 	 * 
 	 */
-	abstract void dibujar();
+	public abstract void dibujar();
 }
