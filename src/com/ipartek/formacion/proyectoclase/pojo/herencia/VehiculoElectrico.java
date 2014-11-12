@@ -1,53 +1,76 @@
 package com.ipartek.formacion.proyectoclase.pojo.herencia;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class VehiculoElectrico extends Vehiculo implements Arrancable,
-		Serializable {
+		Serializable, Comparable<Vehiculo>, Comparator<VehiculoElectrico> {
+
+	private float capacidadBateria;
+
+	public static final Double MIN_POTENCIA = 150.0;
 
 	/**
-	 *
+	 * Capacidad minima para una bateria
 	 */
-	private static final long serialVersionUID = 3786514946515308992L;
-	private Double capaBateria;
-	/**
-	 *
-	 */
-	public static final double MIN_CAP_BATERIA = 0.0;
-	public static final double MIN_POTENCIA = 150.0;
+	static public final float MIN_CAP_BATERIA = 0;
 
 	public VehiculoElectrico() {
 		super();
-		// TODO Auto-generated constructor stub
-		this.setCapaBateria(VehiculoElectrico.MIN_CAP_BATERIA);
-		this.setPotencia(VehiculoElectrico.MIN_POTENCIA);
+		setCapacidadBaterias(MIN_CAP_BATERIA);
+		setPotencia(VehiculoElectrico.MIN_POTENCIA);
+	}
+
+	public VehiculoElectrico(Double potencia) {
+		// super();
+		setCapacidadBaterias(MIN_CAP_BATERIA);
+		setPotencia(potencia);
 	}
 
 	@Override
 	public void setPotencia(Double potencia) {
 		super.setPotencia(potencia);
+	}
 
-	};
+	public float getCapacidadBateria() {
+		return capacidadBateria;
+	}
+
+	public void setCapacidadBaterias(float capacidadBateria) {
+		this.capacidadBateria = capacidadBateria;
+	}
 
 	@Override
 	public String toString() {
-		return "VehiculoElectrico [capaBateria=" + capaBateria + ", numPlazas="
-				+ numPlazas + ", dim=" + dim + ", potencia=" + potencia + "]";
-	}
 
-	public Double getCapaBateria() {
-		return capaBateria;
-	}
-
-	public void setCapaBateria(Double capaBateria) {
-		if (capaBateria >= MIN_CAP_BATERIA)
-			this.capaBateria = capaBateria;
+		String dimensiones = new String("");
+		return "VehiculoElectrico [capacidadBaterias=" + capacidadBateria
+				+ ", numPlazas=" + numPlazas + ", dimensiones=" + dimensiones
+				+ ", potencia=" + potencia + "]";
 	}
 
 	@Override
 	public Boolean arrancar() {
+		return true;
+	}
+
+	@Override
+	public int compare(VehiculoElectrico o1, VehiculoElectrico o2) {
 		// TODO Auto-generated method stub
-		return null;
+		int resultado = 0;
+		return resultado;
+	}
+
+	@Override
+	public int compareTo(Vehiculo o) {
+		// TODO Auto-generated method stub
+		int resultado = 0;
+		if (this.potencia < o.getPotencia()) {
+			resultado = -1;
+		} else if (this.potencia > o.getPotencia()) {
+			resultado = 1;
+		}
+		return resultado;
 	}
 
 }

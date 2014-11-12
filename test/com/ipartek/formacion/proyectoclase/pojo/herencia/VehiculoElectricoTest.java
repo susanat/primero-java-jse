@@ -11,6 +11,7 @@ import org.junit.Test;
 public class VehiculoElectricoTest {
 	private static final float DELTA = 0f;
 	private static VehiculoElectrico veDefecto;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		veDefecto = new VehiculoElectrico();
@@ -33,21 +34,20 @@ public class VehiculoElectricoTest {
 	public void testVehiculoElectrico() {
 	//	fail("Not yet implemented");
 		assertEquals(VehiculoElectrico.MIN_CAP_BATERIA,
-					veDefecto.getCapaBateria(), 
+					veDefecto.getCapacidadBateria(),
 					DELTA);
-		
-		assertEquals(VehiculoElectrico.MIN_PLAZAS,
-					veDefecto.getNumPlazas(), 
-					DELTA);
-		
-		assertEquals(VehiculoElectrico.MIN_POTENCIA,
-				veDefecto.getPotencia(), 
-				DELTA);
-		
-		assertEquals(VehiculoElectrico.MIN_DIM,
-				veDefecto.getDim(), 
-				DELTA);
-		
-	}
 
+		assertEquals(VehiculoElectrico.MIN_PLAZAS,
+					veDefecto.getNumPlazas(),
+					DELTA);
+
+		assertEquals(VehiculoElectrico.MIN_POTENCIA,
+				veDefecto.getPotencia(),
+				DELTA);
+
+		assertEquals(VehiculoElectrico.MIN_DIM,
+				veDefecto.getDim(),
+				DELTA);
+
+	}
 }
