@@ -34,7 +34,7 @@ public class Persona {
 	String telefono;
 	char sexo = 'o';	
 	ArrayList<Libro> libros;
-	ArrayList<Calificacion> calificaciones;
+	
 	
 	// Constructor
 	public Persona() {
@@ -116,12 +116,6 @@ public class Persona {
 		return mayorEdad;
 	}
 
-
-	
-
-
-	
-
 	public String getTelefono() {
 		return telefono;
 	}
@@ -146,14 +140,7 @@ public class Persona {
 		this.libros = libros;
 	}
 
-	public ArrayList<Calificacion> getCalificaciones() {
-		return calificaciones;
-	}
-
-	public void setCalificaciones(ArrayList<Calificacion> calificaciones) {
-		this.calificaciones = calificaciones;
-	}
-	
+		
 	// Metodos
 		@Override
 		public String toString() {
