@@ -1,15 +1,12 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-public class Linea extends Figura {
+public class Linea extends Figura implements Redimensionable {
 
 	private int longitud;
-	
-	public static final int LONG_MIN = 1;
-	public static final int LONG_MAX = 10;
-	
+		
 	public Linea(int x, int y) {
 		super(x, y);	
-		setLongitud(LONG_MIN);
+		setLongitud( LONG_MIN );
 	}
  
 	
@@ -30,6 +27,7 @@ public class Linea extends Figura {
 	public void setLongitud(int longitud) {
 		this.longitud = longitud;
 	}
+	
 	
 	@Override
 	void dibujar() {
