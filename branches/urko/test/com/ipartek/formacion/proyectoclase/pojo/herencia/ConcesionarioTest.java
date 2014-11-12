@@ -51,9 +51,9 @@ public class ConcesionarioTest {
 
 		if (ve instanceof VehiculoElectrico) {
 			VehiculoElectrico vel = (VehiculoElectrico) ve;
-			vel.getCapaBateria();
+			vel.getCapacidadBateria();
 			assertTrue("No se consigio", true);
-			((VehiculoElectrico) ve).getCapaBateria();
+			((VehiculoElectrico) ve).getCapacidadBateria();
 			assertTrue("No se consigio", true);
 		}
 	}
