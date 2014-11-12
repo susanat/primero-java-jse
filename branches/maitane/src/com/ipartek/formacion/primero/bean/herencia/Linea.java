@@ -7,15 +7,15 @@ public class Linea extends Figura {
 	public static final int LONG_MIN = 1;
 	public static final int LONG_MAX = 10;
 	
-	public Linea(int x, int y) {
-		super(x, y);	
+	public Linea(Punto pto) {
+		super(pto);	
 		setLongitud(LONG_MIN);
 	}
  
 	
 	
-	public Linea(int x, int y, int longitud) {
-		super(x, y);
+	public Linea(Punto pto, int longitud) {
+		super(pto);
 		setLongitud( longitud );
 	}
 
