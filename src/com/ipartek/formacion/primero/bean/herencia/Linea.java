@@ -1,23 +1,18 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-public class Linea extends Figura {
+public class Linea extends Figura implements Redimensionable {
 
 	// Atributos
 	private int longitud;
-	
-	// Constantes
-	public static final int LONG_MIN = 1;
-	public static final int LONG_MAX = 10;
-	
-	
+		
 	// Constructores
-	public Linea(int x, int y) {
-		super(x, y);
+	public Linea(Punto punto) {
+		super(punto);
 		setLongitud(LONG_MIN);
 	}
 
-	public Linea(int x, int y, int longitud){
-		super(x, y);
+	public Linea(Punto punto, int longitud){
+		super(punto);
 		setLongitud(longitud);
 	}
 	
@@ -38,9 +33,15 @@ public class Linea extends Figura {
 	}
 
 	// Metodos
+	/**
+	 * Dibuja una linea de '=' con la longitud de la Linea  
+	 */
 	@Override
 	void dibujar() {
-		// Se implementa el metodo Dibujar	
+		for (int i = 0; i < getLongitud() ; i++) {
+			System.out.print("=");
+		}
+		System.out.println();
 	}
 
 }

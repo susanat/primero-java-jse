@@ -1,6 +1,5 @@
 package com.ipartek.formacion.primero.practicas;
 
-import com.ipartek.formacion.primero.util.Dado;
 
 /**
  * Objeto para calcular las vueltas de un cobro de forma mas optima posible 

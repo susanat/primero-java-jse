@@ -1,6 +1,6 @@
-package com.ipartek.formacion.primero.bean;
+package com.ipartek.formacion.primero.bean.herencia;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class LibroTest {
+public class LineaTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -26,12 +26,20 @@ public class LibroTest {
 	public void tearDown() throws Exception {
 	}
 
-	//empiezan nuetros Test Unitarios
-	
 	@Test
-	public void testLibro() {
-		Libro libroPorDefecto = new Libro(); 
-		assertTrue("NO son el numero de paginas esperado", 0 == libroPorDefecto.getPaginas() );
+	public void testDibujar() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testLineaPunto() {
+		
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testLineaPuntoInt() {
+		fail("Not yet implemented");
 	}
 
 }

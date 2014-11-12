@@ -6,34 +6,34 @@ package com.ipartek.formacion.primero.bean.herencia;
  *
  */
 public abstract class Figura {
+
 	// Atributos
-	int x;
-	int y;
+	Punto punto;
+	
 	
 	// Constructor
-	public Figura(int x, int y) {
+	public Figura(){
 		super();
-		setX(x);
-		setY(y);
+		this.punto = new Punto();
+		
 	}
-
-	// Getters y Setters
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
+		
 	
+	public Figura(Punto punto) {
+		super();
+		this.punto = punto;
+	}
+
+
+
+	public Punto getPunto() {
+		return punto;
+	}
+
+
+	public void setPunto(Punto punto) {
+		this.punto = punto;
+	}
 
 	// metodo implementado
 	/**
@@ -42,9 +42,10 @@ public abstract class Figura {
 	 * @param y posicion y a mover
 	 * @return true si es movida la Figura, false eoc
 	 */
-	public boolean mover (int x, int y){
+	public boolean mover (Punto punto){
 		boolean resul = true;
-		if ((getX() == x) && (getY() == y)){
+		// TODO comparar objeto completo con equals, en vez de compara cada uno de sus atributos
+		if ((punto.getX() == this.punto.getX()) && (punto.getY() == this.punto.getY())){
 			resul=false;
 		}
 		return resul;
@@ -55,4 +56,49 @@ public abstract class Figura {
 	 * Dibuja por pantalla la Figura
 	 */
 	abstract void dibujar();
+	
+	
+	
+	
+	/**
+	 * Clase interna para trabajar con coordenadas x e y
+	 * @author Jose A. Perez
+	 *
+	 */
+	protected class Punto{
+		// Atributos
+		int x;
+		int y;
+		
+		// Constructor
+		protected Punto(){
+			super();
+			this.x=0;
+			this.y=0;
+		}
+		
+		protected Punto(int x, int y) {
+			super();
+			this.x = x;
+			this.y = y;
+		}
+
+		protected int getX() {
+			return x;
+		}
+
+		protected void setX(int x) {
+			this.x = x;
+		}
+
+		protected int getY() {
+			return y;
+		}
+
+		protected void setY(int y) {
+			this.y = y;
+		}
+	}
 }
+
+
