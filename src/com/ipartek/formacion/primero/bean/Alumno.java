@@ -17,35 +17,15 @@ public class Alumno extends Persona{
 	
 	// Atributos
 	
-	ArrayList<Calificacion> calificaciones;
+	private ArrayList<Calificacion> calificaciones;
 	
 	// Constructor
 	public Alumno() {
 		super();
-		this.nombre = "Jhon";
-		this.apellido1 = "Doe";
-		this.dni = "xxxxxxxxx";
+		calificaciones = new ArrayList<Calificacion>();
 	}
 	
-	public Alumno(String nombre, String apellido1, String dni) {
-		super();
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.dni = dni;
-	}
-
-	
-	public Alumno(String nombre, String apellido1, int edad, String dni) {
-		super();
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.edad = edad;
-		this.dni = dni;
-		this.mayorEdad = (this.edad>=18)? true: false; 
-	}
-
 	// Getters y Setters
-	
 	public ArrayList<Calificacion> getCalificaciones() {
 		return calificaciones;
 	}
@@ -54,15 +34,4 @@ public class Alumno extends Persona{
 		this.calificaciones = calificaciones;
 	}
 	
-	// Metodos
-		@Override
-		public String toString() {
-			return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
-					+ ", apellido2=" + apellido2 + ", edad=" + edad + ", dni="
-					+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
-					+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
-		}
-	
-	
-
 }

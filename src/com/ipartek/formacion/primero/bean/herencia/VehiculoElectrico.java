@@ -1,11 +1,19 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-public class VehiculoElectrico extends Vehiculo {
-	
+import java.io.Serializable;
+
+public class VehiculoElectrico extends Vehiculo implements Arrancable,
+		Serializable {
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 6377077734494654255L;
+
 	private float capacidadBaterias;
-	
-	public static final float MIN_POTENCIA=150F;
-	
+
+	public static final float MIN_POTENCIA = 150F;
+
 	/*
 	 * Capacidad minima de una bateria
 	 */
@@ -13,11 +21,11 @@ public class VehiculoElectrico extends Vehiculo {
 
 	public VehiculoElectrico() {
 		super();
-		
+
 		setCapacidadBaterias(MIN_CAP_BATERIA);
 		setPotencia(VehiculoElectrico.MIN_POTENCIA);
 	}
-	
+
 	@Override
 	public void setPotencia(float potencia) {
 		super.setPotencia(potencia);
@@ -37,8 +45,10 @@ public class VehiculoElectrico extends Vehiculo {
 				+ ", numPlazas=" + numPlazas + ", dimensiones=" + dimensiones
 				+ ", potencia=" + potencia + "]";
 	}
-	
-	
-	
+
+	@Override
+	public boolean arrancar() {
+		return true;
+	}
 
 }
