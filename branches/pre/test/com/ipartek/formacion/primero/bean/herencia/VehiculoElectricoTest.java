@@ -1,8 +1,6 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-import static org.junit.Assert.*;
-
-import javax.swing.text.html.MinimalHTMLWriter;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,25 +45,24 @@ public class VehiculoElectricoTest {
 		assertEquals(VehiculoElectrico.MIN_PLAZAS, ve.getNumPlazas());
 
 	}
-	
+
 	@Test
 	public void testConstructorParametros() {
-		
-		VehiculoElectrico ve = new VehiculoElectrico( 200f );
-		//comprobar que sigue llamando al constructor del padre
+
+		VehiculoElectrico ve = new VehiculoElectrico(200f);
+		// comprobar que sigue llamando al constructor del padre
 		assertEquals(VehiculoElectrico.MIN_CAP_BATERIA,
 				ve.getCapacidadBaterias(), Float.MIN_VALUE);
 
 		assertEquals(VehiculoElectrico.MIN_DIM, ve.getDimensiones(),
 				Float.MIN_VALUE);
-		
+
 		assertEquals(VehiculoElectrico.MIN_PLAZAS, ve.getNumPlazas());
-		
-		//comprobar potencia en constructor
-		assertEquals("La potencia se setea mal en el constructor ",
-				200f , ve.getPotencia(),
-				Float.MIN_VALUE);
-		
+
+		// comprobar potencia en constructor
+		assertEquals("La potencia se setea mal en el constructor ", 200f,
+				ve.getPotencia(), Float.MIN_VALUE);
+
 	}
 
 }
