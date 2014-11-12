@@ -17,16 +17,16 @@ public class Cuadrado extends Figura implements Redimensionable {
 	 * @param x
 	 * @param y
 	 */
-	public Cuadrado(int x, int y) {
-		super(x, y);
+	public Cuadrado(Punto punto) {
+		super(punto);
 		setCara(LONG_MIN);
 	}
 	
 	
 	
 	
-	public Cuadrado(int x, int y, int cara) {
-		super(x, y);
+	public Cuadrado(Punto punto, int cara) {
+		super(punto);
 		setCara(cara);
 	}
 
@@ -54,7 +54,7 @@ public class Cuadrado extends Figura implements Redimensionable {
 	 */
 	@Override
 	void dibujar() {
-		// TODO Auto-generated method stub
+		System.out.println("Soy un Cuadrado");
 
 	}
 
