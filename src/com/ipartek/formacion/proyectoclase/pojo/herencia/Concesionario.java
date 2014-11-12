@@ -1,7 +1,7 @@
 package com.ipartek.formacion.proyectoclase.pojo.herencia;
 
 /**
- * Obejto para poder comprar {@code Vehiculo}.
+ * Objto para poder comprar {@code Vehiculo}.
  *
  * @author Urko Villanueva
  *
