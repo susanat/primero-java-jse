@@ -38,10 +38,10 @@ public class Main {
 			System.out.println("distinto de \"\" pero no compueba que sea nulo");
 		}
 		*/
-	/*	
+	/*
 		calcular.calcularVueltas(2000.0,1326.24);
 		calcular.mostrarCambios();
-		*/	
+		*/
 		/*
 		if(Util.isVocal('t'))
 			System.out.println("Es vocal");
@@ -63,10 +63,8 @@ public class Main {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
 */
-		
 	} 
 /**
  * 
