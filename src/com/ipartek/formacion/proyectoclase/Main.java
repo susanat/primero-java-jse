@@ -36,7 +36,6 @@ public class Main {
 		 */
 		Cuadrado c = new Cuadrado();
 		Punto p = c.new Punto();
-		c = new Cuadrado(p);
 		c.dibujar();
 		/*
 		 * Linea li = new Linea(); li.dibujar();
