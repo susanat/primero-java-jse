@@ -17,9 +17,7 @@ public class Utilidades {
 	 *            de la linea
 	 */
 	public static void pintarLinea(char c, int longitud) {
-		
-		String[] vab = Dado.alumnos;
-		
+
 		for (int i = 0; i < longitud; i++) {
 			System.out.print(c);
 		}
@@ -53,7 +51,8 @@ public class Utilidades {
 	/**
 	 * Retorna un Array invertido Ej: [0,1,2,3,4] salida: [4,3,2,1,0]
 	 * 
-	 * @param array array de tipo {@code int} para invertir
+	 * @param array
+	 *            array de tipo {@code int} para invertir
 	 * @return int[] array pasado por parametro invertido
 	 */
 	public static int[] invertirArray(int[] array) {
@@ -68,8 +67,7 @@ public class Utilidades {
 		for (int i = 0; i < tamanio; i++) {
 			resul[tamanio - 1 - i] = array[i];
 		}
-		
-		
+
 		// retornar array invertido
 		return resul;
 	}
@@ -83,11 +81,9 @@ public class Utilidades {
 	 */
 	public static int[] ordenarArray(int[] array) {
 
-		int[] resul = new int[array.length];		
+		int[] resul = new int[array.length];
 		boolean flag = true; // set flag to true to begin first pass
 		int temp; // holding variable
-		
-		
 
 		while (flag) {
 			flag = false; // set flag to false awaiting a possible swap
@@ -100,41 +96,40 @@ public class Utilidades {
 					flag = true; // shows a swap occurred
 				}
 			}
-		}		
+		}
 		resul = array;
 		return resul;
 	}
-	
-	
+
 	/**
 	 * Comprueba que sea una vocal: a,e,i,o,u,A,E,I,O,U y con acento
-	 * @param caracter char a comprobar
+	 * 
+	 * @param caracter
+	 *            char a comprobar
 	 * @return true si es un caracter vocal
 	 */
-	public static boolean isVocal ( char caracter ){
+	public static boolean isVocal(char caracter) {
 		boolean resul = false;
-		
-		
-		switch ( Character.toLowerCase(caracter) ) {
-			case 'a':				
-			case 'e':
-			case 'i':	
-			case 'o':	
-			case 'u':
-			case 'á':				
-			case 'é':
-			case 'í':	
-			case 'ó':	
-			case 'ú':
-				resul=true;
-				break;
-				
-			default:
-				break;
+
+		switch (Character.toLowerCase(caracter)) {
+		case 'a':
+		case 'e':
+		case 'i':
+		case 'o':
+		case 'u':
+		case 'á':
+		case 'é':
+		case 'í':
+		case 'ó':
+		case 'ú':
+			resul = true;
+			break;
+
+		default:
+			break;
 		}
-		
-		return resul;		
-	} 
-	
+
+		return resul;
+	}
 
 }
