@@ -49,7 +49,7 @@ public class Main {
 			System.out.println("no es vocal");
 		*/
 		Point p = new Point(3,3);
-		Linea li = new Linea(p);
+		Linea li = new Linea(p,5);
 		li.dibujar();
 		/*
 		f_nacimiento.set(1976, 10, 24);
