@@ -11,7 +11,7 @@ public class Cuadrado extends Figura implements IRedimensionable {
 	 * 
 	 * @param p
 	 */
-	public Cuadrado(Point p) {
+	public Cuadrado(Punto p) {
 		super(p);
 		// TODO Auto-generated constructor stub
 	}
@@ -20,7 +20,7 @@ public class Cuadrado extends Figura implements IRedimensionable {
 	 * @param p
 	 * @param lado
 	 */
-	public Cuadrado(Point p, Integer lado) {
+	public Cuadrado(Punto p, Integer lado) {
 		super(p);
 		this.lado = lado;
 	}

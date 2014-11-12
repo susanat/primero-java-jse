@@ -1,6 +1,6 @@
 package com.ipartek.formacion.proyectoclase;
 
-import java.awt.Point;
+
 import java.util.Calendar;
 import java.util.Iterator;
 
@@ -13,8 +13,10 @@ import org.json.JSONObject;
 
 
 
+
 import com.ipartek.formacion.proyectoclase.pojo.Alumno;
 import com.ipartek.formacion.proyectoclase.pojo.Libro;
+import com.ipartek.formacion.proyectoclase.pojo.herencia.Figura.Punto;
 import com.ipartek.formacion.proyectoclase.pojo.herencia.Linea;
 import com.ipartek.formacion.proyectoclase.util.Cambio;
 import com.ipartek.formacion.proyectoclase.util.Util;
@@ -48,9 +50,12 @@ public class Main {
 		else
 			System.out.println("no es vocal");
 		*/
-		Point p = new Point(3,3);
-		Linea li = new Linea(p,5);
+		Linea li = null;
+		Punto p = li.new Punto();
+		/*
+		Linea li = new Linea();
 		li.dibujar();
+		*/
 		/*
 		f_nacimiento.set(1976, 10, 24);
 		al.setF_nacimiento(f_nacimiento);
