@@ -42,7 +42,9 @@ public abstract class Figura {
 		boolean exito = false;
 		if (!p.equals(getP())){
 			exito = true;
+			System.out.println(" Movido el objeto a la posicion ["+ p.getX() +"," + p.getY() + "]");
 		}
+		
 		return exito;
 	}
 	/**
