@@ -6,12 +6,9 @@ import java.awt.Point;
  * @author Urko Villanueva
  *
  */
-public class Linea extends Figura {
+public class Linea extends Figura implements IRedimensionable{
 
 	private int longitud;
-	
-	public static final int LONG_MIN = 1;
-	public static final int LONG_MAX = 10;
 	/**
 	 * 
 	 * @param p
@@ -23,7 +20,7 @@ public class Linea extends Figura {
 
 	public Linea(Point p, int longitud) {
 		super(p);
-		setLongitud(longitud);
+		setLongitud(IRedimensionable.LONG_MIN);
 	}
 
 	public int getLongitud() {
