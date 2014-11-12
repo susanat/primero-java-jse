@@ -1,4 +1,4 @@
-package com.ipartek.formacion.primero.bean;
+package com.ipartek.formacion.primero.bean.herencia;
 
 import static org.junit.Assert.assertEquals;
 
