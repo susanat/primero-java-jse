@@ -1,6 +1,7 @@
 package com.ipartek.formacion.proyectoclase.pojo.herencia;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
@@ -25,6 +26,7 @@ public class ConcesionarioTest {
 	public void setUp() throws Exception {
 		con1 = new Concesionario();
 		con2 = new Concesionario();
+		Concesionario.resetearCompraVehiculos();
 	}
 
 	@After
@@ -70,7 +72,7 @@ public class ConcesionarioTest {
 	 */
 	@Test
 	public void testVentas() {
-		Concesionario.resetearCompraVehiculos();
+
 		con1.comprarVehiculo(false);
 		con1.comprarVehiculo(false);
 		con1.comprarVehiculo(false);
@@ -81,11 +83,16 @@ public class ConcesionarioTest {
 		con2.comprarVehiculo(true);
 		con2.comprarVehiculo(true);
 
-		assertTrue("", 3 == con1.getVenta());
-		assertTrue("", 5 == con2.getVenta());
-		assertTrue("El valor de Venta global es: " + con1.getVentaGlobal()
-				+ " y " + con2.getVentaGlobal(), 8 == con1.getVentaGlobal()
-				&& con2.getVentaGlobal() == 8);
+		assertSame("Las ventas del concesionario 1 deberian ser 3 y son: "
+				+ con1.getVenta(), 3, con1.getVenta());
+		assertSame("Las ventas del concesionario 1 deberian ser 5 y son: "
+				+ con2.getVenta(), 5, con2.getVenta());
+		assertTrue(
+				"El valor de Venta global es: "
+						+ Concesionario.getVentaGlobal() + " y "
+						+ Concesionario.getVentaGlobal(),
+				8 == Concesionario.getVentaGlobal()
+						&& Concesionario.getVentaGlobal() == 8);
 
 	}
 }
