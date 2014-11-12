@@ -9,31 +9,21 @@ package com.ipartek.formacion.primero.bean.herencia;
 public abstract class Figura {
 
 	// Atributos
-	private int x;
-	private int y;
+	private Punto punto;
 
 	// Constructor
-	public Figura(int x, int y) {
+	public Figura(Punto punto) {
 		super();
-		setX(x);
-		setY(y);
+		this.punto = punto;
 	}
 
 	// Getters & Setters
-	public int getX() {
-		return x;
+	public Punto getPunto() {
+		return punto;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
+	public void setPunto(Punto punto) {
+		this.punto = punto;
 	}
 
 	// Métodos
@@ -46,9 +36,9 @@ public abstract class Figura {
 	 *            posición y a mover
 	 * @return true si la Figura se ha movido, false en caso contrario
 	 */
-	public boolean mover(int x, int y) {
+	public boolean mover(Punto punto) {
 		boolean res = true;
-		if (getX() == x && getY() == y) {
+		if (punto.equals(this.punto)) {
 			res = false;
 		}
 		return res;
@@ -59,4 +49,43 @@ public abstract class Figura {
 	 */
 	public abstract void dibujar();
 
+	/**
+	 * Clase interna para dibujar un punto
+	 * 
+	 * @author Curso
+	 *
+	 */
+	protected class Punto {
+		private int x;
+		private int y;
+
+		protected Punto() {
+			super();
+			this.x = 0;
+			this.y = 0;
+		}
+
+		protected Punto(int x, int y) {
+			super();
+			this.x = x;
+			this.y = y;
+		}
+
+		protected int getX() {
+			return x;
+		}
+
+		protected void setX(int x) {
+			this.x = x;
+		}
+
+		protected int getY() {
+			return y;
+		}
+
+		protected void setY(int y) {
+			this.y = y;
+		}
+
+	}
 }

@@ -1,5 +1,6 @@
 package com.ipartek.formacion.primero;
 
+
 public class Prueba {
 
 	public static void main(String[] args) {
