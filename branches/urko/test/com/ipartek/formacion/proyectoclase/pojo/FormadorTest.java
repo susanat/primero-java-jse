@@ -1,7 +1,5 @@
 package com.ipartek.formacion.proyectoclase.pojo;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,7 +26,7 @@ public class FormadorTest {
 
 	@Test
 	public void testFormador() {
-		//fail("Not yet implemented");
+		// fail("Not yet implemented");
 	}
 
 }

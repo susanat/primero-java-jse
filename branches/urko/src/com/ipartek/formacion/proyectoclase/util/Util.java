@@ -14,7 +14,7 @@ public class Util {
 		n_dni = generarNumeroDni();
 		letra = generarLetraDni(n_dni);
 		
-		dni = n_dni.toString()+letra.toString();
+		dni = String.format("%07d",n_dni.toString())+letra.toString();
 		
 		return dni;
 	}
