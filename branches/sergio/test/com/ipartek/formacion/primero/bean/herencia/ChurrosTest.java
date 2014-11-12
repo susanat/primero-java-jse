@@ -2,13 +2,15 @@ package com.ipartek.formacion.primero.bean.herencia;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.Array;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class VehiculoElectricoTest {
+public class ChurrosTest {
 
 	//desviación de los float para la comparación de float
 	static final float DELTA = 0f;
@@ -30,17 +32,27 @@ public class VehiculoElectricoTest {
 	}
 
 	@Test
-	public void testVehiculoElectrico() {
-		//comprobar que llamamos al constructor del padre vehiculo
-		VehiculoElectrico obj = new VehiculoElectrico();
+	public void test() {
 		
-		//Resultados esperados
-		assertEquals(VehiculoElectrico.MIN_CAPACIDAD_BATERIA, obj.getCapacidadBaterias(), DELTA);
-		assertEquals(VehiculoElectrico.MIN_DIM, obj.getDimensiones(), DELTA);
-		assertEquals(VehiculoElectrico.MIN_PLAZAS, obj.getNumPlazas());
-		assertEquals(VehiculoElectrico.MIN_POTENCIA, obj.getPotencia(), DELTA);
+		churros obj = new churros(50);
 		
-		assertEquals(obj.getCapacidadBaterias(), obj.getPeso(), DELTA);
+		assertEquals(obj.getCalorias(), obj.getPeso(), DELTA);
+		
+		
+		//ordenar array
+		
+		IOrdenable[] aObjetos = 
+			{ 
+				new VehiculoElectrico(90),
+				new churros(50), 
+				new churros(10), 
+				new churros(60), 
+				new VehiculoElectrico(10),
+				new VehiculoElectrico(100),
+			};
+		
+		
+		
 	}
 
 }

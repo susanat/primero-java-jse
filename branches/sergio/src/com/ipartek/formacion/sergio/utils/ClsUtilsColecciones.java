@@ -1,4 +1,4 @@
-package com.ipartek.formacion.primero.util;
+package com.ipartek.formacion.sergio.utils;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,7 +14,7 @@ import java.util.Collections;
  * @author baskito
  * @version 04.11.2014
  */
-public class UtilidadesColecciones {
+public class ClsUtilsColecciones {
 	/**
 	 * Convierte un array tipo int[] a Integer[]
 	 * @param IntegerArray Array de tipo Integer[]
@@ -54,7 +54,7 @@ public class UtilidadesColecciones {
 	 * @return El array ordenado
 	 */
 	public static int[] sortedArrayInt(int[] myArray,  boolean descent) {
-		final Integer[] sorted = UtilidadesColecciones.toObject(myArray);
+		final Integer[] sorted = ClsUtilsColecciones.toObject(myArray);
 
 		if(!descent){
 			Arrays.sort(sorted);
@@ -64,7 +64,7 @@ public class UtilidadesColecciones {
 			Arrays.sort(sorted, Collections.reverseOrder());
 		}
 
-		System.arraycopy(UtilidadesColecciones.toPrimitive(sorted), 0, myArray, 0, sorted.length);
+		System.arraycopy(ClsUtilsColecciones.toPrimitive(sorted), 0, myArray, 0, sorted.length);
 		return myArray;
 	}
 
