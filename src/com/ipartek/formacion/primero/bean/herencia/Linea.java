@@ -1,21 +1,18 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-public class Linea extends Figura {
-
-	public static final int LONG_MIN = 1 ; 
-	public static final int LONG_MAX = 10 ; 
+public class Linea extends Figura implements Redimensionable {
 	
 	private int longitud;
 	
-	public Linea(int x, int y) {
-		super(x, y);
+	public Linea() {
+		super();
 		setLongitud(LONG_MIN);
-		
 	}
-
 	
 	public Linea(int x, int y, int longitud) {
-		super(x, y);
+		super();
+		punto.setX(x);
+		punto.setY(y);
 		setLongitud(longitud);
 	}
 
