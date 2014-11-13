@@ -3,6 +3,7 @@ package com.ipartek.formacion.primero.bean.herencia;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -37,21 +38,27 @@ public class ChurrosTest {
 		churros obj = new churros(50);
 		
 		assertEquals(obj.getCalorias(), obj.getPeso(), DELTA);
-		
-		
+				
 		//ordenar array
 		
 		IOrdenable[] aObjetos = 
 			{ 
 				new VehiculoElectrico(90),
 				new churros(50), 
-				new churros(10), 
+				new churros(10),
 				new churros(60), 
 				new VehiculoElectrico(10),
 				new VehiculoElectrico(100),
 			};
 		
+		Arrays.sort(aObjetos,churros.ObjetoComparator.decending(churros.ObjetoComparator.SORT_PESO));
 		
+		
+		//Arrays.sort(aObjetos,churros.getComparator(churros.ObjetoComparator.SORT_PESO));
+		
+		for(IOrdenable a : aObjetos){
+			System.out.println(a.toString() + ' ' + a.getPeso());
+		}
 		
 	}
 
