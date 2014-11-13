@@ -1,10 +1,9 @@
 package com.ipartek.formacion.proyectoclase.pojo.herencia;
 
 import java.io.Serializable;
-import java.util.Comparator;
 
 public class VehiculoElectrico extends Vehiculo implements Arrancable,
-		Serializable, Comparable<Vehiculo>, Comparator<VehiculoElectrico> {
+		Serializable, Comparable<Vehiculo> {
 
 	private float capacidadBateria;
 
@@ -52,13 +51,6 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 	@Override
 	public Boolean arrancar() {
 		return true;
-	}
-
-	@Override
-	public int compare(VehiculoElectrico o1, VehiculoElectrico o2) {
-		// TODO Auto-generated method stub
-		int resultado = 0;
-		return resultado;
 	}
 
 	@Override
