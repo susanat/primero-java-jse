@@ -106,6 +106,8 @@ public class PersonaTest {
 
 		assertEquals("La lista no esta bien ordenada por nombres", paritz,
 				alumnos.get(0));
+		assertEquals("La lista no esta bien ordenada por nombres", pzuhaitz,
+				alumnos.get(alumnos.size() - 1));
 
 	}
 }
