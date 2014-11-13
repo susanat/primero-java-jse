@@ -9,10 +9,10 @@ package com.ipartek.formacion.primero.bean.herencia;
  * @author Fran
  *
  */
-public class Churros implements Ordenable {
+public class Churro implements Ordenable {
 	private float calorias;
 
-	public Churros(float calorias) {
+	public Churro(float calorias) {
 		super();
 		setCalorias(calorias);
 	}
