@@ -235,7 +235,8 @@ public class Persona implements Comparable<Persona> {
 
 	@Override
 	public int compareTo(Persona o) {
-		Locale locale = new Locale("es_ES");
+		Locale locale = new Locale("es", "ES");
+
 		Collator collator = Collator.getInstance(locale);
 		// TODO Auto-generated method stub
 		collator.setStrength(Collator.PRIMARY);
