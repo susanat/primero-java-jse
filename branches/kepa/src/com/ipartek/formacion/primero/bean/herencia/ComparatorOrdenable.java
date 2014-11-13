@@ -2,11 +2,13 @@ package com.ipartek.formacion.primero.bean.herencia;
 
 import java.util.Comparator;
 
-public class ComparatorOrdenable implements Comparator<Ordenable> {
+import com.ipartek.formacion.primero.bean.interfaces.IOrdenable;
 
-	public ComparatorOrdenable() {
-		public int compare(Ordenable o1, Ordenable o2) {
-			return Integer.compare
-		}
+public class ComparatorOrdenable implements Comparator<IOrdenable> {
+
+	@Override
+	public int compare(IOrdenable o1, IOrdenable o2) {
+		return Integer.compare(o1.getPeso(), o2.getPeso());
 	}
+
 }
