@@ -34,6 +34,7 @@ public class PersonaTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		
 	}
 
 	@Before
@@ -70,10 +71,22 @@ public class PersonaTest {
 
 	@After
 	public void tearDown() throws Exception {
+		pZuahitz = null;
+		pSusána = null;
+		pkepa = null;
+		pÚrko = null;
+		pJon = null;
+		pSergío = null;
+		pJoséba = null;
+		pMarío = null;
+		pÁritz = null;
+		pfran = null;
+		pMaitane = null;
+		pJose = null;
 	}
 
 	@Test
-	public void test() {
+	public void testOrdenarNombre() {
 		
 		assertEquals(pZuahitz, listaPersona.get(0));
 		assertEquals(pSusána, listaPersona.get(1));
