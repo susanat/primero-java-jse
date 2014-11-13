@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ipartek.formacion.proyectoclase.pojo.herencia.Vehiculo;
+import com.ipartek.formacion.proyectoclase.pojo.herencia.Vehiculo.ComparatorNumeroPlazas;
 
 public class ArrayListTest {
 	private ArrayList<String> paises = null;
@@ -107,9 +108,11 @@ public class ArrayListTest {
 		assertEquals("La lista de vehiculos no ha sido ordenada correctamente",
 				250.0, listaVehiculos.get(3).getPotencia(), 0f);
 
-		assertEquals("La lista de vehiculos no ha sido ordenada correctamente",
-				new Vehiculo(150.0), new Vehiculo(150.0));
-
+		listaVehiculos = new ArrayList<Vehiculo>();
+		listaVehiculos.add(new Vehiculo(150.0, 3));
+		listaVehiculos.add(new Vehiculo(100.0, 7));
+		listaVehiculos.add(new Vehiculo(250.0, 5));
+		listaVehiculos.add(new Vehiculo(125.0, 4));
+		Collections.sort(listaVehiculos, new ComparatorNumeroPlazas());
 	}
-
 }
