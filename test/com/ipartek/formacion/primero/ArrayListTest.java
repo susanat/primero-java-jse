@@ -205,7 +205,7 @@ public class ArrayListTest {
 		
 		
 		//Collections.sort(listaCaracteresEspeciales);
-		System.out.println("Ordenados");
+		System.out.println("Ordenados con locale");
 		for(String a:listaCaracteresEspeciales){
 			System.out.println(a);
 		}
@@ -215,6 +215,14 @@ public class ArrayListTest {
 		assertSame("á", listaCaracteresEspeciales.get(2));
 		assertSame("b", listaCaracteresEspeciales.get(3));
 		
+		
+		// set another default locale	    
+		Collections.sort(listaCaracteresEspeciales);
+		//Collections.sort(listaCaracteresEspeciales);
+		System.out.println("Ordenados sin locale");
+		for(String a:listaCaracteresEspeciales){
+			System.out.println(a);
+		}
 	}
 	
 	@Test

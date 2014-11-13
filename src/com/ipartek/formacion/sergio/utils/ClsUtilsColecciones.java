@@ -1,7 +1,9 @@
 package com.ipartek.formacion.sergio.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /*
  * TODO ¿Añadir a la clase? http://www.discoduroderoer.es/formas-de-ordenar-un-array-en-java/
@@ -126,5 +128,22 @@ public class ClsUtilsColecciones {
     	
     	return arrayTmp;    	
     }
+    
+    
+    public static <T> List<T> reverse(List<T> src)
+    {
+        List<T> results = new ArrayList<T>(src);
+        Collections.reverse(results);
+        return results;
+    }
+    
+    public static boolean inArrayA(char[] arr, char targetValue) {	
+		//TODO pasar a la clase ClsUtils y comprobar cual es la mejor forma del url en @see		
+		for(char s: arr){
+			if(s == targetValue)
+				return true;
+		}
+		return false;
+	}
 
 }
