@@ -1,29 +1,32 @@
 package com.ipartek.formacion.primero.bean;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * Clase para reprensentar un Alumno, se compone de:
  * <ol>
- * 	<li>nombre {@code String} obligatorio</li>
+ * <li>nombre {@code String} obligatorio</li>
  * </ol>
- * 
- * 
+ *
+ *
  * @author Mario Alvaro
  *
  */
-public class Persona {
-	
+public class Persona implements Comparable<Persona> {
+
 	static final char SEXO_VARON = 'v';
 	static final char SEXO_MUJER = 'm';
 	static final char SEXO_OTROS = 'o';
-	
+
 	static final int MAYOR_EDAD = 18;
-	
+
 	static final String NOMBRE_DEFECTO = "Jhon";
 	static final String APELLIDO_DEFECTO = "Doe";
 	static final String DNI_DEFECTO = "xxxxxxxxx";
-	
+
 	// Atributos
 	protected String nombre;
 	protected String apellido1;
@@ -33,34 +36,38 @@ public class Persona {
 	protected String poblacion;
 	protected boolean mayorEdad = false;
 	protected String telefono;
-	protected char sexo = 'o';	
+	protected char sexo = 'o';
 	protected ArrayList<Libro> libros;
-	
-	
+
 	// Constructor
 	public Persona() {
 		super();
 		this.nombre = NOMBRE_DEFECTO;
 		this.apellido1 = APELLIDO_DEFECTO;
 		this.dni = DNI_DEFECTO;
-		
-	}
-	
-	public Persona(String nombre, String apellido1, String dni) {
-		super();
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.dni = dni;
+
 	}
 
-	
+	public Persona(String nombre, int edad) {
+		super();
+		setNombre(nombre);
+		setEdad(edad);
+	}
+
+	public Persona(String nombre, String apellido1, String dni) {
+		super();
+		setNombre(nombre);
+		setApellido1(apellido1);
+		setDni(dni);
+	}
+
 	public Persona(String nombre, String apellido1, int edad, String dni) {
 		super();
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.edad = edad;
-		this.dni = dni;
-		this.mayorEdad = (this.edad>=18)? true: false; 
+		setNombre(nombre);
+		setApellido1(apellido1);
+		setDni(dni);
+		setEdad(edad);
+		this.mayorEdad = (this.edad >= 18) ? true : false;
 	}
 
 	// Getters y Setters
@@ -95,7 +102,7 @@ public class Persona {
 
 	public void setEdad(int edad) {
 		this.edad = edad;
-		this.mayorEdad = (this.edad>=MAYOR_EDAD)? true: false;
+		this.mayorEdad = (this.edad >= MAYOR_EDAD) ? true : false;
 	}
 
 	public String getDni() {
@@ -117,7 +124,6 @@ public class Persona {
 	public boolean isMayorEdad() {
 		return mayorEdad;
 	}
-
 
 	public String getTelefono() {
 		return telefono;
@@ -143,17 +149,37 @@ public class Persona {
 		this.libros = libros;
 	}
 
-	
-	
 	// Metodos
+	@Override
+	public String toString() {
+		return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
+				+ ", apellido2=" + apellido2 + ", edad=" + edad + ", dni="
+				+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
+				+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
+	}
+
+	/**
+	 * Compara la edad de esta instancia y la de otra persona
+	 */
+	@Override
+	public int compareTo(Persona o) {
+
+		return Integer.compare(this.edad, o.getEdad());
+	}
+
+	public static class ComparatorNombres implements Comparator<Persona> {
+		/**
+		 * Compara el nombre entre 2 objetos tipo <code>Persona</code> sin tener
+		 * en cuenta mayúsculas y minúsculas ni acentos y símbolos
+		 */
 		@Override
-		public String toString() {
-			return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
-					+ ", apellido2=" + apellido2 + ", edad=" + edad + ", dni="
-					+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
-					+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
+		public int compare(Persona o1, Persona o2) {
+			Locale esp = new Locale("es_ES");
+			Collator espCollator = Collator.getInstance(esp);
+			return espCollator.compare(o1.getNombre().toLowerCase(), o2
+					.getNombre().toLowerCase());
 		}
-	
-	
+
+	}
 
 }
