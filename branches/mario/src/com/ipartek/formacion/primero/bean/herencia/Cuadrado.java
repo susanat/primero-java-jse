@@ -3,6 +3,8 @@
  */
 package com.ipartek.formacion.primero.bean.herencia;
 
+import com.impartek.formacion.primero.interfaces.Redimensionable;
+
 /**
  *
  * @author Mario Alvaro

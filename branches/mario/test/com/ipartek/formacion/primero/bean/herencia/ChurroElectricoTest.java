@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.impartek.formacion.primero.interfaces.Ordenable;
+
 public class ChurroElectricoTest {
 
 	VehiculoElectrico ve1 = null;

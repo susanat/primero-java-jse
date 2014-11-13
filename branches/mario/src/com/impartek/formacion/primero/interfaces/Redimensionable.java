@@ -1,4 +1,4 @@
-package com.ipartek.formacion.primero.bean.herencia;
+package com.impartek.formacion.primero.interfaces;
 
 public interface Redimensionable {
 
