@@ -6,7 +6,7 @@ package com.ipartek.formacion.primero.bean.herencia;
  * @author Jose A. Perez
  *
  */
-public class Churro implements Pesable {
+public class Churro implements Ordenable {
 	// Atributos
 	/**
 	 *
@@ -99,12 +99,10 @@ public class Churro implements Pesable {
 	}
 
 	// Metodos de la interfaz
-	/**
-	 * Devuelve las calorias del churro
-	 */
 	@Override
-	public float getPeso() {
-		return this.calorias;
+	public int getPeso() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
