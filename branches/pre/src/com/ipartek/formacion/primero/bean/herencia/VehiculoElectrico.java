@@ -2,8 +2,10 @@ package com.ipartek.formacion.primero.bean.herencia;
 
 import java.io.Serializable;
 
+import com.ipartek.formacion.primero.bean.interfaces.IOrdenable;
+
 public class VehiculoElectrico extends Vehiculo implements Arrancable,
-Arrancable2, Serializable, Ordenable {
+Arrancable2, Serializable, IOrdenable {
 
 	private static final long serialVersionUID = 6021367556911966591L;
 
