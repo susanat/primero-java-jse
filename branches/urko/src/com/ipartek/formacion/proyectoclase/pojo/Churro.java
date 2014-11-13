@@ -16,12 +16,6 @@ public class Churro implements Comparable<Churro>, IOrdenable {
 	@Override
 	public int compareTo(Churro o) {
 		// TODO Auto-generated method stub
-		int resultado = 0;
-		if (this.caloria < o.getCaloria()) {
-			resultado = -1;
-		} else if (this.caloria > o.getCaloria()) {
-			resultado = 1;
-		}
 		return Double.compare(this.caloria, o.getCaloria());
 	}
 

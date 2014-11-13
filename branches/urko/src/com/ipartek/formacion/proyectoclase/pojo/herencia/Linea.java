@@ -1,16 +1,16 @@
 package com.ipartek.formacion.proyectoclase.pojo.herencia;
 
-import java.awt.Point;
 /**
- * 
+ *
  * @author Urko Villanueva
  *
  */
-public class Linea extends Figura implements IRedimensionable{
+public class Linea extends Figura implements IRedimensionable {
 
 	private int longitud;
+
 	/**
-	 * 
+	 *
 	 * @param p
 	 */
 	public Linea(Punto p) {
@@ -34,7 +34,7 @@ public class Linea extends Figura implements IRedimensionable{
 	@Override
 	public void dibujar() {
 		// TODO Auto-generated method stub
-		for(int i = 0; i < getLongitud(); i++){
+		for (int i = 0; i < getLongitud(); i++) {
 			System.out.print("=");
 		}
 		System.out.println("");
