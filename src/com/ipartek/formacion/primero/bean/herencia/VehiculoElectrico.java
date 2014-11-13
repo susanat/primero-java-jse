@@ -1,7 +1,6 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-
-public class VehiculoElectrico extends Vehiculo implements Arrancable {
+public class VehiculoElectrico extends Vehiculo implements Arrancable, Pesable {
 
 	// Atributos
 	private float capacidadBaterias;
@@ -47,6 +46,11 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable {
 	@Override
 	public boolean arrancar() {
 		return true;
+	}
+
+	@Override
+	public float getPeso() {
+		return this.potencia;
 	}
 
 }
