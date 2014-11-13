@@ -1,7 +1,6 @@
 package com.ipartek.formacion.proyectoclase.pojo;
 
-
-public class Churro implements Comparable<Churro> {
+public class Churro implements Comparable<Churro>, IOrdenable {
 
 	private Double caloria;
 
@@ -23,7 +22,7 @@ public class Churro implements Comparable<Churro> {
 		} else if (this.caloria > o.getCaloria()) {
 			resultado = 1;
 		}
-		return resultado;
+		return Double.compare(this.caloria, o.getCaloria());
 	}
 
 	public Double getCaloria() {
@@ -32,6 +31,12 @@ public class Churro implements Comparable<Churro> {
 
 	public void setCaloria(Double caloria) {
 		this.caloria = caloria;
+	}
+
+	@Override
+	public Double getPeso() {
+		// TODO Auto-generated method stub
+		return this.caloria;
 	}
 
 }

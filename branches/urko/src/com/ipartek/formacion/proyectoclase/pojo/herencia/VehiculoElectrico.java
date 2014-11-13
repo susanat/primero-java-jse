@@ -1,6 +1,9 @@
 package com.ipartek.formacion.proyectoclase.pojo.herencia;
 
-public class VehiculoElectrico extends Vehiculo implements Arrancable {
+import com.ipartek.formacion.proyectoclase.pojo.IOrdenable;
+
+public class VehiculoElectrico extends Vehiculo implements Arrancable,
+		IOrdenable {
 
 	/**
 	 *
@@ -51,6 +54,13 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable {
 	@Override
 	public Boolean arrancar() {
 		return true;
+	}
+
+	@Override
+	public Double getPeso() {
+		// TODO Auto-generated method stub
+		return this.potencia;
+
 	}
 
 }

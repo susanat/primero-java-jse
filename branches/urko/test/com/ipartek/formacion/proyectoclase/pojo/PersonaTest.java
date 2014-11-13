@@ -1,5 +1,7 @@
 package com.ipartek.formacion.proyectoclase.pojo;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -12,6 +14,19 @@ import org.junit.Test;
 
 public class PersonaTest {
 	ArrayList<Persona> alumnos = null;
+	Persona pzuhaitz = null;
+	Persona psusana = null;
+	Persona pkepa = null;
+	Persona purko = null;
+	Persona pjon = null;
+	Persona psergio = null;
+	Persona pjoseba = null;
+	Persona pmario = null;
+	Persona paritz = null;
+	Persona pfran = null;
+	Persona pmaitane = null;
+	Persona pjose = null;
+	Persona pnu = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -25,32 +40,58 @@ public class PersonaTest {
 	public void setUp() throws Exception {
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.YEAR, 1985);
-		alumnos = new ArrayList<Persona>();
-		alumnos.add(new Persona("Zuhaitz", c));
+		pzuhaitz = new Persona("Zuhaitz", c);
+
 		c.set(Calendar.YEAR, 1991);
-		alumnos.add(new Persona("Susúna", c));
+		psusana = new Persona("Susúna", c);
+
 		c.set(Calendar.YEAR, 1980);
-		alumnos.add(new Persona("kepa", c));
+		pkepa = new Persona("kepa", c);
+
 		c.set(Calendar.YEAR, 1977);
-		alumnos.add(new Persona("Úrko", c));
+		purko = new Persona("Úrko", c);
+
 		c.set(Calendar.YEAR, 1979);
-		alumnos.add(new Persona("Jon", c));
+		pjon = new Persona("Jon", c);
+
 		c.set(Calendar.YEAR, 1996);
-		alumnos.add(new Persona("Sergio", c));
+		psergio = new Persona("Sergio", c);
+
 		c.set(Calendar.YEAR, 1988);
-		alumnos.add(new Persona("Joséba", c));
+		pjoseba = new Persona("Joséba", c);
+
 		c.set(Calendar.YEAR, 1991);
-		alumnos.add(new Persona("Mário", c));
+		pmario = new Persona("Mário", c);
+
 		c.set(Calendar.YEAR, 1994);
-		alumnos.add(new Persona("Áritz", c));
+		paritz = new Persona("Áritz", c);
+
 		c.set(Calendar.YEAR, 1981);
-		alumnos.add(new Persona("fran", c));
+		pfran = new Persona("fran", c);
+
 		c.set(Calendar.YEAR, 1986);
-		alumnos.add(new Persona("Maitane", c));
+		pmaitane = new Persona("Maitane", c);
+
 		c.set(Calendar.YEAR, 1965);
-		alumnos.add(new Persona("Jose", c));
+		pjose = new Persona("Jose", c);
+
 		c.set(Calendar.YEAR, 1982);
-		alumnos.add(new Persona("Ñu", c));
+		pnu = new Persona("Ñu", c);
+
+		alumnos = new ArrayList<Persona>();
+
+		alumnos.add(pzuhaitz);
+		alumnos.add(psusana);
+		alumnos.add(pkepa);
+		alumnos.add(pjon);
+		alumnos.add(psergio);
+		alumnos.add(pjoseba);
+		alumnos.add(pmario);
+		alumnos.add(paritz);
+		alumnos.add(pfran);
+		alumnos.add(pmaitane);
+		alumnos.add(pjose);
+		alumnos.add(pnu);
 
 	}
 
@@ -63,10 +104,8 @@ public class PersonaTest {
 		// fail("Not yet implemented");
 		Collections.sort(alumnos);
 
-		for (Persona p : alumnos) {
-			System.out.println(p.getNombre());
-		}
+		assertEquals("La lista no esta bien ordenada por nombres", paritz,
+				alumnos.get(0));
 
 	}
-
 }
