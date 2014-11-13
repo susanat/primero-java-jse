@@ -1,9 +1,10 @@
 package com.ipartek.formacion.proyectoclase.pojo.herencia;
 
-import java.io.Serializable;
+public class VehiculoElectrico extends Vehiculo implements Arrancable {
 
-public class VehiculoElectrico extends Vehiculo implements Arrancable,
-		Serializable, Comparable<Vehiculo> {
+	/**
+	 *
+	 */
 
 	private float capacidadBateria;
 
@@ -12,7 +13,7 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 	/**
 	 * Capacidad minima para una bateria
 	 */
-	static public final float MIN_CAP_BATERIA = 0;
+	static public final float MIN_CAP_BATERIA = 0f;
 
 	public VehiculoElectrico() {
 		super();
@@ -21,8 +22,7 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 	}
 
 	public VehiculoElectrico(Double potencia) {
-		// super();
-		setCapacidadBaterias(MIN_CAP_BATERIA);
+		this();
 		setPotencia(potencia);
 	}
 
@@ -51,18 +51,6 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 	@Override
 	public Boolean arrancar() {
 		return true;
-	}
-
-	@Override
-	public int compareTo(Vehiculo o) {
-		// TODO Auto-generated method stub
-		int resultado = 0;
-		if (this.potencia < o.getPotencia()) {
-			resultado = -1;
-		} else if (this.potencia > o.getPotencia()) {
-			resultado = 1;
-		}
-		return resultado;
 	}
 
 }

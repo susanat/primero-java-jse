@@ -4,7 +4,7 @@ package com.ipartek.formacion.proyectoclase.pojo.herencia;
  * @author Urko Villanueva
  *
  */
-public class Vehiculo {
+public class Vehiculo implements Comparable<Vehiculo> {
 	/**
 	 *
 	 */
@@ -42,10 +42,26 @@ public class Vehiculo {
 		setPotencia(Vehiculo.MIN_POTENCIA);
 	}
 
+	public Vehiculo(Double potencia) {
+		this();
+		setPotencia(potencia);
+	}
+
+	public Vehiculo(Integer numPlazas) {
+		this();
+		setNumPlazas(numPlazas);
+	}
+
 	@Override
 	public String toString() {
 		return "Vehiculo [numPlazas=" + numPlazas + ", dim=" + dim
 				+ ", potencia=" + potencia + "]";
+	}
+
+	@Override
+	public int compareTo(Vehiculo v) {
+		// TODO Auto-generated method stub
+		return Double.compare(this.getPotencia(), v.getPotencia());
 	}
 
 	public Integer getNumPlazas() {
