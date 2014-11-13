@@ -1,6 +1,10 @@
 package com.ipartek.formacion.primero.bean;
 
-public class Persona {
+import java.text.Collator;
+import java.util.Comparator;
+import java.util.Locale;
+
+public class Persona implements Comparable<Persona> {
 
 	// Atributos
 	String nombre;
@@ -20,10 +24,16 @@ public class Persona {
 
 	public Persona(String nombre, String apellido1, int edad, String dni) {
 		super();
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.edad = edad;
-		this.dni = dni;
+		setNombre(nombre);
+		setApellido1(apellido1);
+		setEdad(edad);
+		setDni(dni);
+	}
+
+	public Persona(String nombre, int edad) {
+		super();
+		setNombre(nombre);
+		setEdad(edad);
 	}
 
 	// Getters y Setters
@@ -107,5 +117,27 @@ public class Persona {
 				+ ", DNI = " + dni + ", población = " + poblacion
 				+ ", mayor de edad = " + strMayorEdad + ", teléfono = "
 				+ telefono + ", sexo = " + sexo + ".";
+	}
+
+	@Override
+	public int compareTo(Persona o) {
+		Collator esCollator = Collator.getInstance(Locale.getDefault());
+		esCollator.setStrength(Collator.PRIMARY);
+		return esCollator.compare(this.getNombre(), o.getNombre());
+	}
+
+	/**
+	 * Comparator para edad
+	 *
+	 * @author Curso
+	 *
+	 */
+	public static class ComparatorEdad implements Comparator<Persona> {
+
+		@Override
+		public int compare(Persona o1, Persona o2) {
+			return Integer.compare(o1.getEdad(), o2.getEdad());
+		}
+
 	}
 }

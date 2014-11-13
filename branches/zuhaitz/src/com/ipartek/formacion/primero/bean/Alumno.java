@@ -17,6 +17,10 @@ public class Alumno extends Persona {
 		super(nombre, apellido1, edad, dni);
 	}
 
+	public Alumno(String nombre, int edad) {
+		super(nombre, edad);
+	}
+
 	// Getters & Setters
 	public ArrayList<Calificacion> getCalificaciones() {
 		return calificaciones;
@@ -27,10 +31,10 @@ public class Alumno extends Persona {
 	}
 
 	// Methods
-	/*
-	 * @Override public String toString() { return "Alumno " + this.getNombre()
-	 * + " " + this.getApellido1() + ", calificaciones = " +
-	 * this.getCalificaciones() + "."; }
-	 */
+	@Override
+	public String toString() {
+		return "Alumno " + this.getNombre() + " " + this.getApellido1()
+				+ ", calificaciones = " + this.getCalificaciones() + ".";
+	}
 
 }

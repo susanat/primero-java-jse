@@ -8,6 +8,11 @@ public class Churro implements Ordenable {
 	private int calorias;
 
 	// Constructor
+	public Churro() {
+		super();
+		setCalorias(calorias);
+	}
+
 	public Churro(int calorias) {
 		super();
 		setCalorias(calorias);
@@ -25,6 +30,7 @@ public class Churro implements Ordenable {
 	// Métodos
 	@Override
 	public float getPeso() {
-		return 0;
+		return getCalorias();
 	}
+
 }
