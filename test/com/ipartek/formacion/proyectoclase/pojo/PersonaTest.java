@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.ipartek.formacion.proyectoclase.pojo.Persona.ComparadorNombres;
+
 public class PersonaTest {
 	ArrayList<Persona> alumnos = null;
 	Persona pzuhaitz = null;
@@ -106,7 +108,14 @@ public class PersonaTest {
 
 		assertEquals("La lista no esta bien ordenada por nombres", paritz,
 				alumnos.get(0));
-		assertEquals("La lista no esta bien ordenada por nombres", pzuhaitz,
+		assertEquals("La lista no esta bien ordenada por nombres", pjose,
+				alumnos.get(alumnos.size() - 1));
+
+		Collections.sort(alumnos, new ComparadorNombres());
+
+		assertEquals("La lista no esta bien ordenada por edades", paritz,
+				alumnos.get(0));
+		assertEquals("La lista no esta bien ordenada por edades", pjose,
 				alumnos.get(alumnos.size() - 1));
 
 	}
