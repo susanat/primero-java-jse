@@ -1,6 +1,11 @@
 package com.ipartek.formacion.primero.bean;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Locale;
+
+
 
 /**
  * Clase para reprensentar un Alumno, se compone de:
@@ -39,6 +44,13 @@ public class Persona {
 	// Constructor
 	public Persona() {
 		super();
+		
+	}
+	
+	public Persona(String nombre, int edad)
+	{
+		this.setNombre(nombre);
+		this.setEdad(edad);
 		
 	}
 	
@@ -130,6 +142,94 @@ public class Persona {
 				+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
 				+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
 	}
+	
+	/**
+	 * Enumeración para los ordenamientos de las listas
+	 *
+	 *
+	 */
+	enum ObjetoComparator implements Comparator<Persona> {		
+		
+		SORT_NOMBRE {
+			@Override
+			public int compare(Persona o1, Persona o2) {
+				return o1.getNombre().compareTo(o2.getNombre());
+			}
+		},	
+		SORT_NOMBRE_IGNORE_CASE {
+			@Override
+			public int compare(Persona o1, Persona o2) {				
+				return o1.getNombre().compareToIgnoreCase(o2.getNombre());
+			}
+		},
+		SORT_NOMBRE_COLLATOR {
+			@Override
+			public int compare(Persona o1, Persona o2) {
+				//Usar Collator.IDENTICAL para que no ignore mayusculas y minúsculas
+				//usar Collactor.PRIMARY para ignorar mayúsculas y minúsculas
+				Locale locale = Locale.getDefault();
+				Collator coll = Collator.getInstance(locale);
+				coll.setStrength(Collator.PRIMARY); // thanks to @BheshGurung for reminding me
+							
+				
+				return coll.compare(o1.getNombre(), o2.getNombre());
+			}
+		},
+		SORT_NOMBRE_LOCALE {
+			@Override
+			public int compare(Persona o1, Persona o2) {
+				return o1.getNombre().compareToIgnoreCase(o2.getNombre());
+			}
+		},
+		SORT_EDAD {
+			public int compare(Persona o1, Persona o2) {
+				return Integer.compare(o1.getEdad(), o2.getEdad());
+			}
+		};
+		
+		
+		/**
+		 * Compara en orden descendente
+		 *
+		 * @param objCompare Objeto compare
+		 * @return
+		 */
+		public static Comparator<Persona> decending(final Comparator<Persona> objCompare) {
+			return new Comparator<Persona>() {
+				public int compare(Persona o1, Persona o2) {
+					return -1 * objCompare.compare(o1, o2);
+				}
+			};
+		}
+
+		/**
+		 * Compara en orden ascendendente
+		 *
+		 * @param other
+		 * @return
+		 */
+		public static Comparator<Persona> ascending(final Comparator<Persona> objCompare) {
+			return new Comparator<Persona>() {
+				public int compare(Persona o1, Persona o2) {
+					return objCompare.compare(o1, o2);
+				}
+			};
+		}
+
+		public static Comparator<Persona> getComparator(final ObjetoComparator... multipleOptions) {
+			return new Comparator<Persona>() {
+				public int compare(Persona o1, Persona o2) {
+					for (ObjetoComparator option : multipleOptions) {
+						int result = option.compare(o1, o2);
+						if (result != 0) {
+							return result;
+						}
+					}
+					return 0;
+				}
+			};
+		}
+	}//fin enum
 	
 	
 
