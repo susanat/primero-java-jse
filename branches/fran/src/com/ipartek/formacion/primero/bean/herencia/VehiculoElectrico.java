@@ -24,6 +24,11 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 		setPotencia(MIN_POTENCIA);
 	}
 
+	public VehiculoElectrico(float potencia) {
+		super(potencia);
+		setCapacidadBaterias(MIN_BATERIAS);
+	}
+
 	@Override
 	public void setPotencia(float potencia) {
 		super.setPotencia(potencia);

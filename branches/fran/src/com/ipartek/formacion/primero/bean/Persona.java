@@ -1,28 +1,30 @@
 package com.ipartek.formacion.primero.bean;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * Clase para reprensentar una persona, se compone de:
  * <ol>
- * 	<li>nombre {@code String} obligatorio</li>
+ * <li>nombre {@code String} obligatorio</li>
  * </ol>
  * 
  * 
  * @author Ander Uraga Real
  *
  */
-public class Persona {
-	
+public class Persona implements Comparable<Persona> {
+
 	public static final char SEXO_VARON = 'v';
 	public static final char SEXO_MUJER = 'm';
 	public static final char SEXO_OTROS = 'o';
-	
+
 	public static final int MAYOR_EDAD = 18;
-	
+
 	public static final String NOMBRE_NULO = "sin determinar";
-	
-	
+
 	// Atributos
 	String nombre;
 	String apellido1;
@@ -32,9 +34,9 @@ public class Persona {
 	String poblacion;
 	boolean mayorEdad = false;
 	String telefono;
-	char sexo = 'o';	
+	char sexo = 'o';
 	ArrayList<Libro> libros;
-	
+
 	// Constructor
 	public Persona() {
 		super();
@@ -42,7 +44,7 @@ public class Persona {
 		this.apellido1 = "Doe";
 		this.dni = "xxxxxxxxx";
 	}
-	
+
 	public Persona(String nombre, String apellido1, String dni) {
 		super();
 		this.nombre = nombre;
@@ -50,14 +52,13 @@ public class Persona {
 		this.dni = dni;
 	}
 
-	
 	public Persona(String nombre, String apellido1, int edad, String dni) {
 		super();
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.edad = edad;
 		this.dni = dni;
-		this.mayorEdad = (this.edad>=18)? true: false; 
+		this.mayorEdad = (this.edad >= 18) ? true : false;
 	}
 
 	// Getters y Setters
@@ -92,7 +93,7 @@ public class Persona {
 
 	public void setEdad(int edad) {
 		this.edad = edad;
-		this.mayorEdad = (this.edad>=MAYOR_EDAD)? true: false;
+		this.mayorEdad = (this.edad >= MAYOR_EDAD) ? true : false;
 	}
 
 	public String getDni() {
@@ -114,12 +115,6 @@ public class Persona {
 	public boolean isMayorEdad() {
 		return mayorEdad;
 	}
-
-
-	
-
-
-	
 
 	public String getTelefono() {
 		return telefono;
@@ -144,16 +139,33 @@ public class Persona {
 	public void setLibros(ArrayList<Libro> libros) {
 		this.libros = libros;
 	}
-	
+
 	// Metodos
+	@Override
+	public String toString() {
+		return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
+				+ ", apellido2=" + apellido2 + ", edad=" + edad + ", dni="
+				+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
+				+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
+	}
+
+	@Override
+	public int compareTo(Persona o) {
+		Collator c = Collator.getInstance(new Locale("es_ES"));
+		c.setStrength(Collator.PRIMARY);
+		return c.compare(this.getNombre(), o.getNombre());
+	}
+
+	/**
+	 * Comparator para edad
+	 */
+	public class ComparatorEdad implements Comparator<Persona> {
+
 		@Override
-		public String toString() {
-			return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
-					+ ", apellido2=" + apellido2 + ", edad=" + edad + ", dni="
-					+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
-					+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
+		public int compare(Persona o1, Persona o2) {
+			return Integer.compare(o1.getEdad(), o2.getEdad());
 		}
-	
-	
+
+	}
 
 }
