@@ -1,16 +1,20 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ipartek.formacion.primero.util.Utilidades;
-
 public class OrdenableTest {
+	static final float DELTA = 0f;
 
-	float[] arrayMezcla = new float[4];
+	ArrayList<Ordenable> arrayMezcla = new ArrayList<Ordenable>();
 	Churro ch1;
 	Churro ch2;
 	VehiculoElectrico ve1;
@@ -30,10 +34,10 @@ public class OrdenableTest {
 		ch2 = new Churro(350);
 		ve1 = new VehiculoElectrico(125);
 		ve2 = new VehiculoElectrico(225);
-		arrayMezcla[0] = ch1.getValor();
-		arrayMezcla[1] = ch2.getValor();
-		arrayMezcla[2] = ve1.getValor();
-		arrayMezcla[3] = ve2.getValor();
+		arrayMezcla.add(ch1);
+		arrayMezcla.add(ch2);
+		arrayMezcla.add(ve1);
+		arrayMezcla.add(ve2);
 	}
 
 	@After
@@ -48,12 +52,12 @@ public class OrdenableTest {
 	@Test
 	public void testOrdenar() {
 
-		Utilidades.ordenarArrayFloat(arrayMezcla);
+		Collections.sort(arrayMezcla, new ComparatorOrdenable());
 
-		for (int i = 0; i < arrayMezcla.length; i++) {
-			// assertt
-
-		}
+		assertEquals(125, arrayMezcla.get(0).getValor(), DELTA);
+		assertEquals(150, arrayMezcla.get(1).getValor(), DELTA);
+		assertEquals(225, arrayMezcla.get(2).getValor(), DELTA);
+		assertEquals(350, arrayMezcla.get(3).getValor(), DELTA);
 
 	}
 }
