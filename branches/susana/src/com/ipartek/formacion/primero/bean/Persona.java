@@ -1,6 +1,9 @@
 package com.ipartek.formacion.primero.bean;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+
+import com.ipartek.formacion.primero.bean.herencia.Vehiculo;
 
 /**
  * 
@@ -12,7 +15,7 @@ import java.util.ArrayList;
  * @author Susana Costoya
  */
 
-public class Persona {
+public class Persona implements Comparable<Persona> {
 
 	// Atributos
 	
@@ -50,6 +53,15 @@ public class Persona {
 		this.tfno = "0000000";
 		this.sexo = '/';
 	}
+	
+	public Persona(String nombre, int edad) {
+		super();
+		this.nombre = nombre;
+		this.edad = edad;
+	}
+
+
+
 
 	public Persona(String nombre, String apellido1, String apellido2, int edad,
 			String dni, String poblacion, String tfno, char sexo) {
@@ -159,6 +171,15 @@ public class Persona {
 				+ ", tfno=" + tfno + ", sexo=" + sexo + "]";
 	}
 	
-	
+	/**
+	 * Comparador para ordenar edad
+	 */
 
+	@Override
+	public int compareTo(Persona p) {
+		return Integer.compare(this.getEdad(), p.getEdad());
+	}
+
+	
+	
 }
