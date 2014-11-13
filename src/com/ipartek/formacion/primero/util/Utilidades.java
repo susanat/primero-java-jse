@@ -1,5 +1,7 @@
 package com.ipartek.formacion.primero.util;
 
+import com.ipartek.formacion.primero.bean.herencia.Ordenable;
+
 public class Utilidades {
 	/**
 	 * Construye y devuelve una cadena de una longitud solicitada formada a
@@ -102,7 +104,7 @@ public class Utilidades {
 
 	/**
 	 * Funcion que recibe un caracter y evalua si es vocal o no
-	 * 
+	 *
 	 * @param c
 	 *            <code>char</code>: el caracter a evaluar
 	 * @return <code>true</code> si es vocal, <code>false</code> si es
@@ -126,7 +128,7 @@ public class Utilidades {
 
 	/**
 	 * Comprueba que sea una vocal: a, e, i, o, u
-	 * 
+	 *
 	 * @param c
 	 *            char a comprobar
 	 * @return true si el caracter es vocal
@@ -156,7 +158,7 @@ public class Utilidades {
 
 	/**
 	 * Funcion que comprueba si un dni es valido
-	 * 
+	 *
 	 * @param dni
 	 *            <code>String</code>: el dni a evaluar
 	 * @return esCorrecto <code>Boolean</code>: indica si el dni es correcto o
@@ -218,6 +220,30 @@ public class Utilidades {
 		// }
 
 		return esCorrecto;
+	}
+
+	/**
+	 * Ordenar arrayOrdenable
+	 *
+	 * @param array
+	 * @return
+	 */
+	public static Ordenable[] ordenarArrayOrdenable(Ordenable[] array) {
+		boolean flag = true;
+		Ordenable temp;
+
+		while (flag) {
+			flag = false;
+			for (int i = 0; i < array.length - 1; i++) {
+				if (array[i].getPeso() > array[i + 1].getPeso()) {
+					temp = array[i];
+					array[i] = array[i + 1];
+					array[i + 1] = temp;
+					flag = true;
+				}
+			}
+		}
+		return array;
 	}
 
 }
