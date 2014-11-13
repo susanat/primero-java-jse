@@ -1,12 +1,12 @@
 package com.ipartek.formacion.primero.bean;
 
-import com.ipartek.formacion.primero.bean.herencia.Ordenable;
+import com.ipartek.formacion.primero.bean.interfaces.IOrdenable;
 
-public class Churros implements Ordenable {
+public class Churro implements IOrdenable {
 
 	private int calorias;
 
-	public Churros(int calorias) {
+	public Churro(int calorias) {
 		this.calorias = calorias;
 	}
 
