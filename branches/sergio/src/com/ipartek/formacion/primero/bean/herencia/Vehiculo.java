@@ -1,6 +1,10 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-public class Vehiculo {
+import java.util.Comparator;
+
+
+
+public class Vehiculo implements Comparable<Vehiculo>{
 	
 	protected int numPlazas;
 	protected float dimensiones;
@@ -52,11 +56,23 @@ public class Vehiculo {
 	}
 
 	public Vehiculo(int numPlazas, float dimensiones, float potencia) {
-		super();
-		this.numPlazas = numPlazas;
-		this.dimensiones = dimensiones;
-		this.potencia = potencia;
+		this();
+		this.setDimensiones(dimensiones);
+		this.setNumPlazas(numPlazas);
+		this.setPotencia(potencia);
 	}
+	
+	public Vehiculo(float potencia){
+		this();
+		this.setPotencia(potencia);
+	}
+	
+	public Vehiculo(float potencia, int plaza){
+		this();
+		this.setPotencia(potencia);
+		this.setNumPlazas(plaza);
+	}
+	
 
 	@Override
 	public String toString() {
@@ -65,8 +81,21 @@ public class Vehiculo {
 				+ "dimensiones="+ dimensiones + ", "
 				+ "potencia=" + potencia + "]";
 	}
+
+
+	@Override
+	public int compareTo(Vehiculo o) {
+		return Float.compare(this.getPotencia(), o.getPotencia());		
+	}
 	
-	
+	public static class comparatorNumeroPlazas implements Comparator<Vehiculo>{
+
+		@Override
+		public int compare(Vehiculo o1, Vehiculo o2) {
+			return Integer.compare(o1.getNumPlazas(), o2.getNumPlazas());
+		}
+		
+	}
 	
 	
 

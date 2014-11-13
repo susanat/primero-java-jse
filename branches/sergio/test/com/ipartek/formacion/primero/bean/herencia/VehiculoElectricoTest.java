@@ -41,6 +41,9 @@ public class VehiculoElectricoTest {
 		assertEquals(VehiculoElectrico.MIN_POTENCIA, obj.getPotencia(), DELTA);
 		
 		assertEquals(obj.getCapacidadBaterias(), obj.getPeso(), DELTA);
+		
+		
+		
 	}
 
 }

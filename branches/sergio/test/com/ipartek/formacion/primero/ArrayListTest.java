@@ -3,7 +3,11 @@ package com.ipartek.formacion.primero;
 import static org.junit.Assert.*;
 
 import java.net.PortUnreachableException;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Locale;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,9 +15,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.ipartek.formacion.primero.bean.herencia.Vehiculo;
+
 public class ArrayListTest {
 	
+	//desviación de los float para la comparación de float
+	static final float DELTA = 0f;
+	
+	
 	ArrayList<String> listaPaises = null;
+	ArrayList<String> listaPaisesDesordenada = null;
+	ArrayList<String> listaCaracteresEspeciales = null;
+	ArrayList<Vehiculo> listaVehiculos = null;
 
 	static final String ESPANA = "España";
 	static final String FRANCIA = "Francia";
@@ -37,12 +50,28 @@ public class ArrayListTest {
 		listaPaises.add(FRANCIA); // Ocupa la posición 1
 		listaPaises.add(PORTUGAL); // Ocupa la posición 2
 		
+		listaPaisesDesordenada = new ArrayList();
+		listaPaisesDesordenada.add(PORTUGAL);
+		listaPaisesDesordenada.add(EUSKADI);
+		listaPaisesDesordenada.add(ESPANA);
+		
+		listaCaracteresEspeciales = new ArrayList();
+			
+		
+		listaVehiculos = new ArrayList();
+		listaVehiculos.add(new Vehiculo(150f));
+		listaVehiculos.add(new Vehiculo(50f));
+		listaVehiculos.add(new Vehiculo(350f));
+		
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		
 		listaPaises = null;
+		listaPaisesDesordenada=null;
+		listaCaracteresEspeciales=null;
+		listaVehiculos = null;
 	}
 
 	@Test
@@ -130,5 +159,85 @@ public class ArrayListTest {
 		
 	}
 	
+	@Test
+	public void testCollectionSort(){
+		Collections.sort(listaPaisesDesordenada);
+		
+		assertSame(ESPANA, listaPaisesDesordenada.get(0));
+		assertSame(EUSKADI, listaPaisesDesordenada.get(1));
+		assertSame(PORTUGAL, listaPaisesDesordenada.get(2));
+		
+		//TODO comprobar con acentos, ñ, mayúsculas y minúsculas
+	}
 	
+	@Test
+	public void testOrdenarCaracteresEspeciales(){
+		
+		listaCaracteresEspeciales.add("b");
+		listaCaracteresEspeciales.add("ñ");
+		listaCaracteresEspeciales.add("ú");
+		listaCaracteresEspeciales.add("é");
+		listaCaracteresEspeciales.add("ü");
+		listaCaracteresEspeciales.add("á");
+		listaCaracteresEspeciales.add("o");
+		listaCaracteresEspeciales.add("ó");
+		listaCaracteresEspeciales.add(";");
+		listaCaracteresEspeciales.add("1");
+		
+		
+		System.out.println("Desordenados");
+		for(String a:listaCaracteresEspeciales){
+			System.out.println(a);
+		}
+		
+		
+		
+		//TODO Guardar y explicar
+		//Lenguage: Java		
+		//Etiquetas: Collections, Collator, sort, Locale 
+		//Caracteres especiales en algún idioma, como por ejemplo, á, é, í, ü, ordena de una manera u otra dependiendo del 
+				
+		//Ordenar dependiendo del locale
+		//You can use a sort with a custom Comparator. See the Collator interface
+		Collator coll = Collator.getInstance(Locale.getDefault());
+		coll.setStrength(Collator.PRIMARY); // thanks to @BheshGurung for reminding me
+		Collections.sort(listaCaracteresEspeciales, coll);
+		
+		
+		//Collections.sort(listaCaracteresEspeciales);
+		System.out.println("Ordenados");
+		for(String a:listaCaracteresEspeciales){
+			System.out.println(a);
+		}
+		
+		assertSame(";", listaCaracteresEspeciales.get(0));
+		assertSame("1", listaCaracteresEspeciales.get(1));
+		assertSame("á", listaCaracteresEspeciales.get(2));
+		assertSame("b", listaCaracteresEspeciales.get(3));
+		
+	}
+	
+	@Test
+	public void testOrdenarVehiculos(){
+		Collections.sort(listaVehiculos);
+		
+		assertEquals(50f, listaVehiculos.get(0).getPotencia(), DELTA);
+		assertEquals(150f, listaVehiculos.get(1).getPotencia(), DELTA);
+		assertEquals(350f, listaVehiculos.get(2).getPotencia(), DELTA);
+	}
+	
+	@Test
+	public void testOrdenarVehiculosMultiple(){
+		listaVehiculos = new ArrayList<Vehiculo>();
+		
+		listaVehiculos.add(new Vehiculo(150f,3));
+		listaVehiculos.add(new Vehiculo(50f,4));
+		listaVehiculos.add(new Vehiculo(350f,1));
+		
+		Collections.sort(listaVehiculos, new Vehiculo.comparatorNumeroPlazas());
+		
+		assertEquals(50f, listaVehiculos.get(0).getPotencia(), DELTA);
+		assertEquals(150f, listaVehiculos.get(1).getPotencia(), DELTA);
+		assertEquals(350f, listaVehiculos.get(2).getPotencia(), DELTA);
+	}
 }
