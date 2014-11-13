@@ -1,15 +1,20 @@
 package com.ipartek.formacion.primero;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.ipartek.formacion.primero.bean.herencia.Vehiculo;
+import com.ipartek.formacion.primero.bean.herencia.Vehiculo.ComparatorNumeroPlazas;
 
 public class ArrayListTest {
 
@@ -19,6 +24,10 @@ public class ArrayListTest {
 
 	// declaro la variabler
 	ArrayList<Integer> listaNum;
+	
+	//Nuevas arrays
+	ArrayList<String> listaPaisesDesordenada = null;
+	ArrayList<Vehiculo> listaVehiculos = null;
 
 	// Declaro con constantes
 
@@ -27,6 +36,9 @@ public class ArrayListTest {
 	static final String PORTUGAL = "Portugal";
 	static final String EUSKADI = "Euskadi";
 	static final String BARAKALDO = "Barakaldo";
+	
+	//Para que no me de problemas con los float que no los checkea muy bien
+	static final float DELTA = 0f;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -43,6 +55,12 @@ public class ArrayListTest {
 		listaPaises.add(ESPANA); // Ocupa la posición 0
 		listaPaises.add(FRANCIA); // Ocupa la posición 1
 		listaPaises.add(PORTUGAL); // Ocupa la posición 2
+		
+		//Lista desordenada de paises
+		listaPaisesDesordenada = new ArrayList<String>();
+		listaPaisesDesordenada.add(PORTUGAL);
+		listaPaisesDesordenada.add(EUSKADI);
+		listaPaisesDesordenada.add(ESPANA);
 
 		// Creo una array de numeros
 		listaNum = new ArrayList<Integer>();
@@ -51,6 +69,12 @@ public class ArrayListTest {
 		listaNum.add(3);
 		listaNum.add(4);
 		listaNum.add(1);
+		
+		//lista de vehiculos
+		listaVehiculos = new ArrayList<Vehiculo>();
+		listaVehiculos.add(new Vehiculo(150f, 5));
+		listaVehiculos.add(new Vehiculo(50f, 2));
+		listaVehiculos.add(new Vehiculo(350f, 4));
 
 	}
 
@@ -59,7 +83,8 @@ public class ArrayListTest {
 
 		listaPaises = null;
 		listaNum = null;
-
+		listaPaisesDesordenada = null;
+		listaVehiculos = null;
 	}
 
 	@Test
@@ -168,5 +193,48 @@ public class ArrayListTest {
 		assertFalse(listaNum.contains(5));
 
 	}
+	
+	
+	@Test
+	public void testCollectionSortPrimitivos() {
+
+		// ordenar alfabeticamnte Strings
+		Collections.sort(listaPaisesDesordenada);
+		assertSame(ESPANA, listaPaisesDesordenada.get(0));
+		assertSame(EUSKADI, listaPaisesDesordenada.get(1));
+		assertSame(PORTUGAL, listaPaisesDesordenada.get(2));
+
+		// ordenar al reves
+		Collections.reverse(listaPaisesDesordenada);
+		assertSame(PORTUGAL, listaPaisesDesordenada.get(0));
+		assertSame(EUSKADI, listaPaisesDesordenada.get(1));
+		assertSame(ESPANA, listaPaisesDesordenada.get(2));
+
+		// Ordenar de menor a mayor int
+		Collections.sort(listaNum);
+		assertSame(1, listaNum.get(0));
+		assertSame(1, listaNum.get(1));
+		assertSame(2, listaNum.get(2));
+		assertSame(3, listaNum.get(3));
+
+		// TODO comprobar con acentos, ñ, mayusculas y minusculas
+
+	}
+
+	@Test
+	public void testCollectionSortCalses() {
+
+		Collections.sort(listaVehiculos);
+		assertEquals(50f, listaVehiculos.get(0).getPotencias(), DELTA);
+		assertEquals(150f, listaVehiculos.get(1).getPotencias(), Float.MIN_VALUE);
+		assertEquals(350f, listaVehiculos.get(2).getPotencias(), 0f);
+
+		Collections.sort(listaVehiculos, new ComparatorNumeroPlazas());
+		assertEquals(2, listaVehiculos.get(0).getNumPlazas());
+		assertEquals(4, listaVehiculos.get(1).getNumPlazas());
+		assertEquals(5, listaVehiculos.get(2).getNumPlazas());
+
+	}
+
 
 }
