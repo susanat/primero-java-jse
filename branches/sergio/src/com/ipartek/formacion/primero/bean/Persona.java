@@ -169,8 +169,7 @@ public class Persona {
 				//usar Collactor.PRIMARY para ignorar mayúsculas y minúsculas
 				Locale locale = Locale.getDefault();
 				Collator coll = Collator.getInstance(locale);
-				coll.setStrength(Collator.PRIMARY); // thanks to @BheshGurung for reminding me
-							
+				coll.setStrength(Collator.PRIMARY); // thanks to @BheshGurung for reminding me						
 				
 				return coll.compare(o1.getNombre(), o2.getNombre());
 			}
