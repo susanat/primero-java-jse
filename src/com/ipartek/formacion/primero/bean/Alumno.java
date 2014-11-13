@@ -1,11 +1,14 @@
 package com.ipartek.formacion.primero.bean;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * Clase para reprensentar un Alumno, se compone de:
  * <ol>
- * 	<li>nombre {@code String} obligatorio</li>
+ * <li>nombre {@code String} obligatorio</li>
  * </ol>
  * 
  * 
@@ -13,16 +16,15 @@ import java.util.ArrayList;
  *
  */
 public class Alumno {
-	
+
 	static final char SEXO_VARON = 'v';
 	static final char SEXO_MUJER = 'm';
 	static final char SEXO_OTROS = 'o';
-	
+
 	static final int MAYOR_EDAD = 18;
-	
+
 	static final String NOMBRE_NULO = "sin determinar";
-	
-	
+
 	// Atributos
 	String nombre;
 	String apellido1;
@@ -32,10 +34,10 @@ public class Alumno {
 	String poblacion;
 	boolean mayorEdad = false;
 	String telefono;
-	char sexo = 'o';	
+	char sexo = 'o';
 	ArrayList<Libro> libros;
 	ArrayList<Calificacion> calificaciones;
-	
+
 	// Constructor
 	public Alumno() {
 		super();
@@ -43,7 +45,13 @@ public class Alumno {
 		this.apellido1 = "Doe";
 		this.dni = "xxxxxxxxx";
 	}
-	
+
+	public Alumno(String nombre, int edad) {
+		super();
+		this.nombre = nombre;
+		this.edad = edad;
+	}
+
 	public Alumno(String nombre, String apellido1, String dni) {
 		super();
 		this.nombre = nombre;
@@ -51,14 +59,13 @@ public class Alumno {
 		this.dni = dni;
 	}
 
-	
 	public Alumno(String nombre, String apellido1, int edad, String dni) {
 		super();
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.edad = edad;
 		this.dni = dni;
-		this.mayorEdad = (this.edad>=18)? true: false; 
+		this.mayorEdad = (this.edad >= 18) ? true : false;
 	}
 
 	// Getters y Setters
@@ -93,7 +100,7 @@ public class Alumno {
 
 	public void setEdad(int edad) {
 		this.edad = edad;
-		this.mayorEdad = (this.edad>=MAYOR_EDAD)? true: false;
+		this.mayorEdad = (this.edad >= MAYOR_EDAD) ? true : false;
 	}
 
 	public String getDni() {
@@ -115,12 +122,6 @@ public class Alumno {
 	public boolean isMayorEdad() {
 		return mayorEdad;
 	}
-
-
-	
-
-
-	
 
 	public String getTelefono() {
 		return telefono;
@@ -153,16 +154,35 @@ public class Alumno {
 	public void setCalificaciones(ArrayList<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
 	}
-	
+
 	// Metodos
+	@Override
+	public String toString() {
+		return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
+				+ ", apellido2=" + apellido2 + ", edad=" + edad + ", dni="
+				+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
+				+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
+	}
+
+	public static class ComparatorEdadAlumnos implements Comparator<Alumno> {
 		@Override
-		public String toString() {
-			return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
-					+ ", apellido2=" + apellido2 + ", edad=" + edad + ", dni="
-					+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
-					+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
+		public int compare(Alumno o1, Alumno o2) {
+			return Integer.compare(o1.getEdad(), o2.getEdad());
 		}
-	
-	
+	}
+
+	public static class ComparatorNombreAlumnos implements Comparator<Alumno> {
+
+		@Override
+		public int compare(Alumno b1, Alumno b2) {
+			// TODO Auto-generated method stub
+			Locale locale = new Locale("es", "ES");
+			Collator collator = Collator.getInstance(locale);
+			collator.setStrength(Collator.PRIMARY);
+			return collator.compare(b1.getNombre(), b2.getNombre());
+
+		}
+
+	}
 
 }
