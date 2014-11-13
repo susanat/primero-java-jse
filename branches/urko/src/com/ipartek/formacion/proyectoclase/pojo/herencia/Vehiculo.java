@@ -1,5 +1,7 @@
 package com.ipartek.formacion.proyectoclase.pojo.herencia;
 
+import java.util.Comparator;
+
 /**
  * @author Urko Villanueva
  *
@@ -52,6 +54,12 @@ public class Vehiculo implements Comparable<Vehiculo> {
 		setNumPlazas(numPlazas);
 	}
 
+	public Vehiculo(Double potencia, Integer numPlazas) {
+		this();
+		setPotencia(potencia);
+		setNumPlazas(numPlazas);
+	}
+
 	@Override
 	public String toString() {
 		return "Vehiculo [numPlazas=" + numPlazas + ", dim=" + dim
@@ -86,5 +94,15 @@ public class Vehiculo implements Comparable<Vehiculo> {
 
 	public void setPotencia(Double potencia) {
 		this.potencia = potencia;
+	}
+
+	public static class ComparatorNumeroPlazas implements Comparator<Vehiculo> {
+
+		@Override
+		public int compare(Vehiculo o1, Vehiculo o2) {
+			// TODO Auto-generated method stub
+			return Integer.compare(o1.getNumPlazas(), o2.getNumPlazas());
+		}
+
 	}
 }
