@@ -3,7 +3,7 @@ package com.ipartek.formacion.primero.bean.herencia;
 import java.io.Serializable;
 
 public class VehiculoElectrico extends Vehiculo implements Arrancable,
-		Serializable {
+Arrancable2, Serializable, Ordenable {
 
 	private static final long serialVersionUID = 6021367556911966591L;
 
@@ -51,7 +51,15 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 
 	@Override
 	public boolean arrancar() {
+		int vab1 = Arrancable.VAR;
+		int vab2 = Arrancable2.VAR;
+
 		return true;
+	}
+
+	@Override
+	public int getPeso() {
+		return (int) getPotencia();
 	}
 
 }
