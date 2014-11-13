@@ -1,5 +1,7 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
+import com.impartek.formacion.primero.interfaces.Ordenable;
+
 public class VehiculoElectrico extends Vehiculo implements Arrancable,
 		Ordenable {
 

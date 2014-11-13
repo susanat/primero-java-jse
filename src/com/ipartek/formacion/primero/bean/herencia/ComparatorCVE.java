@@ -2,6 +2,8 @@ package com.ipartek.formacion.primero.bean.herencia;
 
 import java.util.Comparator;
 
+import com.impartek.formacion.primero.interfaces.Ordenable;
+
 /**
  * Clase para utilizar de comparador entre dos interfaces <code>Ordenable</code>
  * con atributos <code>int</code>
