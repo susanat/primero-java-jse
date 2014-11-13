@@ -1,10 +1,12 @@
 package com.ipartek.formacion.primero.bean;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import com.ipartek.formacion.primero.util.Utilidades;
 
-public class Persona {
+public class Persona implements Comparable<Persona> {
 
 	static final char SEXO_VARON = 'v';
 	static final char SEXO_MUJER = 'm';
@@ -48,6 +50,12 @@ public class Persona {
 		setApellido2(apellido2);
 		setSexo(Persona.SEXO_OTROS);
 
+	}
+
+	public Persona(String nombre, int edad) {
+		super();
+		setNombre(nombre);
+		setEdad(edad);
 	}
 
 	// Getters
@@ -170,4 +178,29 @@ public class Persona {
 				+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
 	}
 
-}
+	@Override
+	public int compareTo(Persona o) {
+		Collator collator = Collator.getInstance();// Cogemos el locale del
+		// sistema
+
+		return (collator.compare(this.getNombre(), o.getNombre()));
+	}
+
+	/**
+	 * Clase que implementa la interfaz comparator para comparar los objetos de
+	 * tipo persona por edad
+	 *
+	 * @author Joseba Carrión Blanco
+	 *
+	 */
+	public static class comparatorEdad implements Comparator<Persona> {
+
+		@Override
+		public int compare(Persona o1, Persona o2) {
+			return (Integer.compare(o1.getEdad(), o2.getEdad()));
+
+		}
+
+	}// final de la clase comparatorEdad
+
+}// Final de clase persona
