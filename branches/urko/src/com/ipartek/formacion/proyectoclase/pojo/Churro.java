@@ -1,8 +1,7 @@
 package com.ipartek.formacion.proyectoclase.pojo;
 
-import java.util.Comparator;
 
-public class Churro implements Comparable<Churro>, Comparator<Churro> {
+public class Churro implements Comparable<Churro> {
 
 	private Double caloria;
 
@@ -24,13 +23,6 @@ public class Churro implements Comparable<Churro>, Comparator<Churro> {
 		} else if (this.caloria > o.getCaloria()) {
 			resultado = 1;
 		}
-		return resultado;
-	}
-
-	@Override
-	public int compare(Churro o1, Churro o2) {
-		// TODO Auto-generated method stub
-		int resultado = 0;
 		return resultado;
 	}
 
