@@ -2,11 +2,11 @@ package com.ipartek.formacion.primero.bean.herencia;
 
 /**
  * Tipos de churros
- * 
+ *
  * @author Jose A. Perez
  *
  */
-public class Churro {
+public class Churro implements Pesable {
 	// Atributos
 	/**
 	 *
@@ -90,6 +90,21 @@ public class Churro {
 			this.tipo = NORMAL;
 			break;
 		}
+	}
+
+	// Metodos
+	@Override
+	public String toString() {
+		return "Churro [calorias=" + calorias + ", tipo=" + tipo + "]";
+	}
+
+	// Metodos de la interfaz
+	/**
+	 * Devuelve las calorias del churro
+	 */
+	@Override
+	public float getPeso() {
+		return this.calorias;
 	}
 
 }
