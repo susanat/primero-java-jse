@@ -253,21 +253,17 @@ public class Persona implements Comparable<Persona> {
 
 	}
 
-	private static class CollatorComparator implements Comparator {
-		private Collator collator;
-
-		public CollatorComparator(Collator collator) {
-			this.collator = collator;
-		}
+	public static class ComparadorNombres implements Comparator<Persona> {
 
 		@Override
-		public int compare(Object o1, Object o2) {
-			return collator.compare(o1, o2);
-		}
+		public int compare(Persona o1, Persona o2) {
+			// TODO Auto-generated method stub
+			Locale locale = new Locale("es", "ES");
 
-		@Override
-		public boolean equals(Object obj) {
-			return false;
+			Collator collator = Collator.getInstance(locale);
+
+			collator.setStrength(Collator.PRIMARY);
+			return collator.compare(o1.getNombre(), o2.getNombre());
 		}
 	}
 
