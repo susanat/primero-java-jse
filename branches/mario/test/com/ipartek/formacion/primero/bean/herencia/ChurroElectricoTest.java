@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestChurroVElectrico {
+public class ChurroElectricoTest {
 
 	VehiculoElectrico ve1 = null;
 	VehiculoElectrico ve2 = null;
