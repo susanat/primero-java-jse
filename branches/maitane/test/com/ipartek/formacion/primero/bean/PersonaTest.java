@@ -1,6 +1,7 @@
 package com.ipartek.formacion.primero.bean;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,17 +13,22 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ipartek.formacion.primero.bean.Persona.ComparatorEdad;
+import com.ipartek.formacion.primero.excepciones.PersonaException;
 
 public class PersonaTest {
 
+	static int cont;
+	static int CONT_ASSERT = 3;
 	ArrayList<Persona> listaPersona = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		cont = 0;
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		// assertEquals(CONT_ASSERT, cont);
 	}
 
 	@Before
@@ -48,6 +54,78 @@ public class PersonaTest {
 		listaPersona = null;
 	}
 
+	@Test(expected = PersonaException.class)
+	public void TestExceptions() throws PersonaException {
+		Persona p = new Persona();
+		// cont++;
+		p.setEdad(Persona.MIN_EDAD - 1);
+		// cont--;
+		// p.setEdad(Persona.MAX_EDAD + 1);
+		p.setNombre("a");
+
+	}
+
+	@Test
+	public void testExceptionEdad() throws PersonaException {
+		// testear el mensaje y el codigo de la Exception
+
+		try {
+			Persona p = new Persona();
+			p.setEdad(Persona.MIN_EDAD - 1);
+			fail("No lanza PersonaException por edad");
+		} catch (PersonaException e) {
+			assertEquals(PersonaException.MSG_EDAD_NO_VALIDO, e.getMessage());
+			assertEquals(PersonaException.CODE_EDAD_NO_VALIDO, e.getCodigo());
+
+		}
+
+	}
+
+	@Test
+	public void testExceptionString() throws PersonaException {
+		// testear el mensaje y el codigo de la Exception
+
+		try {
+			Persona p = new Persona();
+			p.setNombre("l");
+
+			fail("No lanza PersonaException por nombre");
+		} catch (PersonaException e) {
+			assertEquals(PersonaException.MSG_LONG_STRING_NO_VALIDO,
+					e.getMessage());
+			assertEquals(PersonaException.CODE_LONG_STRING_NO_VALIDO,
+					e.getCodigo());
+
+		}
+
+		try {
+			Persona p = new Persona();
+			p.setApellido1("s");
+
+			fail("No lanza PersonaException por apellido1");
+		} catch (PersonaException e) {
+			assertEquals(PersonaException.MSG_LONG_STRING_NO_VALIDO,
+					e.getMessage());
+			assertEquals(PersonaException.CODE_LONG_STRING_NO_VALIDO,
+					e.getCodigo());
+
+		}
+
+		try {
+			Persona p = new Persona();
+			p.setApellido2("d");
+
+			fail("No lanza PersonaException por apellido2");
+		} catch (PersonaException e) {
+			assertEquals(PersonaException.MSG_LONG_STRING_NO_VALIDO,
+					e.getMessage());
+			assertEquals(PersonaException.CODE_LONG_STRING_NO_VALIDO,
+					e.getCodigo());
+
+		}
+
+	}
+
 	@Test
 	public void testSortPersona() {
 		// Ordenar por nombre (ComparaTo--> por defecto)
@@ -57,13 +135,13 @@ public class PersonaTest {
 
 		/*
 		 * try {
-		 * 
+		 *
 		 * RuleBasedCollator spCollator = new RuleBasedCollator(
 		 * traditionalSpanishRules);
-		 * 
+		 *
 		 * // Collections.sort(listaPersona); Collections.sort(spCollator,
 		 * listaPersona);
-		 * 
+		 *
 		 * } catch (ParseException pe) {
 		 * System.out.println("Parse exception for rules"); }
 		 */
@@ -100,4 +178,5 @@ public class PersonaTest {
 		assertEquals(99, listaPersona.get(12).getEdad());
 
 	}
+
 }
