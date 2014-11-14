@@ -20,6 +20,7 @@ public class Persona {
 	static final char SEXO_MUJER = 'm';
 	static final char SEXO_OTROS = 'o';
 
+	public static final int MIN_STRING = 2;
 	public static final int MIN_EDAD = 18;
 	public static final int MAX_EDAD = 99;
 
@@ -68,7 +69,11 @@ public class Persona {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws PersonaException {
+		if (nombre == null || nombre.length() <= MIN_STRING)
+			throw new PersonaException(PersonaException.MSG_STRING_CORTO,
+					PersonaException.COD_STRING_CORTO);
+
 		this.nombre = nombre;
 	}
 

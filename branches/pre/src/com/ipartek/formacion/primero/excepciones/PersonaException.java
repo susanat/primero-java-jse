@@ -12,7 +12,10 @@ public class PersonaException extends Exception {
 			+ Persona.MIN_EDAD + " y " + Persona.MAX_EDAD;
 	public static final int COD_EDAD_NO_VALIDA = 0;
 
-	// TODO nombre menor 2
+	// nombre,apellido1,apellido2 < 2 longitud
+	public static final String MSG_STRING_CORTO = Persona.MIN_STRING
+			+ " longitud minima";
+	public static final int COD_STRING_CORTO = 1;
 
 	// atributos
 	int codigo;
