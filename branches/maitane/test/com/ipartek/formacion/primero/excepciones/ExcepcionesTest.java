@@ -1,4 +1,4 @@
-package com.ipartek.formacion.primero;
+package com.ipartek.formacion.primero.excepciones;
 
 import static org.junit.Assert.assertTrue;
 
@@ -26,6 +26,20 @@ public class ExcepcionesTest {
 
 	@After
 	public void tearDown() throws Exception {
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void TestExceptionAnotacion() {
+		String cadena = null;
+		cadena.length();
+	}
+
+	// Tambien pasa si es Exception la mas general
+
+	@Test(expected = Exception.class)
+	public void TestExceptionAnotacion2() {
+		String cadena = null;
+		cadena.length();
 	}
 
 	@Test
