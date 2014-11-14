@@ -2,10 +2,12 @@ package com.ipartek.formacion.primero.bean;
 
 import java.util.ArrayList;
 
+import com.ipartek.formacion.primero.excepciones.PersonaException;
+
 /**
  * Clase Alumno que hereda de la clase Persona. Tiene como unico atributo
  * distintivo un ArrayList de calificaciones
- * 
+ *
  * @author Joseba Carrión Blanco
  *
  */
@@ -19,7 +21,8 @@ public class Alumno extends Persona {
 		super();
 	}
 
-	public Alumno(String nombre, String apellido1, String apellido2) {
+	public Alumno(String nombre, String apellido1, String apellido2)
+			throws PersonaException {
 		super(nombre, apellido1, apellido2);
 	}
 

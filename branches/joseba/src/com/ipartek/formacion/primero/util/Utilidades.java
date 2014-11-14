@@ -1,6 +1,6 @@
 package com.ipartek.formacion.primero.util;
 
-import com.ipartek.formacion.primero.bean.herencia.Ordenable;
+import com.ipartek.formacion.primero.bean.interfaces.IOrdenable;
 
 public class Utilidades {
 	/**
@@ -228,9 +228,9 @@ public class Utilidades {
 	 * @param array
 	 * @return
 	 */
-	public static Ordenable[] ordenarArrayOrdenable(Ordenable[] array) {
+	public static IOrdenable[] ordenarArrayOrdenable(IOrdenable[] array) {
 		boolean flag = true;
-		Ordenable temp;
+		IOrdenable temp;
 
 		while (flag) {
 			flag = false;
