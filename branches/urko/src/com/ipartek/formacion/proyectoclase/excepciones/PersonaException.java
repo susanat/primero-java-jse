@@ -8,7 +8,11 @@ public class PersonaException extends Exception {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final int COD_EDAD_NO_VALIDA = 50;
+	public static final int COD_EDAD_NO_VALIDA = 0;
+	public static final int COD_LONG_TEXTO_NO_VALIDA = 10;
+
+	public static final String MSG_TEXTO_NO_VALIDO = "EL TEXTO INTRODUCIDO DEBE DE TENER ALMENOS "
+			+ Persona.TEXTO_LONG_MIN + " CARACTERES";
 	public static final String MSG_EDAD_NO_VALIDA = "LA EDAD INTRODUCIDA DEBE DE ESTAR COMPRENDIDA ENTRE "
 			+ Persona.MIN_EDAD + " Y " + Persona.MAYOR_EDAD;
 	// TODO nombre menor a 2 letras de longitud

@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ipartek.formacion.proyectoclase.excepciones.LongitudTextoException;
 import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
 import com.ipartek.formacion.proyectoclase.pojo.Persona.ComparatorPersonaEdad;
 
@@ -32,12 +31,18 @@ public class PersonaTest {
 	Persona pjose = null;
 	Persona pnu = null;
 
+	private static final int TOTAL_COUNTS = 2;
+	private static int count = 0;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		assertEquals("no se hiceron correctamente todas las comprobaciones:"
+				+ TOTAL_COUNTS + " " + count, TOTAL_COUNTS, count);
 	}
 
 	@Before
@@ -112,7 +117,7 @@ public class PersonaTest {
 				alumnos.get(0));
 		assertEquals("La lista no esta bien ordenada por nombres", pzuhaitz,
 				alumnos.get(alumnos.size() - 1));
-
+		count++;
 		Collections.sort(alumnos, new ComparatorPersonaEdad());
 
 		assertEquals(
@@ -122,20 +127,30 @@ public class PersonaTest {
 		assertEquals("La lista no esta bien ordenada por edades "
 				+ alumnos.get(alumnos.size() - 1).getNombre(), psergio,
 				alumnos.get(alumnos.size() - 1));
+		count++;
 
 	}
 
 	@Test(expected = PersonaException.class)
-	public void testException() throws PersonaException, LongitudTextoException {
+	public void testException() throws PersonaException {
 		Persona p = new Persona();
-		p.setFnacimiento(Calendar.getInstance());
-	}
+		try {
+			p.setFnacimiento(Calendar.getInstance());
+		} catch (PersonaException e) {
+			assertEquals(PersonaException.MSG_EDAD_NO_VALIDA, e.getMessage());
+			assertEquals(PersonaException.COD_EDAD_NO_VALIDA, e.getCodigo());
+			count++;
+		}
 
-	@Test(expected = LongitudTextoException.class)
-	public void testLongitudTexto() throws PersonaException,
-			LongitudTextoException {
-		Persona p = new Persona();
-		p.setFnacimiento(Calendar.getInstance());
-	}
+		try {
+			p.setNombre(null);
+		} catch (PersonaException e) {
+			assertEquals(PersonaException.MSG_TEXTO_NO_VALIDO, e.getMessage());
+			assertEquals(PersonaException.COD_LONG_TEXTO_NO_VALIDA,
+					e.getCodigo());
+			count++;
+		}
+		System.out.println(count);
 
+	}
 }
