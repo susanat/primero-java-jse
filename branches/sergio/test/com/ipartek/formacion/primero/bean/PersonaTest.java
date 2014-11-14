@@ -42,27 +42,29 @@ public class PersonaTest {
 
 	@Test
 	public void test() {
-		
-		lstPersona.add(new Persona("Zuhaitz",29));
-		lstPersona.add(new Persona("Susana",23));
-		lstPersona.add(new Persona("kepa",34));
-		lstPersona.add(new Persona("Úrko",37));
-		lstPersona.add(new Persona("urko",20));
-		lstPersona.add(new Persona("Jon",35));
-		lstPersona.add(new Persona("Sergio",18));
-		lstPersona.add(new Persona("Ñu",32));
-		lstPersona.add(new Persona("Urko",10));
-		lstPersona.add(new Persona("zuhaitz",20));
-		lstPersona.add(new Persona("maitane",30));
-		lstPersona.add(new Persona("Zuhaitz",19));
-		lstPersona.add(new Persona("Joseba",26));
-		lstPersona.add(new Persona("Mario",29));
-		lstPersona.add(new Persona("Aritz",20));
-		lstPersona.add(new Persona("fran",33));
-		lstPersona.add(new Persona("Maitane",28));
-		lstPersona.add(new Persona("Jose",99));
-		
-		
+		try {
+			lstPersona.add(new Persona("Zuhaitz",29));
+			lstPersona.add(new Persona("Susana",23));
+			lstPersona.add(new Persona("kepa",34));
+			lstPersona.add(new Persona("Úrko",37));
+			lstPersona.add(new Persona("urko",20));
+			lstPersona.add(new Persona("Jon",35));
+			lstPersona.add(new Persona("Sergio",18));
+			lstPersona.add(new Persona("Ñue",32));
+			lstPersona.add(new Persona("Urko",18));
+			lstPersona.add(new Persona("zuhaitz",20));
+			lstPersona.add(new Persona("maitane",30));
+			lstPersona.add(new Persona("Zuhaitz",19));
+			lstPersona.add(new Persona("Joseba",26));
+			lstPersona.add(new Persona("Mario",29));
+			lstPersona.add(new Persona("Aritz",20));
+			lstPersona.add(new Persona("fran",33));
+			lstPersona.add(new Persona("Maitane",28));
+			lstPersona.add(new Persona("Jose",99));
+		} catch (PersonaException e) {			
+			e.printStackTrace();
+		}
+			
 		
 		/*
 		// Prueba edad y nombre
@@ -111,20 +113,62 @@ public class PersonaTest {
 		}
 		
 		
-		System.out.println(ClsUtilsConstantes.SALTO_DE_LINEA);
-		System.out.println("Locate dentro de Collactor: " + ClsUtilsConstantes.SALTO_DE_LINEA);
-		for(Locale s : Collator.getAvailableLocales()){
-			System.out.println(
-					"Country		: " + s.getDisplayCountry() + ClsUtilsConstantes.SALTO_DE_LINEA
-					+ "		: " + s.getCountry() + ClsUtilsConstantes.SALTO_DE_LINEA 
-					+ "	ISO	: " + s.getISO3Country() + ClsUtilsConstantes.SALTO_DE_LINEA
-					+ "Lengua		: " + s.getDisplayLanguage() + ClsUtilsConstantes.SALTO_DE_LINEA
-					+ "		: " + s.getLanguage() + ClsUtilsConstantes.SALTO_DE_LINEA
-					+ "		: " + s.toString() + ClsUtilsConstantes.SALTO_DE_LINEA
-					+ "	ISO	: " + s.getISO3Language() + ClsUtilsConstantes.SALTO_DE_LINEA				
-					);
-		}
+	}
+	
+	@Test(expected=PersonaException.class)
+	public void testException() throws PersonaException{
+		
+		
+		Persona obj = new Persona(null, Persona.MIN_EDAD - 1);
+		obj = new Persona("nombre", Persona.MAX_EDAD - 1);
+		System.out.println(obj.getNombre());
+		
+		
+		fail("No se lanza PersonaException");
+		
 		
 	}
+	
+	@Test(expected=PersonaException.class)
+	public void testStringCortoNombreException() throws PersonaException{
+		try {
+			Persona obj = new Persona("n0", Persona.MIN_EDAD);
+		
+		} catch (PersonaException e) {
+
+			assertSame(PersonaException.COD_STRING_CORTO, e.getCodigo() );
+			throw e;
+		}		
+	}
+	
+	@Test(expected=PersonaException.class)
+	public void testStringCortoApellido1Exception() throws PersonaException{
+		try {
+			Persona obj = new Persona("nueva", Persona.MIN_EDAD);
+			obj.setApellido1("ob");
+		
+			
+		} catch (PersonaException e) {
+
+			assertSame(PersonaException.COD_STRING_CORTO, e.getCodigo() );
+			throw e;
+		}		
+	}
+	
+	@Test(expected=PersonaException.class)
+	public void testStringCortoApellido2Exception() throws PersonaException{
+		try {
+			Persona obj = new Persona("nueva", Persona.MIN_EDAD);
+			obj.setApellido2("ob");
+		
+			
+		} catch (PersonaException e) {
+
+			assertSame(PersonaException.COD_STRING_CORTO, e.getCodigo() );
+			assertSame(PersonaException.MSG_STRING_CORTO, e.getMessage() );
+			throw e;
+		}		
+	}
+	
 
 }

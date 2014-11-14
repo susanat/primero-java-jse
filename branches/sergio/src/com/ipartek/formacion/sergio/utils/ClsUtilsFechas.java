@@ -239,5 +239,25 @@ public class ClsUtilsFechas {
     	
     }
     
+    public static Timestamp getCurrentTimestamp(){
+    	// 1) create a java calendar instance
+    	Calendar calendar = Calendar.getInstance();    	 
+    	// 2) get a java.util.Date from the calendar instance.
+    	//    	    this date will represent the current instant, or "now".
+    	Date now = calendar.getTime();    	 
+    	// 3) a java current time (now) instance
+    	Timestamp currentTimestamp = new Timestamp(now.getTime());
+    	
+    	return currentTimestamp;
+    }
+    
+    public static Timestamp longToTimestamp(Long timestamp){
+    	return new Timestamp(timestamp);
+    }
+    
+    public static Long TimestampToLong(Timestamp timestamp){
+    	return timestamp.getTime();
+    }
+    
     
 }
