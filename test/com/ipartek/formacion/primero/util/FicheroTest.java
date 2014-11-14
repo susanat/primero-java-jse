@@ -1,6 +1,6 @@
 package com.ipartek.formacion.primero.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -9,9 +9,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FicheroTest {
-	
+
 	static final String FICHERO_NAME_TEST1 = "filename.txt";
-	static final String FICHERO_CONTENT_TEST1 = "Hello Word";
+	static final String FICHERO_CONTENT_TEST1 = "Hello Wolrd";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -19,7 +19,7 @@ public class FicheroTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		
+
 		assertTrue(FICHERO_NAME_TEST1 + " No se pudo eliminar",
 				Fichero.remove(FICHERO_NAME_TEST1));
 	}
@@ -33,9 +33,10 @@ public class FicheroTest {
 	}
 
 	@Test
-	public void test() {
+	public void testCreate() {
 
-		assertTrue(condition);
+		assertTrue(Fichero.create(FICHERO_NAME_TEST1, FICHERO_CONTENT_TEST1));
+
 	}
 
 }
