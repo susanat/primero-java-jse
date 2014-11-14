@@ -1,6 +1,7 @@
 package com.ipartek.formacion.primero.util;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -47,12 +48,16 @@ public class Fichero {
 		return resul;
 	}
 
-	public static boolean remove(String ficheroNameTest) {
-		// TODO Auto-generated method stub
-		return false;
+	public static boolean remove(String ficheroName) {
+		boolean resul = false;
+		try {
+			File file = new File(ficheroName);
+			resul = file.delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resul;
+
 	}
-
-
-
-
 }
+
