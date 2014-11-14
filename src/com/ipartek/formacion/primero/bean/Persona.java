@@ -25,7 +25,12 @@ public class Persona {
 	
 	public static final int MAYOR_EDAD = 18;
 	
+	public static final int MAX_EDAD = 99;
+	public static final int MIN_EDAD = 18;
+	
 	public static final String NOMBRE_NULO = "undefined";
+	
+	public static final int STRING_MAYOR_QUE = 2;
 	
 	
 	// Atributos
@@ -47,7 +52,7 @@ public class Persona {
 		
 	}
 	
-	public Persona(String nombre, int edad)
+	public Persona(String nombre, int edad) throws PersonaException
 	{
 		this.setNombre(nombre);
 		this.setEdad(edad);
@@ -60,15 +65,22 @@ public class Persona {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws PersonaException {
+		if(nombre == null || nombre.length() <= Persona.STRING_MAYOR_QUE){
+			throw new PersonaException(PersonaException.MSG_STRING_CORTO, PersonaException.COD_STRING_CORTO);
+		}
+				
 		this.nombre = nombre;
 	}
 
-	public String getApellido1() {
+	public String getApellido1() {		
 		return apellido1;
 	}
 
-	public void setApellido1(String apellido1) {
+	public void setApellido1(String apellido1) throws PersonaException {
+		if(apellido1 == null || apellido1.length() <= Persona.STRING_MAYOR_QUE){
+			throw new PersonaException(PersonaException.MSG_STRING_CORTO, PersonaException.COD_STRING_CORTO);
+		}
 		this.apellido1 = apellido1;
 	}
 
@@ -76,7 +88,10 @@ public class Persona {
 		return apellido2;
 	}
 
-	public void setApellido2(String apellido2) {
+	public void setApellido2(String apellido2) throws PersonaException {
+		if(apellido1 == null || apellido2.length() <= Persona.STRING_MAYOR_QUE){
+			throw new PersonaException(PersonaException.MSG_STRING_CORTO, PersonaException.COD_STRING_CORTO);
+		}
 		this.apellido2 = apellido2;
 	}
 
@@ -84,7 +99,12 @@ public class Persona {
 		return edad;
 	}
 
-	public void setEdad(int edad) {
+	public void setEdad(int edad) throws PersonaException {
+		if(edad < Persona.MIN_EDAD || edad > Persona.MAX_EDAD){
+			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA, PersonaException.COD_EDAD_NO_VALIDA);			
+		}
+		
+		
 		this.edad = edad;
 		this.mayorEdad = (this.edad>=MAYOR_EDAD)? true: false;
 	}
