@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Locale;
 
+import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
+
 /**
  *
  * @author Urko Villanueva
@@ -55,16 +57,24 @@ public class Persona implements Comparable<Persona> {
 	/**
 	 *
 	 */
+	protected Boolean mayorEdad;
+	/**
+	 *
+	 */
 	protected Libro libro;
 	/**
 	 *
 	 */
 	public static final Integer MIN_HERMANOS = 0;
+	public static final Integer MAYOR_EDAD = 18;
+	public static final Integer MAX_EDAD = 99;
+	public static final Integer MIN_EDAD = 18;
 
 	/**
+	 * @throws PersonaException
 	 *
 	 */
-	public Persona() {
+	public Persona() throws PersonaException {
 		super();
 		// TODO Auto-generated constructor stub
 		setNombre("");
@@ -97,7 +107,7 @@ public class Persona implements Comparable<Persona> {
 		this.telefono = telefono;
 	}
 
-	public Persona(String nombre, Calendar fNacimiento) {
+	public Persona(String nombre, Calendar fNacimiento) throws PersonaException {
 		this.nombre = nombre;
 		setFnacimiento(fNacimiento);
 	}
@@ -114,11 +124,12 @@ public class Persona implements Comparable<Persona> {
 	 * @param trabajando
 	 * @param nhermanos
 	 * @param libro
+	 * @throws PersonaException
 	 */
 	public Persona(String nombre, String papellido, String sapellido,
 			String dni, String poblacion, Calendar fnacimiento,
 			String telefono, Character sexo, Boolean trabajando,
-			Integer nhermanos, Libro libro) {
+			Integer nhermanos, Libro libro) throws PersonaException {
 		super();
 		setNombre(nombre);
 		setPapellido(papellido);
@@ -187,8 +198,24 @@ public class Persona implements Comparable<Persona> {
 		return fnacimiento;
 	}
 
-	public void setFnacimiento(Calendar fnacimiento) {
-		this.fnacimiento = fnacimiento;
+	public void setFnacimiento(Calendar fnacimiento) throws PersonaException {
+		Calendar c = Calendar.getInstance();
+		if (fnacimiento.get(Calendar.YEAR) + MIN_EDAD >= c.get(Calendar.YEAR)
+				&& fnacimiento.get(Calendar.YEAR) + MAX_EDAD <= c
+						.get(Calendar.YEAR)) {
+			this.fnacimiento = fnacimiento;
+			if (fnacimiento.get(Calendar.YEAR) + MAYOR_EDAD >= c
+					.get(Calendar.YEAR)) {
+				this.setMayorEdad(true);
+			} else {
+				this.setMayorEdad(false);
+			}
+
+		} else {
+			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA,
+					PersonaException.COD_EDAD_NO_VALIDA);
+
+		}
 	}
 
 	public String getTelefono() {
@@ -231,6 +258,14 @@ public class Persona implements Comparable<Persona> {
 
 	public void setLibro(Libro libro) {
 		this.libro = libro;
+	}
+
+	public Boolean getMayorEdad() {
+		return mayorEdad;
+	}
+
+	private void setMayorEdad(Boolean mayorEdad) {
+		this.mayorEdad = mayorEdad;
 	}
 
 	@Override
