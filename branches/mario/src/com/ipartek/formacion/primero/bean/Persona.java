@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Locale;
 
+import com.impartek.formacion.primero.excepciones.PersonaException;
+
 /**
  * Clase para reprensentar un Alumno, se compone de:
  * <ol>
@@ -21,7 +23,9 @@ public class Persona implements Comparable<Persona> {
 	static final char SEXO_MUJER = 'm';
 	static final char SEXO_OTROS = 'o';
 
-	static final int MAYOR_EDAD = 18;
+	public static final int MIN_EDAD = 18;
+	public static final int MAX_EDAD = 99;
+	public static final int MIN_LENGTH = 2;
 
 	static final String NOMBRE_DEFECTO = "Jhon";
 	static final String APELLIDO_DEFECTO = "Doe";
@@ -48,20 +52,22 @@ public class Persona implements Comparable<Persona> {
 
 	}
 
-	public Persona(String nombre, int edad) {
+	public Persona(String nombre, int edad) throws PersonaException {
 		super();
 		setNombre(nombre);
 		setEdad(edad);
 	}
 
-	public Persona(String nombre, String apellido1, String dni) {
+	public Persona(String nombre, String apellido1, String dni)
+			throws PersonaException {
 		super();
 		setNombre(nombre);
 		setApellido1(apellido1);
 		setDni(dni);
 	}
 
-	public Persona(String nombre, String apellido1, int edad, String dni) {
+	public Persona(String nombre, String apellido1, int edad, String dni)
+			throws PersonaException {
 		super();
 		setNombre(nombre);
 		setApellido1(apellido1);
@@ -76,33 +82,56 @@ public class Persona implements Comparable<Persona> {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nombre) throws PersonaException {
+		if (nombre.length() >= MIN_LENGTH) {
+			this.nombre = nombre;
+		} else {
+			throw new PersonaException(PersonaException.MSG_NOMBRE_NO_VALIDO,
+					PersonaException.COD_NOMBRE_NO_VALIDO);
+		}
+
 	}
 
 	public String getApellido1() {
 		return apellido1;
 	}
 
-	public void setApellido1(String apellido1) {
-		this.apellido1 = apellido1;
+	public void setApellido1(String apellido1) throws PersonaException {
+		if (apellido1.length() >= MIN_LENGTH) {
+			this.apellido1 = apellido1;
+		} else {
+			throw new PersonaException(PersonaException.MSG_NOMBRE_NO_VALIDO,
+					PersonaException.COD_NOMBRE_NO_VALIDO);
+		}
 	}
 
 	public String getApellido2() {
 		return apellido2;
 	}
 
-	public void setApellido2(String apellido2) {
-		this.apellido2 = apellido2;
+	public void setApellido2(String apellido2) throws PersonaException {
+		if (apellido2.length() >= MIN_LENGTH) {
+			this.apellido2 = apellido2;
+		} else {
+			throw new PersonaException(PersonaException.MSG_NOMBRE_NO_VALIDO,
+					PersonaException.COD_NOMBRE_NO_VALIDO);
+		}
 	}
 
 	public int getEdad() {
 		return edad;
 	}
 
-	public void setEdad(int edad) {
-		this.edad = edad;
-		this.mayorEdad = (this.edad >= MAYOR_EDAD) ? true : false;
+	public void setEdad(int edad) throws PersonaException {
+		if (edad >= MIN_EDAD && edad <= MAX_EDAD) {
+			this.edad = edad;
+			this.mayorEdad = (this.edad >= MIN_EDAD) ? true : false;
+		} else {
+			// lanzar PersonaException
+			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA,
+					PersonaException.COD_EDAD_NO_VALIDA);
+		}
+
 	}
 
 	public String getDni() {

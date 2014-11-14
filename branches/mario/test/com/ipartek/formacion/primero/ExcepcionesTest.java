@@ -55,4 +55,17 @@ public class ExcepcionesTest {
 
 	}
 
+	@Test(expected = NullPointerException.class)
+	public void testExceptionAnotation() {
+		String cadena = null;
+		cadena.length();
+	}
+
+	// Tmabien pasa si es Exception la mas general
+	@Test(expected = Exception.class)
+	public void testExceptionAnotation2() {
+		String cadena = null;
+		cadena.length();
+	}
+
 }
