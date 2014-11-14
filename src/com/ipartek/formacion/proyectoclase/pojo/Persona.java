@@ -3,6 +3,7 @@ package com.ipartek.formacion.proyectoclase.pojo;
 import java.text.Collator;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Locale;
 
 import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
@@ -37,7 +38,7 @@ public class Persona implements Comparable<Persona> {
 	/**
 	 *
 	 */
-	protected Calendar fnacimiento;
+	protected Date fnacimiento;
 	/**
 	 *
 	 */
@@ -194,24 +195,29 @@ public class Persona implements Comparable<Persona> {
 		this.poblacion = poblacion;
 	}
 
-	public Calendar getFnacimiento() {
+	public Date getFnacimiento() {
 		return fnacimiento;
 	}
 
 	public void setFnacimiento(Calendar fnacimiento) throws PersonaException {
 		Calendar c = Calendar.getInstance();
-		if (fnacimiento.get(Calendar.YEAR) + MIN_EDAD >= c.get(Calendar.YEAR)
-				&& fnacimiento.get(Calendar.YEAR) + MAX_EDAD <= c
+
+		if (fnacimiento.get(Calendar.YEAR) + MIN_EDAD <= c.get(Calendar.YEAR)
+				&& fnacimiento.get(Calendar.YEAR) + MAX_EDAD >= c
 						.get(Calendar.YEAR)) {
-			this.fnacimiento = fnacimiento;
-			if (fnacimiento.get(Calendar.YEAR) + MAYOR_EDAD >= c
+
+			this.fnacimiento = fnacimiento.getTime();
+
+			if (fnacimiento.get(Calendar.YEAR) + MAYOR_EDAD <= c
 					.get(Calendar.YEAR)) {
 				this.setMayorEdad(true);
 			} else {
 				this.setMayorEdad(false);
+
 			}
 
 		} else {
+
 			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA,
 					PersonaException.COD_EDAD_NO_VALIDA);
 
@@ -283,9 +289,9 @@ public class Persona implements Comparable<Persona> {
 		@Override
 		public int compare(Persona o1, Persona o2) {
 			// TODO Auto-generated method stub
+
 			return o1.getFnacimiento().compareTo(o2.getFnacimiento());
 		}
-
 	}
 
 	public static class ComparadorNombres implements Comparator<Persona> {

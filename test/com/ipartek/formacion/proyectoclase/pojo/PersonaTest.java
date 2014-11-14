@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
-import com.ipartek.formacion.proyectoclase.pojo.Persona.ComparadorNombres;
+import com.ipartek.formacion.proyectoclase.pojo.Persona.ComparatorPersonaEdad;
 
 public class PersonaTest {
 	ArrayList<Persona> alumnos = null;
@@ -109,14 +109,17 @@ public class PersonaTest {
 
 		assertEquals("La lista no esta bien ordenada por nombres", paritz,
 				alumnos.get(0));
-		assertEquals("La lista no esta bien ordenada por nombres", pjose,
+		assertEquals("La lista no esta bien ordenada por nombres", pzuhaitz,
 				alumnos.get(alumnos.size() - 1));
 
-		Collections.sort(alumnos, new ComparadorNombres());
+		Collections.sort(alumnos, new ComparatorPersonaEdad());
 
-		assertEquals("La lista no esta bien ordenada por edades", paritz,
-				alumnos.get(0));
-		assertEquals("La lista no esta bien ordenada por edades", pjose,
+		assertEquals(
+				"La lista no esta bien ordenada por edades"
+						+ alumnos.get(0).getNombre(), pjose, alumnos.get(0));
+
+		assertEquals("La lista no esta bien ordenada por edades "
+				+ alumnos.get(alumnos.size() - 1).getNombre(), psergio,
 				alumnos.get(alumnos.size() - 1));
 
 	}
