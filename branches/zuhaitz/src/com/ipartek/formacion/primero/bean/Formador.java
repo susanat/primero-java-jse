@@ -1,5 +1,7 @@
 package com.ipartek.formacion.primero.bean;
 
+import com.ipartek.formacion.primero.excepciones.PersonaException;
+
 public class Formador extends Persona {
 
 	public static final float MIN_SUELDO = 646.56f;
@@ -13,7 +15,8 @@ public class Formador extends Persona {
 		setSueldo(MIN_SUELDO);
 	}
 
-	public Formador(String nombre, String apellido1, int edad, String dni) {
+	public Formador(String nombre, String apellido1, int edad, String dni)
+			throws PersonaException {
 		super(nombre, apellido1, edad, dni);
 	}
 
@@ -25,7 +28,7 @@ public class Formador extends Persona {
 	/**
 	 * Sueldo mensual en euros y bruto. Siempre será el mínimo
 	 * <code>MIN_SUELDO</code>
-	 * 
+	 *
 	 * @param sueldo
 	 *            en euros
 	 */
