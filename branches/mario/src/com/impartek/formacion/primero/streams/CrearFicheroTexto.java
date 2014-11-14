@@ -20,6 +20,7 @@ public class CrearFicheroTexto {
 		try {
 			// Creamos el nombre y extension del fichero
 			ficheroTexto = new FileOutputStream("filename.txt");
+
 			// Declaramos un Stream para escribir
 			// pasamos como parametros el fichero a escribir y su Charset
 			outputStream = new OutputStreamWriter(ficheroTexto, "utf-8");
