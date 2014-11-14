@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
-import com.ipartek.formacion.proyectoclase.excepciones.LongitudTextoException;
 import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
 
 /**
@@ -71,13 +70,14 @@ public class Persona implements Comparable<Persona> {
 	public static final Integer MAYOR_EDAD = 18;
 	public static final Integer MAX_EDAD = 99;
 	public static final Integer MIN_EDAD = 18;
+	public static final int TEXTO_LONG_MIN = 2;
 
 	/**
 	 * @throws PersonaException
 	 * @throws LongitudTextoException
 	 *
 	 */
-	public Persona() throws PersonaException, LongitudTextoException {
+	public Persona() throws PersonaException {
 		super();
 		// TODO Auto-generated constructor stub
 		setNombre("   ");
@@ -133,8 +133,7 @@ public class Persona implements Comparable<Persona> {
 	public Persona(String nombre, String papellido, String sapellido,
 			String dni, String poblacion, Calendar fnacimiento,
 			String telefono, Character sexo, Boolean trabajando,
-			Integer nhermanos, Libro libro) throws PersonaException,
-			LongitudTextoException {
+			Integer nhermanos, Libro libro) throws PersonaException {
 		super();
 		setNombre(nombre);
 		setPapellido(papellido);
@@ -163,13 +162,12 @@ public class Persona implements Comparable<Persona> {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) throws LongitudTextoException {
-		if (nombre.length() > 2) {
+	public void setNombre(String nombre) throws PersonaException {
+		if (nombre != null && nombre.length() >= TEXTO_LONG_MIN) {
 			this.nombre = nombre;
 		} else {
-			throw new LongitudTextoException(
-					LongitudTextoException.MSG_TEXTO_NO_VALIDO,
-					LongitudTextoException.COD_LONG_TEXTO_NO_VALIDA);
+			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
+					PersonaException.COD_LONG_TEXTO_NO_VALIDA);
 		}
 
 	}
@@ -178,13 +176,12 @@ public class Persona implements Comparable<Persona> {
 		return papellido;
 	}
 
-	public void setPapellido(String papellido) throws LongitudTextoException {
-		if (papellido.length() > 2) {
+	public void setPapellido(String papellido) throws PersonaException {
+		if (papellido != null && papellido.length() >= TEXTO_LONG_MIN) {
 			this.papellido = papellido;
 		} else {
-			throw new LongitudTextoException(
-					LongitudTextoException.MSG_TEXTO_NO_VALIDO,
-					LongitudTextoException.COD_LONG_TEXTO_NO_VALIDA);
+			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
+					PersonaException.COD_LONG_TEXTO_NO_VALIDA);
 		}
 		this.papellido = papellido;
 	}
@@ -193,13 +190,12 @@ public class Persona implements Comparable<Persona> {
 		return sapellido;
 	}
 
-	public void setSapellido(String sapellido) throws LongitudTextoException {
-		if (sapellido.length() > 2) {
+	public void setSapellido(String sapellido) throws PersonaException {
+		if (papellido != null && sapellido.length() >= TEXTO_LONG_MIN) {
 			this.sapellido = sapellido;
 		} else {
-			throw new LongitudTextoException(
-					LongitudTextoException.MSG_TEXTO_NO_VALIDO,
-					LongitudTextoException.COD_LONG_TEXTO_NO_VALIDA);
+			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
+					PersonaException.COD_LONG_TEXTO_NO_VALIDA);
 		}
 	}
 
