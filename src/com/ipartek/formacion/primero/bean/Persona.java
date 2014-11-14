@@ -83,12 +83,11 @@ public class Persona implements Comparable<Persona> {
 	}
 
 	public void setNombre(String nombre) throws PersonaException {
-		if (nombre.length() >= MIN_LENGTH) {
-			this.nombre = nombre;
-		} else {
-			throw new PersonaException(PersonaException.MSG_NOMBRE_NO_VALIDO,
-					PersonaException.COD_NOMBRE_NO_VALIDO);
+		if (nombre == null || nombre.length() < MIN_LENGTH) {
+			throw new PersonaException(PersonaException.MSG_STRING_NO_VALIDO,
+					PersonaException.COD_STRING_NO_VALIDO);
 		}
+		this.nombre = nombre;
 
 	}
 
@@ -97,12 +96,11 @@ public class Persona implements Comparable<Persona> {
 	}
 
 	public void setApellido1(String apellido1) throws PersonaException {
-		if (apellido1.length() >= MIN_LENGTH) {
-			this.apellido1 = apellido1;
-		} else {
-			throw new PersonaException(PersonaException.MSG_NOMBRE_NO_VALIDO,
-					PersonaException.COD_NOMBRE_NO_VALIDO);
+		if (apellido1 == null || apellido1.length() < MIN_LENGTH) {
+			throw new PersonaException(PersonaException.MSG_STRING_NO_VALIDO,
+					PersonaException.COD_STRING_NO_VALIDO);
 		}
+		this.apellido1 = apellido1;
 	}
 
 	public String getApellido2() {
@@ -110,12 +108,11 @@ public class Persona implements Comparable<Persona> {
 	}
 
 	public void setApellido2(String apellido2) throws PersonaException {
-		if (apellido2.length() >= MIN_LENGTH) {
-			this.apellido2 = apellido2;
-		} else {
-			throw new PersonaException(PersonaException.MSG_NOMBRE_NO_VALIDO,
-					PersonaException.COD_NOMBRE_NO_VALIDO);
+		if (apellido2 == null || apellido2.length() < MIN_LENGTH) {
+			throw new PersonaException(PersonaException.MSG_STRING_NO_VALIDO,
+					PersonaException.COD_STRING_NO_VALIDO);
 		}
+		this.apellido2 = apellido2;
 	}
 
 	public int getEdad() {

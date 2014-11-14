@@ -18,9 +18,9 @@ public class PersonaException extends Exception {
 	public static final int COD_EDAD_NO_VALIDA = 0;
 
 	// nombre, appelidos
-	public static final String MSG_NOMBRE_NO_VALIDO = "El nombre y/o apellido debe tener una longitud mayor de "
-			+ Persona.MIN_LENGTH;
-	public static final int COD_NOMBRE_NO_VALIDO = 1;
+	public static final String MSG_STRING_NO_VALIDO = Persona.MIN_LENGTH
+			+ " es la longitud mínima que tiene que tener el nombre y/o apellido1, apellido2 ";
+	public static final int COD_STRING_NO_VALIDO = 1;
 
 	// atributos
 	private int codigoError;
