@@ -5,26 +5,26 @@ public class ExcepcionEjemplo1 {
 	static void metodoA() {
 		try {
 			metodoB();
-		} catch (ExcepcionPersonalizada e) {
+		} catch (PersonaException e) {
 			System.out.println("Cazada la excepcion: " + e.getCodigoError()
-					+ " - " + e.getMensaje());
+					+ " - " + e.getMessage());
 		}
 
 	}
 
-	static void metodoB() throws ExcepcionPersonalizada {
+	static void metodoB() throws PersonaException {
 		metodoC();
 	}
 
 	/*
 	 * Metodo para probar NullPointerException static void metodoC() throws
 	 * Exception { String cadena = null; cadena.length();
-	 *
+	 * 
 	 * }
 	 */
-	static void metodoC() throws ExcepcionPersonalizada {
-		throw new ExcepcionPersonalizada(102,
-				"Error para probar excepcion personalizada");
+	static void metodoC() throws PersonaException {
+		throw new PersonaException("Error para probar excepcion personalizada",
+				102);
 
 	}
 

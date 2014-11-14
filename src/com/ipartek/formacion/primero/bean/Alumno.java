@@ -2,31 +2,34 @@ package com.ipartek.formacion.primero.bean;
 
 import java.util.ArrayList;
 
+import com.impartek.formacion.primero.excepciones.PersonaException;
+
 public class Alumno extends Persona {
-	
+
 	private ArrayList<Calificacion> calificaciones;
-	
-	//contructor
+
+	// contructor
 	public Alumno() {
 		super();
 		calificaciones = new ArrayList<Calificacion>();
 	}
-	
-	//getters y setters
+
+	// getters y setters
 	public ArrayList<Calificacion> getCalificaciones() {
 		return calificaciones;
 	}
 
-	public Alumno( String nombre, String apellido1, String dni, int edad, ArrayList<Calificacion> calificaciones) {
+	public Alumno(String nombre, String apellido1, String dni, int edad,
+			ArrayList<Calificacion> calificaciones) throws PersonaException {
 		super(nombre, apellido1, edad, dni);
 		setCalificaciones(calificaciones);
-		
+
 	}
 
 	public void setCalificaciones(ArrayList<Calificacion> calificaciones) {
 		if (calificaciones == null) {
 			calificaciones = new ArrayList<Calificacion>();
-		}else{
+		} else {
 			this.calificaciones = calificaciones;
 		}
 	}
@@ -40,6 +43,5 @@ public class Alumno extends Persona {
 				+ ", telefono=" + telefono + ", sexo=" + sexo + ", libros="
 				+ libros + "]";
 	}
-	
-	
+
 }

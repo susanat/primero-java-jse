@@ -11,24 +11,25 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.impartek.formacion.primero.excepciones.PersonaException;
 import com.ipartek.formacion.primero.bean.Persona.ComparatorNombres;
 
 public class PersonaTest {
 	ArrayList<Persona> listaPersona = null;
 
-	Persona pZuhaitz = new Persona("Zuhaitz", 29);
-	Persona pSusana = new Persona("Susána", 23);
-	Persona pKepa = new Persona("kepa", 34);
-	Persona pUrko = new Persona("Úrko", 37);
-	Persona pJon = new Persona("Jon", 35);
-	Persona pSergio = new Persona("Sergio", 18);
-	Persona pSrNu = new Persona("Sr Ñu", 32);
-	Persona pJoseba = new Persona("Joséba", 26);
-	Persona pMario = new Persona("Mário", 29);
-	Persona pAritz = new Persona("Áritz", 20);
-	Persona pFran = new Persona("fran", 33);
-	Persona pMaitane = new Persona("Maitane", 28);
-	Persona pJose = new Persona("Jose", 99);
+	Persona pZuhaitz;
+	Persona pSusana;
+	Persona pKepa;
+	Persona pUrko;
+	Persona pJon;
+	Persona pSergio;
+	Persona pSrNu;
+	Persona pJoseba;
+	Persona pMario;
+	Persona pAritz;
+	Persona pFran;
+	Persona pMaitane;
+	Persona pJose;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -41,6 +42,20 @@ public class PersonaTest {
 	@Before
 	public void setUp() throws Exception {
 		listaPersona = new ArrayList<Persona>();
+
+		pZuhaitz = new Persona("Zuhaitz", 29);
+		pSusana = new Persona("Susána", 23);
+		pKepa = new Persona("kepa", 34);
+		pUrko = new Persona("Úrko", 37);
+		pJon = new Persona("Jon", 35);
+		pSergio = new Persona("Sergio", 18);
+		pSrNu = new Persona("Sr Ñu", 32);
+		pJoseba = new Persona("Joséba", 26);
+		pMario = new Persona("Mário", 29);
+		pAritz = new Persona("Áritz", 20);
+		pFran = new Persona("fran", 33);
+		pMaitane = new Persona("Maitane", 28);
+		pJose = new Persona("Jose", 99);
 
 		listaPersona.add(pZuhaitz);
 		listaPersona.add(pSusana);
@@ -99,4 +114,24 @@ public class PersonaTest {
 		assertSame(pZuhaitz, listaPersona.get(12));
 
 	}
+
+	@Test(expected = PersonaException.class)
+	public void testExceptionsEdad() throws PersonaException {
+		Persona p = new Persona();
+		p.setEdad(Persona.MIN_EDAD - 1);
+
+		p.setEdad(Persona.MAX_EDAD + 1);
+		// fail("no se lanza PersonaException ");
+
+	}
+
+	@Test(expected = PersonaException.class)
+	public void testExceptionsNombre() throws PersonaException {
+		Persona p = new Persona();
+		p.setNombre("b");
+		p.setApellido1("f");
+		p.setApellido2("a");
+
+	}
+
 }
