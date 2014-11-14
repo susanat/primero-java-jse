@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Locale;
 
+import com.ipartek.formacion.primero.excepciones.PersonaException;
+
 /**
  * Clase para reprensentar un Alumno, se compone de:
  * <ol>
@@ -21,19 +23,24 @@ public class Persona implements Comparable<Persona> {
 	static final char SEXO_MUJER = 'm';
 	static final char SEXO_OTROS = 'o';
 
-	static final int MAYOR_EDAD = 18;
+	public static final int MIN_EDAD = 18;
+	public static final int MAX_EDAD = 99;
+
+	public static final int MIN_LONG_STRING = 2;
 
 	static final String NOMBRE_NULO = "sin determinar";
 
-	static final String SMALLnTILDE = new String("\u00F1"); // ñ
-	static final String CAPITALnTILDE = new String("\u00D1"); // Ñ
-
-	static final String SPANISH = ("< a,A,á,Á < b,B < c,C "
-			+ "< ch, cH, Ch, CH " + "< d,D < e,E,é,É < f,F "
-			+ "< g,G < h,H < i,I.í,Í < j,J < k,K < l,L " + "< ll, lL, Ll, LL "
-			+ "< m,M < n,N " + "< " + SMALLnTILDE + "," + CAPITALnTILDE + " "
-			+ "< o,O,ó,Ó < p,P < q,Q < r,R "
-			+ "< s,S < t,T < u,U,ú,Ú,ü,Ü < v,V < w,W < x,X " + "< y,Y < z,Z");
+	/*
+	 * static final String SMALLnTILDE = new String("\u00F1"); // ñ static final
+	 * String CAPITALnTILDE = new String("\u00D1"); // Ñ
+	 *
+	 * static final String SPANISH = ("< a,A,á,Á < b,B < c,C " +
+	 * "< ch, cH, Ch, CH " + "< d,D < e,E,é,É < f,F " +
+	 * "< g,G < h,H < i,I.í,Í < j,J < k,K < l,L " + "< ll, lL, Ll, LL " +
+	 * "< m,M < n,N " + "< " + SMALLnTILDE + "," + CAPITALnTILDE + " " +
+	 * "< o,O,ó,Ó < p,P < q,Q < r,R " +
+	 * "< s,S < t,T < u,U,ú,Ú,ü,Ü < v,V < w,W < x,X " + "< y,Y < z,Z");
+	 */
 
 	// Atributos
 	String nombre;
@@ -55,23 +62,25 @@ public class Persona implements Comparable<Persona> {
 		this.dni = "xxxxxxxxx";
 	}
 
-	public Persona(String nombre, String apellido1, String dni) {
+	public Persona(String nombre, String apellido1, String dni)
+			throws PersonaException {
 		super();
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.dni = dni;
 	}
 
-	public Persona(String nombre, String apellido1, int edad, String dni) {
+	public Persona(String nombre, String apellido1, int edad, String dni)
+			throws PersonaException {
 		super();
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
-		this.edad = edad;
+		setEdad(edad);
 		this.dni = dni;
 		this.mayorEdad = (this.edad >= 18) ? true : false;
 	}
 
-	public Persona(String nombre, int edad) {
+	public Persona(String nombre, int edad) throws PersonaException {
 		super();
 		setNombre(nombre);
 		setEdad(edad);
@@ -85,33 +94,64 @@ public class Persona implements Comparable<Persona> {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nombre) throws PersonaException {
+
+		if (nombre == null || nombre.length() < MIN_LONG_STRING) {
+
+			throw new PersonaException(
+					PersonaException.MSG_LONG_STRING_NO_VALIDO,
+					PersonaException.CODE_LONG_STRING_NO_VALIDO);
+		} else {
+			this.nombre = nombre;
+		}
+
 	}
 
 	public String getApellido1() {
 		return apellido1;
 	}
 
-	public void setApellido1(String apellido1) {
-		this.apellido1 = apellido1;
+	public void setApellido1(String apellido1) throws PersonaException {
+
+		if (apellido1 == null || apellido1.length() < MIN_LONG_STRING) {
+
+			throw new PersonaException(
+					PersonaException.MSG_LONG_STRING_NO_VALIDO,
+					PersonaException.CODE_LONG_STRING_NO_VALIDO);
+		} else {
+			this.apellido1 = apellido1;
+		}
 	}
 
 	public String getApellido2() {
 		return apellido2;
 	}
 
-	public void setApellido2(String apellido2) {
-		this.apellido2 = apellido2;
+	public void setApellido2(String apellido2) throws PersonaException {
+		if (apellido2 == null || apellido2.length() < MIN_LONG_STRING) {
+
+			throw new PersonaException(
+					PersonaException.MSG_LONG_STRING_NO_VALIDO,
+					PersonaException.CODE_LONG_STRING_NO_VALIDO);
+		} else {
+			this.apellido2 = apellido2;
+		}
 	}
 
 	public int getEdad() {
 		return edad;
 	}
 
-	public void setEdad(int edad) {
-		this.edad = edad;
-		this.mayorEdad = (this.edad >= MAYOR_EDAD) ? true : false;
+	public void setEdad(int edad) throws PersonaException {
+		if (edad >= MIN_EDAD && edad <= MAX_EDAD) {
+			this.edad = edad;
+			this.mayorEdad = (this.edad >= MIN_EDAD) ? true : false;
+		} else {
+
+			// lanzar PersonaException
+			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDO,
+					PersonaException.CODE_EDAD_NO_VALIDO);
+		}
 	}
 
 	public String getDni() {
