@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Locale;
 
+import com.ipartek.formacion.primero.excepciones.PersonaException;
+
 /**
  * Clase para reprensentar un Persona, se compone de:
  * <ol>
@@ -33,13 +35,16 @@ public class Persona implements Comparable<Persona> {
 	public static final char SEXO_OTROS = 'o';
 
 	/**
-	 * Edad por defecto de una persona
+	 * Edad por defecto de una persona Edad en la cual se considera mayor de
+	 * edad
 	 */
-	public static final int EDAD_POR_DEFECTO = 18;
+	public static final int MIN_EDAD = 18;
+	public static final int MAX_EDAD = 99;
+
 	/**
-	 * Edad en la cual se considera mayor de edad
+	 * Caracteristicas especiales a cumplir por los datos
 	 */
-	public static final int MAYOR_EDAD = 18;
+	public static final int TAM_MIN_NOMBRE_APELLIDOS = 2;
 
 	/**
 	 * Valores Nulos
@@ -60,44 +65,40 @@ public class Persona implements Comparable<Persona> {
 	protected char sexo;
 	protected ArrayList<Libro> libros;
 
-	// Metodos privados
-	private void valoresPorDefecto() {
-		setEdad(EDAD_POR_DEFECTO);
-		this.mayorEdad = (this.edad >= MAYOR_EDAD) ? true : false;
+	// Constructor
+	public Persona() throws PersonaException {
+		super();
+		setEdad(MIN_EDAD);
+		this.mayorEdad = (this.edad >= MIN_EDAD) ? true : false;
 		setSexo(SEXO_VARON);
 		setNombre(NOMBRE_NULO);
 		setApellido1(APELLIDO_NULO);
+		setApellido2(APELLIDO_NULO);
 		setDni(DNI_NULO);
 	}
 
-	// Constructor
-	public Persona() {
-		super();
-		valoresPorDefecto();
-	}
-
-	public Persona(String nombre, int edad) {
+	public Persona(String nombre, int edad) throws PersonaException {
 		this();
 		setNombre(nombre);
 		setEdad(edad);
 	}
 
-	public Persona(String nombre, String apellido1, String dni) {
+	public Persona(String nombre, String apellido1, String dni)
+			throws PersonaException {
 		super();
-		valoresPorDefecto();
 		setNombre(nombre);
 		setApellido1(apellido1);
 		setDni(dni);
 	}
 
-	public Persona(String nombre, String apellido1, int edad, String dni) {
+	public Persona(String nombre, String apellido1, int edad, String dni)
+			throws PersonaException {
 		super();
-		valoresPorDefecto();
 		setNombre(nombre);
 		setApellido1(apellido1);
 		setDni(dni);
 		setEdad(edad);
-		this.mayorEdad = (this.edad >= MAYOR_EDAD) ? true : false;
+		this.mayorEdad = (this.edad >= MIN_EDAD) ? true : false;
 	}
 
 	// Getters y Setters
@@ -106,11 +107,17 @@ public class Persona implements Comparable<Persona> {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws PersonaException {
 		if (nombre.isEmpty()) {
 			this.nombre = NOMBRE_NULO;
 		} else {
-			this.nombre = nombre;
+			if (nombre.length() >= TAM_MIN_NOMBRE_APELLIDOS) {
+				this.nombre = nombre;
+			} else {
+				throw new PersonaException(
+						PersonaException.MSG_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO,
+						PersonaException.COD_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO);
+			}
 		}
 
 	}
@@ -119,11 +126,18 @@ public class Persona implements Comparable<Persona> {
 		return apellido1;
 	}
 
-	public void setApellido1(String apellido1) {
+	public void setApellido1(String apellido1) throws PersonaException {
 		if (apellido1.isEmpty()) {
 			this.apellido1 = APELLIDO_NULO;
 		} else {
-			this.apellido1 = apellido1;
+			if (apellido1.length() >= TAM_MIN_NOMBRE_APELLIDOS) {
+				this.apellido1 = apellido1;
+			} else {
+				throw new PersonaException(
+						PersonaException.MSG_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO,
+						PersonaException.COD_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO);
+			}
+
 		}
 	}
 
@@ -131,17 +145,29 @@ public class Persona implements Comparable<Persona> {
 		return apellido2;
 	}
 
-	public void setApellido2(String apellido2) {
-		this.apellido2 = apellido2;
+	public void setApellido2(String apellido2) throws PersonaException {
+		if (apellido2.length() >= TAM_MIN_NOMBRE_APELLIDOS) {
+			this.apellido2 = apellido2;
+		} else {
+			throw new PersonaException(
+					PersonaException.MSG_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO,
+					PersonaException.COD_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO);
+		}
 	}
 
 	public int getEdad() {
 		return edad;
 	}
 
-	public void setEdad(int edad) {
-		this.edad = edad;
-		this.mayorEdad = (this.edad >= MAYOR_EDAD) ? true : false;
+	public void setEdad(int edad) throws PersonaException {
+		if (edad >= MIN_EDAD && edad <= MAX_EDAD) {
+			this.edad = edad;
+			this.mayorEdad = (this.edad >= MIN_EDAD) ? true : false;
+		} else {
+			// lanzar PersonalException
+			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA,
+					PersonaException.COD_EDAD_NO_VALIDA);
+		}
 	}
 
 	public String getDni() {
@@ -221,7 +247,7 @@ public class Persona implements Comparable<Persona> {
 
 	/**
 	 * Compara a una persona por edad
-	 * 
+	 *
 	 * @author Jose A. Perez
 	 *
 	 */
@@ -235,7 +261,7 @@ public class Persona implements Comparable<Persona> {
 
 	/**
 	 * Compara a una persona por nombre
-	 * 
+	 *
 	 * @author Jose A. Perez
 	 *
 	 */
