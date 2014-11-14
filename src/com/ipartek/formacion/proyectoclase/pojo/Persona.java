@@ -79,13 +79,15 @@ public class Persona implements Comparable<Persona> {
 	 */
 	public Persona() throws PersonaException {
 		super();
-		// TODO Auto-generated constructor stub
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.YEAR, c.get(Calendar.YEAR) - MIN_EDAD);
+
 		setNombre("   ");
 		setPapellido("   ");
 		setSapellido("  ");
 		setDni("  ");
 		setPoblacion("  ");
-		setFnacimiento(Calendar.getInstance());
+		setFnacimiento(c);
 		setTelefono("  ");
 		setSexo('v');
 		setTrabajando(false);
