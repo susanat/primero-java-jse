@@ -4,6 +4,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import com.ipartek.formacion.primero.excepciones.PersonaException;
 import com.ipartek.formacion.primero.util.Utilidades;
 
 public class Persona implements Comparable<Persona> {
@@ -12,7 +13,10 @@ public class Persona implements Comparable<Persona> {
 	static final char SEXO_MUJER = 'm';
 	static final char SEXO_OTROS = 'o';
 
-	static final int MAYOR_EDAD = 18;
+	public static final int MIN_EDAD = 18;
+	public static final int MAX_EDAD = 99;
+
+	public static final int LONG_MIN = 2;
 
 	static final String SIN_DETERMINAR = "Sin Determinar";
 
@@ -41,7 +45,8 @@ public class Persona implements Comparable<Persona> {
 	// Constructor con varios parametros (en este caso 3) e inicializamos el
 	// sexo en "otros"
 
-	public Persona(String nombre, String apellido1, String apellido2) {
+	public Persona(String nombre, String apellido1, String apellido2)
+			throws PersonaException {
 		super();
 		// Llamamos a los setters para poder tener un control sobre lo que se
 		// introduce
@@ -52,7 +57,7 @@ public class Persona implements Comparable<Persona> {
 
 	}
 
-	public Persona(String nombre, int edad) {
+	public Persona(String nombre, int edad) throws PersonaException {
 		super();
 		setNombre(nombre);
 		setEdad(edad);
@@ -64,25 +69,24 @@ public class Persona implements Comparable<Persona> {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		if ("".equals(nombre) || nombre == null) {
-			this.nombre = SIN_DETERMINAR;
-		} else {
-			this.nombre = nombre;
+	public void setNombre(String nombre) throws PersonaException {
+		if (nombre == null || nombre.length() < LONG_MIN) {
+			throw new PersonaException(PersonaException.MSG_ARGUMENTO_INVALIDO,
+					PersonaException.COD_ARG_INVALIDO);
 		}
-
+		this.nombre = nombre;
 	}
 
 	public String getApellido1() {
 		return apellido1;
 	}
 
-	public void setApellido1(String apellido1) {
-		if ("".equals(apellido1) || apellido1 == null) {
-			this.apellido1 = SIN_DETERMINAR;
-		} else {
-			this.apellido1 = apellido1;
+	public void setApellido1(String apellido1) throws PersonaException {
+		if (apellido1 == null || apellido1.length() < LONG_MIN) {
+			throw new PersonaException(PersonaException.MSG_ARGUMENTO_INVALIDO,
+					PersonaException.COD_ARG_INVALIDO);
 		}
+		this.apellido1 = apellido1;
 
 	}
 
@@ -90,13 +94,12 @@ public class Persona implements Comparable<Persona> {
 		return apellido2;
 	}
 
-	public void setApellido2(String apellido2) {
-		if ("".equals(apellido2) || apellido2 == null) {
-			this.apellido2 = SIN_DETERMINAR;
-		} else {
-			this.apellido2 = apellido2;
+	public void setApellido2(String apellido2) throws PersonaException {
+		if (apellido2 == null || apellido2.length() < LONG_MIN) {
+			throw new PersonaException(PersonaException.MSG_ARGUMENTO_INVALIDO,
+					PersonaException.COD_ARG_INVALIDO);
 		}
-
+		this.apellido2 = apellido2;
 	}
 
 	public int getEdad() {
@@ -109,8 +112,15 @@ public class Persona implements Comparable<Persona> {
 
 	// Setters
 
-	public void setEdad(int edad) {
+	public void setEdad(int edad) throws PersonaException {
+		if (edad < MIN_EDAD || edad > MAX_EDAD) {
+			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA,
+					PersonaException.COD_EDAD_NO_VALIDA);
+
+		}
 		this.edad = edad;
+		this.mayoredad = (this.edad >= MIN_EDAD) ? true : false;
+
 	}
 
 	public String getDni() {

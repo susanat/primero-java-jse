@@ -1,8 +1,8 @@
-package com.ipartek.formacion.primero.bean.herencia;
+package com.ipartek.formacion.primero.bean.interfaces;
 
 import java.util.Comparator;
 
-public interface Ordenable {
+public interface IOrdenable {
 
 	public float getPeso();
 
@@ -15,10 +15,10 @@ public interface Ordenable {
 	 *
 	 */
 
-	public class comparatorPeso implements Comparator<Ordenable> {
-
+	public class comparatorPeso implements Comparator<IOrdenable> {
+		// TODO: Crear esta clase en un fichero externo
 		@Override
-		public int compare(Ordenable o1, Ordenable o2) {
+		public int compare(IOrdenable o1, IOrdenable o2) {
 
 			return (Float.compare(o1.getPeso(), o2.getPeso()));
 		}

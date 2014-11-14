@@ -11,11 +11,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ipartek.formacion.primero.bean.herencia.Ordenable.comparatorPeso;
+import com.ipartek.formacion.primero.bean.interfaces.IOrdenable;
+import com.ipartek.formacion.primero.bean.interfaces.IOrdenable.comparatorPeso;
 
 public class TestChurro {
 
-	ArrayList<Ordenable> listaInterfacesOrdenable = null;
+	ArrayList<IOrdenable> listaInterfacesOrdenable = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -27,7 +28,7 @@ public class TestChurro {
 
 	@Before
 	public void setUp() throws Exception {
-		listaInterfacesOrdenable = new ArrayList<Ordenable>();
+		listaInterfacesOrdenable = new ArrayList<IOrdenable>();
 		listaInterfacesOrdenable.add(new VehiculoElectrico(100f, 350f));
 		listaInterfacesOrdenable.add(new VehiculoElectrico(100f, 0f));
 		listaInterfacesOrdenable.add(new VehiculoElectrico(100f, 13f));

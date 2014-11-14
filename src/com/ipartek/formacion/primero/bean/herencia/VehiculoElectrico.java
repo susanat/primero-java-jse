@@ -2,8 +2,18 @@ package com.ipartek.formacion.primero.bean.herencia;
 
 import java.io.Serializable;
 
+import com.ipartek.formacion.primero.bean.interfaces.IOrdenable;
+
+/**
+ * Clase VehiculoElectrico que hereda de la Clase Vehiculo e implementa las
+ * interfaces Arrancable, Serializable y Ordenable
+ *
+ * @author Joseba Carrión Blanco
+ *
+ */
+
 public class VehiculoElectrico extends Vehiculo implements Arrancable,
-		Serializable, Ordenable {
+		Serializable, IOrdenable {
 
 	/**
 	 *
@@ -18,6 +28,8 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 	public static final float MIN_CAP_BATERIA = 0;
 	public static final float MIN_POTENCIA = 150;
 
+	// Constructores
+
 	public VehiculoElectrico() {
 		super();
 		setCapacidadBaterias(MIN_CAP_BATERIA);
@@ -30,6 +42,8 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 		setCapacidadBaterias(bateria);
 		setPotencia(potencia);
 	}
+
+	// Setters y getters
 
 	@Override
 	public void setPotencia(float potencia) {

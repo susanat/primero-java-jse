@@ -1,5 +1,7 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
+import com.ipartek.formacion.primero.bean.interfaces.IOrdenable;
+
 /**
  * Clase Churro que implementa la interfaz ordenable
  * 
@@ -7,7 +9,7 @@ package com.ipartek.formacion.primero.bean.herencia;
  *
  */
 
-public class Churro implements Ordenable {
+public class Churro implements IOrdenable {
 	private float calorias;
 
 	// Constructor
