@@ -1,6 +1,8 @@
 package com.ipartek.formacion.primero.bean;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -125,12 +127,33 @@ public class PersonaTest {
 
 	}
 
-	@Test(expected = PersonaException.class)
-	public void testExceptionsNombre() throws PersonaException {
-		Persona p = new Persona();
-		p.setNombre("b");
-		p.setApellido1("f");
-		p.setApellido2("a");
+	@Test
+	public void testExceptionsNombreApellido() throws PersonaException {
+		try {
+			Persona p = new Persona();
+			/*
+			 * p.setNombre("b"); p.setApellido1("f"); p.setApellido2("a");
+			 */
+			p.setEdad(Persona.MIN_EDAD - 1);
+			fail("No lanza PersonaException por edad");
+		} catch (PersonaException e) {
+			assertEquals(PersonaException.MSG_EDAD_NO_VALIDA, e.getMessage());
+			assertEquals(PersonaException.COD_EDAD_NO_VALIDA,
+					e.getCodigoError());
+		}
+
+		try {
+			Persona p = new Persona();
+			String n = null;
+			p.setNombre(n);
+			p.setApellido1("f");
+			p.setApellido2("a");
+			fail("No lanza PersonaException por nombre/apellido1/apellido2");
+		} catch (PersonaException e) {
+			assertEquals(PersonaException.MSG_STRING_NO_VALIDO, e.getMessage());
+			assertEquals(PersonaException.COD_STRING_NO_VALIDO,
+					e.getCodigoError());
+		}
 
 	}
 
