@@ -30,7 +30,7 @@ public class ManejadorFichero {
 		this.fileName = fileExt;
 	}
 
-	public void crearArchivo(String content) {
+	public void crearArchivoTexto(String content) {
 		File fichero = new File(filePath + fileName + fileExt);
 		FileOutputStream fos = null;
 		Writer out = null;
@@ -94,5 +94,16 @@ public class ManejadorFichero {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public boolean borrarFichero() {
+		boolean exito = false;
+		try {
+			fichero = new File(filePath + fileName + fileExt);
+			exito = fichero.delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exito;
 	}
 }
