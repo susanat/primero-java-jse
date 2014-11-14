@@ -131,15 +131,21 @@ public class PersonaTest {
 
 	}
 
-	@Test(expected = PersonaException.class)
+	@Test
+	// (expected = PersonaException.class)
 	public void testException() throws PersonaException {
+
 		Persona p = new Persona();
+
 		try {
+			p = new Persona();
 			p.setFnacimiento(Calendar.getInstance());
 		} catch (PersonaException e) {
+			System.out.println(count);
 			assertEquals(PersonaException.MSG_EDAD_NO_VALIDA, e.getMessage());
 			assertEquals(PersonaException.COD_EDAD_NO_VALIDA, e.getCodigo());
 			count++;
+
 		}
 
 		try {
@@ -150,7 +156,6 @@ public class PersonaTest {
 					e.getCodigo());
 			count++;
 		}
-		System.out.println(count);
 
 	}
 }

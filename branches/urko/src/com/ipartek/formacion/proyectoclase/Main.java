@@ -11,6 +11,7 @@ import com.ipartek.formacion.proyectoclase.pojo.Libro;
 import com.ipartek.formacion.proyectoclase.pojo.herencia.Cuadrado;
 import com.ipartek.formacion.proyectoclase.pojo.herencia.Figura.Punto;
 import com.ipartek.formacion.proyectoclase.util.Cambio;
+import com.ipartek.formacion.proyectoclase.util.ManejadorFichero;
 
 public class Main {
 
@@ -22,6 +23,9 @@ public class Main {
 		JSONObject json1 = new JSONObject(l);
 		Iterator<String> it = json1.keys();
 		Cambio calcular = new Cambio();
+		ManejadorFichero man;
+		man = new ManejadorFichero();
+		man.escribirFicheroTexto("HelloWorld");
 		/*
 		 * String texto = null; if(texto ==null){ System.out.println("Es nulo");
 		 * } if(!"".equals(texto)){
