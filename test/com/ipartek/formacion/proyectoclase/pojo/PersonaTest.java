@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
 import com.ipartek.formacion.proyectoclase.pojo.Persona.ComparadorNombres;
 
 public class PersonaTest {
@@ -119,4 +120,11 @@ public class PersonaTest {
 				alumnos.get(alumnos.size() - 1));
 
 	}
+
+	@Test(expected = PersonaException.class)
+	public void testException() throws PersonaException {
+		Persona p = new Persona();
+		p.setFnacimiento(Calendar.getInstance());
+	}
+
 }

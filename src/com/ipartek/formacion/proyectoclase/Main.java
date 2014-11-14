@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import org.json.JSONObject;
 
+import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
 import com.ipartek.formacion.proyectoclase.pojo.Alumno;
 import com.ipartek.formacion.proyectoclase.pojo.Libro;
 import com.ipartek.formacion.proyectoclase.pojo.herencia.Cuadrado;
@@ -13,7 +14,7 @@ import com.ipartek.formacion.proyectoclase.util.Cambio;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws PersonaException {
 		// TODO Auto-generated method stub
 		Calendar fnacimiento = Calendar.getInstance();
 		Alumno al = new Alumno();
