@@ -108,6 +108,10 @@ public class Persona implements Comparable<Persona> {
 	}
 
 	public void setNombre(String nombre) throws PersonaException {
+		if (nombre == null) {
+			this.nombre = "*";
+		}
+
 		if (nombre.isEmpty()) {
 			this.nombre = NOMBRE_NULO;
 		} else {
@@ -127,6 +131,10 @@ public class Persona implements Comparable<Persona> {
 	}
 
 	public void setApellido1(String apellido1) throws PersonaException {
+		if (apellido1 == null) {
+			this.apellido1 = "*";
+		}
+
 		if (apellido1.isEmpty()) {
 			this.apellido1 = APELLIDO_NULO;
 		} else {
@@ -146,13 +154,12 @@ public class Persona implements Comparable<Persona> {
 	}
 
 	public void setApellido2(String apellido2) throws PersonaException {
-		if (apellido2.length() >= TAM_MIN_NOMBRE_APELLIDOS) {
-			this.apellido2 = apellido2;
-		} else {
+		if (apellido2 == null || apellido2.length() < TAM_MIN_NOMBRE_APELLIDOS) {
 			throw new PersonaException(
 					PersonaException.MSG_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO,
 					PersonaException.COD_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO);
 		}
+		this.apellido2 = apellido2;
 	}
 
 	public int getEdad() {

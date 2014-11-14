@@ -10,7 +10,6 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ipartek.formacion.primero.excepciones.PersonaException;
@@ -30,29 +29,34 @@ public class PersonaTest {
 
 	@Before
 	public void setUp() throws Exception {
-		/*
-		 * listaPersonas = new ArrayList<Persona>();
-		 *
-		 * listaPersonas.add(new Persona("Zuhaitz", 29)); listaPersonas.add(new
-		 * Persona("Susána", 23)); listaPersonas.add(new Persona("kepa", 34));
-		 * listaPersonas.add(new Persona("Úrko", 37)); listaPersonas.add(new
-		 * Persona("Jon", 35)); listaPersonas.add(new Persona("Sergio", 18));
-		 * listaPersonas.add(new Persona("Sr Ñu", 32)); listaPersonas.add(new
-		 * Persona("Joséba", 20)); listaPersonas.add(new Persona("Mário", 29));
-		 * listaPersonas.add(new Persona("Áritz", 20)); listaPersonas.add(new
-		 * Persona("fran", 33)); listaPersonas.add(new Persona("Maitane", 28));
-		 * listaPersonas.add(new Persona("Jose", 41));
-		 *
-		 * // Lista Especial con Mayusculas, minusculas, acentos, dieresis, y //
-		 * letras especiales como 'ñ' ArrayList<Persona> listaPersonasReducida =
-		 * new ArrayList<Persona>(); listaPersonasReducida.add(new
-		 * Persona("Antoniü", 12)); listaPersonasReducida.add(new
-		 * Persona("antoniu", 10)); listaPersonasReducida.add(new
-		 * Persona("Ántoniu", 11)); listaPersonasReducida.add(new
-		 * Persona("Añtoniu", 12)); listaPersonasReducida.add(new
-		 * Persona("Antoniu", 13)); listaPersonasReducida.add(new
-		 * Persona("Aotoniu", 12));
-		 */
+
+		listaPersonas = new ArrayList<Persona>();
+
+		listaPersonas.add(new Persona("Zuhaitz", 29));
+		listaPersonas.add(new Persona("Susána", 23));
+		listaPersonas.add(new Persona("kepa", 34));
+		listaPersonas.add(new Persona("Úrko", 37));
+		listaPersonas.add(new Persona("Jon", 35));
+		listaPersonas.add(new Persona("Sergio", 18));
+		listaPersonas.add(new Persona("Sr Ñu", 32));
+		listaPersonas.add(new Persona("Joséba", 20));
+		listaPersonas.add(new Persona("Mário", 29));
+		listaPersonas.add(new Persona("Áritz", 20));
+		listaPersonas.add(new Persona("fran", 33));
+		listaPersonas.add(new Persona("Maitane", 28));
+		listaPersonas.add(new Persona("Jose", 41));
+
+		// Lista Especial con Mayusculas, minusculas, acentos, dieresis, y
+		// letras especiales como 'ñ' ArrayList<Persona>
+		listaPersonasReducida = new ArrayList<Persona>();
+
+		listaPersonasReducida.add(new Persona("Antoniü", 22));
+		listaPersonasReducida.add(new Persona("antoniu", 20));
+		listaPersonasReducida.add(new Persona("Ántoniu", 21));
+		listaPersonasReducida.add(new Persona("Añtoniu", 22));
+		listaPersonasReducida.add(new Persona("Antoniu", 23));
+		listaPersonasReducida.add(new Persona("Aotoniu", 22));
+
 	}
 
 	@After
@@ -62,7 +66,6 @@ public class PersonaTest {
 		 */
 	}
 
-	@Ignore
 	@Test
 	public void testPersona() throws PersonaException {
 		Persona p = new Persona();
@@ -73,7 +76,6 @@ public class PersonaTest {
 		assertEquals(Persona.SEXO_VARON, p.getSexo());
 	}
 
-	@Ignore
 	@Test
 	public void testPersonaStringStringString() throws PersonaException {
 		Persona p = new Persona("", "", "");
@@ -91,7 +93,6 @@ public class PersonaTest {
 		assertEquals(Persona.SEXO_VARON, p2.getSexo());
 	}
 
-	@Ignore
 	@Test
 	public void testPersonaStringStringIntString() throws PersonaException {
 		Persona p = new Persona("", "", 0, "");
@@ -110,7 +111,6 @@ public class PersonaTest {
 
 	}
 
-	@Ignore
 	@Test
 	public void testCompararNombreSimple() {
 		Collections.sort(listaPersonasReducida);
@@ -141,7 +141,17 @@ public class PersonaTest {
 		// testear el mensaje y codigo de la excepcion
 		try {
 			Persona p = new Persona();
-			// p.setEdad(Persona.MIN_EDAD - 1);
+			p.setEdad(Persona.MIN_EDAD - 1);
+			fail("No se lanza PersonaException");
+		}
+
+		catch (PersonaException e) {
+			assertEquals(PersonaException.COD_EDAD_NO_VALIDA, e.getCodigo());
+			assertEquals(PersonaException.MSG_EDAD_NO_VALIDA, e.getMessage());
+		}
+
+		try {
+			Persona p = new Persona();
 			p.setEdad(Persona.MAX_EDAD + 1);
 			fail("No se lanza PersonaException");
 		}
@@ -157,8 +167,36 @@ public class PersonaTest {
 		// testear el mensaje y codigo de la excepcion
 		try {
 			Persona p = new Persona();
-			// p.setNombre("a");
-			// p.setApellido1("b");
+			p.setNombre("a");
+			fail("No se lanza PersonaException");
+		}
+
+		catch (PersonaException e) {
+			assertEquals(
+					PersonaException.COD_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO,
+					e.getCodigo());
+			assertEquals(
+					PersonaException.MSG_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO,
+					e.getMessage());
+		}
+
+		try {
+			Persona p = new Persona();
+			p.setApellido1("b");
+			fail("No se lanza PersonaException");
+		}
+
+		catch (PersonaException e) {
+			assertEquals(
+					PersonaException.COD_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO,
+					e.getCodigo());
+			assertEquals(
+					PersonaException.MSG_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO,
+					e.getMessage());
+		}
+
+		try {
+			Persona p = new Persona();
 			p.setApellido2("c");
 			fail("No se lanza PersonaException");
 		}
