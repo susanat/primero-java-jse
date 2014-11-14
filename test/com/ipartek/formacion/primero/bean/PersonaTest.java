@@ -13,6 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ipartek.formacion.primero.bean.Persona.ComparatorEdad;
+import com.ipartek.formacion.primero.excepciones.PersonaException;
 
 public class PersonaTest {
 
@@ -53,7 +54,7 @@ public class PersonaTest {
 		a4 = new Alumno("Úrko", 37);
 		a5 = new Alumno("Jon", 35);
 		a6 = new Alumno("Sergio", 18);
-		a7 = new Alumno("Ñu", 32);
+		a7 = new Alumno("Ñu Sr", 32);
 		a8 = new Alumno("Joséba", 26);
 		a9 = new Alumno("Mário", 29);
 		a10 = new Alumno("Áritz", 20);
@@ -131,6 +132,31 @@ public class PersonaTest {
 		assertEquals(testMsg, alumnos.get(10), a5);
 		assertEquals(testMsg, alumnos.get(11), a4);
 		assertEquals(testMsg, alumnos.get(12), a13);
+	}
+
+	@Test(expected = PersonaException.class)
+	public void testExceptions() throws PersonaException {
+		Persona p = new Persona();
+		// p.setEdad(Persona.MIN_EDAD - 1);
+		// p.setEdad(Persona.MIN_EDAD + 1);
+
+		// p.setNombre("na");
+		// p.setApellido1("na");
+		p.setApellido2(null);
+	}
+
+	@Test
+	public void testExceptionMessages() {
+		try {
+			Persona p = new Persona();
+			// p.setEdad(Persona.MIN_EDAD - 1);
+			p.setNombre("n");
+		} catch (PersonaException e) {
+			// assertEquals("Mensaje de PersonaException con edad incorrecto.",
+			// PersonaException.MSG_EDAD_NO_VALIDA, e.getMessage());
+			assertEquals("Mensaje de PersonaException con length incorrecto.",
+					PersonaException.MSG_LENGTH_SHORT, e.getMessage());
+		}
 	}
 
 }
