@@ -2,6 +2,7 @@ package com.ipartek.formacion.proyectoclase.pojo;
 
 import java.util.Calendar;
 
+import com.ipartek.formacion.proyectoclase.excepciones.LongitudTextoException;
 import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
 
 /**
@@ -21,9 +22,10 @@ public class Formador extends Persona {
 
 	/**
 	 * @throws PersonaException
+	 * @throws LongitudTextoException
 	 *
 	 */
-	public Formador() throws PersonaException {
+	public Formador() throws PersonaException, LongitudTextoException {
 		// TODO Auto-generated constructor stub
 		super();
 		setSueldo(SUELDO_MINIMO);
@@ -40,7 +42,8 @@ public class Formador extends Persona {
 	public Formador(String nombre, String p_apellido, String s_apellido,
 			String dni, String poblacion, Calendar f_nacimiento,
 			String telefono, char sexo, Boolean trabajando, Integer n_hermanos,
-			Libro libro, Double sueldo) throws PersonaException {
+			Libro libro, Double sueldo) throws PersonaException,
+			LongitudTextoException {
 		super(nombre, p_apellido, s_apellido, dni, poblacion, f_nacimiento,
 				telefono, sexo, trabajando, n_hermanos, libro);
 		setSueldo(sueldo);
