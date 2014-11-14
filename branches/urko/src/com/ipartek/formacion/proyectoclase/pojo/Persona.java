@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
+import com.ipartek.formacion.proyectoclase.excepciones.LongitudTextoException;
 import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
 
 /**
@@ -73,18 +74,19 @@ public class Persona implements Comparable<Persona> {
 
 	/**
 	 * @throws PersonaException
+	 * @throws LongitudTextoException
 	 *
 	 */
-	public Persona() throws PersonaException {
+	public Persona() throws PersonaException, LongitudTextoException {
 		super();
 		// TODO Auto-generated constructor stub
-		setNombre("");
-		setPapellido("");
-		setSapellido("");
-		setDni("");
-		setPoblacion("");
+		setNombre("   ");
+		setPapellido("   ");
+		setSapellido("  ");
+		setDni("  ");
+		setPoblacion("  ");
 		setFnacimiento(Calendar.getInstance());
-		setTelefono("");
+		setTelefono("  ");
 		setSexo('v');
 		setTrabajando(false);
 		setNhermanos(MIN_HERMANOS);
@@ -126,11 +128,13 @@ public class Persona implements Comparable<Persona> {
 	 * @param nhermanos
 	 * @param libro
 	 * @throws PersonaException
+	 * @throws LongitudTextoException
 	 */
 	public Persona(String nombre, String papellido, String sapellido,
 			String dni, String poblacion, Calendar fnacimiento,
 			String telefono, Character sexo, Boolean trabajando,
-			Integer nhermanos, Libro libro) throws PersonaException {
+			Integer nhermanos, Libro libro) throws PersonaException,
+			LongitudTextoException {
 		super();
 		setNombre(nombre);
 		setPapellido(papellido);
@@ -159,24 +163,44 @@ public class Persona implements Comparable<Persona> {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre(String nombre) throws LongitudTextoException {
+		if (nombre.length() > 2) {
+			this.nombre = nombre;
+		} else {
+			throw new LongitudTextoException(
+					LongitudTextoException.MSG_TEXTO_NO_VALIDO,
+					LongitudTextoException.COD_LONG_TEXTO_NO_VALIDA);
+		}
+
 	}
 
 	public String getPapellido() {
 		return papellido;
 	}
 
-	public void setPapellido(String p_apellido) {
-		this.papellido = p_apellido;
+	public void setPapellido(String papellido) throws LongitudTextoException {
+		if (papellido.length() > 2) {
+			this.papellido = papellido;
+		} else {
+			throw new LongitudTextoException(
+					LongitudTextoException.MSG_TEXTO_NO_VALIDO,
+					LongitudTextoException.COD_LONG_TEXTO_NO_VALIDA);
+		}
+		this.papellido = papellido;
 	}
 
 	public String getSapellido() {
 		return sapellido;
 	}
 
-	public void setSapellido(String sapellido) {
-		this.sapellido = sapellido;
+	public void setSapellido(String sapellido) throws LongitudTextoException {
+		if (sapellido.length() > 2) {
+			this.sapellido = sapellido;
+		} else {
+			throw new LongitudTextoException(
+					LongitudTextoException.MSG_TEXTO_NO_VALIDO,
+					LongitudTextoException.COD_LONG_TEXTO_NO_VALIDA);
+		}
 	}
 
 	public String getDni() {

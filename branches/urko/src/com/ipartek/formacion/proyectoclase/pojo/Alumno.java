@@ -3,13 +3,14 @@ package com.ipartek.formacion.proyectoclase.pojo;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import com.ipartek.formacion.proyectoclase.excepciones.LongitudTextoException;
 import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
 
 public class Alumno extends Persona {
 
 	private HashMap<String, Integer> calificaciones;
 
-	public Alumno() throws PersonaException {
+	public Alumno() throws PersonaException, LongitudTextoException {
 		super();
 	}
 
@@ -23,7 +24,7 @@ public class Alumno extends Persona {
 			String dni, String poblacion, Calendar f_nacimiento,
 			String telefono, char sexo, Boolean trabajando, Integer n_hermanos,
 			Libro libro, HashMap<String, Integer> calificaciones)
-			throws PersonaException {
+			throws PersonaException, LongitudTextoException {
 		super(nombre, p_apellido, s_apellido, dni, poblacion, f_nacimiento,
 				telefono, sexo, trabajando, n_hermanos, libro);
 		setCalificaciones(calificaciones);

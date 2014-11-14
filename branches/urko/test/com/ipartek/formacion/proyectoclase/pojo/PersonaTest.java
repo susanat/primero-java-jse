@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.ipartek.formacion.proyectoclase.excepciones.LongitudTextoException;
 import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
 import com.ipartek.formacion.proyectoclase.pojo.Persona.ComparatorPersonaEdad;
 
@@ -125,7 +126,14 @@ public class PersonaTest {
 	}
 
 	@Test(expected = PersonaException.class)
-	public void testException() throws PersonaException {
+	public void testException() throws PersonaException, LongitudTextoException {
+		Persona p = new Persona();
+		p.setFnacimiento(Calendar.getInstance());
+	}
+
+	@Test(expected = LongitudTextoException.class)
+	public void testLongitudTexto() throws PersonaException,
+			LongitudTextoException {
 		Persona p = new Persona();
 		p.setFnacimiento(Calendar.getInstance());
 	}
