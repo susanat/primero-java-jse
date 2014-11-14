@@ -2,27 +2,29 @@ package com.ipartek.formacion.primero.bean;
 
 import java.util.ArrayList;
 
+import com.ipartek.formacion.primero.excepciones.PersonaException;
+
 /**
  * Clase para reprensentar un Alumno, se compone de:
  * <ol>
- * 	<li>nombre {@code String} obligatorio</li>
+ * <li>nombre {@code String} obligatorio</li>
  * </ol>
- * 
- * 
+ *
+ *
  * @author Ander Uraga Real
  *
  */
 public class Persona {
-	
+
 	static final char SEXO_VARON = 'v';
 	static final char SEXO_MUJER = 'm';
 	static final char SEXO_OTROS = 'o';
-	
-	static final int MAYOR_EDAD = 18;
-	
+
+	public static final int MIN_EDAD = 18;
+	public static final int MAX_EDAD = 99;
+
 	static final String NOMBRE_NULO = "sin determinar";
-	
-	
+
 	// Atributos
 	String nombre;
 	String apellido1;
@@ -32,10 +34,9 @@ public class Persona {
 	String poblacion;
 	boolean mayorEdad = false;
 	String telefono;
-	char sexo = 'o';	
+	char sexo = 'o';
 	ArrayList<Libro> libros;
 
-	
 	// Constructor
 	public Persona() {
 		super();
@@ -43,7 +44,7 @@ public class Persona {
 		this.apellido1 = "Doe";
 		this.dni = "xxxxxxxxx";
 	}
-	
+
 	public Persona(String nombre, String apellido1, String dni) {
 		super();
 		this.nombre = nombre;
@@ -51,14 +52,14 @@ public class Persona {
 		this.dni = dni;
 	}
 
-	
-	public Persona(String nombre, String apellido1, int edad, String dni) {
+	public Persona(String nombre, String apellido1, int edad, String dni)
+			throws PersonaException {
 		super();
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
-		this.edad = edad;
+		setEdad(edad);
 		this.dni = dni;
-		this.mayorEdad = (this.edad>=18)? true: false; 
+		this.mayorEdad = (this.edad >= 18) ? true : false;
 	}
 
 	// Getters y Setters
@@ -91,9 +92,15 @@ public class Persona {
 		return edad;
 	}
 
-	public void setEdad(int edad) {
-		this.edad = edad;
-		this.mayorEdad = (this.edad>=MAYOR_EDAD)? true: false;
+	public void setEdad(int edad) throws PersonaException {
+		if (edad >= MIN_EDAD && edad <= MAX_EDAD) {
+			this.edad = edad;
+			this.mayorEdad = (this.edad >= MIN_EDAD) ? true : false;
+		} else {
+			// lanzar PersonaException
+			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA,
+					PersonaException.COD_EDAD_NO_VALIDA);
+		}
 	}
 
 	public String getDni() {
@@ -115,12 +122,6 @@ public class Persona {
 	public boolean isMayorEdad() {
 		return mayorEdad;
 	}
-
-
-	
-
-
-	
 
 	public String getTelefono() {
 		return telefono;
@@ -146,17 +147,13 @@ public class Persona {
 		this.libros = libros;
 	}
 
-	
-	
 	// Metodos
-		@Override
-		public String toString() {
-			return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
-					+ ", apellido2=" + apellido2 + ", edad=" + edad + ", dni="
-					+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
-					+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
-		}
-	
-	
+	@Override
+	public String toString() {
+		return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
+				+ ", apellido2=" + apellido2 + ", edad=" + edad + ", dni="
+				+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
+				+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
+	}
 
 }
