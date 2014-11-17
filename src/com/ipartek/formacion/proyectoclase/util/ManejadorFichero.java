@@ -125,10 +125,10 @@ public class ManejadorFichero {
 			fichero = new File(filePath + fileName + fileExt);
 			fr = new FileReader(fichero);
 			br = new BufferedReader(fr);
+			sb = new StringBuilder();
+			String linea = null;
 
 			// Lectura del fichero
-			String linea;
-			sb = new StringBuilder();
 			while ((linea = br.readLine()) != null) {
 				sb.append(linea);
 			}
