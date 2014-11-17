@@ -1,6 +1,7 @@
 package com.ipartek.formacion.primero.bean;
 
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,6 +11,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.ipartek.formacion.primero.excepciones.PersonaException;
 
 public class PersonaTest {
 	ArrayList<Persona> listaPersonas = null;
@@ -79,5 +82,53 @@ public class PersonaTest {
 		assertSame(listaPersonas.get(10).getNombre(), "Jon");
 		assertSame(listaPersonas.get(11).getNombre(), "Úrko");
 		assertSame(listaPersonas.get(12).getNombre(), "Jose");
+	}
+
+	@Test(expected = PersonaException.class)
+	public void testException() throws PersonaException {
+		Persona p = new Persona();
+		p.setEdad(Persona.MIN_EDAD - 1);
+	}
+
+	@Test(expected = PersonaException.class)
+	public void testExceptionNombre() throws PersonaException {
+		Persona p = new Persona();
+		p.setNombre("sa");
+		assertTrue(p.getNombre().length() == 2);
+		p.setNombre("sass");
+		assertTrue(p.getNombre().length() == 4);
+		p.setNombre("s");
+	}
+
+	@Test(expected = PersonaException.class)
+	public void testExceptionApe1() throws PersonaException {
+		Persona p = new Persona();
+		p.setApellido1("sa");
+		assertTrue(p.getApellido1().length() == 2);
+		p.setApellido1("sass");
+		assertTrue(p.getApellido1().length() == 4);
+		p.setApellido1("s");
+	}
+
+	@Test(expected = PersonaException.class)
+	public void testExceptionApe2() throws PersonaException {
+		Persona p = new Persona();
+		p.setApellido2("sa");
+		assertTrue(p.getApellido2().length() == 2);
+		p.setApellido2("sass");
+		assertTrue(p.getApellido2().length() == 4);
+		p.setApellido2("s");
+	}
+
+	@Test
+	public void testExceptionMsgEdad() {
+		try {
+			Persona p = new Persona();
+			p.setEdad(Persona.MIN_EDAD - 1);
+		} catch (PersonaException e) {
+			assertSame(PersonaException.MSG_EDAD_NO_VALIDA, e.getMessage());
+			assertSame(PersonaException.COD_EDAD_NO_VALIDA, e.getCodigo());
+		}
+
 	}
 }
