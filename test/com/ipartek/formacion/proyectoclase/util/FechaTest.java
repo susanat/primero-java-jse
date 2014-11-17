@@ -2,7 +2,6 @@ package com.ipartek.formacion.proyectoclase.util;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -41,11 +40,26 @@ public class FechaTest {
 		String strFechacas = Fecha.getString(gc, Idioma.CASTELLANO);
 
 		String strFechaeu = Fecha.getString(gc, Idioma.EUSKERA);
-		String strHoycas = gc.DAY_OF_MONTH + "/" + Calendar.MONTH + "/"
-				+ GregorianCalendar.YEAR;
-		String strHoyeu = GregorianCalendar.YEAR + "/"
-				+ GregorianCalendar.MONTH + "/"
-				+ GregorianCalendar.DAY_OF_MONTH;
+		String strHoycas = gc.get(GregorianCalendar.DAY_OF_MONTH) + "/"
+				+ (gc.get(GregorianCalendar.MONTH) + 1) + "/"
+				+ gc.get(GregorianCalendar.YEAR);
+		String strHoyeu = gc.get(GregorianCalendar.YEAR) + "/"
+				+ (gc.get(GregorianCalendar.MONTH) + 1) + "/"
+				+ gc.get(GregorianCalendar.DAY_OF_MONTH);
+
+		assertEquals(strHoycas, strFechacas);
+		assertEquals(strHoyeu, strFechaeu);
+
+		gc.set(GregorianCalendar.MONTH, 02);
+		strFechacas = Fecha.getString(gc, Idioma.CASTELLANO);
+
+		strFechaeu = Fecha.getString(gc, Idioma.EUSKERA);
+		strHoycas = gc.get(GregorianCalendar.DAY_OF_MONTH) + "/"
+				+ (gc.get(GregorianCalendar.MONTH) + 1) + "/"
+				+ gc.get(GregorianCalendar.YEAR);
+		strHoyeu = gc.get(GregorianCalendar.YEAR) + "/"
+				+ (gc.get(GregorianCalendar.MONTH) + 1) + "/"
+				+ gc.get(GregorianCalendar.DAY_OF_MONTH);
 
 		assertEquals(strHoycas, strFechacas);
 		assertEquals(strHoyeu, strFechaeu);
