@@ -20,7 +20,7 @@ public class Fecha {
 	 *            - la fecha de hoy
 	 * @param idioma
 	 *            - idioma al que se quiere formatear la fecha
-	 * @return un String con la fecha formateada
+	 * @return String con la fecha formateada
 	 */
 	public static String getString(GregorianCalendar hoyDate, Idioma idioma) {
 		return getString(hoyDate.getTimeInMillis(), idioma);
@@ -28,7 +28,7 @@ public class Fecha {
 	}
 
 	/**
-	 * Dada una fecha en milisegundos y un idiom, formatea la fecha en
+	 * Dada una fecha en milisegundos y un idioma, formatea la fecha en
 	 * consecuencia
 	 *
 	 * @param fechaHoy
