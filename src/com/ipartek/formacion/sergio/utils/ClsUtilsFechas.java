@@ -5,9 +5,14 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Clase de recopilación de funciones útiles para trabajar con fechas
@@ -259,5 +264,69 @@ public class ClsUtilsFechas {
     	return timestamp.getTime();
     }
     
+    
+    /**
+     * Devuelve la fecha pasada dependiendo de la zona temporal
+     * @param strTimeZone String con el time zone
+     * @param fecha fecha a convertir
+     * @return
+     */
+    public static Date convertOtherTimeZone(String strTimeZone, Date fecha){		
+		//creamos la instancia del calendario
+		Calendar calendar = Calendar.getInstance();
+		
+		//Le añadimos la fecha
+		calendar.setTime(fecha);
+		
+		//Obtenemos el actual time zone ?¿?¿?¿
+        TimeZone fromTimeZone = calendar.getTimeZone();
+        
+        //Obtenemos el timeZoneDestino
+        TimeZone toTimeZone = TimeZone.getTimeZone(strTimeZone);
+
+        calendar.setTimeZone(fromTimeZone);
+        calendar.add(Calendar.MILLISECOND, fromTimeZone.getRawOffset() * -1);
+        if (fromTimeZone.inDaylightTime(calendar.getTime())) {
+            calendar.add(Calendar.MILLISECOND, calendar.getTimeZone().getDSTSavings() * -1);
+        }
+
+        calendar.add(Calendar.MILLISECOND, toTimeZone.getRawOffset());
+        if (toTimeZone.inDaylightTime(calendar.getTime())) {
+            calendar.add(Calendar.MILLISECOND, toTimeZone.getDSTSavings());
+        }
+
+        return calendar.getTime();
+	}
+    
+    
+    /**
+     * Return a collection with timeZones 
+     * 
+     * (filtradas)
+     * @see http://blog.lunatech.com/2008/12/20/getting-list-time-zones-java-and-seam
+     * @return
+     */
+    public static List<TimeZone> getListTimeZones(){
+    	String TIMEZONE_ID_PREFIXES =
+			      "^(Africa|America|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*";
+		
+		String[] timeZoneIds = TimeZone.getAvailableIDs();
+		List<TimeZone> timeZones = new ArrayList<TimeZone>();
+		
+		timeZones = new ArrayList<TimeZone>();
+	      timeZoneIds = TimeZone.getAvailableIDs();
+	      for (final String id : timeZoneIds) {
+	         if (id.matches(TIMEZONE_ID_PREFIXES)) {
+	            timeZones.add(TimeZone.getTimeZone(id));
+	         }
+	      }
+	      Collections.sort(timeZones, new Comparator<TimeZone>() {
+	         public int compare(final TimeZone a, final TimeZone b) {
+	            return a.getID().compareTo(b.getID());
+	         }
+	      });
+	      
+	      return timeZones;
+    }
     
 }
