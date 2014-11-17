@@ -1,5 +1,7 @@
 package com.ipartek.formacion.proyectoclase.util;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -7,6 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ManejadorFicheroTest {
+	final String FICHERO_NAME_TEST1 = "FILENAME";
+	final String FICHERO_NAME_TEST2 = "FILENAME";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -31,7 +35,11 @@ public class ManejadorFicheroTest {
 
 	@Test
 	public void borrarArchivoTexto() {
-
+		assertTrue("El fichero no ha sido creado con exito", true);
 	}
 
+	@Test
+	public void leerArchivoTexto() {
+		assertTrue("", true);
+	}
 }

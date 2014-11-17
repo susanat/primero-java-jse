@@ -1,9 +1,11 @@
 package com.ipartek.formacion.proyectoclase.util;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -12,10 +14,10 @@ import java.io.Writer;
 
 public class ManejadorFichero {
 
-	private String filePath;
-	private String fileName;
-	private String fileExt;
-	private File fichero;
+	private static String filePath;
+	private static String fileName;
+	private static String fileExt;
+	private static File fichero;
 
 	public ManejadorFichero() {
 		super();
@@ -30,7 +32,7 @@ public class ManejadorFichero {
 		this.fileName = fileExt;
 	}
 
-	public void crearArchivoTexto(String content) {
+	public static void crearArchivoTexto(String content) {
 		File fichero = new File(filePath + fileName + fileExt);
 		FileOutputStream fos = null;
 		Writer out = null;
@@ -85,7 +87,7 @@ public class ManejadorFichero {
 		System.out.println(filePath);
 	}
 
-	private void crearFichero() {
+	private static void crearFichero() {
 		if (!fichero.exists()) {
 			try {
 				fichero.createNewFile();
@@ -96,14 +98,53 @@ public class ManejadorFichero {
 		}
 	}
 
-	public boolean borrarFichero() {
+	public static boolean borrarFichero() {
 		boolean exito = false;
 		try {
 			fichero = new File(filePath + fileName + fileExt);
-			exito = fichero.delete();
+			if (!fichero.exists()) {
+				exito = fichero.delete();
+			} else {
+				exito = false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return exito;
+	}
+
+	@SuppressWarnings("finally")
+	public static String leerFichero() {
+		String texto = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+
+		try {
+			// Apertura del fichero y creacion de BufferedReader para poder
+			// hacer una lectura comoda (disponer del metodo readLine()).
+			fichero = new File(filePath + fileName + fileExt);
+			fr = new FileReader(fichero);
+			br = new BufferedReader(fr);
+
+			// Lectura del fichero
+			String linea;
+
+			while ((linea = br.readLine()) != null) {
+				texto += linea;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != fr) {
+					fr.close();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return texto;
 	}
 }
