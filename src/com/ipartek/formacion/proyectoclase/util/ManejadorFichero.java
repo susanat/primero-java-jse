@@ -21,15 +21,15 @@ public class ManejadorFichero {
 
 	public ManejadorFichero() {
 		super();
-		this.filePath = System.getProperty("java.io.tmpdir");
-		this.fileName = "helloWord";
-		this.fileExt = ".txt";
+		ManejadorFichero.filePath = System.getProperty("java.io.tmpdir");
+		ManejadorFichero.fileName = "helloWord";
+		ManejadorFichero.fileExt = ".txt";
 	}
 
 	public ManejadorFichero(String filePath, String fileName, String fileExt) {
 		super();
-		this.filePath = filePath;
-		this.fileName = fileExt;
+		ManejadorFichero.filePath = filePath;
+		ManejadorFichero.fileName = fileExt;
 	}
 
 	public static void crearArchivoTexto(String content) {
@@ -115,7 +115,7 @@ public class ManejadorFichero {
 
 	@SuppressWarnings("finally")
 	public static String leerFichero() {
-		String texto = null;
+		StringBuilder sb = null;
 		FileReader fr = null;
 		BufferedReader br = null;
 
@@ -128,9 +128,9 @@ public class ManejadorFichero {
 
 			// Lectura del fichero
 			String linea;
-
+			sb = new StringBuilder();
 			while ((linea = br.readLine()) != null) {
-				texto += linea;
+				sb.append(linea);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,6 +145,6 @@ public class ManejadorFichero {
 			}
 		}
 
-		return texto;
+		return sb.toString();
 	}
 }
