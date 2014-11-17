@@ -1,9 +1,8 @@
 package com.ipartek.formacion.proyectoclase;
 
 import java.util.Calendar;
-import java.util.Iterator;
 
-import org.json.JSONObject;
+//import org.json.JSONObject;
 
 import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
 import com.ipartek.formacion.proyectoclase.pojo.Alumno;
@@ -20,8 +19,8 @@ public class Main {
 		Calendar fnacimiento = Calendar.getInstance();
 		Alumno al = new Alumno();
 		Libro l = new Libro();
-		JSONObject json1 = new JSONObject(l);
-		Iterator<String> it = json1.keys();
+	//	JSONObject json1 = new JSONObject(l);
+//		Iterator<String> it = json1.keys();
 		Cambio calcular = new Cambio();
 		ManejadorFichero man;
 		man = new ManejadorFichero();
