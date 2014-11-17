@@ -2,6 +2,7 @@ package com.ipartek.formacion.proyectoclase.util;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -15,6 +16,7 @@ import com.ipartek.formacion.proyectoclase.pojo.Fecha;
 
 public class FechaTest {
 	GregorianCalendar gc;
+	SimpleDateFormat fmt;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -26,7 +28,9 @@ public class FechaTest {
 
 	@Before
 	public void setUp() throws Exception {
+		fmt = new SimpleDateFormat("MMM");
 		gc = new GregorianCalendar();
+
 		gc.setTime(new Date());
 	}
 
