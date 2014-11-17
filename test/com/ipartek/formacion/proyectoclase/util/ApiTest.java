@@ -97,8 +97,6 @@ public class ApiTest {
 		int indice_fin = lineaPersona.indexOf(SALTOLINEA.charAt(0));
 		int indice_inicio = 0;
 		// int n_lineas = 0;
-
-		String texto = lineaPersona;
 		ArrayList<String> people = new ArrayList<String>();
 		/*
 		 * indice_inicio = texto.indexOf(SALTOLINEA.charAt(0), 1); indice_fin =
@@ -108,9 +106,10 @@ public class ApiTest {
 			String persona = lineaPersona.substring(indice_inicio, indice_fin);
 			// n_lineas++;
 
-			indice_inicio = texto.indexOf(SALTOLINEA.charAt(0),
+			indice_inicio = lineaPersona.indexOf(SALTOLINEA.charAt(0),
 					indice_inicio + 1);
-			indice_fin = texto.indexOf(SALTOLINEA.charAt(0), indice_fin + 1);
+			indice_fin = lineaPersona.indexOf(SALTOLINEA.charAt(0),
+					indice_fin + 1);
 			people.add(persona);
 
 		}
