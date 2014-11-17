@@ -125,4 +125,5 @@ public class Fichero {
 		}
 		return resul;
 	}
+
 }
