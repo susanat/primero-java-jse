@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Locale;
 
+import com.ipartek.formacion.primero.excepciones.PersonaException;
+
 /**
  * Clase para reprensentar una persona, se compone de:
  * <ol>
@@ -22,6 +24,9 @@ public class Persona implements Comparable<Persona> {
 	public static final char SEXO_OTROS = 'o';
 
 	public static final int MAYOR_EDAD = 18;
+	public static final int MIN_EDAD = 18;
+	public static final int MAX_EDAD = 99;
+	public static final int MIN_CAR = 2;
 
 	public static final String NOMBRE_NULO = "sin determinar";
 
@@ -67,7 +72,12 @@ public class Persona implements Comparable<Persona> {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws PersonaException {
+		if (nombre == null || nombre.length() < 2) {
+			throw new PersonaException("Nombre,"
+					+ PersonaException.MSG_LONG_TOO_SHORT,
+					PersonaException.COD_LONG_TOO_SHORT);
+		}
 		this.nombre = nombre;
 	}
 
@@ -75,7 +85,12 @@ public class Persona implements Comparable<Persona> {
 		return apellido1;
 	}
 
-	public void setApellido1(String apellido1) {
+	public void setApellido1(String apellido1) throws PersonaException {
+		if (apellido1 == null || apellido1.length() < 2) {
+			throw new PersonaException("Apellido1,"
+					+ PersonaException.MSG_LONG_TOO_SHORT,
+					PersonaException.COD_LONG_TOO_SHORT);
+		}
 		this.apellido1 = apellido1;
 	}
 
@@ -83,7 +98,12 @@ public class Persona implements Comparable<Persona> {
 		return apellido2;
 	}
 
-	public void setApellido2(String apellido2) {
+	public void setApellido2(String apellido2) throws PersonaException {
+		if (apellido2 == null || apellido2.length() < 2) {
+			throw new PersonaException("Apellido2,"
+					+ PersonaException.MSG_LONG_TOO_SHORT,
+					PersonaException.COD_LONG_TOO_SHORT);
+		}
 		this.apellido2 = apellido2;
 	}
 
@@ -91,7 +111,12 @@ public class Persona implements Comparable<Persona> {
 		return edad;
 	}
 
-	public void setEdad(int edad) {
+	public void setEdad(int edad) throws PersonaException {
+		if (edad < MIN_EDAD || edad > MAX_EDAD) {
+			// La edad tiene que estar comprendida entre MIN_EDAD y MAX_EDAD
+			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA,
+					PersonaException.COD_EDAD_NO_VALIDA);
+		}
 		this.edad = edad;
 		this.mayorEdad = (this.edad >= MAYOR_EDAD) ? true : false;
 	}
