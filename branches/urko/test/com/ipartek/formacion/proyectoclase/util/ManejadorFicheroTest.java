@@ -39,7 +39,7 @@ public class ManejadorFicheroTest {
 		assertTrue("El fichero no ha sido creado con exito", true);
 	}
 
-	@Test
+	@Test(timeout = 1000)
 	public void leerArchivoTexto() {
 		assertTrue("", true);
 	}
