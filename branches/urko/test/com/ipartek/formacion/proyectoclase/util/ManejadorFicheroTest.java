@@ -10,7 +10,8 @@ import org.junit.Test;
 
 public class ManejadorFicheroTest {
 	final String FICHERO_NAME_TEST1 = "FILENAME";
-	final String FICHERO_NAME_TEST2 = "FILENAME";
+	final String FICHERO_EXT_TEST1 = "TXT";
+	final String FICHERO_PATH_TEST1 = "C://";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
