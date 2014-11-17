@@ -1,6 +1,7 @@
 package com.ipartek.formacion.primero.util;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,6 +12,7 @@ import org.junit.Test;
 public class FicheroTest {
 	static final String FICHERO_NAME_TEST1 = "filename.txt";
 	static final String FICHERO_CONTENT_TEST1 = "Hello World";
+	static final String FICHERO_CONTENT_TEST2 = "filename.txt \nlinea1 \nlinea2";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -34,6 +36,19 @@ public class FicheroTest {
 	public void testCreate() {
 
 		assertTrue(Fichero.create(FICHERO_NAME_TEST1, FICHERO_CONTENT_TEST1));
+
+	}
+
+	@Test
+	public void testRead() {
+
+		try {
+			assertTrue(Fichero
+					.create(FICHERO_NAME_TEST1, FICHERO_CONTENT_TEST2));
+			Fichero.read(FICHERO_NAME_TEST1);
+		} catch (Exception e) {
+			fail("Exception leyendo fichero");
+		}
 
 	}
 
