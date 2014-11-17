@@ -5,6 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.StringTokenizer;
@@ -22,7 +25,8 @@ public class ApiTest {
 	String aLower = "hola";
 	String replaceChar = "a";
 	String nulo = null;
-	// String lineaPersona = "Pili,Mili,Gorriti,34;";
+	String cadenaOriginal = "holaholahola";
+	String cadenaReemplazada = "hol2hol2hol2";
 	String personaNombre = "Pili";
 	String personaApe1 = "Mili";
 	String personaApe2 = "Gorriti";
@@ -31,6 +35,7 @@ public class ApiTest {
 	static final String SALTOLINEA = ";";
 	String lineaPersona = personaNombre + SEPARADOR + personaApe1 + SEPARADOR
 			+ personaApe2 + SEPARADOR + personaEdad + SALTOLINEA;
+	GregorianCalendar gc;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -42,11 +47,13 @@ public class ApiTest {
 
 	@Before
 	public void setUp() throws Exception {
+		gc = new GregorianCalendar();
+		gc.setTime(new Date());
 	}
 
 	@After
 	public void tearDown() throws Exception {
-
+		gc = null;
 	}
 
 	@Test
@@ -82,26 +89,26 @@ public class ApiTest {
 			String pape1 = st.nextToken();
 			String pape2 = st.nextToken();
 			String pedad = st.nextToken();
-			System.out.println(pnombre + pape1 + pape2 + pedad);
+			assertTrue("", personaNombre.equals(pnombre));
+			assertTrue("", personaApe1.equals(pape1));
+			assertTrue("", personaApe2.equals(pape2));
+			assertTrue("", personaEdad.equals(pedad));
+
 		}
 
 		String[] personas = lineaPersona.split(SALTOLINEA);
+		String[] d_personas = null;
 		for (String p : personas) {
-			String[] d_personas = p.split(SEPARADOR);
-			for (String dato : d_personas) {
-				System.out.print(dato);
-			}
-			System.out.println("");
+			d_personas = p.split(SEPARADOR);
 		}
+
+		assertTrue("", personaNombre.equals(d_personas[0]));
 
 		int indice_fin = lineaPersona.indexOf(SALTOLINEA.charAt(0));
 		int indice_inicio = 0;
 		// int n_lineas = 0;
 		ArrayList<String> people = new ArrayList<String>();
-		/*
-		 * indice_inicio = texto.indexOf(SALTOLINEA.charAt(0), 1); indice_fin =
-		 * texto.indexOf(SALTOLINEA.charAt(0), 2);
-		 */
+
 		while (indice_fin > 0) {
 			String persona = lineaPersona.substring(indice_inicio, indice_fin);
 			// n_lineas++;
@@ -115,4 +122,35 @@ public class ApiTest {
 		}
 
 	}
+
+	@Test
+	public void testReplaceAllString() {
+		String cadenaCambiada = cadenaOriginal.replace('a', '2');
+		assertEquals(cadenaReemplazada, cadenaCambiada);
+
+	}
+
+	@Test
+	public void testName() {
+		Locale loc = new Locale("es", "ES");
+		Calendar cal = Calendar.getInstance(loc);
+
+		GregorianCalendar ahora = new GregorianCalendar();
+		ahora.setTimeInMillis(System.currentTimeMillis());
+
+		assertEquals(gc, ahora);
+		assertEquals(gc.getTimeInMillis(), ahora.getTimeInMillis());
+
+		assertEquals(cal.get(Calendar.DAY_OF_MONTH),
+				gc.get(GregorianCalendar.DAY_OF_MONTH));
+
+		assertEquals(cal.get(Calendar.MONTH), gc.get(GregorianCalendar.MONTH));// Jaunary=0
+
+		assertEquals(cal.get(Calendar.YEAR), gc.get(GregorianCalendar.YEAR));
+		assertEquals(cal.get(Calendar.DAY_OF_WEEK),
+				gc.get(GregorianCalendar.DAY_OF_WEEK));// Empieza con el
+														// Sunday=1
+
+	}
+
 }
