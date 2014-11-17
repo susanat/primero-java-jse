@@ -18,9 +18,9 @@ public class Fecha {
 		
 		
 		SimpleDateFormat formatoCastellano = new SimpleDateFormat("dd"+ "/"+"MM"+ "/"+"yyyy");
-		String cadenaFecha = formatoCastellano.format(actual);
+		String hoyStringCastellano = formatoCastellano.format(actual);
 		
-		System.out.println("La fecha en castellano es " + cadenaFecha + " y la hora " +  hora + ":" + minutos + ":" + segundos);
+		System.out.println("La fecha en castellano es " + hoyStringCastellano + " y la hora " +  hora + ":" + minutos + ":" + segundos);
 				
 		
 		return null;
