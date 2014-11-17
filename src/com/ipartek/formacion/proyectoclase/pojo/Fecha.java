@@ -31,10 +31,10 @@ public class Fecha {
 		// TODO Implementar
 		switch (idioma) {
 		case CASTELLANO:
-			fmt = new SimpleDateFormat("dd/MM/yyyy");
+			fmt = new SimpleDateFormat("dd/M/yyyy");
 			break;
 		case EUSKERA:
-			fmt = new SimpleDateFormat("yyyy/MM/dd");
+			fmt = new SimpleDateFormat("yyyy/M/dd");
 			break;
 		}
 		fmt.setCalendar(fecha);
@@ -54,10 +54,10 @@ public class Fecha {
 		GregorianCalendar aux = new GregorianCalendar();
 		switch (idioma) {
 		case CASTELLANO:
-			fmt = new SimpleDateFormat("dd/MM/yyyy");
+			fmt = new SimpleDateFormat("dd/M/yyyy");
 			break;
 		case EUSKERA:
-			fmt = new SimpleDateFormat("yyyy/MM/dd");
+			fmt = new SimpleDateFormat("yyyy/M/dd");
 			break;
 		}
 		aux.setTimeInMillis(fecha);
