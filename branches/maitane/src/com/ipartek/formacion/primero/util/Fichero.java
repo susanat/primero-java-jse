@@ -1,46 +1,43 @@
 package com.ipartek.formacion.primero.util;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 public class Fichero {
+
 	/**
 	 * Crea un fichero de texto con codificacion "utf-8"
 	 *
-	 * @param nombreFich
-	 *            path+nombre+erxtension, ej: filename.txt
+	 * @param nombreFichero
+	 *            path + nombre + extension, ej: filename.txt
 	 * @param contenido
-	 *            contenido a escribir el en fichero
-	 * @return true si se crea el fichero, false em caso contrario
+	 *            contenido a escribir en el fichero
+	 *
+	 * @return true si se crea el fichero, false en caso contrario
 	 */
-
-	static boolean create(String nombreFichero, String contenido) {
-
-		boolean rdo = false;
-
+	static public boolean create(String nombreFichero, String contenido) {
+		boolean resul = false;
 		Writer writer = null;
 		FileOutputStream ficheroTexto = null;
-		OutputStreamWriter outPutStream = null;
-
+		OutputStreamWriter outputStream = null;
 		try {
-			// creamos el nombre y extension del fichero
-			ficheroTexto = new FileOutputStream("filename.txt");
-
+			// Creamos el nombre y extension del fichero
+			ficheroTexto = new FileOutputStream(nombreFichero);
 			// declaramos un Stream para escribir
 			// pasamos como parametros el fichero a escribir y su Charset
-			outPutStream = new OutputStreamWriter(ficheroTexto, "utf-8");
-
+			outputStream = new OutputStreamWriter(ficheroTexto, "utf-8");
 			// objeto Writer para escribir
 			// mejoramos el rendimiento con un buffer
-			writer = new BufferedWriter(outPutStream);
-
+			writer = new BufferedWriter(outputStream);
 			// escribir en el fichero a traves del writer
 			writer.write(contenido);
-			rdo = true;
+			resul = true;
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -50,26 +47,61 @@ public class Fichero {
 				ex.printStackTrace();
 			}
 		}
-
-		return rdo;
-
+		return resul;
 	}
 
-	// metodo para eliminar un fichero
-	public static boolean remove(String ficheroName) {
-		boolean rdo = false;
+	/**
+	 * Lee el fichero y lo muestra por pantalla
+	 *
+	 * @param ficheroName
+	 *            path y nombre del fichero
+	 */
+	public static void read(String ficheroName) {
+		BufferedReader br = null; // buffer para mejorar la lectura
+		FileReader reader = null;
 		try {
+			// para leer las lineas del fichero
+			String sCurrentLine;
 
-			File file = new File(ficheroName);
+			// Crear Stream de lectura
+			reader = new FileReader(ficheroName);
+			// asociar el buffer al Stream
+			br = new BufferedReader(reader);
 
-			rdo = file.delete();
+			// Bucle para leer linea a linea
+			while ((sCurrentLine = br.readLine()) != null) {
+				System.out.println(sCurrentLine);
+			}
 
-		} catch (Exception e) {
-
+		} catch (IOException e) {
 			e.printStackTrace();
-
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
-		return rdo;
 	}
 
+	/**
+	 * Eliminar Fichero
+	 *
+	 * @param ficheroName
+	 *            path y nombre del fichero
+	 * @return true si es eliminado, false en caso contrario
+	 */
+	public static boolean remove(String ficheroName) {
+		boolean resul = false;
+		try {
+			File file = new File(ficheroName);
+			resul = file.delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resul;
+
+	}
 }
