@@ -34,7 +34,7 @@ public class HolaMundo {
 		Alumno alum= new Alumno();
 		System.out.println(alum);
 		
-		Alumno alum2 = new Alumno("Mai", "Casado", "Fernandez", 18, "46582h", "Bilbao", "654178504", 'f');
+		Alumno alum2 = new Alumno();
 		System.out.println(alum2);
 		
 		System.out.println(alum2.isMayorEdad());
