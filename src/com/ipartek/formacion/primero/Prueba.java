@@ -1,6 +1,5 @@
 package com.ipartek.formacion.primero;
 
-
 public class Prueba {
 
 	public static void main(String[] args) {
@@ -37,6 +36,5 @@ public class Prueba {
 		// Formador f1 = new Formador("XXXXX", "XXXXXX", 666, "xxxxxxxxx");
 		// f1.setSueldo(24000.5f);
 		// System.out.println(f1);
-
 	}
 }
