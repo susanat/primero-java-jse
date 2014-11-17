@@ -1,6 +1,7 @@
 package com.ipartek.formacion.primero.util;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,6 +13,9 @@ public class FicheroTest {
 
 	static final String FICHERO_NAME_TEST1 = "filename.txt";
 	static final String FICHERO_CONTENT_TEST1 = "Hello Wolrd";
+	static final String FICHERO_CONTENT_TEST2 = "filename.txt \nlinea1 \nlinea2";
+
+	static final int BUCLE = 10000;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -37,6 +41,43 @@ public class FicheroTest {
 
 		assertTrue(Fichero.create(FICHERO_NAME_TEST1, FICHERO_CONTENT_TEST1));
 
+	}
+
+	@Test
+	public void testRead() {
+
+		try {
+
+			assertTrue(Fichero
+					.create(FICHERO_NAME_TEST1, FICHERO_CONTENT_TEST2));
+			Fichero.read(FICHERO_NAME_TEST1);
+
+		} catch (Exception e) {
+			fail("Exception leyendo fichero");
+		}
+
+	}
+
+	@Test(timeout = 1000)
+	public void testWriteString() {
+		String content = "";
+		for (int i = 0; i < BUCLE; i++) {
+			content += "linea" + i + "\n";
+		}
+		Fichero.create(FICHERO_NAME_TEST1, content);
+		// Fichero.read(FICHERO_NAME_TEST1);
+		assertTrue(Fichero.remove(FICHERO_NAME_TEST1));
+	}
+
+	@Test(timeout = 1000)
+	public void testWriteStringBuilder() {
+		StringBuilder sbContent = new StringBuilder();
+		for (int i = 0; i < BUCLE; i++) {
+			sbContent.append("linea" + i + "\n");
+		}
+		Fichero.create(FICHERO_NAME_TEST1, sbContent.toString());
+		// Fichero.read(FICHERO_NAME_TEST1);
+		assertTrue(Fichero.remove(FICHERO_NAME_TEST1));
 	}
 
 }

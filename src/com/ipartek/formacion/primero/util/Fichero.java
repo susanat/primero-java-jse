@@ -1,8 +1,10 @@
 package com.ipartek.formacion.primero.util;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -48,6 +50,49 @@ public class Fichero {
 		return resul;
 	}
 
+	/**
+	 * Lee el fichero y lo muestra por pantalla
+	 *
+	 * @param ficheroName
+	 *            path y nombre del fichero
+	 */
+	public static void read(String ficheroName) {
+		BufferedReader br = null; // buffer para mejorar la lectura
+		FileReader reader = null;
+		try {
+			// para leer las lineas del fichero
+			String sCurrentLine;
+
+			// Crear Stream de lectura
+			reader = new FileReader(ficheroName);
+			// asociar el buffer al Stream
+			br = new BufferedReader(reader);
+
+			// Bucle para leer linea a linea
+			while ((sCurrentLine = br.readLine()) != null) {
+				System.out.println(sCurrentLine);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Eliminar Fichero
+	 *
+	 * @param ficheroName
+	 *            path y nombre del fichero
+	 * @return true si es eliminado, false en caso contrario
+	 */
 	public static boolean remove(String ficheroName) {
 		boolean resul = false;
 		try {
@@ -60,4 +105,3 @@ public class Fichero {
 
 	}
 }
-
