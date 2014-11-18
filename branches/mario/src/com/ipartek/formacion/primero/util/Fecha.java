@@ -17,10 +17,10 @@ public class Fecha {
 	 * consecuencia
 	 *
 	 * @param hoyDate
-	 *            - la fecha de hoy
+	 *            - {@code GregorianCalendar} la fecha de hoy
 	 * @param idioma
-	 *            - idioma al que se quiere formatear la fecha
-	 * @return String con la fecha formateada
+	 *            - {@code enum} idioma al que se quiere formatear la fecha
+	 * @return {@code String} con la fecha formateada
 	 */
 	public static String getString(GregorianCalendar hoyDate, Idioma idioma) {
 		return getString(hoyDate.getTimeInMillis(), idioma);
@@ -32,10 +32,10 @@ public class Fecha {
 	 * consecuencia
 	 *
 	 * @param fechaHoy
-	 *            - Fecha en milisegundos
+	 *            - {@code long} Fecha en milisegundos
 	 * @param idioma
-	 *            - idioma al que se quiere formatear la fecha
-	 * @return resul - String con la fecha formateada
+	 *            - {@code enum} idioma al que se quiere formatear la fecha
+	 * @return resul - {@code String} con la fecha formateada
 	 */
 	public static String getString(long fechaHoy, Idioma idioma) {
 		String resul = "";
