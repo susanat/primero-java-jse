@@ -60,17 +60,8 @@ public class Fecha {
 	public static String getString(long fecha, Idioma idioma) {
 		String dateFormatted = "";
 		GregorianCalendar aux = new GregorianCalendar();
-		switch (idioma) {
-		case CASTELLANO:
-			fmt = new SimpleDateFormat(MASCARAES);
-			break;
-		case EUSKERA:
-			fmt = new SimpleDateFormat(MASCARAEU);
-			break;
-		}
 		aux.setTimeInMillis(fecha);
-		fmt.setCalendar(aux);
-		dateFormatted = fmt.format(aux.getTime());
+		dateFormatted = getString(aux, idioma);
 		return dateFormatted;
 	}
 
