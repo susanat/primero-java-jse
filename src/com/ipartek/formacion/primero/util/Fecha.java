@@ -50,17 +50,9 @@ public class Fecha {
 	 * @return Un String con la fecha formateada
 	 */
 	public static String getString(Long hoyDate, Idioma idioma) {
-		String resul = "";
-		SimpleDateFormat formato;
-		Date fecha = new Date(hoyDate);
-		if (idioma.equals(Idioma.CASTELLANO)) {
-			formato = new SimpleDateFormat("dd/M/yyyy");
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTimeInMillis(hoyDate);
+		return getString(gc, idioma);
 
-		} else {
-			formato = new SimpleDateFormat("yyyy/M/dd");
-
-		}
-		resul = formato.format(fecha);
-		return resul;
 	}
 }
