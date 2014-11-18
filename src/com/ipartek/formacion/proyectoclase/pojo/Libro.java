@@ -43,7 +43,7 @@ public class Libro {
 		return isbn;
 	}
 
-	public void setIsbn(String isbn) {
+	public void setIsbn(final String isbn) {
 		if (!"".equalsIgnoreCase(isbn)) {
 			this.isbn = isbn;
 		}
@@ -53,7 +53,7 @@ public class Libro {
 		return autor;
 	}
 
-	public void setAutor(String autor) {
+	public void setAutor(final String autor) {
 		if (!"".equalsIgnoreCase(autor)) {
 			this.autor = autor;
 		}
@@ -63,7 +63,7 @@ public class Libro {
 		return npaginas;
 	}
 
-	public void setNpaginas(Integer npaginas) {
+	public void setNpaginas(final Integer npaginas) {
 		if (npaginas > 0) {
 			this.npaginas = npaginas;
 		}
