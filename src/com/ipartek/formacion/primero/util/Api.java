@@ -3,12 +3,13 @@ package com.ipartek.formacion.primero.util;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class API {
+public class Api {
 
-	public static ArrayList SepararTokenizer(String cadena, String separador) {
+	public static ArrayList<String> SepararTokenizer(String cadena,
+			String separador) {
 
 		String strTemp = null;
-		ArrayList elementosCadena = new ArrayList<String>();
+		ArrayList<String> elementosCadena = new ArrayList<String>();
 		StringTokenizer stringTokenizer = new StringTokenizer(cadena, separador);
 		while (stringTokenizer.hasMoreTokens()) {
 			strTemp = stringTokenizer.nextToken();
@@ -19,7 +20,7 @@ public class API {
 
 	}
 
-	public static String[] SepararSplit(String cadena, String separador) {
+	public static String[] separarSplit(String cadena, String separador) {
 
 		String[] elementosCadena = cadena.split(separador);
 
