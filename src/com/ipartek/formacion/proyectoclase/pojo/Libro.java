@@ -14,8 +14,8 @@ public class Libro {
 		this.codlibro = "0";
 		this.isbn = "0";
 		this.titulo = "sin definir";
-		this.autor = new String("");
-		this.npaginas = new Integer(0);
+		this.autor = "";
+		this.npaginas = 0;
 
 	}
 
