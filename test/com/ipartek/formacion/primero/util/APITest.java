@@ -161,12 +161,12 @@ public class APITest {
 		assertEquals(hoyDate.getTimeInMillis(), hoyCurrent.getTimeInMillis());
 
 		// Dia del mes
-		assertEquals(17, hoyDate.get(GregorianCalendar.DAY_OF_MONTH));
+		assertEquals(18, hoyDate.get(GregorianCalendar.DAY_OF_MONTH));
 
 		// Dia de la semana
-		assertEquals(GregorianCalendar.MONDAY,
+		assertEquals(GregorianCalendar.TUESDAY,
 				hoyDate.get(GregorianCalendar.DAY_OF_WEEK));
-		assertEquals(2, hoyDate.get(GregorianCalendar.DAY_OF_WEEK));
+		assertEquals(3, hoyDate.get(GregorianCalendar.DAY_OF_WEEK));
 
 		// Mes actual
 		// acordarse de sumar 1 al mes
@@ -199,6 +199,10 @@ public class APITest {
 					Fecha.getString(hoyDate, Idioma.CASTELLANO));
 			assertEquals(hoyStringEuskera,
 					Fecha.getString(hoyDate, Idioma.EUSKARA));
+			assertEquals(hoyStringCastellano, Fecha.getString(
+					hoyDate.getTimeInMillis(), Idioma.CASTELLANO));
+			assertEquals(hoyStringEuskera,
+					Fecha.getString(hoyDate.getTimeInMillis(), Idioma.EUSKARA));
 		}
 	}
 }
