@@ -52,9 +52,7 @@ public class Fecha {
 			formato = new SimpleDateFormat();
 			break;
 		}
-
-		Date fecha = new Date(fechaHoy);
-		resul = formato.format(fecha);
+		resul = formato.format(new Date(fechaHoy));
 		return resul;
 
 	}

@@ -35,8 +35,8 @@ public class FechaTest {
 	}
 
 	@Test
-	public void test() {
-		
+	public void testFecha() {
+
 		String hoyCastellano = hoyDate.get(GregorianCalendar.DAY_OF_MONTH)
 				+ "/" + (hoyDate.get(GregorianCalendar.MONTH) + 1) + "/"
 				+ hoyDate.get(GregorianCalendar.YEAR);
