@@ -2,6 +2,7 @@ package com.ipartek.formacion.primero.util;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -14,9 +15,13 @@ import org.junit.Test;
 public class FechaTest {
 
 	static GregorianCalendar gc1;
+	static String mascaraES;
+	static String mascaraEU;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		mascaraES = "dd/MM/yyyy";
+		mascaraEU = "yyyy/MM/dd";
 	}
 
 	@AfterClass
@@ -36,36 +41,41 @@ public class FechaTest {
 
 	@Test
 	public void testGetString() throws Exception {
-		String castellanoFecha = gc1.get(GregorianCalendar.DAY_OF_MONTH) + "/"
-				+ gc1.get(GregorianCalendar.MONTH) + "/"
-				+ gc1.get(GregorianCalendar.YEAR);
-		String euskeraFecha = gc1.get(GregorianCalendar.YEAR) + "/"
-				+ gc1.get(GregorianCalendar.MONTH) + "/"
-				+ gc1.get(GregorianCalendar.DAY_OF_MONTH);
-
+		String castellanoFecha = "";
+		String euskeraFecha = "";
 		String pruebaCastellano = "";
 		String pruebaEuskera = "";
+
+		SimpleDateFormat sdf;
 
 		for (int i = 0; i < 12; i++) {
 			gc1.set(2014, i, 17);
 
 			// Comprueba si está bien en CASTELLANO
-			pruebaCastellano = gc1.get(GregorianCalendar.DAY_OF_MONTH) + "/"
-					+ (gc1.get(GregorianCalendar.MONTH) + 1) + "/"
-					+ gc1.get(GregorianCalendar.YEAR);
+			// Con una fecha
+			sdf = new SimpleDateFormat(mascaraES);
+			pruebaCastellano = sdf.format(gc1.getTime());
 
 			castellanoFecha = Fecha.getString(gc1, Idioma.CASTELLANO);
 			assertEquals(pruebaCastellano, castellanoFecha);
-			System.out.println("Castellano => " + castellanoFecha);
+
+			// Con milisegundos
+			castellanoFecha = Fecha.getString(gc1.getTimeInMillis(),
+					Idioma.CASTELLANO);
+			assertEquals(pruebaCastellano, castellanoFecha);
 
 			// Comprueba si está bien en EUSKERA
-			pruebaEuskera = gc1.get(GregorianCalendar.YEAR) + "/"
-					+ (gc1.get(GregorianCalendar.MONTH) + 1) + "/"
-					+ gc1.get(GregorianCalendar.DAY_OF_MONTH);
+			// Con una fecha
+			sdf = new SimpleDateFormat(mascaraEU);
+			pruebaEuskera = sdf.format(gc1.getTime());
 
 			euskeraFecha = Fecha.getString(gc1, Idioma.EUSKERA);
 			assertEquals(pruebaEuskera, euskeraFecha);
-			System.out.println("Euskera => " + euskeraFecha);
+
+			// Con milisegundos
+			euskeraFecha = Fecha.getString(gc1.getTimeInMillis(),
+					Idioma.EUSKERA);
+			assertEquals(pruebaEuskera, euskeraFecha);
 		}
 
 	}

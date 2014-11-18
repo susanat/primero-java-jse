@@ -1,13 +1,12 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-
 public class VehiculoElectrico extends Vehiculo implements Arrancable,
 		Ordenable {
 	// Atributos
 	private float capacidadBaterias;
 
 	/**
-	 * Capacidad mínima para una batería
+	 * Capacidad mínima para una batería.
 	 */
 	// Constantes
 	public static final float MIN_CAP_BATERIA = 1000f;
@@ -20,7 +19,7 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 		setPotencia(MIN_POTENCIA);
 	}
 
-	public VehiculoElectrico(float potencia) {
+	public VehiculoElectrico(final float potencia) {
 		// super();
 		setCapacidadBaterias(MIN_CAP_BATERIA);
 		setPotencia(potencia);
@@ -28,7 +27,7 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 
 	// Getters y setters
 	@Override
-	public void setPotencia(float potencia) {
+	public void setPotencia(final float potencia) {
 		super.setPotencia(potencia);
 	}
 
@@ -36,7 +35,7 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 		return capacidadBaterias;
 	}
 
-	public void setCapacidadBaterias(float capacidadBaterias) {
+	public void setCapacidadBaterias(final float capacidadBaterias) {
 		this.capacidadBaterias = capacidadBaterias;
 	}
 
@@ -49,12 +48,12 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 	}
 
 	@Override
-	public boolean arrancar() {
+	public final boolean arrancar() {
 		return true;
 	}
 
 	@Override
-	public float getPeso() {
+	public final float getPeso() {
 		return super.getPotencia();
 	}
 

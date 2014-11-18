@@ -1,5 +1,9 @@
 package com.ipartek.formacion.primero.util;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 /**
  * Clase con metodos staticos para no tener que crear un objeto al usarlos
  *
@@ -87,8 +91,7 @@ public class Utilidades {
 		while (flag) {
 			flag = false; // set flag to false awaiting a possible swap
 			for (int j = 0; j < array.length - 1; j++) {
-				if (array[j] > array[j + 1]) // change to > for ascending sort
-				{
+				if (array[j] > array[j + 1]) { // change to > for ascending sort
 					temp = array[j]; // swap elements
 					array[j] = array[j + 1];
 					array[j + 1] = temp;
@@ -102,7 +105,7 @@ public class Utilidades {
 
 	/**
 	 * Comprueba que sea una vocal: a,e,i,o,u,A,E,I,O,U y con acento
-	 * 
+	 *
 	 * @param caracter
 	 *            char a comprobar
 	 * @return true si es un caracter vocal
@@ -129,6 +132,21 @@ public class Utilidades {
 		}
 
 		return resul;
+	}
+
+	/**
+	 * Formatea números
+	 *
+	 * @param n
+	 *            Número a formatear
+	 * @return String con el número formateado
+	 */
+	public static String format(Number n) {
+		NumberFormat format = DecimalFormat.getInstance();
+		format.setRoundingMode(RoundingMode.FLOOR);
+		format.setMinimumFractionDigits(0);
+		format.setMaximumFractionDigits(2);
+		return format.format(n);
 	}
 
 }

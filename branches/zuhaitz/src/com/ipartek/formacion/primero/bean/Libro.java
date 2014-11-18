@@ -1,36 +1,36 @@
 package com.ipartek.formacion.primero.bean;
 
 /**
- * Clase para representar un {@link Libro} la cual se compone de los siguientes atributos:
+ * Clase para representar un {@link Libro} la cual se compone de los siguientes
+ * atributos:
  * <ul>
- * 	<li>{@code int} <b>paginas</b> Numero de paginas </li>
- *  <li>{@code String} <b>titulo</b> Titulo </li>
- * <ul> 
- * 
+ * <li>{@code int} <b>paginas</b> Numero de paginas</li>
+ * <li>{@code String} <b>titulo</b> Titulo</li>
+ * <ul>
+ *
  * @author ur00
- * @since  v1.0
+ * @since v1.0
  */
 public class Libro {
 
-	//atributos
+	// atributos
 	/**
 	 * {@code int} Numero de paginas del {@code Libro}
 	 */
 	private int paginas;
-	
+
 	/**
 	 * {@code String} Titulo del {@code Libro}
 	 */
 	private String titulo;
-	
-	
-	//constructor vacio
+
+	// constructor vacio
 	/**
-	 * Constructor vacio para {@code Libro}.
-	 * Parametros iniciales de los atributos
+	 * Constructor vacio para {@code Libro}. Parametros iniciales de los
+	 * atributos
 	 * <ul>
-	 * 	<li>paginas = 0</li>
-	 *  <li>titulo  = "Sin definir"</li>
+	 * <li>paginas = 0</li>
+	 * <li>titulo = "Sin definir"</li>
 	 * </ul>
 	 */
 	public Libro() {
@@ -38,19 +38,17 @@ public class Libro {
 		this.paginas = 0;
 		this.titulo = "Sin definir";
 	}
-	
-	//construcor con parametros
-	
+
+	// construcor con parametros
+
 	public Libro(int paginas, String titulo) {
 		super();
 		this.paginas = paginas;
 		this.titulo = titulo;
 	}
 
-		
-	
-	//gettter y setters
-	
+	// gettter y setters
+
 	public int getPaginas() {
 		return paginas;
 	}
@@ -64,23 +62,18 @@ public class Libro {
 	}
 
 	public void setTitulo(String titulo) {
-		
-		if ( "".equalsIgnoreCase(titulo) ){	
+
+		if ("".equalsIgnoreCase(titulo)) {
 			this.titulo = "Sin Determinar";
-		}else{
+		} else {
 			this.titulo = titulo;
-		}	
+		}
 	}
-	
-	
-	
-	//metodos
+
+	// metodos
 	@Override
 	public String toString() {
 		return "Libro [paginas=" + paginas + ", titulo=" + titulo + "]";
 	}
 
-	
-
-	
 }

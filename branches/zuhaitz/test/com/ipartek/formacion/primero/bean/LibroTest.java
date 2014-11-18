@@ -1,6 +1,6 @@
 package com.ipartek.formacion.primero.bean;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -26,12 +26,13 @@ public class LibroTest {
 	public void tearDown() throws Exception {
 	}
 
-	//empiezan nuetros Test Unitarios
-	
+	// empiezan nuetros Test Unitarios
+
 	@Test
 	public void testLibro() {
-		Libro libroPorDefecto = new Libro(); 
-		assertTrue("NO son el numero de paginas esperado", 0 == libroPorDefecto.getPaginas() );
+		Libro libroPorDefecto = new Libro();
+		assertTrue("NO son el numero de paginas esperado",
+				0 == libroPorDefecto.getPaginas());
 	}
 
 }
