@@ -6,4 +6,10 @@ public class Churro implements Ordenable {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public int getPeso() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
