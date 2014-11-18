@@ -42,14 +42,12 @@ public class FechaTest {
 		String strFechacas = Fecha.getString(gc, Idioma.CASTELLANO);
 
 		String strFechaeu = Fecha.getString(gc, Idioma.EUSKERA);
-		String strHoycas = gc.get(GregorianCalendar.DAY_OF_MONTH)
-				+ "/"
-				+ Integer.parseInt(String.format("%02d",
-						(gc.get(GregorianCalendar.MONTH) + 1))) + "/"
-				+ gc.get(GregorianCalendar.YEAR);
+		String strHoycas = gc.get(GregorianCalendar.DAY_OF_MONTH) + "/"
+				+ String.format("%02d", (gc.get(GregorianCalendar.MONTH) + 1))
+				+ "/" + gc.get(GregorianCalendar.YEAR);
 		String strHoyeu = gc.get(GregorianCalendar.YEAR) + "/"
-				+ (gc.get(GregorianCalendar.MONTH) + 1) + "/"
-				+ gc.get(GregorianCalendar.DAY_OF_MONTH);
+				+ String.format("%02d", (gc.get(GregorianCalendar.MONTH) + 1))
+				+ "/" + gc.get(GregorianCalendar.DAY_OF_MONTH);
 
 		assertEquals(strHoycas, strFechacas);
 		assertEquals(strHoyeu, strFechaeu);
@@ -58,14 +56,12 @@ public class FechaTest {
 		strFechacas = Fecha.getString(gc, Idioma.CASTELLANO);
 
 		strFechaeu = Fecha.getString(gc, Idioma.EUSKERA);
-		strHoycas = gc.get(GregorianCalendar.DAY_OF_MONTH)
-				+ "/"
-				+ Integer.parseInt(String.format("%02d",
-						(gc.get(GregorianCalendar.MONTH) + 1))) + "/"
-				+ gc.get(GregorianCalendar.YEAR);
+		strHoycas = gc.get(GregorianCalendar.DAY_OF_MONTH) + "/"
+				+ String.format("%02d", (gc.get(GregorianCalendar.MONTH) + 1))
+				+ "/" + gc.get(GregorianCalendar.YEAR);
 		strHoyeu = gc.get(GregorianCalendar.YEAR) + "/"
-				+ (gc.get(GregorianCalendar.MONTH) + 1) + "/"
-				+ gc.get(GregorianCalendar.DAY_OF_MONTH);
+				+ String.format("%02d", (gc.get(GregorianCalendar.MONTH) + 1))
+				+ "/" + gc.get(GregorianCalendar.DAY_OF_MONTH);
 
 		assertEquals(strHoycas, strFechacas);
 		assertEquals(strHoyeu, strFechaeu);
