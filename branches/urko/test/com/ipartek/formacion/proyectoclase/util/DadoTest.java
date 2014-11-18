@@ -87,31 +87,26 @@ public class DadoTest {
 
 	/**
 	 * Muestra por pantalla la lista de participantes y número de veces elegidos
-	 * 
+	 *
 	 * ej:
 	 * <table>
-	 * <thead>
-	 * </thead>
-	 * <tfoot>
-	 * </tfoot>
+	 * <thead> </thead> <tfoot> </tfoot>
 	 * </table>
-	 * --------------------------------------
-	 * Participante      |  	Tiradas
-	 * --------------------------------------
-	 * Susana						12
-	 * Zuahitz					 1.112
+	 * -------------------------------------- Participante | Tiradas
+	 * -------------------------------------- Susana 12 Zuahitz 1.112
 	 * .......................................
 	 */
 	private static void mostrarEstadisticas() {
-		final char LINE ='-';
-		final int ESPACE=20;
-		for(int i = 0; i < ESPACE; i++){
-			System.out.println("-");
+		final char LINE = '-';
+		final int ESPACE = 20;
+		for (int i = 0; i < ESPACE; i++) {
+			System.out.print(LINE);
 		}
+		System.out.println("");
 		for (Map.Entry<String, Integer> entry : controlTiradas.entrySet()) {
 			String key = entry.getKey();
 			Integer value = entry.getValue();
-			
+
 			System.out.println(key + ": " + value);
 		}
 	}

@@ -1,7 +1,7 @@
 package com.ipartek.formacion.proyectoclase.excepciones;
 
 public class ExcepcionEjercicio1 {
-	static int array_corto[] = new int[5];
+	static int arraycorto[] = new int[5];
 
 	public static void main(String args[]) {
 
@@ -18,7 +18,7 @@ public class ExcepcionEjercicio1 {
 			 * Las excepciones de tipo Runtime más tipicas son: - NullPointer -
 			 * ArrayIndexOutofBounds - NoSuchElementException -
 			 * ClassCastException
-			 * 
+			 *
 			 * Hay que diferenciar entre Errores (Runtime) o Fallos no debidos a
 			 * la programación (IOException)
 			 */
@@ -58,6 +58,6 @@ public class ExcepcionEjercicio1 {
 		if (divisor == 0) {
 			throw new ArithmeticException();
 		}
-		return ((double) dividendo / divisor);
+		return (double) dividendo / divisor;
 	}
 }
