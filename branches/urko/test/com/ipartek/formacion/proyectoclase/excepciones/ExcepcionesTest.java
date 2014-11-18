@@ -28,14 +28,20 @@ public class ExcepcionesTest {
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 *
+	 */
 	@Test(expected = NullPointerException.class)
-	public void TestNullPointer() {
+	public void testNullPointer() {
 		String cadena = null;
 		cadena.length();
 	}
 
+	/**
+ *
+ */
 	@Test(expected = Exception.class)
-	public void TestOutofBounds() {
+	public void testOutofBounds() {
 		int[] numeros = new int[5];
 		numeros[10] = 9;
 	}

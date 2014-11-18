@@ -120,7 +120,6 @@ public class ApiTest {
 			people.add(persona);
 
 		}
-
 	}
 
 	@Test
