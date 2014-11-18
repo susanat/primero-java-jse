@@ -23,10 +23,10 @@ public class Util {
 
 	private static Integer generarNumeroDni() {
 		final int LIMITE_SUP = 99999999;
-		Integer n_dni = 0;
-		n_dni = (int) Math.floor(Math.random() * LIMITE_SUP + 1);
+		Integer ndni = 0;
+		ndni = (int) Math.floor(Math.random() * LIMITE_SUP + 1);
 
-		return n_dni;
+		return ndni;
 	}
 
 	private static Character generarLetraDni(Integer ndni) {
