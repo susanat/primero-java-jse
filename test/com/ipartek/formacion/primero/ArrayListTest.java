@@ -70,7 +70,7 @@ public class ArrayListTest {
 	}
 
 	@Test
-	public void testPoscion() throws Exception {
+	public void testPosicion() throws Exception {
 		assertSame(ESPANA, listaPaises.get(0));
 		assertSame(FRANCIA, listaPaises.get(1));
 		assertSame(PORTUGAL, listaPaises.get(2));
@@ -78,7 +78,7 @@ public class ArrayListTest {
 	}
 
 	@Test
-	public void testInsertarEnPoscion() throws Exception {
+	public void testInsertarEnPosicion() throws Exception {
 		// insertar Barakaldo en posicion 1
 		listaPaises.add(1, BARAKALDO);
 
