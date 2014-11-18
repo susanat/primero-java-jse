@@ -99,15 +99,20 @@ public class DadoTest {
 	private static void mostrarEstadisticas() {
 		final char LINE = '-';
 		final int ESPACE = 20;
-		for (int i = 0; i < ESPACE; i++) {
-			System.out.print(LINE);
-		}
-		System.out.println("");
+		escribirLinea(LINE, ESPACE);
+		System.out.println("Participa\t\t|\t\tTiradas");
 		for (Map.Entry<String, Integer> entry : controlTiradas.entrySet()) {
 			String key = entry.getKey();
 			Integer value = entry.getValue();
 
 			System.out.println(key + ": " + value);
 		}
+	}
+
+	private static void escribirLinea(final char c, final int n_veces) {
+		for (int i = 0; i < n_veces; i++) {
+			System.out.print(c);
+		}
+		System.out.println(" ");
 	}
 }
