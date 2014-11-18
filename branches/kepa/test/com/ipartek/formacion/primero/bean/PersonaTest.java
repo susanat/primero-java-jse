@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.ipartek.formacion.primero.excepciones.PersonaException;
 
 public class PersonaTest {
+	static int count = 0;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
