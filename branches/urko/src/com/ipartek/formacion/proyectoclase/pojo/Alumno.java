@@ -31,13 +31,13 @@ public class Alumno extends Persona {
 
 	}
 
-	public Alumno(final String nombre, final String p_apellido,
-			final String s_apellido, final String dni, final String poblacion,
-			final Calendar f_nacimiento, String telefono, char sexo,
-			Boolean trabajando, Integer n_hermanos, Libro libro,
-			HashMap<String, Integer> calificaciones) throws PersonaException {
-		super(nombre, p_apellido, s_apellido, dni, poblacion, f_nacimiento,
-				telefono, sexo, trabajando, n_hermanos, libro);
+	public Alumno(String nombre, String papellido, String sapellido,
+			String dni, String poblacion, Calendar fnacimiento,
+			String telefono, char sexo, Boolean trabajando, Integer nhermanos,
+			Libro libro, HashMap<String, Integer> calificaciones)
+			throws PersonaException {
+		super(nombre, papellido, sapellido, dni, poblacion, fnacimiento,
+				telefono, sexo, trabajando, nhermanos, libro);
 		setCalificaciones(calificaciones);
 	}
 
