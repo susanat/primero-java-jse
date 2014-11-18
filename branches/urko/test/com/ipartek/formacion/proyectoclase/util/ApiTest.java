@@ -80,9 +80,16 @@ public class ApiTest {
 
 	@Test
 	public void testTrocearCadenas() {
+		String[] d_personas = null;
+		String[] personas = null;
+		int indice_fin;
+		int indice_inicio = 0;
+		ArrayList<String> people = new ArrayList<String>();
+		StringTokenizer st = null;
 		lineaPersona += lineaPersona;
-		StringTokenizer st = new StringTokenizer(lineaPersona, SEPARADOR
-				+ SALTOLINEA);
+		indice_fin = lineaPersona.indexOf(SALTOLINEA.charAt(0));
+
+		st = new StringTokenizer(lineaPersona, SEPARADOR + SALTOLINEA);
 		while (st.hasMoreTokens()) {
 
 			String pnombre = st.nextToken();
@@ -96,18 +103,15 @@ public class ApiTest {
 
 		}
 
-		String[] personas = lineaPersona.split(SALTOLINEA);
-		String[] d_personas = null;
+		personas = lineaPersona.split(SALTOLINEA);
+
 		for (String p : personas) {
 			d_personas = p.split(SEPARADOR);
 		}
 
 		assertTrue("", personaNombre.equals(d_personas[0]));
 
-		int indice_fin = lineaPersona.indexOf(SALTOLINEA.charAt(0));
-		int indice_inicio = 0;
 		// int n_lineas = 0;
-		ArrayList<String> people = new ArrayList<String>();
 
 		while (indice_fin > 0) {
 			String persona = lineaPersona.substring(indice_inicio, indice_fin);
