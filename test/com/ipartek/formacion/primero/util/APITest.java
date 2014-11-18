@@ -185,7 +185,6 @@ public class APITest {
 	@Test
 	public void testFecha() throws Exception {
 		
-		hoyDate =  new GregorianCalendar();
 
 		// crear las cadenas para cada idioma
 		String hoyStringCastellano = hoyDate
