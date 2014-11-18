@@ -8,8 +8,19 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ *
+ * @author Urko Villanueva
+ *
+ */
 public class ArrayUtilTest {
+	/**
+	 *
+	 */
 	private static ArrayUtil a_util;
+	/**
+	 *
+	 */
 	private static Integer[] array;
 
 	@BeforeClass
@@ -34,16 +45,11 @@ public class ArrayUtilTest {
 
 	@Test
 	public void testSort() {
-		Integer[] ar_solutions = new Integer[] { 1, 6, 7, 9, 10 };
+		final Integer[] ar_solutions = new Integer[] { 1, 6, 7, 9, 10 };
 		Integer[] obtained = null;
 		a_util.sort();
 		obtained = (Integer[]) a_util.getArray();
-		/*
-		 * for(int i =0;i<ar_solutions.length;i++){
-		 * System.out.println(ar_solutions[i]);
-		 * 
-		 * } for(int valor: ar_solutions){ System.out.println(valor); }
-		 */
+
 		assertArrayEquals(
 				"La tarea de ordenación no se realizado correctamente",
 				ar_solutions, obtained);
