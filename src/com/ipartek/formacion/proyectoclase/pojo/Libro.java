@@ -59,17 +59,17 @@ public class Libro {
 		}
 	}
 
-	public Integer getN_paginas() {
+	public Integer getNpaginas() {
 		return npaginas;
 	}
 
-	public void setN_paginas(Integer npaginas) {
+	public void setNpaginas(Integer npaginas) {
 		if (npaginas > 0) {
 			this.npaginas = npaginas;
 		}
 	}
 
-	public String getCod_libro() {
+	public String getCodlibro() {
 		return codlibro;
 	}
 
