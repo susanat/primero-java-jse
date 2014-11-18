@@ -58,11 +58,11 @@ public class Fecha {
 	 * @return dateFormatted {@code String} con la fecha formateada
 	 */
 	public static String getString(long fecha, Idioma idioma) {
-		String dateFormatted = "";
+
 		GregorianCalendar aux = new GregorianCalendar();
 		aux.setTimeInMillis(fecha);
-		dateFormatted = getString(aux, idioma);
-		return dateFormatted;
+
+		return getString(aux, idioma);
 	}
 
 }
