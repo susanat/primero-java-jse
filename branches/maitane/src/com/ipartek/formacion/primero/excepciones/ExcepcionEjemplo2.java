@@ -8,7 +8,7 @@ public class ExcepcionEjemplo2 {
 
 	// propiedades necesarias
 
-	static int array_corto[] = new int[5];
+	static int arrayCorto[] = new int[5];
 
 	public static void main(String args[]) {
 

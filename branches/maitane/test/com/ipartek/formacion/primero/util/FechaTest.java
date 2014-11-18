@@ -60,8 +60,8 @@ public class FechaTest {
 		assertEquals(hoyDate.getTimeInMillis(), hoyCurrent.getTimeInMillis());
 
 		// Dia del mes
-		assertEquals(17, hoyDate.get(GregorianCalendar.DAY_OF_MONTH));
-		assertEquals(GregorianCalendar.MONDAY,
+		assertEquals(18, hoyDate.get(GregorianCalendar.DAY_OF_MONTH));
+		assertEquals(GregorianCalendar.TUESDAY,
 				hoyDate.get(GregorianCalendar.DAY_OF_WEEK));
 
 		// Dia de la semana

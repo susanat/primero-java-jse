@@ -31,14 +31,14 @@ public class UtilidadesColecciones {
 
 	/**
 	 * Convierte un array tipo Integer[] a int[]
-	 * @param IntegerArray Array de tipo Integer[]
+	 * @param integerArray Array de tipo Integer[]
 	 * @return Array tipo int[]
 	 */
-	public static int[] toPrimitive(Integer[] IntegerArray) {
+	public static int[] toPrimitive(Integer[] integerArray) {
 
-		int[] result = new int[IntegerArray.length];
-		for (int i = 0; i < IntegerArray.length; i++) {
-			result[i] = IntegerArray[i].intValue();
+		int[] result = new int[integerArray.length];
+		for (int i = 0; i < integerArray.length; i++) {
+			result[i] = integerArray[i].intValue();
 		}
 		return result;
 	}

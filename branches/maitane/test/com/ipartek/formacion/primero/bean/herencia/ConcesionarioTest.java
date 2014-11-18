@@ -114,10 +114,10 @@ public class ConcesionarioTest {
 				Concesionario.getVentasGlobales(), 8);
 		assertSame(
 				"El numero de vehiculos vendidos en todos los concesionario no es correcto",
-				8, concesionario.getVentasGlobales());
+				8, Concesionario.getVentasGlobales());
 		assertSame(
 				"El numero de vehiculos vendidos en todos los concesionario no es correcto",
-				8, concesionario2.getVentasGlobales());
+				8, Concesionario.getVentasGlobales());
 
 	}
 }

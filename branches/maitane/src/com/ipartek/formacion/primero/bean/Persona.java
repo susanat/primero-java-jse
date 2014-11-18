@@ -33,7 +33,7 @@ public class Persona implements Comparable<Persona> {
 	/*
 	 * static final String SMALLnTILDE = new String("\u00F1"); // ñ static final
 	 * String CAPITALnTILDE = new String("\u00D1"); // Ñ
-	 *
+	 * 
 	 * static final String SPANISH = ("< a,A,á,Á < b,B < c,C " +
 	 * "< ch, cH, Ch, CH " + "< d,D < e,E,é,É < f,F " +
 	 * "< g,G < h,H < i,I.í,Í < j,J < k,K < l,L " + "< ll, lL, Ll, LL " +
@@ -43,16 +43,16 @@ public class Persona implements Comparable<Persona> {
 	 */
 
 	// Atributos
-	String nombre;
-	String apellido1;
-	String apellido2;
-	int edad;
-	String dni;
-	String poblacion;
-	boolean mayorEdad = false;
-	String telefono;
-	char sexo = 'o';
-	ArrayList<Libro> libros;
+	private String nombre;
+	private String apellido1;
+	private String apellido2;
+	private int edad;
+	private String dni;
+	private String poblacion;
+	private boolean mayorEdad = false;
+	private String telefono;
+	private char sexo = 'o';
+	private ArrayList<Libro> libros;
 
 	// Constructor
 	public Persona() {
@@ -62,7 +62,7 @@ public class Persona implements Comparable<Persona> {
 		this.dni = "xxxxxxxxx";
 	}
 
-	public Persona(String nombre, String apellido1, String dni)
+	public Persona(final String nombre, final String apellido1, final String dni)
 			throws PersonaException {
 		super();
 		this.nombre = nombre;
@@ -70,17 +70,17 @@ public class Persona implements Comparable<Persona> {
 		this.dni = dni;
 	}
 
-	public Persona(String nombre, String apellido1, int edad, String dni)
-			throws PersonaException {
+	public Persona(final String _nombre, final String _apellido1,
+			final int _edad, final String _dni) throws PersonaException {
 		super();
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		setEdad(edad);
-		this.dni = dni;
+		this.nombre = _nombre;
+		this.apellido1 = _apellido1;
+		setEdad(_edad);
+		this.dni = _dni;
 		this.mayorEdad = (this.edad >= 18) ? true : false;
 	}
 
-	public Persona(String nombre, int edad) throws PersonaException {
+	public Persona(final String nombre, final int edad) throws PersonaException {
 		super();
 		setNombre(nombre);
 		setEdad(edad);
@@ -94,15 +94,15 @@ public class Persona implements Comparable<Persona> {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) throws PersonaException {
+	public void setNombre(final String _nombre) throws PersonaException {
 
-		if (nombre == null || nombre.length() < MIN_LONG_STRING) {
+		if (_nombre == null || _nombre.length() < MIN_LONG_STRING) {
 
 			throw new PersonaException(
 					PersonaException.MSG_LONG_STRING_NO_VALIDO,
 					PersonaException.CODE_LONG_STRING_NO_VALIDO);
 		} else {
-			this.nombre = nombre;
+			this.nombre = _nombre;
 		}
 
 	}
@@ -111,7 +111,7 @@ public class Persona implements Comparable<Persona> {
 		return apellido1;
 	}
 
-	public void setApellido1(String apellido1) throws PersonaException {
+	public void setApellido1(final String apellido1) throws PersonaException {
 
 		if (apellido1 == null || apellido1.length() < MIN_LONG_STRING) {
 
@@ -127,7 +127,7 @@ public class Persona implements Comparable<Persona> {
 		return apellido2;
 	}
 
-	public void setApellido2(String apellido2) throws PersonaException {
+	public void setApellido2(final String apellido2) throws PersonaException {
 		if (apellido2 == null || apellido2.length() < MIN_LONG_STRING) {
 
 			throw new PersonaException(
@@ -142,7 +142,7 @@ public class Persona implements Comparable<Persona> {
 		return edad;
 	}
 
-	public void setEdad(int edad) throws PersonaException {
+	public void setEdad(final int edad) throws PersonaException {
 		if (edad >= MIN_EDAD && edad <= MAX_EDAD) {
 			this.edad = edad;
 			this.mayorEdad = (this.edad >= MIN_EDAD) ? true : false;
@@ -158,7 +158,7 @@ public class Persona implements Comparable<Persona> {
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	public void setDni(final String dni) {
 		this.dni = dni;
 	}
 
@@ -166,8 +166,8 @@ public class Persona implements Comparable<Persona> {
 		return poblacion;
 	}
 
-	public void setPoblacion(String poblacion) {
-		this.poblacion = poblacion;
+	public void setPoblacion(final String _poblacion) {
+		this.poblacion = _poblacion;
 	}
 
 	public boolean isMayorEdad() {
@@ -178,23 +178,23 @@ public class Persona implements Comparable<Persona> {
 		return telefono;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setTelefono(final String _telefono) {
+		this.telefono = _telefono;
 	}
 
 	public char getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(char sexo) {
-		this.sexo = sexo;
+	public void setSexo(final char _sexo) {
+		this.sexo = _sexo;
 	}
 
 	public ArrayList<Libro> getLibros() {
 		return libros;
 	}
 
-	public void setLibros(ArrayList<Libro> libros) {
+	public void setLibros(final ArrayList<Libro> libros) {
 		this.libros = libros;
 	}
 
@@ -208,7 +208,7 @@ public class Persona implements Comparable<Persona> {
 	}
 
 	@Override
-	public int compareTo(Persona o) {
+	public int compareTo(final Persona o) {
 		Collator collator = Collator.getInstance(new Locale("es_ES"));
 		collator.setStrength(Collator.PRIMARY);
 		// collator.setDecomposition(Collator.CANONICAL_DECOMPOSITION);
@@ -223,7 +223,7 @@ public class Persona implements Comparable<Persona> {
 	public static class ComparatorEdad implements Comparator<Persona> {
 
 		@Override
-		public int compare(Persona o1, Persona o2) {
+		public int compare(final Persona o1, final Persona o2) {
 
 			return Integer.compare(o1.getEdad(), o2.getEdad());
 		}

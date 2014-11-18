@@ -84,7 +84,7 @@ public class APITest {
 
 		// StringTokenizer
 		ArrayList<String> elementosCadena = new ArrayList<String>();
-		elementosCadena = API.SepararTokenizer(lineaPersona, separador);
+		elementosCadena = Api.SepararTokenizer(lineaPersona, separador);
 		assertTrue(Objects.equals(elementosCadena.get(0), personaNombre));
 		assertTrue(Objects.equals(elementosCadena.get(1), personaApellido1));
 		assertTrue(Objects.equals(elementosCadena.get(2), personaApellido2));
@@ -92,7 +92,7 @@ public class APITest {
 
 		// split
 
-		String[] elemsCadena = API.SepararSplit(lineaPersona, separador);
+		String[] elemsCadena = Api.separarSplit(lineaPersona, separador);
 		assertTrue(Objects.equals(elemsCadena[0], personaNombre));
 		assertTrue(Objects.equals(elemsCadena[1], personaApellido1));
 		assertTrue(Objects.equals(elemsCadena[2], personaApellido2));
