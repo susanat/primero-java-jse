@@ -19,14 +19,14 @@ public class Libro {
 
 	}
 
-	public Libro(String cod_libro, String titulo, String isbn, String autor,
-			Integer n_paginas) {// parametros
+	public Libro(String codlibro, String titulo, String isbn, String autor,
+			Integer npaginas) {// parametros
 		super();
-		this.codlibro = cod_libro;
+		this.codlibro = codlibro;
 		this.isbn = isbn;
 		this.titulo = titulo;
 		this.autor = autor;
-		this.npaginas = n_paginas;
+		this.npaginas = npaginas;
 	}
 
 	// metodos
@@ -34,7 +34,7 @@ public class Libro {
 	@Override
 	public String toString() {
 		return "Libro [cod_libro=" + codlibro + ", isbn=" + isbn + ", autor="
-				+ autor + ", n_paginas=" + npaginas + "]";
+				+ autor + ", npaginas=" + npaginas + "]";
 	}
 
 	// getters setters
@@ -63,9 +63,9 @@ public class Libro {
 		return npaginas;
 	}
 
-	public void setN_paginas(Integer n_paginas) {
-		if (n_paginas > 0) {
-			this.npaginas = n_paginas;
+	public void setN_paginas(Integer npaginas) {
+		if (npaginas > 0) {
+			this.npaginas = npaginas;
 		}
 	}
 

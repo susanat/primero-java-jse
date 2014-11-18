@@ -31,19 +31,19 @@ public class Formador extends Persona {
 
 	}
 
-	public Formador(String nombre, String p_apellido, String s_apellido,
+	public Formador(String nombre, String papellido, String sapellido,
 			String dni, String telefono, Double sueldo) {
-		super(nombre, p_apellido, s_apellido, dni, telefono);
+		super(nombre, papellido, sapellido, dni, telefono);
 		// TODO Auto-generated constructor stub
 		setSueldo(sueldo);
 	}
 
-	public Formador(String nombre, String p_apellido, String s_apellido,
-			String dni, String poblacion, Calendar f_nacimiento,
-			String telefono, char sexo, Boolean trabajando, Integer n_hermanos,
+	public Formador(String nombre, String papellido, String sapellido,
+			String dni, String poblacion, Calendar fnacimiento,
+			String telefono, char sexo, Boolean trabajando, Integer nhermanos,
 			Libro libro, Double sueldo) throws PersonaException {
-		super(nombre, p_apellido, s_apellido, dni, poblacion, f_nacimiento,
-				telefono, sexo, trabajando, n_hermanos, libro);
+		super(nombre, papellido, sapellido, dni, poblacion, fnacimiento,
+				telefono, sexo, trabajando, nhermanos, libro);
 		setSueldo(sueldo);
 
 	}

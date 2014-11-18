@@ -25,9 +25,9 @@ public class Alumno extends Persona {
 		super();
 	}
 
-	public Alumno(String nombre, String p_apellido, String s_apellido,
+	public Alumno(String nombre, String papellido, String sapellido,
 			String dni, String telefono) {
-		super(nombre, p_apellido, s_apellido, dni, telefono);
+		super(nombre, papellido, sapellido, dni, telefono);
 
 	}
 
