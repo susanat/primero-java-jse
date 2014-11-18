@@ -30,9 +30,6 @@ public class Fecha {
 	 * @return dateFormatted {@code String} con la fecha formateada
 	 */
 	public static String getString(GregorianCalendar fecha, Idioma idioma) {
-		/**
-		 *
-		 */
 		String dateFormatted = "";
 
 		// TODO Implementar
