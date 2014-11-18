@@ -5,7 +5,7 @@ public class Util {
 	/**
 	 * Genera un número de DNI {@code String} valido: numero y letra en
 	 * mayusculas
-	 * 
+	 *
 	 * @return {@code String} devuelve el numero de DNI generado
 	 */
 	public static String generarDNI() {
@@ -29,21 +29,21 @@ public class Util {
 		return n_dni;
 	}
 
-	private static Character generarLetraDni(Integer n_dni) {
+	private static Character generarLetraDni(Integer ndni) {
 		final char[] letras = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P',
 				'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C',
 				'K', 'E', 'T' };
 		Character c = null;
 
-		MyMath.compruebaMayor((double) n_dni);
-		c = letras[n_dni % letras.length];
+		MyMath.compruebaMayor((double) ndni);
+		c = letras[ndni % letras.length];
 
 		return c;
 	}
 
 	/**
 	 * Comprueba si una letra es una vocal
-	 * 
+	 *
 	 * @param c
 	 *            {@code Character} la letra a validar
 	 * @return {@code Boolean} nos devuelve si es cierto si es una vocal o no
