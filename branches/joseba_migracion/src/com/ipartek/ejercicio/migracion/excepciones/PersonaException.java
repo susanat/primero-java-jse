@@ -2,9 +2,6 @@ package com.ipartek.ejercicio.migracion.excepciones;
 
 public class PersonaException extends Exception {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -9181319064807734990L;
 
     // DNI no valido
@@ -19,6 +16,10 @@ public class PersonaException extends Exception {
     // Edad no comprendida entre 18 y 99
     public static final String MSG_EDAD_NO_VALIDA = "LA EDAD debe estar comprendida entre 18 y 99 años";
     public static final int COD_EDAD_NO_VALIDA = 2;
+
+    // Caracteres invalidos
+    public static final String MSG_CARACTER_NO_VALIDO = "Ha usado caracteres no validos (Ver UTF-8)";
+    public static final int COD_CARACTER_NO_VALIDO = 3;
 
     // Atributos
 
