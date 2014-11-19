@@ -1,9 +1,8 @@
 package com.ipartek.formacion.primero.bean;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import org.junit.After;
@@ -41,18 +40,18 @@ public class PersonaTest {
 	public void setUp() throws Exception {
 		
 		listaPersona = new ArrayList<Persona>();
-		pZuahitz = new Persona("Zuhaitz",29);
-		pSusána = new Persona("Susána",23);
-		pkepa = new Persona("kepa",34);
-		pÚrko = new Persona("Úrko",37);
-		pJon = new Persona("Jon",35);
-		pSergío = new Persona("Sergío",18);
-		pJoséba = new Persona("Joséba",26);
-		pMarío = new Persona("Marío",29);
-		pÁritz = new Persona("Áritz",20);
-		pfran = new Persona("fran",33);
-		pMaitane = new Persona("Maitane",29);
-		pJose = new Persona("Jose",44);
+		pZuahitz = new Persona("Zuhaitz", 29);
+		pSusána = new Persona("Susána", 23);
+		pkepa = new Persona("kepa", 34);
+		pÚrko = new Persona("Úrko", 37);
+		pJon = new Persona("Jon", 35);
+		pSergío = new Persona("Sergío", 18);
+		pJoséba = new Persona("Joséba", 26);
+		pMarío = new Persona("Marío", 29);
+		pÁritz = new Persona("Áritz", 20);
+		pfran = new Persona("fran", 33);
+		pMaitane = new Persona("Maitane", 29);
+		pJose = new Persona("Jose", 44);
 		
 		listaPersona.add (pZuahitz);
 		listaPersona.add (pSusána);

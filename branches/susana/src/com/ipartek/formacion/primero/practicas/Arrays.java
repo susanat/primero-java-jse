@@ -25,13 +25,13 @@ public class Arrays {
 		
 		//Inicializar Array de tres posiciones de enteros y en cada posicion debe de 
 		//tener el valor de la posicion
-		int[] myArray2 = new int[]{0,1,2};
+		int[] myArray2 = new int[]{0, 1, 2};
 		utilidades.pintarArray(myArray2);
 		
 		
 		//Ejercicio1: Dado el siguiente array funcion para invertir los valores
 		//Ej:[0,1,2,3,4] salida: [4,3,2,1,0]
-		int[] myArray3 = new int[]{0,1,2,3,4};	
+		int[] myArray3 = new int[]{0, 1, 2, 3, 4};	
 		System.out.println("Array Original");
 		utilidades.pintarArray(myArray3);
 		
@@ -41,7 +41,7 @@ public class Arrays {
 		
 		//Ejercicio2:Dado un array ordenar sus valores de menor a mayor
 		//Ej: [89,54,3,2,45] salida: [2,3,45,54,89]
-		int[] myArray4 = new int[]{89,54,3,2,45};
+		int[] myArray4 = new int[]{89, 54, 3, 2, 45};
 		System.out.println("Array Original");
 		utilidades.pintarArray(myArray4);
 		

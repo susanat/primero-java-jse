@@ -3,12 +3,12 @@ package com.ipartek.formacion.primero.bean;
 import java.sql.Timestamp;
 
 /**
- * Calificaciones para las notas de los alumnos, para una asignatura en una fecha concreta
- * Una Calificacion se compone de:
+ * Calificaciones para las notas de los alumnos, para una asignatura en una
+ * fecha concreta Una Calificacion se compone de:
  * <ul>
- * 	<li>asignatura: asignatura de la calificacion</li>
- *  <li>nota: entre 0.0 y 10.0</li>
- *  <li>fecha: fecha realizacion de la calificacion</li>
+ * <li>asignatura: asignatura de la calificacion</li>
+ * <li>nota: entre 0.0 y 10.0</li>
+ * <li>fecha: fecha realizacion de la calificacion</li>
  * </ul>
  * 
  * @author Susana Costoya
@@ -17,63 +17,61 @@ import java.sql.Timestamp;
 
 public class Calificacion {
 
-	public static final String ASIGNATURA_EMPTY = "Sin determinar";
-	public static final float  MAX_NOTA = 10f;
-	public static final float  MIN_NOTA =  0f;
-	
-	//Atributos
-	
-	private String asignatura;
-	
-	private float nota; // comprendida de 0.0 a 10.0
-	
-	private Timestamp fecha;
+    public static final String ASIGNATURA_EMPTY = "Sin determinar";
+    public static final float MAX_NOTA = 10f;
+    public static final float MIN_NOTA = 0f;
 
-	//constructor
-	public Calificacion(String asignatura, float nota, Timestamp fecha) {
-		super();
-		setAsignatura(asignatura);
-		setNota(nota);
-		setFecha(fecha);
-	}
+    // Atributos
 
-	
-	
-	//getters y setters
-	
-	public String getAsignatura() {
-		return asignatura;
-	}
+    private String asignatura;
 
-	public void setAsignatura(String asignatura) {
-		if ( asignatura != null ){
-		    this.asignatura = asignatura;	
-		}else{
-			this.asignatura = ASIGNATURA_EMPTY;
-		}
-	}
+    private float nota; // comprendida de 0.0 a 10.0
 
-	public float getNota() {
-		return nota;
-	}
+    private Timestamp fecha;
 
-	public void setNota(float nota) {
-		if ( nota < MIN_NOTA ){
-			this.nota = MIN_NOTA;
-		}else if (  nota > MAX_NOTA ){
-			this.nota = MAX_NOTA;
-		}else{
-			this.nota = nota;
-		}	
-	}
+    // constructor
+    public Calificacion(final String asignatura, final float nota,
+	    final Timestamp fecha) {
+	super();
+	setAsignatura(asignatura);
+	setNota(nota);
+	setFecha(fecha);
+    }
 
-	public Timestamp getFecha() {
-		return fecha;
-	}
+    // getters y setters
 
-	public void setFecha(Timestamp fecha) {
-		this.fecha = fecha;
+    public String getAsignatura() {
+	return asignatura;
+    }
+
+    public void setAsignatura(final String asignatura) {
+	if (asignatura != null) {
+	    this.asignatura = asignatura;
+	} else {
+	    this.asignatura = ASIGNATURA_EMPTY;
 	}
-	
-	
+    }
+
+    public float getNota() {
+	return nota;
+    }
+
+    public void setNota(final float nota) {
+	if (nota < MIN_NOTA) {
+	    this.nota = MIN_NOTA;
+	} else if (nota > MAX_NOTA) {
+	    this.nota = MAX_NOTA;
+	} else {
+	    this.nota = nota;
+	}
+    }
+
+    public Timestamp getFecha() {
+	return fecha;
+    }
+
+    public void setFecha(final Timestamp fecha) {
+	this.fecha = fecha;
+    }
+
 }

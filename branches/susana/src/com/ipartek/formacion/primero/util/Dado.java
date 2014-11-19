@@ -3,8 +3,7 @@ package com.ipartek.formacion.primero.util;
 public class Dado {
 
 	public static final String[] ALUMNOS_TIRADA = new String[] { "Susana", "Zuahitz", "Kepa",
-			"Urko", "Jon", "Sergio", "Joseba", "Mario", "Aritz", "Fran",
-			"Maitane", "Jose" };
+			"Urko", "Jon", "Sergio", "Joseba", "Mario", "Aritz", "Fran", "Maitane", "Jose" };
 
 	static public void tirar() {
 		int aleatorio = getTirada();
