@@ -386,7 +386,7 @@ public final class ClsUtilsFechas {
 			texto = new StringBuffer();
 			// Preparamos el texto
 			texto.append("(");
-			texto.append(ClsUtilsFechas.formateoHourMinutesGMT(tim));
+			texto.append(ClsUtilsFechas.formatTimeZoneOffset(tim));
 			texto.append(")");
 			texto.append(" - ").append(tim.getID()).append(" - ");
 			texto.append(tim.getDisplayName());
@@ -458,7 +458,7 @@ public final class ClsUtilsFechas {
 	 *            TimeZone
 	 * @return String con formato (+00:00) o (-00:00)
 	 */
-	public static String formateoHourMinutesGMT(final TimeZone tim) {
+	public static String formatTimeZoneOffset(final TimeZone tim) {
 	    // TODO: Crear clase de timezone
 	    boolean negative = false;
 	    int milliOffSet = tim.getOffset(System.currentTimeMillis());
