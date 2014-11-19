@@ -1,0 +1,6 @@
+
+<project>
+	<delete includeemptydirs="true">  
+	    <fileset dir="Ficheros/output" includes="**/*"/>  
+	</delete> 
+</project>
