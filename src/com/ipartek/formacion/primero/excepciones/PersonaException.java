@@ -17,6 +17,24 @@ public class PersonaException extends Exception {
 	public static final String MSG_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO = "El nombre y los apellidos deben de tener como minimo "
 			+ Persona.TAM_MIN_NOMBRE_APELLIDOS + " letras";
 
+	// ERROR: no existe el dato
+	public static final int COD_DATO_INCOMPLETO = 2;
+	public static final String MSG_DATO_INCOMPLETO = "Falta el dato";
+
+	// ERROR: el formato de un dato de tipo email no es correcto
+	// (nombre@gmail.com)
+	public static final int COD_FORMATO_EMAIL_INCORRECTO = 3;
+	public static final String MSG_FORMATO_EMAIL_INCORRECTO = "El formato del email no es el correcto";
+
+	// ERROR: el formato de un dato de tipo DNI
+	// nn nnn nnn C
+	public static final int COD_FORMATO_DNI_INCORRECTO = 4;
+	public static final String MSG_FORMATO_DNI_INCORRECTO = "El formato del dni no es correcto";
+
+	// ERROR: la letra del DNI
+	public static final int COD_LETRA_DNI_INCORRECTA = 5;
+	public static final String MSG_LETRA_DNI_INCORRECTA = "La letra del dni no es correcta";
+
 	// Atributos
 	int codigo;
 
