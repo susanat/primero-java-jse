@@ -73,7 +73,7 @@ public class Utilidades {
 	}
 
 	/**
-	 * Ordena un array de enteros de menor a mayor
+	 * Ordena un array de enteros de menor a mayor.
 	 *
 	 * @param array
 	 *            desordenado
@@ -88,8 +88,9 @@ public class Utilidades {
 		while (flag) {
 			flag = false; // set flag to false awaiting a possible swap
 			for (int j = 0; j < array.length - 1; j++) {
-				if (array[j] > array[j + 1]) // change to > for ascending sort
-				{
+				// change to > for ascending sort
+				if (array[j] > array[j + 1]){
+
 					temp = array[j]; // swap elements
 					array[j] = array[j + 1];
 					array[j + 1] = temp;
@@ -102,8 +103,8 @@ public class Utilidades {
 	}
 
 	/**
-	 * Comprueba que sea una vocal: a,e,i,o,u,A,E,I,O,U y con acento
-	 * 
+	 * Comprueba que sea una vocal: a,e,i,o,u,A,E,I,O,U y con acento.
+	 *
 	 * @param caracter
 	 *            char a comprobar
 	 * @return true si es un caracter vocal
