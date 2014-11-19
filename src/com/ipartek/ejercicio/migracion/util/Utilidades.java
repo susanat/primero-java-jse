@@ -43,4 +43,16 @@ public class Utilidades {
 	return matcher.matches();
     }
 
+    public static boolean validarCodificacion(String cadena) {
+	boolean valida = false;
+	// TODO: Convertimos la cadena en bytes
+
+	return valida;
+    }
+
+    public static byte[] getBytes(String cadena) {
+	byte[] bytes = cadena.getBytes();
+	return bytes;
+    }
+
 }
