@@ -1,5 +1,10 @@
 package com.ipartek.migracion.bean;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.aeat.valida.Validador;
+
 /**
  * Persona.
  * <ol>
@@ -17,11 +22,19 @@ package com.ipartek.migracion.bean;
  *
  */
 public class Persona {
-	// Constantes
-	public static final String ERROR_EDAD = "EDAD";
-	public static final String ERROR_EMAIL = "EMAIL";
-	public static final String ERROR_DNI = "DNI";
-	public static final String ERROR_UTF8 = "UTF8";
+	/**
+	 * Constante con el valor mínimo aceptado para el atributo {@code edad}.
+	 */
+	private static final int EDAD_MIN = 18;
+	/**
+	 * Constante con el valor máximo aceptado para el atributo {@code edad}.
+	 */
+	private static final int EDAD_MAX = 99;
+	/**
+	 * Expresión regular que debe cumplir el email para ser válido.
+	 */
+	private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 	// Atributos
 	private String nombre;
@@ -181,4 +194,55 @@ public class Persona {
 		this.categoria = pCategoria;
 	}
 
+	/**
+	 * Comprobar si la edad esta dentro del rango estipulado. Entre 18 y 99.
+	 * 
+	 * @return True si la edad esta entre 18 y 99. False en cc.
+	 */
+	public boolean edadCorrecta() {
+		boolean resul;
+		resul = true;
+		if (getEdad() < EDAD_MIN || getEdad() > EDAD_MAX) {
+			resul = false;
+		}
+		return resul;
+	}
+
+	/**
+	 * Comprobar si el email esta correctamente formado
+	 * 
+	 * @return True si es válido. False si no es válido
+	 */
+	public boolean emailCorrecto() {
+		boolean resul;
+		resul = true;
+		Pattern pattern = Pattern.compile(PATTERN_EMAIL);
+		Matcher matcher = pattern.matcher(getEmail());
+		resul = matcher.matches();
+		return resul;
+	}
+
+	public boolean dniCorrecto() {
+		boolean resul;
+		resul = true;
+		// Utiliza la libreria valnif.jar
+		/*
+		 * Información de la librería: NIF a validar con las siguientes
+		 * características: Longitud de 9 caracteres. Mayúsculas. Relleno de
+		 * ceros por la izquierda. No realiza ningún ajuste de la cadena
+		 * recibida como parámetro, valida dicha cadena y devuelve: Un valor
+		 * cero (0) si nif_a_validar es un NIF CORRECTO Un valor uno (1) si
+		 * nif_a_validar es INCORRECTO
+		 */
+
+		String dni = getDni().toUpperCase();
+		Validador validador = new Validador();
+		while (dni.length() < 9) {
+			dni = "0" + dni;
+		}
+		int e = validador.checkNif(dni);
+
+		resul = e > 0;
+		return resul;
+	}
 }
