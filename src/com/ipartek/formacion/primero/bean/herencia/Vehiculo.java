@@ -2,7 +2,7 @@ package com.ipartek.formacion.primero.bean.herencia;
 
 import java.util.Comparator;
 
-public class Vehiculo implements Comparable<Vehiculo>{
+public class Vehiculo implements Comparable<Vehiculo> {
 	
 	//Atributos - protected es parecido a private pero las clases hijas lo pueden utilizar, es menos restrintivo
 	protected int numPlazas;

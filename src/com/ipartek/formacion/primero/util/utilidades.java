@@ -89,12 +89,12 @@ public class utilidades {
 		boolean flag = true; // set flag to true to begin first pass
 		int temp; // holding variable
 
-		while (flag) {
+		while (flag) { 
 			flag = false; // set flag to false awaiting a possible swap
 			for (j = 0; j < array.length - 1; j++) {
-				if (array[j] > array[j + 1]) // change to > for ascending
+				if (array[j] > array[j + 1]) { // change to > for ascending
 													// sort
-				{
+					
 					temp = array[j]; // te guarda el valor en una variable temporal
 					array[j] = array[j + 1];
 					array[j + 1] = temp;
@@ -114,7 +114,7 @@ public class utilidades {
 	 * @return true si es una vocal
 	 */
 	
-	public static boolean isVocal( char caracter){
+	public static boolean isVocal(char caracter) {
 		
 		boolean resul = false;
 		

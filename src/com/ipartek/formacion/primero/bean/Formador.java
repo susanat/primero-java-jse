@@ -10,7 +10,7 @@ public class Formador extends Persona {
 	public Formador() {
 		//llamamos con esto al del padre
 		super();
-		setSueldo (SUELDO_MIN);
+		setSueldo(SUELDO_MIN);
 	}
 
 	//Getter y Setter
@@ -24,7 +24,7 @@ public class Formador extends Persona {
 	 * @param sueldo en euros
 	 */
 	public void setSueldo(float sueldo) {
-		if ( sueldo > SUELDO_MIN){
+		if ( sueldo > SUELDO_MIN) {
 			this.sueldo = sueldo;
 		}
 	}

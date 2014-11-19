@@ -115,7 +115,7 @@ public class CalcularVueltas {
 	public static void main(String[] args) {
 		
 		CalcularVueltas calc = new CalcularVueltas();
-		calc.calcular(2000f,1326.24f);
+		calc.calcular(2000f, 1326.24f);
 		calc.imprimirVueltas();
 		
 		

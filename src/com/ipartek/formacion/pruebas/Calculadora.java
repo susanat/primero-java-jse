@@ -86,7 +86,7 @@ public class Calculadora {
 		for (int i = 0; i < aVueltas.length; i++) {
 			
 			imprimir = aVueltas[i] + " ";
-			if ( BILLETE_MINIMO <= BILLETES_MONEDAS[i] ){
+			if (BILLETE_MINIMO <= BILLETES_MONEDAS[i]){
 				imprimir += "Billetes " + (int)BILLETES_MONEDAS[i] + " €";
 			}else{
 				imprimir += "Monedas " + BILLETES_MONEDAS[i] + " €";
