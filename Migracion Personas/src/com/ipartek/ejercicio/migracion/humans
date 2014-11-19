@@ -33,10 +33,13 @@ Edad entre 18 y 99
 
 Errores posibles:
 Datos Incompletos -> linea
+
 Edad -> linea
 Email no valido -> linea
 DNI no valido -> linea
+
 UTF8 -> linea
+
 **Repetida -> linea
 
 
