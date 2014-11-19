@@ -1,0 +1,27 @@
+MIGRACION
+
+personas.txt:
+	- estadisticas.txt
+		- registros leidos
+		- minutos y segundos
+		- correctos
+		- error
+		- duplicados
+	- personas_correctas.txt
+	- personas_error.txt:
+		- edad
+		- email
+		- dni
+		- utf8
+	- personas_repetidas.txt repetida (mismo dni)
+	persona:
+		- nombre
+		- apellido1
+		- direccion
+		- edad 18-99
+		- email
+		- dni
+		- categoria
+		
+TAG-> usuario_migracion_v1.0
+viernes 10 mañana
