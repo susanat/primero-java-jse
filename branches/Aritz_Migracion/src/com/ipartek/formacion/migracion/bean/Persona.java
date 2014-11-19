@@ -14,26 +14,18 @@ import com.ipartek.formacion.migracion.excepciones.PersonaException;
  */
 public class Persona {
 
-	static final char SEXO_VARON = 'v';
-	static final char SEXO_MUJER = 'm';
-	static final char SEXO_OTROS = 'o';
-
 	public static final int MIN_STRING = 2;
 	public static final int MIN_EDAD = 18;
 	public static final int MAX_EDAD = 99;
 
-	static final String NOMBRE_NULO = "sin determinar";
-
 	// Atributos
 	String nombre;
 	String apellido1;
-	String apellido2;
-	int edad;
-	String dni;
 	String poblacion;
-	boolean mayorEdad = false;
-	String telefono;
-	char sexo = 'o';
+	int edad;
+	String mail;
+	String dni;
+	String categoria;
 
 	// Constructor
 	public Persona() {
@@ -50,27 +42,24 @@ public class Persona {
 		this.dni = dni;
 	}
 
-	public Persona(String nombre, String apellido1, int edad, String dni)
-			throws PersonaException {
+	public Persona(String nombre, String apellido1, String poblacion, int edad,
+			String mail, String dni, String categoria) throws PersonaException {
 		super();
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
+		setNombre(nombre);
+		setApellido1(apellido1);
+		setPoblacion(poblacion);
 		setEdad(edad);
-		this.dni = dni;
-		this.mayorEdad = (this.edad >= 18) ? true : false;
+		setMail(mail);
+		setDni(dni);
+		setCategoria(categoria);
 	}
 
 	// Getters y Setters
-
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) throws PersonaException {
-		if (nombre == null || nombre.length() <= MIN_STRING)
-			throw new PersonaException(PersonaException.MSG_STRING_CORTO,
-					PersonaException.COD_STRING_CORTO);
-
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -82,12 +71,12 @@ public class Persona {
 		this.apellido1 = apellido1;
 	}
 
-	public String getApellido2() {
-		return apellido2;
+	public String getPoblacion() {
+		return poblacion;
 	}
 
-	public void setApellido2(String apellido2) {
-		this.apellido2 = apellido2;
+	public void setPoblacion(String poblacion) {
+		this.poblacion = poblacion;
 	}
 
 	public int getEdad() {
@@ -97,12 +86,19 @@ public class Persona {
 	public void setEdad(int edad) throws PersonaException {
 		if (edad >= MIN_EDAD && edad <= MAX_EDAD) {
 			this.edad = edad;
-			this.mayorEdad = (this.edad >= MIN_EDAD) ? true : false;
 		} else {
 			// lanzar PersonaException
 			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA,
 					PersonaException.COD_EDAD_NO_VALIDA);
 		}
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	public String getDni() {
@@ -113,41 +109,20 @@ public class Persona {
 		this.dni = dni;
 	}
 
-	public String getPoblacion() {
-		return poblacion;
+	public String getCategoria() {
+		return categoria;
 	}
 
-	public void setPoblacion(String poblacion) {
-		this.poblacion = poblacion;
-	}
-
-	public boolean isMayorEdad() {
-		return mayorEdad;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public char getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(char sexo) {
-		this.sexo = sexo;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 	// Metodos
 	@Override
 	public String toString() {
-		return "Alumno [nombre=" + nombre + ", apellido1=" + apellido1
-				+ ", apellido2=" + apellido2 + ", edad=" + edad + ", dni="
-				+ dni + ", poblacion=" + poblacion + ", mayorEdad=" + mayorEdad
-				+ ", telefono=" + telefono + ", sexo=" + sexo + "]";
+		return "Persona [nombre=" + nombre + ", apellido1=" + apellido1
+				+ ", poblacion=" + poblacion + ", edad=" + edad + ", mail="
+				+ mail + ", dni=" + dni + ", categoria=" + categoria + "]";
 	}
 
 }
