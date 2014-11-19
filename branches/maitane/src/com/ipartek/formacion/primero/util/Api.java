@@ -20,7 +20,8 @@ public class Api {
 
 	}
 
-	public static String[] separarSplit(String cadena, String separador) {
+	public static String[] separarSplit(final String cadena,
+			final String separador) {
 
 		String[] elementosCadena = cadena.split(separador);
 
