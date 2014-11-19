@@ -140,7 +140,7 @@ public final class StdRandom {
      */
     public static double uniform(double a, double b) {
         if (!(a < b)) throw new IllegalArgumentException("Invalid range");
-        return a + uniform() * (b-a);
+        return a + uniform() * (b - a);
     }
 
     /**
@@ -213,7 +213,7 @@ public final class StdRandom {
             k++;
             p *= uniform();
         } while (p >= L);
-        return k-1;
+        return k - 1;
     }
 
     /**
@@ -276,7 +276,7 @@ public final class StdRandom {
     public static void shuffle(Object[] a) {
         int N = a.length;
         for (int i = 0; i < N; i++) {
-            int r = i + uniform(N-i);     // between i and N-1
+            int r = i + uniform(N - i);     // between i and N-1
             Object temp = a[i];
             a[i] = a[r];
             a[r] = temp;
@@ -289,7 +289,7 @@ public final class StdRandom {
     public static void shuffle(double[] a) {
         int N = a.length;
         for (int i = 0; i < N; i++) {
-            int r = i + uniform(N-i);     // between i and N-1
+            int r = i + uniform(N - i);     // between i and N-1
             double temp = a[i];
             a[i] = a[r];
             a[r] = temp;
@@ -302,7 +302,7 @@ public final class StdRandom {
     public static void shuffle(int[] a) {
         int N = a.length;
         for (int i = 0; i < N; i++) {
-            int r = i + uniform(N-i);     // between i and N-1
+            int r = i + uniform(N - i);     // between i and N-1
             int temp = a[i];
             a[i] = a[r];
             a[r] = temp;
@@ -318,7 +318,7 @@ public final class StdRandom {
             throw new IndexOutOfBoundsException("Illegal subarray range");
         }
         for (int i = lo; i <= hi; i++) {
-            int r = i + uniform(hi-i+1);     // between i and hi
+            int r = i + uniform(hi - i + 1);     // between i and hi
             Object temp = a[i];
             a[i] = a[r];
             a[r] = temp;
@@ -333,7 +333,7 @@ public final class StdRandom {
             throw new IndexOutOfBoundsException("Illegal subarray range");
         }
         for (int i = lo; i <= hi; i++) {
-            int r = i + uniform(hi-i+1);     // between i and hi
+            int r = i + uniform(hi - i + 1);     // between i and hi
             double temp = a[i];
             a[i] = a[r];
             a[r] = temp;
@@ -348,7 +348,7 @@ public final class StdRandom {
             throw new IndexOutOfBoundsException("Illegal subarray range");
         }
         for (int i = lo; i <= hi; i++) {
-            int r = i + uniform(hi-i+1);     // between i and hi
+            int r = i + uniform(hi - i + 1);     // between i and hi
             int temp = a[i];
             a[i] = a[r];
             a[r] = temp;

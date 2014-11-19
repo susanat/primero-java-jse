@@ -76,7 +76,7 @@ public class ClsUtilsNumeros {
      */
     public static int valorAleatorio(int desde, int hasta)
     {               
-        return  (int) Math.floor(Math.random()*(hasta-desde+1)+ desde);  // Valor entre M y N, ambos incluidos.
+        return  (int) Math.floor(Math.random()*(hasta - desde + 1) + desde);  // Valor entre M y N, ambos incluidos.
     
     }
     

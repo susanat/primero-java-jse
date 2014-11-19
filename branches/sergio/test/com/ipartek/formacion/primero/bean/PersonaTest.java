@@ -105,7 +105,7 @@ public class PersonaTest {
 		assertSame(20, lstPersona.get(0).getEdad());
 		
 		assertSame("Zuhaitz", lstPersona.get(lstPersona.size() - 1).getNombre());
-		assertSame(29, lstPersona.get(lstPersona.size()-1).getEdad());
+		assertSame(29, lstPersona.get(lstPersona.size() - 1).getEdad());
 		
 		
 		for(Persona per : lstPersona){

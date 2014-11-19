@@ -45,20 +45,20 @@ public class ArrayListTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		listaPaises = new ArrayList();
+		listaPaises = new ArrayList<String>();
 		listaPaises.add(ESPANA); // Ocupa la posición 0
 		listaPaises.add(FRANCIA); // Ocupa la posición 1
 		listaPaises.add(PORTUGAL); // Ocupa la posición 2
 		
-		listaPaisesDesordenada = new ArrayList();
+		listaPaisesDesordenada = new ArrayList<String>();
 		listaPaisesDesordenada.add(PORTUGAL);
 		listaPaisesDesordenada.add(EUSKADI);
 		listaPaisesDesordenada.add(ESPANA);
 		
-		listaCaracteresEspeciales = new ArrayList();
+		listaCaracteresEspeciales = new ArrayList<String>();
 			
 		
-		listaVehiculos = new ArrayList();
+		listaVehiculos = new ArrayList<Vehiculo>();
 		listaVehiculos.add(new Vehiculo(150f));
 		listaVehiculos.add(new Vehiculo(50f));
 		listaVehiculos.add(new Vehiculo(350f));
