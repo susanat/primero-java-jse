@@ -1,0 +1,75 @@
+Nuevo proyecto Java:
+
+Versión: Java 6
+
+Importar ficheros de texto con alumnos. Limpiar los que están mal y guardar en otro fichero los buenos.
+
+Fichero de entrada: personas.txt
+
+Ficheros de salida:
+- estadisticas.txt
+- personas_correctas.txt guarda las personas correctas
+- personas_error.txt guarda las personas erroneas
+- personas_repetidas.txt guarda las lineas repetidas por DNI, las dos personas
+
+
+
+
+1 linea dato de persona.
+
+
+*nombre
+*apellido1
+*apellido2
+*edad
+*mail
+*dni
+*categoria
+
+Necesario:
+
+Todos los datos
+Edad entre 18 y 99
+
+Errores posibles:
+Datos Incompletos -> linea
+Edad -> linea
+Email no valido -> linea
+DNI no valido -> linea
+UTF8 -> linea
+**Repetida -> linea
+
+
+**Mismo DNI.
+
+Salida Repetido:
+
+linea repe 1
+linea repe n (si es erróneo, añadir * para indicar que también se encuentra en registros erroneos
+--------------- (separación por linea)
+
+Salida estadísticas:
+
+	tiempo proceso: X milisegundos
+	registros leídos:
+	registros correctos:
+	registros erroneos:
+	registros duplicados: (por cada línea, si un dni aparece dos veces, suma dos)
+	
+
+	
+Fecha de entrega:
+
+Viernes 10:00 
+
+
+-----------------------------------------------------
+
+
+
+
+
+
+
+
+
