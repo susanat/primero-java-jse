@@ -1,10 +1,10 @@
 package com.ipartek.formacion.primero.util;
 
+import com.ipartek.formacion.sergio.utils.ClsUtilsNumeros;
+
 public class Dado {
-
-
 	
-	static String[] alumnos = new String[]{
+	final public static String[] alumnos = new String[]{
 		"Susana",
 		"Zuahitz",
 		"Kepa",
@@ -19,14 +19,24 @@ public class Dado {
 		"Jose"
 	};	
 	
-	static public void tirar (){		
-		int aleatorio = (int)(Math.random()*alumnos.length);
-		System.out.println(alumnos[aleatorio]);
+	
+	private String lastAlumno = "";
+	private int lastIndexTirada = -1;
+		
+	
+	public int getLastIndexTirada(){
+		return lastIndexTirada;
 	}
 	
-	public static void main(String[] args) {
-		tirar();
-		
+	public void tirar(){			
+		this.lastIndexTirada = ClsUtilsNumeros.valorAleatorio(0, alumnos.length - 1);
+		this.lastAlumno = Dado.alumnos[lastIndexTirada];
 	}
+	
+	@Override
+	public String toString(){
+		return lastAlumno;
+	}
+
 	
 }

@@ -13,6 +13,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
+import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -118,7 +119,7 @@ public class APITest {
 	
 	@Test
 	public void testDate() throws Exception {
-		
+		//TODO cambiar a un sitio más correcto
 		SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
 		
 		Calendar hoy = new GregorianCalendar();
@@ -127,113 +128,33 @@ public class APITest {
 		System.out.println("Fecha en min actual: " + hoy.getTimeInMillis());
 		System.out.println(formatoDeFecha.format(hoy.getTime()));
 		
-		/*
-		TimeZone timeZone = TimeZone.getDefault();		
-		
-		System.out.print("Zona: " + timeZone.getDisplayName());
-		System.out.print(" ID: " + timeZone.getID());
-		System.out.println(" offSet:" + timeZone.getOffset( System.currentTimeMillis() ));
-		System.out.println(formatoDeFecha.format(hoy.getTime()));
-		*/
-		
 				
-		
-		
-		/*
-		System.out.print("*************************************" + ClsUtilsConstantes.SALTO_DE_LINEA);
-		for(String tim : TimeZone.getAvailableIDs()){
-			
-			TimeZone toTimeZone = TimeZone.getTimeZone(tim);			
-			hoy.add(Calendar.MILLISECOND, toTimeZone.getRawOffset());
-			
-			System.out.print(" ID: " + toTimeZone.getID());
-			System.out.print(" Zona: " + toTimeZone.getDisplayName());			
-			System.out.println(" offSet:" + toTimeZone.getOffset( System.currentTimeMillis()));
-			System.out.println(formatoDeFecha.format(hoy.getTime()));			
-			System.out.print("*************************************" + ClsUtilsConstantes.SALTO_DE_LINEA);
-		}
-		*/
-		
-		/*
-		System.out.print("*************************************" + ClsUtilsConstantes.SALTO_DE_LINEA);
-		for(String tim : TimeZone.getAvailableIDs()){
-			TimeZone timeZone = TimeZone.getTimeZone(tim);
-			System.out.print(" ID: " + timeZone.getID());
-			System.out.print(" Zona: " + timeZone.getDisplayName());			
-			System.out.println(" offSet:" + timeZone.getOffset( System.currentTimeMillis()));
-						
-			Date mod = ClsUtilsFechas.convertOtherTimeZone(tim, hoy.getTime());
-			System.out.println(formatoDeFecha.format(mod));			
-			System.out.print("*************************************" + ClsUtilsConstantes.SALTO_DE_LINEA);
-		}
-		*/
-		
 		long millis = 16200000l;
 		
 		/*
-		String formateado = String.format("%02d:%02d:%02d", 
-				TimeUnit.MILLISECONDS.toHours(millis),
-				TimeUnit.MILLISECONDS.toMinutes(millis) -  
-				TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
-				TimeUnit.MILLISECONDS.toSeconds(millis) - 
-				TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-		*/   
-		
-		//System.out.println(formateado);
-		
-	     for(TimeZone tim : ClsUtilsFechas.getListTimeZones()){
-	    
-	    	 
-	    	 
-	    	 
-	    	  System.out.print("(" + formateoHourMinutesGMT(tim) + ")");
-	    	  
-	    	  
-	    	  
-	    	  
+	     for(TimeZone tim : ClsUtilsFechas.getListTimeZones()){	    	 
+	    	  System.out.print("(" + ClsUtilsFechas.formateoHourMinutesGMT(tim) + ")");
 	    	  System.out.print(" - " + tim.getID() + " - ");
 	    	  System.out.println(tim.getDisplayName());
 	    	  	
-	      }
+	     }
+	     */
+	    
+		
+		for (Entry<String, String> tirada : ClsUtilsFechas.getMapTZIdTZString().entrySet() ){
+			
+			String clave = tirada.getKey();
+			String valor = tirada.getValue();
+			System.out.println(clave + "  ->  "+valor);
+			
+			
+		}
+		
 		
 	}
 
 	
-	public String millisecondsToHourMinute(int milliseconds){
-		
-		String formateado = String.format("%02d:%02d", 
-				TimeUnit.MILLISECONDS.toHours(milliseconds),
-				TimeUnit.MILLISECONDS.toMinutes(milliseconds) -  
-				TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliseconds)));		
-		return formateado;		
-		
-	}
 	
-	public String formateoHourMinutesGMT(TimeZone tim) {
-		boolean negative = false;
-		int milliOffSet = tim.getOffset(System.currentTimeMillis());
-
-		// lo ponemos positivo pero marcamos que es negativo
-		if (milliOffSet < 0) {
-			milliOffSet *= -1;
-			negative = true;
-		}
-
-		// lo pasamos a string
-		String strMilliOffSet = millisecondsToHourMinute(milliOffSet);
-
-		// le añadimos los 0 que le falten
-		strMilliOffSet = ClsUtilsTextos.padLeft(strMilliOffSet, 5, "0");
-
-		// ponemos el signo
-		if (!negative) {
-			strMilliOffSet = "+" + strMilliOffSet;
-		} else {
-			strMilliOffSet = "-" + strMilliOffSet;
-		}
-
-		return strMilliOffSet;
-	}
 
 	
 	

@@ -111,7 +111,7 @@ public class Utilidades {
 	 * @param caracter char a comprobar
 	 * @return true si es un caracter vocal
 	 */
-	public static boolean isVocal ( char caracter ){
+	public static boolean isVocal( char caracter ){
 		boolean resul = false;
 		
 		
