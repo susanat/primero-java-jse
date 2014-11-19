@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase de recopilaci�n de funciones �tiles para elementos num�ricos
+ * Clase de recopilaci�n de funciones �tiles para elementos num�ricos.
  * 
  * @author baskito
  * @version 03.11.2014
  */
 public class ClsUtilsNumeros {
     /**
-     * Comprueba si un número es par o impar
+     * Comprueba si un número es par o impar.
      * @param num Numero a comprobar
      */
     public static boolean isPar(double num)
@@ -21,7 +21,7 @@ public class ClsUtilsNumeros {
     }
     
     /**
-     * Comprueba si un número es par o impar
+     * Comprueba si un número es par o impar.
      * @param num Numero a comprobar
      */
     public static boolean isPar(int num)
@@ -30,7 +30,7 @@ public class ClsUtilsNumeros {
     }
     
     /**
-     * Comprueba si un número es par o impar
+     * Comprueba si un número es par o impar.
      * @param num Numero a comprobar
      */
     public static boolean isPar(long num)
@@ -39,7 +39,7 @@ public class ClsUtilsNumeros {
     }
     
     /**
-     * Comprueba si un texto es numérico
+     * Comprueba si un texto es numérico.
      * @param cadena cadena a comprobar
      */
     public static boolean isNumeric(String cadena)
@@ -51,7 +51,7 @@ public class ClsUtilsNumeros {
     }
     
     /**
-     * Comprueba si un texto es numérico
+     * Comprueba si un texto es numérico.
      * @param cadena cadena a comprobar
      */
     public static boolean isNumeric(char cadena)
@@ -81,7 +81,7 @@ public class ClsUtilsNumeros {
     }
     
     /***
-     * Obtiene una lista de números enteros aleatorios entre dos números dados
+     * Obtiene una lista de números enteros aleatorios entre dos números dados.
      * @param nNumeros
      * @return 
      * @return Lista de tamaño indicada con números aleatorios.
@@ -92,5 +92,13 @@ public class ClsUtilsNumeros {
             resultados.add(valorAleatorio(desde,hasta));
         }                  
         return resultados;          
+    }
+    
+    public static int safeLongToInt(long l) {
+	if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {
+	    throw new IllegalArgumentException
+	    (l + " cannot be cast to int without changing its value.");
+	}
+	return (int) l;
     }
 }

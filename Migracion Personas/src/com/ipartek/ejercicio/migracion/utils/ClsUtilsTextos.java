@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *	Funciones útiles para el tratamiendo de texto
+ *	Funciones útiles para el tratamiendo de texto.
  *
  * @author Sergio Rubio
  * @version 03.11.2014
@@ -71,7 +71,7 @@ public class ClsUtilsTextos {
     }
     
     /**
-     * Obtiene una cadena de caracteres iniciando por la última posición
+     * Obtiene una cadena de caracteres iniciando por la última posición.
      * 
      * @param inputString
      * @param subStringLength
@@ -93,12 +93,22 @@ public class ClsUtilsTextos {
      * @param tamTotal TamaÃ±o total del texto final
      * @param caracter CarÃ¡cter a aÃ±adir
      */
-    public static String padLeft(String texto, int tamTotal, String caracter) 
+    public static String padLeft(final String texto, 
+	    final int tamTotal, final String caracter) 
     {
-        if (texto.length() >= tamTotal)
-            return texto;        
-        else
-            return String.format("%1$" + tamTotal + "s",texto).replace(" ", caracter);
+	String txtTemp = texto;
+	
+        if (texto.length() >= tamTotal) {
+            return txtTemp;        
+        }
+        else {
+            
+            txtTemp = String.format("%1$" + tamTotal + "s",texto);
+            txtTemp = txtTemp.replace(" ", caracter);
+            
+            //return String.format("%1$" + tamTotal + "s",texto).replace(" ", caracter);
+            return txtTemp;
+        }
     }
     
     /**
@@ -117,7 +127,7 @@ public class ClsUtilsTextos {
     }
     
     /**
-     * Desordena un string
+     * Desordena un string.
      * 
      * @param texto
      * @return

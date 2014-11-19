@@ -6,10 +6,10 @@ import com.ipartek.ejercicio.migracion.Constantes;
 import com.ipartek.ejercicio.migracion.Validations;
 import com.ipartek.ejercicio.migracion.Constantes.eErrorCause;
 
-public class Personas {
+public class Persona {
     
     /**
-     * Save the posible errors in data
+     * Save the posible errors in data.
      */
     private LinkedList<eErrorCause> errors = null;
     
@@ -24,7 +24,7 @@ public class Personas {
     private String cargo;
     
     /**
-     * Get all type errors ocurred in object 
+     * Get all type errors ocurred in object.
      * @return
      */
     public LinkedList<eErrorCause> getErrors(){
@@ -37,7 +37,7 @@ public class Personas {
     }
 
     public void setNombre(String nombre) {
-	if(!Validations.isUTF8MisInterpreted(nombre)){
+	if(!Validations.isValidUTF8(nombre)){
 	    errors.add(eErrorCause.UTF8);
 	}
 		
@@ -72,16 +72,16 @@ public class Personas {
 	return edad;
     }
 
-    public void setEdad(String edad) {
+    public void setEdad(final String edad) {
 	
-	try{
+	try {
 	    //check validations 
-	    if(!Validations.isValidEdad(edad)){
+	    if(!Validations.isValidEdad(edad)) {
 		errors.add(eErrorCause.EDAD);		
 	    }
 	    //save the edad
 	    this.edad = Integer.valueOf(edad);
-	}catch(Exception ex){
+	} catch(Exception ex) {
 	    //error in edad passed, save -1
 	    this.edad = -1;
 	}	
@@ -92,7 +92,7 @@ public class Personas {
 	return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
 	
 	if(!Validations.isValidEmail(email)){
 	    errors.add(eErrorCause.EMAIL);
@@ -144,13 +144,25 @@ public class Personas {
 	this.setCargo(cargo);
     }
     */
-    public Personas(){
+    
+    /**
+     * Create a new object empty.
+     */
+    public Persona() {
 	//initialize list of errors
 	errors = new LinkedList<eErrorCause>();
     }
     
-    public boolean hasErrors(){
-	if(errors.size() > 0) return true;
+    /**
+     * Check if object has error.
+     * 
+     * @return true if yes, false if not
+     */
+    public boolean hasErrors() {
+	
+	if(errors != null) {
+	    if(errors.size() > 0) return true;
+	}	
 		
 	return false;		
     }
@@ -158,9 +170,25 @@ public class Personas {
 
     @Override
     public String toString() {
-	return "Personas [nombre=" + nombre + ", apellido1=" + apellido1
+	
+	String text = "";
+	
+	if(errors != null && errors.size() > 0){
+	    for(eErrorCause errorCause : errors){
+		text += errorCause.toString() + ","; 
+	    }
+	}
+	if(text.length() > 0) {
+	    text = text.substring(0, text.length() - 1);
+	    text += " => ";
+	}
+	
+	
+	text += "nombre=" + nombre + ", apellido1=" + apellido1
 		+ ", poblacion=" + poblacion + ", edad=" + edad + ", email="
-		+ email + ", dni=" + dni + ", cargo=" + cargo + "]";
+		+ email + ", dni=" + dni + ", cargo=" + cargo;
+	
+	return text;
     }
 
 }
