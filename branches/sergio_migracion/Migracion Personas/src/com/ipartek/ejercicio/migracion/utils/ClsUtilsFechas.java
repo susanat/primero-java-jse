@@ -17,7 +17,7 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Clase de recopilación de funciones útiles para trabajar con fechas
+ * Clase de recopilación de funciones útiles para trabajar con fechas.
  * 
  * @author baskito
  * @version 03.11.2014
@@ -30,13 +30,13 @@ public final class ClsUtilsFechas {
 	}
 
 	/**
-	 * Formato utilizado para las fechas en sqlite
+	 * Formato utilizado para las fechas en sqlite.
 	 */
 	public static SimpleDateFormat formatoDeFechaSQLite = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss.SSS");
 
 	/**
-	 * Convierte una fecha en formato sqllite a timestamp
+	 * Convierte una fecha en formato sqllite a timestamp.
 	 * 
 	 * @param fecha
 	 * @return
@@ -57,7 +57,7 @@ public final class ClsUtilsFechas {
 	}
 
 	/**
-	 * Metodo usado para obtener la fecha actual
+	 * Metodo usado para obtener la fecha actual.
 	 * 
 	 * @return Retorna un <b>STRING</b> con la fecha actual formato "dd-MM-yyyy"
 	 */
@@ -153,7 +153,7 @@ public final class ClsUtilsFechas {
 	}
 
 	/**
-	 * Calcula la diferencia entre dos horas
+	 * Calcula la diferencia entre dos horas.
 	 * 
 	 * @param fInicial
 	 * @param fFinal
@@ -319,7 +319,7 @@ public final class ClsUtilsFechas {
 	}
 
 	/**
-	 * Devuelve la fecha pasada dependiendo de la zona temporal
+	 * Devuelve la fecha pasada dependiendo de la zona temporal.
 	 * 
 	 * @param strTimeZone
 	 *            String con el time zone
@@ -372,9 +372,12 @@ public final class ClsUtilsFechas {
 								.toHours(milliseconds)));
 		return formateado;
 	}
+	
+	
 
 	/**
-	 * Get a hashMap with Key string TimeZoneId and String with offset and TimeZone name value.
+	 * Get a hashMap with Key string TimeZoneId 
+	 * and String with offset and TimeZone name value.
 	 * 
 	 * @return hashMap
 	 */
@@ -402,11 +405,12 @@ public final class ClsUtilsFechas {
 	/** 
 	 * Filter for Timezones.	 
 	 */
-	private static final String TZ_ID_PREF = "^(Africa|America|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*";
+	private static final String TZ_ID_PREF 
+	= "^(Africa|America|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*";
 
 	/**
 	 * Return a collection with timeZones. Ordena primero por el offset y luego
-	 * por nombre
+	 * por nombre.
 	 * 
 	 * (filtradas por
 	 * "^(Africa|America|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*"

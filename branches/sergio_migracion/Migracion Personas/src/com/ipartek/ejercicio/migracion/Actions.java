@@ -1,235 +1,343 @@
 package com.ipartek.ejercicio.migracion;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Objects;
 
 import com.ipartek.ejercicio.migracion.Constantes.eErrorCause;
+import com.ipartek.ejercicio.migracion.object.Persona;
+import com.ipartek.ejercicio.migracion.utils.ClsUtilsFechas;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsFicheros;
 
-public class Actions
-{
+/**
+ * Lógica del proceso de checkeo de datos.
+ * 
+ * 
+ * @author baskito
+ *
+ */
+public class Actions {
 
     /**
-     * Save each line of file
+     * Save the objects of Persona.
+     */
+    private List<Persona> lstPersonas = null;
+
+    /**
+     * Save each line of file.
      */
     private List<String> strFile = null;
-    
+
     /**
-     * Agrupa las lineas por tiepo de error, una línea solo aparecerá una vez
-     * y solo con el primer tipo de error encontrado. 
+     * Agrupa las lineas por tiepo de error, una línea solo aparecerá una vez y
+     * solo con el primer tipo de error encontrado.
      */
     private HashMap<eErrorCause, List<String>> agrupedLinesByFirstError = null;
-    
-    
+
     /**
-     * Agrupa las lineas por tipo de error, pero estas líneas pueden aparecer
-     * en más de un error
+     * Agrupa las lineas por tipo de error, pero estas líneas pueden aparecer en
+     * más de un error.
      */
     private HashMap<eErrorCause, List<String>> agrupedLinesByAllError = null;
-    
+
+    /**
+     * Guarda el tiempo del proceso.
+     */
+    private Long miliseconds = Constantes.INITIALIZE_LONG;
+
+    /**
+     * Get the list with objects of Persona.
+     * @return List with Persona objects
+     */
+    private List<Persona> getLstPersonas() 
+    {	
+	return lstPersonas;
+    }
     
     /**
-     * Get the size of lines in file
+     * Get the time of process.
+     * 
+     * @return Long with milliseconds
+     */
+    public Long getTimeLapsedMiliseconds() {
+	return miliseconds;
+    }
+
+    /**
+     * Get the size of lines in file.
+     * 
      * @return Integer number of lines or null if not yet read;
      */
-    public Integer getCountLines(){
-	if(strFile != null){
+    public Integer getCountLines() {
+	if (strFile != null) {
 	    return strFile.size();
-	}else{
+	} else {
 	    return null;
 	}
     }
-    
+
     /**
-     * Get List of lines with determinate error cause
-     * @param errorCause
-     * @return
+     * Get List of lines with determinate error cause.
+     * 
+     * @param errorCause Error
+     * @return List of lines
      */
-    public List<String> getAgrupedLinesByFirstError(final eErrorCause errorCause){
-	
-	if(agrupedLinesByFirstError != null){
+    public List<String> getLinesByFirstError(final eErrorCause errorCause) {
+	if (agrupedLinesByFirstError != null) {
 	    return agrupedLinesByFirstError.get(errorCause);
 	}
-	
+
 	return null;
     }
-    
+
     /**
-     * Get number of lines with determinate error cause
-     * @param errorCause
-     * @return
-     */
-    public Integer getNumberOfLinesByFirstError(final eErrorCause errorCause){
-	
-	if(agrupedLinesByFirstError != null){
-	    return agrupedLinesByFirstError.get(errorCause).size();
-	}
-	
-	return null;
-    }
-    
-    
-    /**
-     * Read indicated file and save into list
-     * @throws Exception 
+     * Get the hasmap with lines group by error cause.
      * 
+     * @return hasmap with key enum ErrorCause and List of lines
      */
-    public void readFile(final String filePath) throws Exception
-    {
-	
+    public HashMap<eErrorCause, List<String>> getAgrupedLinesByFirstError() {
+
+	if (agrupedLinesByFirstError != null) {
+	    return agrupedLinesByFirstError;
+	}
+
+	return null;
+    }
+
+    /**
+     * Get number of lines with determinate error cause.
+     * 
+     * @param errorCause Error
+     * @return Integer count of lines with a type of error
+     */
+    public Integer getNumberOfLinesByFirstError(final eErrorCause errorCause) {
+
+	if (agrupedLinesByFirstError != null) {
+	    final List<String> lstTemp = agrupedLinesByFirstError.get(errorCause);
+	    if (lstTemp == null) {
+		return 0;
+	    } else {
+		return agrupedLinesByFirstError.get(errorCause).size();
+	    }
+	}
+
+	return 0;
+    }
+
+    /**
+     * Get count of lines processed.
+     * 
+     * @param errorCause Error
+     * @return Integer with the number of lines processed
+     */
+    public Integer getNumberOfLinesByAllError(final eErrorCause errorCause) {
+
+	if (agrupedLinesByAllError != null) {
+	    List<String> lstTemp = agrupedLinesByAllError.get(errorCause);
+	    if (lstTemp == null) {
+		return 0;
+	    } else {
+		return agrupedLinesByAllError.get(errorCause).size();
+	    }
+	}
+
+	return 0;
+    }
+
+    /**
+     * Get count of lines with error.
+     * 
+     * @return Integer with lines with error
+     */
+    public Integer getCountLinesWithErrors() {
+	HashMap<eErrorCause, List<String>> map = 
+		new HashMap<eErrorCause, List<String>>(
+		agrupedLinesByFirstError);
+
+	// removemos las correctas:
+	map.remove(eErrorCause.NONE);
+	List<String> lstErrors = new ArrayList<String>();
+
+	for (Entry<eErrorCause, List<String>> lst : map.entrySet()) {
+	    lstErrors.addAll(lst.getValue());
+	}
+
+	return lstErrors.size();
+    }
+
+    /**
+     * Read indicated file and save into list.
+     * 
+     * @throws Exception FileException
+     * 
+     * @param filePath path and name for file
+     */
+    public void readFile(final String filePath) throws Exception {
+
 	try {
 	    strFile = ClsUtilsFicheros.readFile(filePath);
 	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    throw e;
 	}
-	
+
     }
-    
-       
-    
+
     /**
      * Start process to read list file.
      */
-    public void startProcess()
-    {
-	//for each line	
-	for (String line : strFile) {
-	    
-	    //System.out.println(line + ClsUtilsConstantes.SALTO_DE_LINEA);	    
-	    //Check each line for errors, if not, next line
-	    if (isCorrectLine(line)){
+    public void startProcess() {
+
+	final Date fInicial = new Date();
+
+	// for each line
+	for (final String line : strFile) {
+	    // System.out.println(line + ClsUtilsConstantes.SALTO_DE_LINEA);
+	    // Check each line for errors, if not, next line
+	    if (isCorrectLine(line)) {
 		createObject(line);
-	    }	    
-	}	
+	    }
+	}
+
+	//System.out.println("finanl proceso");
+	miliseconds = ClsUtilsFechas.diferenciaHoras(fInicial, new Date())
+		.getDiffMilisegundos();
     }
-    
+
     /**
+     * Check if is correct field.
      * 
-     * @param line
-     * @return first false if not is correct, tru if yes.
+     * @param line String Line to check
+     * @return first false if not is correct, true if yes.
      */
-    private boolean isCorrectLine(final String line){
-	
-	eErrorCause errorCause = null;   
-	   
-	//check max fields or min fields
-	errorCause = Validations.isValidNumberFields(line, Constantes.NUM_EXPECTED_FIELDS); 
-	if(null != errorCause){
-	    //es incorrecta
-	    //guardamos en los dos maps
+    private boolean isCorrectLine(final String line) {
+
+	eErrorCause errorCause = null;
+
+	// check max fields or min fields
+	errorCause = Validations.isValidNumberFields(line,
+		Constantes.NUM_EXPECTED_FIELDS);
+	if (null != errorCause) {
+	    // es incorrecta, guardamos en los dos maps
 	    saveInAllErrorCause(errorCause, line);
 	    saveInFirstErrorCause(errorCause, line);
-	    	    
 	    return false;
-	}else{
-	    //es correcta	    
+	} else {
+	    // es correcta
 	    return true;
 	}
     }
-    
-    
-    /**
-     * 
-     * 
-     * @param line
-     * @return first error cause
-     */
-    private eErrorCause createObject(final String line){
-	String[] splitLine = line.split(Constantes.STR_SEPARATOR);
-	
-	/*
-	String nombre;
-	String apellido1;
-	String poblacion;
-	String edad;
-	String email;
-	String dni;
-	String cargo;
-	*/
 
-	//http://www.mkyong.com/java/how-to-use-reflection-to-call-java-method-at-runtime/
-	//String parameter
-	Class[] paramString = new Class[1];	
-	paramString[0] = String.class;
+    /**
+     * Crea un objeto con los datos de la linea y comprueba si éstos tienen
+     * algún error.
+     * 
+     * (versión utilizando reflection)
+     * @see 
+     * http://www.mkyong.com/java/how-to-use-reflection-to-call-java-method-at-runtime/
+     * @param line String with line
+     * 
+     */
+    private void createObject(final String line) {
 	
-	//creamos el objeto
+
+	String[] splitLine = line.split(Constantes.STR_SEPARATOR);
+
+	//
+	// String parameter
+	Class[] paramString = new Class[1];
+	paramString[0] = String.class;
+
+	// creamos el objeto
 	Class cls = null;
 	Object obj = null;
 	Method method = null;
 	String functionName = null;
 	String parameter = "";
-	
-	try {	    
-	    cls = Class.forName("com.ipartek.ejercicio.migracion.object.Personas");
+
+	try {
+	    // creamos el objeto por su nombre.
+	    cls = Class.forName(Constantes.PATH_OBJECT_PERSONAS);
 	    obj = cls.newInstance();
-	    for(int i = 0; i < Constantes.NUM_EXPECTED_FIELDS; i++)
-	    {
-		//functon name
-		functionName = Constantes.mapCamposPos.get(i + 1);
+	    for (int i = 0; i < Constantes.NUM_EXPECTED_FIELDS; i++) {
+		// functon name
+		functionName = Constantes.MAP_CAMPOS_POS.get(i + 1);
 		parameter = splitLine[i];
-		
-		//call the printItString method, pass a String param 
+
+		// call the printItString method, pass a String param
 		method = cls.getDeclaredMethod(functionName, paramString);
 		method.invoke(obj, parameter);
-		
-		
-		
-		
-		
-		
+	    }
+
+	    
+	    //Se ha creado el objeto
+	    if (lstPersonas == null) {
+		lstPersonas = new ArrayList<Persona>();
 	    }
 	    
-	    //no paramater
-	    Class noparams[] = {};
+	    //añadimos el objeto a la lista
+	    lstPersonas.add((Persona) obj);
 	    
-	    //System.out.println(obj.toString());
+	    
+	    // no paramater
+	    Class[] noparams = {};
+
+	    // System.out.println(obj.toString());
 	    method = cls.getDeclaredMethod("getErrors", noparams);
-	    LinkedList<eErrorCause>  errors = (LinkedList<eErrorCause>) method.invoke(obj);
-	    if(errors != null){
-		System.out.println(line);
+	    final LinkedList<eErrorCause> errors = (LinkedList<eErrorCause>) method
+		    .invoke(obj);
+	    if (errors != null && errors.size() > 0) {
+		// En all errors desglosamos los errores
+		for (eErrorCause errorCause : errors) {
+		    saveInAllErrorCause(errorCause, line);
+		}
+
+		// en first error, solo introducimos el primer error
+		saveInFirstErrorCause(errors.getFirst(), line);
+	    } else {
+		// Sin errores
+		saveInFirstErrorCause(eErrorCause.NONE, line);
+		saveInAllErrorCause(eErrorCause.NONE, line);
 	    }
-	    
-	    
-	     
-	    
 	} catch (ClassNotFoundException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (InstantiationException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IllegalAccessException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (NoSuchMethodException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (SecurityException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (IllegalArgumentException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (InvocationTargetException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
-	
-	
-	
-	
-	return null;
+
     }
-      
-    private void saveInFirstErrorCause(eErrorCause error, String line) {
-	if (agrupedLinesByFirstError == null)
+
+    /**
+     * Guarda en los mapas la linea pasada agrupada por el error.
+     * 
+     * @param error
+     *            Error que tiene la linea. (NONE si no hay error)
+     * @param line
+     *            Linea tratada
+     */
+    private void saveInFirstErrorCause(final eErrorCause error, 
+	    final String line) {
+	if (agrupedLinesByFirstError == null) {
 	    agrupedLinesByFirstError = new HashMap<eErrorCause, List<String>>();
-	
+	}
+
 	// Keep it first error cause
 	eErrorCause key = error;
 	if (agrupedLinesByFirstError.get(key) == null) {
@@ -238,38 +346,63 @@ public class Actions
 	agrupedLinesByFirstError.get(key).add(line);
     }
 
-    private void saveInAllErrorCause(eErrorCause error, String line) {
-	if (agrupedLinesByAllError == null)
+    /**
+     * Guarda en los mapas la linea pasada agrupada por el error.
+     * 
+     * @param error
+     *            Error que tiene la linea. (NONE si no hay error)
+     * @param line
+     *            Linea tratada
+     */
+    private void saveInAllErrorCause(final eErrorCause error, 
+	    final String line) {
+	if (agrupedLinesByAllError == null) {
 	    agrupedLinesByAllError = new HashMap<eErrorCause, List<String>>();
-	
-	
-	
+	}
+
 	eErrorCause key = error;
 	if (agrupedLinesByAllError.get(key) == null) {
 	    agrupedLinesByAllError.put(key, new ArrayList<String>());
 	}
 	agrupedLinesByAllError.get(key).add(line);
     }
-    
 
-    public static void main(String[] args) {
-  	Actions objAction = new Actions();
-  	
-  	//System.out.println(ClsUtilsFicheros.combinarRutas(Constantes.PATH_SOURCE,Constantes.NAME_FILE_SOURCE));
-  	
-  	
-  	
-  	try {
-  	    objAction.readFile(ClsUtilsFicheros.combinarRutas(Constantes.PATH_SOURCE,Constantes.NAME_FILE_SOURCE));
-  	    objAction.startProcess();
-  	} catch (Exception e) {
-  	    // TODO Auto-generated catch block
-  	    e.printStackTrace();
-  	}
-  	
-  		
-  	
-      }
+    /**
+     * Initial main for actions.
+     * 
+     * @param args Argumentos de entrada
+     */
+    public static void main(final String[] args) {
+	final Actions objAction = new Actions();
+
+	try {
+	    // Abrimos el fichero
+	    objAction.readFile(ClsUtilsFicheros.combinarRutas(
+		    Constantes.PATH_SOURCE, Constantes.NAME_FILE_SOURCE));
+	    // iniciamos el proceso
+	    objAction.startProcess();
+
+	    // Creamos el fichero de estadísticas
+	    Output.createStadisticFile(objAction);
+
+	    // creamos el fichero de líneas Incorrectas
+	    Output.createErrorsFile(objAction.getAgrupedLinesByFirstError());
+
+	    // creamos el fichero con las correctas
+	    Output.createCorrectFile(objAction.getAgrupedLinesByFirstError());
+	    
+	    // creamos el fichero de duplicados
+	    Output.createDuplicatedFile(objAction.getLstPersonas());
+
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	} catch (Exception e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+    }
+
     
 
 }

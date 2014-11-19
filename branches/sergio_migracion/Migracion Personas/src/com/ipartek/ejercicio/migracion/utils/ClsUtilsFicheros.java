@@ -33,7 +33,7 @@ public class ClsUtilsFicheros {
 		return (fFile.exists() ? true : false);
 	}
 
-	public static String combinarRutas(String path1, String path2) {
+	public static String combinarRutas(final String path1, final String path2) {
 
 		File file1 = new File(path1);
 		File file2 = new File(file1, path2);
@@ -41,12 +41,12 @@ public class ClsUtilsFicheros {
 
 	}
 
-	private static long espacioLibre(String unidad) {
+	private static long espacioLibre(final String unidad) {
 		File drive = new File(unidad);
 		return drive.getFreeSpace();
 	}
 
-	public static boolean existeExpacioLibre(String unidad, Long mayorQue) {
+	public static boolean existeExpacioLibre(final String unidad, final Long mayorQue) {
 		if (espacioLibre(unidad) > mayorQue) {
 			return true;
 		} else {
@@ -54,7 +54,7 @@ public class ClsUtilsFicheros {
 		}
 	}
 
-	public static boolean existeExpacioLibre(String unidad) {
+	public static boolean existeExpacioLibre(final String unidad) {
 		if (espacioLibre(unidad) > 0) {
 			return true;
 		} else {
@@ -62,20 +62,24 @@ public class ClsUtilsFicheros {
 		}
 	}
 
-	public static String checkBarraFinal(String path) {
+	public static String checkBarraFinal(final String path) {
+	    	String localPath = path;
 		String barra = "";
 		// comprobamos el tipo de ruta:
-		if (path.contains(BARRA_PATH_SIMPLE))
+		if (localPath.contains(BARRA_PATH_SIMPLE)) {
 			barra = BARRA_PATH_SIMPLE;
-		else if (path.contains(BARRA_PATH_DOBLE))
-			barra = BARRA_PATH_DOBLE;
-		if (!path.endsWith(barra)) {
-			path += barra;
 		}
-		return path;
+		else if (localPath.contains(BARRA_PATH_DOBLE)) {
+			barra = BARRA_PATH_DOBLE;
+		}
+		
+		if (!localPath.endsWith(barra)) {
+		    localPath += barra;
+		}
+		return localPath;
 	}
 
-	public static String getAbsolutePath(String relativePath) {
+	public static String getAbsolutePath(final String relativePath) {
 		Path path = Paths.get(relativePath);
 		String spath = path.toAbsolutePath().toString();
 		spath = spath.replace(".", "");
@@ -83,7 +87,7 @@ public class ClsUtilsFicheros {
 	}
 
 	/**
-	 * Lee un fichero y devuelve un string </p>
+	 * Lee un fichero y devuelve un string. </p>
 	 * 
 	 * Ejemplos: The StandardCharsets class define some constants for the
 	 * encodings required of all Java runtimes: - String content =
@@ -99,13 +103,13 @@ public class ClsUtilsFicheros {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String readFile1(String path, Charset encoding)
+	public static String readFile1(final String path, final Charset encoding)
 			throws IOException {
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		return encoding.decode(ByteBuffer.wrap(encoded)).toString();
 	}
 
-	public static String readFile2(String path) throws FileNotFoundException {
+	public static String readFile2(final String path) throws FileNotFoundException {
 
 		String content = "";
 		content = new Scanner(new File(path)).useDelimiter("\\Z").next();
@@ -117,13 +121,13 @@ public class ClsUtilsFicheros {
 	/**
 	 * 
 	 * 
-	 * - orientado a ficheros pequeños
+	 * - orientado a ficheros pequeños.
 	 * 
 	 * @param path
 	 * @param encoding
 	 * @return
 	 */
-	public static String readFile3(String path, Charset encoding) {
+	public static String readFile3(final String path, final Charset encoding) {
 		FileInputStream fis = null;
 		byte[] data = null;
 		String content = "";
@@ -154,7 +158,8 @@ public class ClsUtilsFicheros {
 	}
 
 	/**
-	 * http://www.javapractices.com/topic/TopicAction.do?Id=42 Note: the javadoc
+	 * http://www.javapractices.com/topic/TopicAction.do?Id=42. 
+	 * Note: the javadoc
 	 * of Files.readAllLines says it's intended for small files. But its
 	 * implementation uses buffering, so it's likely good even for fairly large
 	 * files.
@@ -174,7 +179,7 @@ public class ClsUtilsFicheros {
 	// For larger files
 	
 	/**
-	 * since 1.7
+	 * since 1.7.
 	 * 
 	 * @param aFileName
 	 * @param encodig
@@ -213,7 +218,7 @@ public class ClsUtilsFicheros {
 	*/
 
 	/**
-	 * since 1.7
+	 * since 1.7.
 	 * @param aFileName
 	 * @param aLines
 	 * @param encoding
@@ -232,8 +237,8 @@ public class ClsUtilsFicheros {
 	}
 	*/
 
-	public static List<String> readWithScanerToList(String path,
-			Charset encoding) throws IOException {
+	public static List<String> readWithScanerToList(final String path,
+			final Charset encoding) throws IOException {
 		Path fFilePath = Paths.get(path);
 		List<String> texto = new ArrayList<String>();
 
@@ -248,19 +253,21 @@ public class ClsUtilsFicheros {
 		return texto;
 	}
 	
-	public static List<String> readFile(String filename)
+	public static List<String> readFile(final String filename)
 		throws Exception
 		{
 		    String line = null;
 		    List<String> records = new ArrayList<String>();
 		 
 		    // wrap a BufferedReader around FileReader
-		    BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
+		    BufferedReader bufferedReader = new BufferedReader
+			    (new FileReader(filename));
 		 
-		    // use the readLine method of the BufferedReader to read one line at a time.
-		    // the readLine method returns null when there is nothing else to read.
-		    while ((line = bufferedReader.readLine()) != null)
-		    {
+		    // use the readLine method of the BufferedReader 
+		    // to read one line at a time.
+		    // the readLine method returns null when there is 
+		    //nothing else to read.
+		    while ((line = bufferedReader.readLine()) != null) {
 		        records.add(line);
 		    }
 		   

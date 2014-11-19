@@ -1,12 +1,29 @@
 package com.ipartek.ejercicio.migracion;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 
+import com.ipartek.ejercicio.migracion.utils.ClsUtilsConstantes;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsFicheros;
 
+/**
+ * Storage class constants. 
+ * @author baskito
+ *
+ */
 public class Constantes {
-		
+	
+    /**
+     * Empty constructor
+     */
+    public Constantes() {
+	
+    };
 
+    /**
+     * Show each type of error.
+     * @author baskito     
+     */
     public enum eErrorCause{
 	NONE,
 	EDAD,
@@ -17,37 +34,92 @@ public class Constantes {
 	MIN_FIELDS
     }
     
-    public static final String PATH_PROJECT = System.getProperty("user.dir");
+    /**
+     * Path source of files.
+     */
+    public static final String PATH_SOURCE = ClsUtilsFicheros.combinarRutas(ClsUtilsConstantes.PATH_PROJECT, "source");
     
-    
-    public static final String PATH_SOURCE = ClsUtilsFicheros.combinarRutas(PATH_PROJECT, "source");
+    /**
+     * Path name of source file.
+     */
     public static final String NAME_FILE_SOURCE = "personas.txt";
     
+    /**
+     * Path output for files.
+     */
+    public static final String PATH_OUTPUT = ClsUtilsFicheros.combinarRutas(ClsUtilsConstantes.PATH_PROJECT, "output");
     
+    /**
+     * Name for file for statistics.
+     */
     public static final String NAME_FILE_ESTADISTICAS = "estadisticas.txt";
+    
+    /**
+     * Name for file for correct register.
+     */
     public static final String NAME_FILE_CORRECTAS = "personas_correctas.txt";
+    
+    /**
+     * Name for file for wrong register.
+     */
     public static final String NAME_FILE_ERRONEAS = "personas_error.txt";
+    
+    /**
+     * Name for file for duplicated registers.
+     */
     public static final String NAME_FILE_REPETIDAS = "personas_repetidas.txt";
 	
+    /**
+     * Separator for fields in line.
+     */
     public static final String STR_SEPARATOR = ",";
 	
+    /**
+     * Num of expected fields.
+     */
     public static final int NUM_EXPECTED_FIELDS = 7;
     
+    /**
+     * Min edad allowed.
+     */
     public static final int MIN_EDAD = 18;
+    
+    /**
+     * Max edad allowed.
+     */
     public static final int MAX_EDAD = 99;
       
-	    
-    public static final HashMap<Integer, String> mapCamposPos;
+	 
+    /**
+     * Map with the relation field - function of set in object persona.
+     */
+    public static final HashMap<Integer, String> MAP_CAMPOS_POS;
     static
     {
-	mapCamposPos = new HashMap<Integer, String>();
-	mapCamposPos.put(1, "setNombre");
-	mapCamposPos.put(2, "setApellido1");
-	mapCamposPos.put(3, "setPoblacion");
-	mapCamposPos.put(4, "setEdad");
-	mapCamposPos.put(5, "setEmail");
-	mapCamposPos.put(6, "setDni");
-	mapCamposPos.put(7, "setCargo");
+	MAP_CAMPOS_POS = new HashMap<Integer, String>();
+	MAP_CAMPOS_POS.put(1, "setNombre");
+	MAP_CAMPOS_POS.put(2, "setApellido1");
+	MAP_CAMPOS_POS.put(3, "setPoblacion");
+	MAP_CAMPOS_POS.put(4, "setEdad");
+	MAP_CAMPOS_POS.put(5, "setEmail");
+	MAP_CAMPOS_POS.put(6, "setDni");
+	MAP_CAMPOS_POS.put(7, "setCargo");
     }
+    
+    /**
+     * Const for object persona.
+     */
+    public static final String PATH_OBJECT_PERSONAS = 
+	    "com.ipartek.ejercicio.migracion.object.Persona";
+    
+    /**
+     * Const for charset default for files.
+     */
+    public static final Charset CHARSET_OUTPUT = Charset.forName("UTF-8");
+    
+    /**
+     * Const to initialize logs.
+     */
+    public static final Long INITIALIZE_LONG = 0L;
 	
 }
