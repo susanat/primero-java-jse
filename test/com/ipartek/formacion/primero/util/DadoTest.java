@@ -45,26 +45,25 @@ public class DadoTest {
 			msg = "La tirada " + tirada + "debe estar entre [" + TIRADA_MINIMA
 					+ "," + TIRADA_MAXIMA + "]";
 
-			setTiradas.add(tirada);
-
 			assertTrue(msg, (TIRADA_MINIMA <= tirada)
 					&& (TIRADA_MAXIMA >= tirada));
 
 		}
-		assertEquals(12, setTiradas.size());
 
-		assertTrue(setTiradas.contains(0));
-		assertTrue(setTiradas.contains(1));
-		assertTrue(setTiradas.contains(2));
-		assertTrue(setTiradas.contains(3));
-		assertTrue(setTiradas.contains(4));
-		assertTrue(setTiradas.contains(5));
-		assertTrue(setTiradas.contains(6));
-		assertTrue(setTiradas.contains(7));
-		assertTrue(setTiradas.contains(8));
-		assertTrue(setTiradas.contains(9));
-		assertTrue(setTiradas.contains(10));
-		assertTrue(setTiradas.contains(11));
+	}
+
+	public void testTodosLosParticipantes() {
+		HashSet<Integer> hs = new HashSet<Integer>();
+
+		for (int i = 0; i < TIRADAS; i++) {
+			hs.add(Dado.getTirada());
+		}
+
+		assertEquals(TIRADA_MAXIMA, hs.size());
+
+		for (int j = 0; j < TIRADA_MAXIMA; j++) {
+			assertTrue(hs.contains(j));
+		}
 
 	}
 }
