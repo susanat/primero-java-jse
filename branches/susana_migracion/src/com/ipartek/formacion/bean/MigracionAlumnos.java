@@ -60,12 +60,14 @@ public class MigracionAlumnos {
     }
 
     private static boolean isNumeric(final String dato) {
+	boolean resul = false;
 	try {
 	    Integer.parseInt(dato);
-	    return true;
+	    resul = true;
 	} catch (final NumberFormatException nfe) {
-	    return false;
+
 	}
+	return resul;
     }
 
 }
