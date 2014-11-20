@@ -1,5 +1,11 @@
 package com.ipartek.ejercicio.migracion.excepciones;
 
+/**
+ *
+ * @author Joseba Carrión Blanco
+ *
+ */
+
 public class PersonaException extends Exception {
 
     private static final long serialVersionUID = -9181319064807734990L;
