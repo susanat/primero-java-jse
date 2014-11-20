@@ -1,6 +1,6 @@
 Lineas Totales: 10004
 Lineas Correctas: 6919
-Lineas con algÃºn fallo: 3085
+Lineas con algún fallo: 3085
 Total analizado: 10004
  - Campos de mas: 0
  - Campos de menos: 1
@@ -8,5 +8,6 @@ Total analizado: 10004
  - EMAIL no valido: 1
  - DNI no valido: 3
  - Edad no valida: 3080
-Tiempo de proceso: 530 milisegundos
+Número de duplicados: 4
+Tiempo de proceso: 500 milisegundos
 Tiempo de proceso: 00:00

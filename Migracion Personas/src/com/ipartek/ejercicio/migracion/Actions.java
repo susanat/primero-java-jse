@@ -1,19 +1,19 @@
 package com.ipartek.ejercicio.migracion;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Objects;
 
 import com.ipartek.ejercicio.migracion.Constantes.eErrorCause;
 import com.ipartek.ejercicio.migracion.object.Persona;
-import com.ipartek.ejercicio.migracion.utils.ClsUtilsConstantes;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsFechas;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsFicheros;
 
@@ -40,14 +40,19 @@ public class Actions {
      * Agrupa las lineas por tiepo de error, una línea solo aparecerá una vez y
      * solo con el primer tipo de error encontrado.
      */
-    private HashMap<eErrorCause, List<String>> agrupedLinesByFirstError = null;
+    private HashMap<eErrorCause, List<String>> groupByFirstErr = null;
 
     /**
      * Agrupa las lineas por tipo de error, pero estas líneas pueden aparecer en
      * más de un error.
      */
-    private HashMap<eErrorCause, List<String>> agrupedLinesByAllError = null;
-
+    private HashMap<eErrorCause, List<String>> groupByAllErr = null;
+    
+    /**
+     * Agrupa los duplicados por DNI.
+     */
+    private HashMap<String, List<Persona>> groupDuplicated = null;
+    
     /**
      * Guarda el tiempo del proceso.
      */
@@ -59,6 +64,16 @@ public class Actions {
      */
     private List<Persona> getLstPersonas() {	
 	return lstPersonas;
+    }
+    
+    /**
+     * Obtiene la lista de duplicados agrupados por dni
+     * 
+     * @return HashMap<String, List<Persona>> con la lista de duplicados 
+     * agrupados por DNI
+     */
+    public HashMap<String, List<Persona>> getGroupDuplicated() {
+	return groupDuplicated;
     }
     
     /**
@@ -90,8 +105,8 @@ public class Actions {
      * @return List of lines
      */
     public List<String> getLinesByFirstError(final eErrorCause errorCause) {
-	if (agrupedLinesByFirstError != null) {
-	    return agrupedLinesByFirstError.get(errorCause);
+	if (groupByFirstErr != null) {
+	    return groupByFirstErr.get(errorCause);
 	}
 
 	return null;
@@ -104,8 +119,8 @@ public class Actions {
      */
     public HashMap<eErrorCause, List<String>> getAgrupedLinesByFirstError() {
 
-	if (agrupedLinesByFirstError != null) {
-	    return agrupedLinesByFirstError;
+	if (groupByFirstErr != null) {
+	    return groupByFirstErr;
 	}
 
 	return null;
@@ -119,12 +134,12 @@ public class Actions {
      */
     public Integer getNumberOfLinesByFirstError(final eErrorCause errorCause) {
 
-	if (agrupedLinesByFirstError != null) {
-	    final List<String> lstTemp = agrupedLinesByFirstError.get(errorCause);
+	if (groupByFirstErr != null) {
+	    final List<String> lstTemp = groupByFirstErr.get(errorCause);
 	    if (lstTemp == null) {
 		return 0;
 	    } else {
-		return agrupedLinesByFirstError.get(errorCause).size();
+		return groupByFirstErr.get(errorCause).size();
 	    }
 	}
 
@@ -139,12 +154,12 @@ public class Actions {
      */
     public Integer getNumberOfLinesByAllError(final eErrorCause errorCause) {
 
-	if (agrupedLinesByAllError != null) {
-	    List<String> lstTemp = agrupedLinesByAllError.get(errorCause);
+	if (groupByAllErr != null) {
+	    List<String> lstTemp = groupByAllErr.get(errorCause);
 	    if (lstTemp == null) {
 		return 0;
 	    } else {
-		return agrupedLinesByAllError.get(errorCause).size();
+		return groupByAllErr.get(errorCause).size();
 	    }
 	}
 
@@ -159,7 +174,7 @@ public class Actions {
     public Integer getCountLinesWithErrors() {
 	HashMap<eErrorCause, List<String>> map = 
 		new HashMap<eErrorCause, List<String>>(
-		agrupedLinesByFirstError);
+		groupByFirstErr);
 
 	// removemos las correctas:
 	map.remove(eErrorCause.NONE);
@@ -183,6 +198,7 @@ public class Actions {
 
 	try {
 	    strFile = ClsUtilsFicheros.readFile(filePath);
+	    //strFile = ClsUtilsFicheros.readWithScanerToList(filePath, Charset.forName("UTF-8"));
 	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    throw e;
@@ -205,6 +221,10 @@ public class Actions {
 		createObject(line);
 	    }
 	}
+	
+	//creamos los duplicados si existen datos de persona
+	if(lstPersonas != null)
+	    groupDuplicated = getListDuplicated(lstPersonas);
 
 	//System.out.println("finanl proceso");
 	miliseconds = ClsUtilsFechas.diferenciaHoras(fInicial, new Date())
@@ -332,16 +352,16 @@ public class Actions {
      */
     private void saveInFirstErrorCause(final eErrorCause error, 
 	    final String line) {
-	if (agrupedLinesByFirstError == null) {
-	    agrupedLinesByFirstError = new HashMap<eErrorCause, List<String>>();
+	if (groupByFirstErr == null) {
+	    groupByFirstErr = new HashMap<eErrorCause, List<String>>();
 	}
 
 	// Keep it first error cause
 	eErrorCause key = error;
-	if (agrupedLinesByFirstError.get(key) == null) {
-	    agrupedLinesByFirstError.put(key, new ArrayList<String>());
+	if (groupByFirstErr.get(key) == null) {
+	    groupByFirstErr.put(key, new ArrayList<String>());
 	}
-	agrupedLinesByFirstError.get(key).add(line);
+	groupByFirstErr.get(key).add(line);
     }
 
     /**
@@ -354,15 +374,15 @@ public class Actions {
      */
     private void saveInAllErrorCause(final eErrorCause error, 
 	    final String line) {
-	if (agrupedLinesByAllError == null) {
-	    agrupedLinesByAllError = new HashMap<eErrorCause, List<String>>();
+	if (groupByAllErr == null) {
+	    groupByAllErr = new HashMap<eErrorCause, List<String>>();
 	}
 
 	eErrorCause key = error;
-	if (agrupedLinesByAllError.get(key) == null) {
-	    agrupedLinesByAllError.put(key, new ArrayList<String>());
+	if (groupByAllErr.get(key) == null) {
+	    groupByAllErr.put(key, new ArrayList<String>());
 	}
-	agrupedLinesByAllError.get(key).add(line);
+	groupByAllErr.get(key).add(line);
     }
 
     /**
@@ -374,9 +394,21 @@ public class Actions {
 	final Actions objAction = new Actions();
 
 	try {
+	    
+	    //Abrimos el fichero como UTF-8 y lo volvemos a guardar
+	    /*
+	    File file = new File(Constantes.PATH_SOURCE, Constantes.NAME_FILE_SOURCE);
+	    String content = ClsUtilsFicheros.readFile2(file.getAbsolutePath());
+	    ClsUtilsFicheros.writeFile4(file.getAbsolutePath(), content);
+	    */
+	    
+	    
 	    // Abrimos el fichero
 	    objAction.readFile(ClsUtilsFicheros.combinarRutas(
-		    Constantes.PATH_SOURCE, Constantes.NAME_FILE_SOURCE));
+	    	    Constantes.PATH_SOURCE, Constantes.NAME_FILE_SOURCE));
+	    //objAction.readFile(file.getAbsolutePath());
+	    
+	    
 	    // iniciamos el proceso
 	    objAction.startProcess();
 	    
@@ -384,14 +416,13 @@ public class Actions {
 	    Output.createErrorsFile(objAction.getAgrupedLinesByFirstError());
 
 	    // creamos el fichero con las correctas
-	    Output.createCorrectFile(objAction.getAgrupedLinesByFirstError());
+	    Output.createCorrectFile(objAction);
 	    
 	    // creamos el fichero de duplicados
-	    Output.createDuplicatedFile(objAction.getLstPersonas());
+	    Output.createDuplicatedFile(objAction);
 
 	    // Creamos el fichero de estadísticas
 	    Output.createStadisticFile(objAction);
-
 	    
 
 	} catch (IOException e) {
@@ -401,23 +432,24 @@ public class Actions {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
+	
     }
 
     /**
      * Crea una lista con los registros duplicados.
      * 
      * @param lstPersona List<String> Listado con los objetos de persona
-     * @return HashMap<String, List<String>> 
+     * @return HashMap<String, List<String>> vacío si no hay duplicados
      */
     private HashMap<String, List<Persona>> getListDuplicated(
-	    final List<Persona> lstPersona) {
+	    final List<Persona> lstPersonas) {
 
 	HashMap<String, List<Persona>> mapDuplicados = 
 		new HashMap<String, List<Persona>>();
 
 	//agrupo por DNI
 	HashMap<String, List<Persona>> map = new HashMap<String, List<Persona>>();	
-	for (Persona persona : lstPersona) {
+	for (Persona persona : lstPersonas) {
 	    String key = persona.getDni();
 	    if (map.get(key) == null) {
 		map.put(key, new ArrayList<Persona>());

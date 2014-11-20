@@ -30,22 +30,34 @@ public final class Output {
     /**
      * Create file with correct lines.
      * 
-     * @param lstFirstError agrupedLinesByFirstError map 
-     * with lines group by error.
+     * @param objAction Object type action
      * @throws IOException Exceptions for files
      */
     public static void createCorrectFile(
-	    final HashMap<eErrorCause, List<String>> lstFirstError) 
+	    final Actions objAction) 
 	    throws IOException {
+	
+	//preparo el fichero
 	final String file = 
 		ClsUtilsFicheros.combinarRutas(Constantes.PATH_OUTPUT, 
 			Constantes.NAME_FILE_CORRECTAS);
+
+	List<String> aLines = new ArrayList<String>();
 	
 	//obtengo las correctas
-	List<String> lstCorrectas = lstFirstError.get(eErrorCause.NONE);
+	if (objAction.getAgrupedLinesByFirstError() != null) {
+	    aLines = objAction.getAgrupedLinesByFirstError().get(eErrorCause.NONE);
+	}
 	
-	ClsUtilsFicheros.writeSmallTextFile(lstCorrectas, 
-		file, Constantes.CHARSET_OUTPUT);
+	//Nos aseguramos que no sea null
+	if (aLines == null) {
+	    aLines = new ArrayList<String>();
+	}
+	
+	//ClsUtilsFicheros.writeSmallTextFile(lstCorrectas, 
+	//	file, Constantes.CHARSET_OUTPUT);
+	
+	write(file, aLines);
 	
 	
     }
@@ -90,6 +102,17 @@ public final class Output {
 	aLines.add(" - DNI no valido: " + errorDni);
 	aLines.add(" - Edad no valida: " + errorEdad);
 	
+	
+	
+	int duplicados = 0;
+	if (objAction.getGroupDuplicated() != null) {
+	    duplicados = objAction.getGroupDuplicated().size();
+	}
+	
+	
+	aLines.add("Número de duplicados: " + duplicados);
+	
+	
 	aLines.add("Tiempo de proceso: " 
 		+ objAction.getTimeLapsedMiliseconds() 
 		+ " milisegundos");
@@ -100,8 +123,9 @@ public final class Output {
 				objAction.getTimeLapsedMiliseconds())));
 
 
-	ClsUtilsFicheros.writeSmallTextFile(aLines, 
-		file, Constantes.CHARSET_OUTPUT);
+	//ClsUtilsFicheros.writeSmallTextFile(aLines, 
+	//	file, Constantes.CHARSET_OUTPUT);
+	write(file, aLines);
     }
     
     /**
@@ -116,7 +140,7 @@ public final class Output {
 	final String file = ClsUtilsFicheros.combinarRutas(Constantes.PATH_OUTPUT, 
 		Constantes.NAME_FILE_ERRONEAS);
 
-	final List<String> aLines = new ArrayList<String>();
+	List<String> aLines = new ArrayList<String>();
 
 	HashMap<eErrorCause, List<String>> map = 
 		new HashMap<eErrorCause, List<String>>(agrupedLinesByFirstError);
@@ -131,53 +155,45 @@ public final class Output {
 	    }
 	}
 
-	ClsUtilsFicheros.writeSmallTextFile(aLines, file, 
-		Constantes.CHARSET_OUTPUT);
+
+	//ClsUtilsFicheros.writeSmallTextFile(aLines, file, 
+	//	Constantes.CHARSET_OUTPUT);
+	write(file, aLines);
     }
     
     
     /**
      * Create file with duplicated lines (Duplicate DNI).
      * 
-     * @param lstPersona list with objects type Persona
+     * @param objAction object with action
      * @throws IOException Exceptions for files
      */
-    public static void createDuplicatedFile(final List<Persona> lstPersona) 
+    public static void createDuplicatedFile(final Actions objAction) 
 	    throws IOException {
 	String file = ClsUtilsFicheros.combinarRutas(Constantes.PATH_OUTPUT, 
 		Constantes.NAME_FILE_REPETIDAS);
 
-	List<String> lstDuplicated = new ArrayList<String>();
+	List<String> aLines = new ArrayList<String>();
 
-	//agrupo por DNI
-	HashMap<String, List<Persona>> map = new HashMap<String, List<Persona>>();	
-	for (Persona persona : lstPersona) {
-	    String key = persona.getDni();
-	    if (map.get(key) == null) {
-		map.put(key, new ArrayList<Persona>());
-	    }
-	    map.get(key).add(persona);
-	}
-
-	String text = "";
-	
-	//recorro encontrando duplicados
-	for (Entry<String, List<Persona>> lst : map.entrySet()) {
-	    //compruebo si tiene más de un elementos en la lista
-	    if (lst.getValue().size() > 1) {
-		//está duplicado		
-		for (Persona persona: lst.getValue()) { 
-		    text += persona.toString() + ClsUtilsConstantes.SALTO_DE_LINEA;
-		}		
-		lstDuplicated.add(text);
-	    }
+	if (objAction.getGroupDuplicated() != null) {
+	    for (Entry<String, List<Persona>> dniDuplicated  
+		    : objAction.getGroupDuplicated().entrySet()) {
 	    
-	    text = "";
+		for (Persona persona : dniDuplicated.getValue()) {
+		    aLines.add(persona.toString());
+		}
+	    }    
 	}
 	
-	ClsUtilsFicheros.writeSmallTextFile(lstDuplicated, file, 
-		Constantes.CHARSET_OUTPUT);
 	
+	write(file, aLines);
+	
+	
+	
+    }
+    
+    private static void write(String file, List<String> aLines) throws IOException{
+	ClsUtilsFicheros.writeFile1(file, aLines);
     }
 
 }

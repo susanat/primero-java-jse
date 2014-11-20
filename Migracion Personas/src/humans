@@ -84,11 +84,13 @@ branches/sergio_migracion/Migracion Personas
 
 - Fallos:
 
-FIXED 0.9.2 - Modificar salida fichero de duplicados	
-	- Mostrar la línea en sí
-	
-	
-FIXED 0.9.2 - Modificar salida fichero de erróneos
+
+FIXED 0.9.2 - No se mostraban en estadísticas número de duplicados
+FIXED 0.9.2 - No se validaba correctamente el DNI (se cumplimenta con 0 hasta llegar al tamaño adecuado)		
+FIXED 0.9.2 - Formato incorrecto ficheros duplicados		
+FIXED 0.9.2 - Formato incorrecto salida fichero de erróneos
+FIXED 0.9.2 - Null exception cuando no había datos en los ficheros 
+
 	- utilizar, para escritir el error, los datos proporcionados por el cliente
 	Datos Incompletos -> linea
 	Edad -> linea
@@ -96,12 +98,9 @@ FIXED 0.9.2 - Modificar salida fichero de erróneos
 	DNI no valido -> linea
 	UTF8 -> linea 
 
-- Mostrar en estadísticas número de duplicados
+
+	
 
 - Guardar versión correcta de archivo (no interpreta las tildes)
 	https://code.google.com/p/juniversalchardet/
-
-FIXED 0.9.2 - Validar el DNI completandlo con "0"
-	
-
 

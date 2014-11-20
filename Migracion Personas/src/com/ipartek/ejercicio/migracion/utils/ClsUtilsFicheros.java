@@ -1,11 +1,16 @@
 package com.ipartek.ejercicio.migracion.utils;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -336,23 +341,122 @@ public final class ClsUtilsFicheros {
 	 */
 	public static List<String> readFile(final String filename)
 		throws Exception {
-		    String line = null;
-		    List<String> records = new ArrayList<String>();
-		 
-		    // wrap a BufferedReader around FileReader
-		    BufferedReader bufferedReader = new BufferedReader(
-			    new FileReader(filename));
-		 
-		    // use the readLine method of the BufferedReader 
-		    // to read one line at a time.
-		    // the readLine method returns null when there is 
-		    //nothing else to read.
-		    while ((line = bufferedReader.readLine()) != null) {
-		        records.add(line);
-		    }
-		   
-		    // close the BufferedReader when we're done
-		    bufferedReader.close();
-		    return records;
-		}
+	    String line = null;
+	    List<String> records = new ArrayList<String>();
+
+	    // wrap a BufferedReader around FileReader
+	    BufferedReader bufferedReader = new BufferedReader(
+		    new FileReader(filename));
+
+	    // use the readLine method of the BufferedReader 
+	    // to read one line at a time.
+	    // the readLine method returns null when there is 
+	    //nothing else to read.
+	    while ((line = bufferedReader.readLine()) != null) {
+		records.add(line);
+	    }
+
+	    // close the BufferedReader when we're done
+	    bufferedReader.close();
+	    return records;
+	}
+	
+	/**
+	 * TODO: testear
+	 * @param filename
+	 * @param lstLineas
+	 * @throws IOException
+	 */
+	public static void writeFile1(final String filename,final List<String> lstLineas) 
+		throws IOException {
+		
+	    File fout = new File(filename);
+	    FileOutputStream fos = new FileOutputStream(fout);
+
+	    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+	    for (String linea : lstLineas) {
+		bw.write(linea);
+		bw.newLine();
+	    }
+
+	    bw.close();
+	}
+	
+	
+	/**
+	 * Use file writer
+	 * 
+	 * @throws IOException
+	 */
+	public static void writeFile2(final String filename,final List<String> lstLineas) 
+		throws IOException {
+	    FileWriter fw = new FileWriter(filename);
+
+	    for (String linea : lstLineas) {
+		fw.write(linea + ClsUtilsConstantes.SALTO_DE_LINEA);
+		
+	    }
+	    fw.close();
+	}
+	
+	public static void writeFile2(final String filename,final String texto) 
+		throws IOException {
+	    FileWriter fw = new FileWriter(filename);
+
+	    
+	    fw.write(texto);
+		
+	    
+	    fw.close();
+	}
+
+	/**
+	 * Use print writer
+	 * 
+	 * @throws IOException
+	 */
+	public static void writeFile3(final String filename,final List<String> lstLineas) 
+		throws IOException {
+	    PrintWriter pw = new PrintWriter(new FileWriter(filename));
+
+	    for (String linea : lstLineas) {
+		pw.write(linea + ClsUtilsConstantes.SALTO_DE_LINEA);
+	    }
+
+	    pw.close();
+	}
+
+	/**
+	 * Use OutputStreamWriter
+	 * 
+	 * @throws IOException
+	 */
+	public static void writeFile4(final String filename,final List<String> lstLineas) 
+		throws IOException {
+	    File fout = new File(filename);
+	    FileOutputStream fos = new FileOutputStream(fout);
+
+	    //permite charset
+	    OutputStreamWriter osw = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
+
+	    for (String linea : lstLineas) {
+		osw.write(linea + ClsUtilsConstantes.SALTO_DE_LINEA);
+	    }
+
+	    osw.close();
+	}
+	
+	public static void writeFile4(final String filename,final String texto) 
+		throws IOException {
+	    File fout = new File(filename);
+	    FileOutputStream fos = new FileOutputStream(fout);
+
+	    //permite charset
+	    OutputStreamWriter osw = new OutputStreamWriter(fos, Charset.forName("UTF-8"));
+	    
+	    osw.write(texto);	    
+
+	    osw.close();
+	}
 }
