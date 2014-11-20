@@ -30,7 +30,7 @@ public class Persona {
 		super();
 		this.nombre = _nombre;
 		this.apellido = _apellido;
-		this.poblacion = poblacion;
+		this.poblacion = _poblacion;
 		setEdad(_edad);
 		this.email = _email;
 		this.dni = _dni;
