@@ -1,12 +1,22 @@
 package com.ipartek.formacion.migracion;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.aeat.valida.Validador;
-
+/**
+ * Clase para reprensentar una Persona, se compone de:
+ * <ol>
+ * <li>nombre {@code String}</li>
+ * <li>apellido {@code String}</li>
+ * <li>poblacion {@code String}</li>
+ * <li>edad {@code int}</li>
+ * <li>dni {@code String}</li>
+ * <li>email {@code String}</li>
+ * <li>categoria {@code String}</li>
+ * </ol>
+ *
+ *
+ * @author Mario Alvaro
+ *
+ */
 public class Persona {
-    private static final int CANTIDAD_ATRIBUTOS = 4;
 
     // Atributos
     private String nombre;
@@ -90,57 +100,6 @@ public class Persona {
 
     public void setCategoria(String categoria) {
 	this.categoria = categoria;
-    }
-
-    // metodos
-
-    public boolean comprobarEdad() {
-	boolean correcto = false;
-	if (this.edad >= 18 || this.edad <= 99) {
-	    correcto = true;
-	}
-	return correcto;
-    }
-
-    public boolean comprobarDni() {
-	boolean comprobado = false;
-	Validador validador = new Validador();
-	int e = validador.checkNif(this.dni);
-
-	if (e > 0) {
-	    comprobado = true;
-	}
-	return comprobado;
-
-    }
-
-    public boolean comprobarEmail() {
-	// Compilar la expresión regular dada en un patron.
-	Pattern pattern = Pattern.compile(Migracion.PATTERN_EMAIL);
-
-	// Compueba el email dado contra el patron
-	Matcher matcher = pattern.matcher(this.email);
-	return matcher.matches();
-    }
-
-    public boolean comprobarCaracteresExtraños() {
-	int indice = 0;
-	boolean fallo = false;
-
-	Pattern pattern = Pattern.compile("[^A-Za-z0-9 ]");
-	Matcher encaja;
-	String[] atr = new String[] { this.nombre, this.apellido,
-		this.poblacion, this.categoria };
-
-	while (fallo == false && indice < CANTIDAD_ATRIBUTOS) {
-	    encaja = pattern.matcher(atr[indice]);
-	    // Mira si el string encaja con el patron que
-	    if (encaja.find()) {
-		fallo = true;
-	    }
-	    indice++;
-	}
-	return fallo;
     }
 
 }
