@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.ipartek.ejercicio.migracion.Constantes;
 import com.ipartek.ejercicio.migracion.Persona;
@@ -34,11 +36,12 @@ public class Fichero {
 	// opcional, mnejora el rendimiento
 	FileReader reader = null;
 	List<String> lista = new ArrayList<String>();
-
+	ArrayList<Persona> listaDePersonas = new ArrayList<Persona>();
 	// Variables para calcular estadisticas
 	int registrosLeidos = 0;
 	int numCorrectos = 0;
 	int numErrores = 0;
+	int numRepetidos = 0;
 	Date fechaInicio = new Date();
 
 	try {
@@ -71,7 +74,9 @@ public class Fichero {
 		} else {
 		    // Numero de atributos correcto. Construimos una persona
 		    // para ver si ciertos atributos (edad, dni y mail) son
-		    // validos mediante los setters invocados por su constructor
+		    // validos (ademas de la codificacion) mediante los setters
+		    // invocados por su constructor
+
 		    try {
 			Persona p1 = new Persona(lista.get(0), lista.get(1),
 				lista.get(2), Integer.parseInt(lista.get(3)),
@@ -79,17 +84,24 @@ public class Fichero {
 			// Si llegamos aqui es que la persona es correcta la
 			// marcamos como correcta
 			escribir = ESCRIBIR_EN_CORRECTO;
+
 			numCorrectos = numCorrectos + 1;
 		    } catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			// Es una linea erronea, debe ir al fichero de error
-
-			// obtenemos el mensaje de error de la excepcion lanzada
 			lista = new ArrayList<String>(lista);
+			// obtenemos el mensaje de error de la excepcion lanzada
 			lista.add(ex.getMessage());
 			escribir = ESCRIBIR_EN_ERROR;
+
 			numErrores = numErrores + 1;
 		    }
+
+		    // construimos la persona sin comprobar que los valores sean
+		    // correctos
+		    listaDePersonas.add(new Persona(lista.get(0), lista.get(1),
+			    lista.get(2), Integer.parseInt(lista.get(3)), lista
+			    .get(4), lista.get(5), lista.get(6), true));
 
 		}
 		// Escribimos las lineas a los ficheros correspondientes
@@ -105,6 +117,8 @@ public class Fichero {
 		}
 	    }
 
+	    numRepetidos = checkRepetidos(listaDePersonas);
+
 	} catch (IOException e) {
 	    e.printStackTrace();
 	} finally {
@@ -116,7 +130,7 @@ public class Fichero {
 
 		    writeStatistics(Constantes.FICHERO_ESTADISTICAS,
 			    registrosLeidos, numCorrectos, numErrores,
-			    fechaInicio, dateFinal);
+			    numRepetidos, fechaInicio, dateFinal);
 
 		}
 	    } catch (IOException ex) {
@@ -218,7 +232,7 @@ public class Fichero {
 
     public static boolean writeStatistics(String nombreFichero,
 	    int registrosLeidos, int numCorrectos, int numErrores,
-	    Date dateInicio, Date dateFinal) {
+	    int numRepetidos, Date dateInicio, Date dateFinal) {
 	boolean resul = false;
 	Writer writer = null;
 	FileOutputStream fichero = null;
@@ -248,11 +262,12 @@ public class Fichero {
 	    // Creamos lo que vamos a escribir en el fichero
 	    // sb.append
 
-	    sb.append("Numero de registros leídos: " + registrosLeidos + "\n");
+	    sb.append("Numero de registros leidos: " + registrosLeidos + "\n");
 	    sb.append("Duracion del proceso: " + formato.format(duracion)
 		    + "\n");
 	    sb.append("Correctos: " + numCorrectos + "\n");
 	    sb.append("Errores: " + numErrores + "\n");
+	    sb.append("Repetidos: " + numRepetidos + "\n");
 
 	    // Escribimos lo que queramos en el fichero
 
@@ -275,4 +290,110 @@ public class Fichero {
 	return resul;
 
     }
+
+    public static boolean WritetoRepetidoFileStringBuilder(
+	    String nombreFichero, List<Persona> listaRepetidos) {
+	boolean resul = false;
+	Writer writer = null;
+	FileOutputStream fichero = null;
+	OutputStreamWriter outputStream = null;
+	BufferedWriter buffer = null;
+	StringBuilder sb = new StringBuilder();
+
+	try {
+	    // Creamos el nombrey extension del fichero
+	    fichero = new FileOutputStream(nombreFichero, true);
+
+	    // declaramos un stream para escribir. Pasamos como parametros el
+	    // fichero a escribir y el charset
+	    outputStream = new OutputStreamWriter(fichero, "utf-8");
+
+	    // Creamos un bufer intermedio (opcional) para mejorar el
+	    // rendimiento
+	    buffer = new BufferedWriter(outputStream);
+
+	    // Asignamos el bufer al writer
+
+	    writer = buffer;
+
+	    // Creamos lo que vamos a escribir en el fichero
+	    // sb.append
+	    for (int i = 0; i < listaRepetidos.size(); i++) {
+		sb.append(listaRepetidos.get(i).getNombre() + " "
+			+ listaRepetidos.get(i).getApellido() + " "
+			+ listaRepetidos.get(i).getPoblacion() + " "
+			+ listaRepetidos.get(i).getEdad() + " "
+			+ listaRepetidos.get(i).getMail() + " "
+			+ listaRepetidos.get(i).getDni() + " "
+			+ listaRepetidos.get(i).getCategoria() + "\n");
+		if (i % 2 != 0) {
+		    sb.append("-------------------------------------------------------------------------------------------\n");
+		}
+	    }
+
+	    // Escribimos lo que queramos en el fichero
+
+	    writer.write(sb.toString());
+
+	    resul = true;
+	} catch (IOException ex) {
+	    System.out.println(ex.getMessage());
+	    ex.printStackTrace();
+	    resul = false;
+	} finally {
+	    try {
+		writer.close();
+		buffer.close();
+	    } catch (Exception ex) {
+		System.out.println(ex.getMessage());
+		ex.printStackTrace();
+	    }
+	}
+	return resul;
+
+    }
+
+    /**
+     * Funcion para encontrar los dni repetidos en nuestro fichero y escribirlos
+     * en nuestro fichero de repetidos
+     *
+     * @param listaPersonas
+     */
+    public static int checkRepetidos(ArrayList<Persona> listaPersonas) {
+	List<Persona> duplicates = new ArrayList<Persona>();
+	Set<Persona> personaSet = new TreeSet<Persona>(new PersonaComparator());
+	for (Persona p : listaPersonas) {
+	    if (!personaSet.add(p)) {
+		// intentamos añadir la persona a nuestro TreeSet, si falla es
+		// que ya hay una persona con ese dni
+		duplicates.add(getPrimerDuplicado(listaPersonas, p.getDni()));
+		duplicates.add(p);
+	    }
+	}
+	WritetoRepetidoFileStringBuilder(Constantes.FICHERO_REPETIDOS,
+		duplicates);
+	return (duplicates.size());
+
+    }
+
+    /**
+     *
+     * @param listaPersonas
+     * @param dni
+     * @return
+     */
+    public static Persona getPrimerDuplicado(ArrayList<Persona> listaPersonas,
+	    String dni) {
+	Persona p1 = null;
+	boolean flag = false;
+	for (int i = 0; i < listaPersonas.size(); i++) {
+	    if (listaPersonas.get(i).getDni().equals(dni) && !flag) {
+		p1 = listaPersonas.get(i);
+		flag = true;
+	    }
+	}
+	return p1;
+
+    }
+
 }

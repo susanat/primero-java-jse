@@ -1,5 +1,11 @@
 package com.ipartek.ejercicio.migracion.util;
 
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,16 +49,46 @@ public class Utilidades {
 	return matcher.matches();
     }
 
-    public static boolean validarCodificacion(String cadena) {
-	boolean valida = false;
-	// TODO: Convertimos la cadena en bytes
+    /**
+     * Funcion que comprueba la correcta codificacion de los carateres
+     * 
+     * @param input
+     * @return
+     */
 
-	return valida;
+    public static boolean isUTF8MisInterpreted(String input) {
+	// convenience overload for the most common UTF-8 misinterpretation
+	// which is also the case in your question
+	return isUTF8MisInterpreted(input, "Windows-1252");
     }
 
-    public static byte[] getBytes(String cadena) {
-	byte[] bytes = cadena.getBytes();
-	return bytes;
+    /**
+     * Funcion que comprueba la correcta codicicacion de los caracteres
+     *
+     * @param input
+     * @param encoding
+     * @return
+     */
+
+    public static boolean isUTF8MisInterpreted(String input, String encoding) {
+
+	CharsetDecoder decoder = Charset.forName("UTF-8").newDecoder();
+	CharsetEncoder encoder = Charset.forName(encoding).newEncoder();
+	ByteBuffer tmp;
+	try {
+	    tmp = encoder.encode(CharBuffer.wrap(input));
+	}
+
+	catch (CharacterCodingException e) {
+	    return false;
+	}
+
+	try {
+	    decoder.decode(tmp);
+	    return true;
+	} catch (CharacterCodingException e) {
+	    return false;
+	}
     }
 
 }
