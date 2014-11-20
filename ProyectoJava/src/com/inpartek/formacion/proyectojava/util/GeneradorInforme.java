@@ -11,12 +11,13 @@ public class GeneradorInforme extends ManejadorFichero {
     private final static String P_PATTERN = ";";
     private final static String A_PATTERN = ",";
 
-    private final static int NOMBRE_POS = 1;
-    private final static int APELLIDO_POS = 2;
-    private final static int POBLACION_POS = 3;
-    private final static int EDAD_POS = 4;
+    private final static int NOMBRE_POS = 0;
+    private final static int APELLIDO_POS = 1;
+    private final static int POBLACION_POS = 2;
+    private final static int EDAD_POS = 3;
+    private final static int EMAIL_POS = 4;
     private final static int DNI_POS = 5;
-    private final static int DNI_CATEGORIA = 6;
+    private final static int CATEGORIA_POS = 6;
     private final static int N_CAMPOS = 7;
     String[] lista;
     HashMap<String, Persona> personas;
@@ -24,7 +25,7 @@ public class GeneradorInforme extends ManejadorFichero {
     HashMap<Persona, Integer> datos_repetidos;
     List<String> errores;
 
-    // TODO Sacar el texto a clase util
+    // TODO Sacar las validaciones a clase util
     public GeneradorInforme(final String _filePath, final String _fileName,
 	    final String _fileExt) {
 	super(_filePath, _fileName, _fileExt);
@@ -102,13 +103,18 @@ public class GeneradorInforme extends ManejadorFichero {
 	Persona p = new Persona(list[DNI_POS]);
 	p.setNombre(list[NOMBRE_POS]);
 	p.setApellido(list[APELLIDO_POS]);
-	// p.set
+	p.setPoblacion(list[POBLACION_POS]);
 	if (UtilValidacion.IsNumber(list[EDAD_POS])) {
 	    p.setEdad(Integer.parseInt(list[EDAD_POS]));
 	} else {
 	    p.setTodo(false);
 	}
-
+	if (UtilValidacion.validarEmail(list[EMAIL_POS])) {
+	    p.setEmail(list[EMAIL_POS]);
+	} else {
+	    p.setTodo(false);
+	}
+	p.setCategoria(list[CATEGORIA_POS]);
 	return p;
     }
 }
