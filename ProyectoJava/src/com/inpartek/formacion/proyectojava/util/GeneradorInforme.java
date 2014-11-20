@@ -31,9 +31,9 @@ public class GeneradorInforme extends ManejadorFichero {
 	List<String> errores;
 
 	// TODO Sacar las validaciones a clase util
-	public GeneradorInforme(final String _filePath, final String _fileName,
-			final String _fileExt) {
-		super(_filePath, _fileName, _fileExt);
+	public GeneradorInforme(final String pfilePath, final String pfileName,
+			final String pfileExt) {
+		super(pfilePath, pfileName, pfileExt);
 		datosPersonas = new HashMap<String, Persona>();
 		datosCortos = new HashMap<String, Persona>();
 		errores = new ArrayList<String>();
@@ -187,9 +187,9 @@ public class GeneradorInforme extends ManejadorFichero {
 		}
 	}
 
-	private String[] toLine(final String _line) {
+	private String[] toLine(final String pline) {
 		String[] list = null;
-		list = _line.split(P_PATTERN);
+		list = pline.split(P_PATTERN);
 
 		return list;
 	}

@@ -18,23 +18,23 @@ public class Persona {
 	public final static int EDAD_MIN = 0;
 	public final static int TEXTO_LONG_MIN = 2;
 
-	public Persona(final String _dni) {
+	public Persona(final String pdni) {
 		super();
-		this.dni = _dni;
+		this.dni = pdni;
 		this.todo = false;
 	}
 
-	public Persona(final String _nombre, final String _apellido,
-			final String _poblacion, final int _edad, final String _email,
-			final String _dni, final String _categoria) throws PersonaException {
+	public Persona(final String pnombre, final String papellido,
+			final String ppoblacion, final int pedad, final String pemail,
+			final String pdni, final String pcategoria) throws PersonaException {
 		super();
-		this.nombre = _nombre;
-		this.apellido = _apellido;
-		this.poblacion = _poblacion;
-		setEdad(_edad);
-		this.email = _email;
-		this.dni = _dni;
-		this.categoria = _categoria;
+		this.nombre = pnombre;
+		this.apellido = papellido;
+		this.poblacion = ppoblacion;
+		setEdad(pedad);
+		this.email = pemail;
+		this.dni = pdni;
+		this.categoria = pcategoria;
 		this.todo = true;
 	}
 
@@ -70,9 +70,9 @@ public class Persona {
 		return todo;
 	}
 
-	public void setApellido(final String _apellido) throws PersonaException {
-		if (_apellido != null && _apellido.length() >= Persona.TEXTO_LONG_MIN) {
-			this.apellido = _apellido;
+	public void setApellido(final String papellido) throws PersonaException {
+		if (papellido != null && papellido.length() >= Persona.TEXTO_LONG_MIN) {
+			this.apellido = papellido;
 		} else {
 			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
@@ -80,9 +80,9 @@ public class Persona {
 		}
 	}
 
-	public void setCategoria(final String _categoria) throws PersonaException {
-		if (_categoria != null && _categoria.length() >= Persona.TEXTO_LONG_MIN) {
-			this.categoria = _categoria;
+	public void setCategoria(final String pcategoria) throws PersonaException {
+		if (pcategoria != null && pcategoria.length() >= Persona.TEXTO_LONG_MIN) {
+			this.categoria = pcategoria;
 		} else {
 			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
@@ -91,9 +91,9 @@ public class Persona {
 
 	}
 
-	public void setDni(final String _dni) throws PersonaException {
-		if (UtilValidacion.validarDNI(_dni)) {
-			this.dni = _dni;
+	public void setDni(final String pdni) throws PersonaException {
+		if (UtilValidacion.validarDNI(pdni)) {
+			this.dni = pdni;
 		} else {
 			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_DNI_NO_VALIDO,
@@ -101,9 +101,9 @@ public class Persona {
 		}
 	}
 
-	public void setEdad(final int _edad) throws PersonaException {
-		if (_edad > EDAD_MIN && _edad <= EDAD_MAX) {
-			this.edad = _edad;
+	public void setEdad(final int pedad) throws PersonaException {
+		if (pedad > EDAD_MIN && pedad <= EDAD_MAX) {
+			this.edad = pedad;
 		} else {
 			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA,
@@ -111,13 +111,13 @@ public class Persona {
 		}
 	}
 
-	public void setEmail(final String email) {
-		this.email = email;
+	public void setEmail(final String pemail) {
+		this.email = pemail;
 	}
 
-	public void setNombre(final String _nombre) throws PersonaException {
-		if (_nombre != null && _nombre.length() >= Persona.TEXTO_LONG_MIN) {
-			this.nombre = _nombre;
+	public void setNombre(final String pnombre) throws PersonaException {
+		if (pnombre != null && pnombre.length() >= Persona.TEXTO_LONG_MIN) {
+			this.nombre = pnombre;
 		} else {
 			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
@@ -125,9 +125,9 @@ public class Persona {
 		}
 	}
 
-	public void setPoblacion(final String _poblacion) throws PersonaException {
-		if (_poblacion != null && _poblacion.length() >= Persona.TEXTO_LONG_MIN) {
-			this.poblacion = _poblacion;
+	public void setPoblacion(final String ppoblacion) throws PersonaException {
+		if (ppoblacion != null && ppoblacion.length() >= Persona.TEXTO_LONG_MIN) {
+			this.poblacion = ppoblacion;
 		} else {
 			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
@@ -135,8 +135,8 @@ public class Persona {
 		}
 	}
 
-	public void setTodo(final boolean _todo) {
-		this.todo = _todo;
+	public void setTodo(final boolean ptodo) {
+		this.todo = ptodo;
 	}
 
 	public String toFileString() {

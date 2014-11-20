@@ -9,15 +9,15 @@ public class Estadistica {
 	private int regIncorrecto;
 	private int regEstadistica;
 
-	public Estadistica(final int _regLeido, final GregorianCalendar _tiempo,
-			final int _regCorrecto, final int _regIncorrecto,
-			final int _regEstadistica) {
+	public Estadistica(final int pregLeido, final GregorianCalendar ptiempo,
+			final int pregCorrecto, final int pregIncorrecto,
+			final int pregEstadistica) {
 		super();
-		this.regLeido = _regLeido;
-		this.tiempo = _tiempo;
-		this.regCorrecto = _regCorrecto;
-		this.regIncorrecto = _regIncorrecto;
-		this.regEstadistica = _regEstadistica;
+		this.regLeido = pregLeido;
+		this.tiempo = ptiempo;
+		this.regCorrecto = pregCorrecto;
+		this.regIncorrecto = pregIncorrecto;
+		this.regEstadistica = pregEstadistica;
 	}
 
 	public int getRegCorrecto() {
@@ -40,24 +40,24 @@ public class Estadistica {
 		return tiempo;
 	}
 
-	public void setRegCorrecto(final int regCorrecto) {
-		this.regCorrecto = regCorrecto;
+	public void setRegCorrecto(final int pregCorrecto) {
+		this.regCorrecto = pregCorrecto;
 	}
 
-	public void setRegEstadistica(final int regEstadistica) {
-		this.regEstadistica = regEstadistica;
+	public void setRegEstadistica(final int pregEstadistica) {
+		this.regEstadistica = pregEstadistica;
 	}
 
-	public void setRegIncorrecto(final int regIncorrecto) {
-		this.regIncorrecto = regIncorrecto;
+	public void setRegIncorrecto(final int pregIncorrecto) {
+		this.regIncorrecto = pregIncorrecto;
 	}
 
-	public void setRegLeido(final int regLeido) {
-		this.regLeido = regLeido;
+	public void setRegLeido(final int pregLeido) {
+		this.regLeido = pregLeido;
 	}
 
-	public void setTiempo(final GregorianCalendar tiempo) {
-		this.tiempo = tiempo;
+	public void setTiempo(final GregorianCalendar ptiempo) {
+		this.tiempo = ptiempo;
 	}
 
 }

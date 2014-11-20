@@ -21,12 +21,12 @@ public class ManejadorFichero {
 	protected String fileExt;
 	protected File fichero;
 
-	public ManejadorFichero(final String _filePath, final String _fileName,
-			final String _fileExt) {
+	public ManejadorFichero(final String pfilePath, final String pfileName,
+			final String pfileExt) {
 		super();
-		this.filePath = _filePath;
-		this.fileName = _fileName;
-		this.fileExt = _fileExt;
+		this.filePath = pfilePath;
+		this.fileName = pfileName;
+		this.fileExt = pfileExt;
 	}
 
 	public void addTexttoFile(final String content) {
