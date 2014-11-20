@@ -25,6 +25,7 @@ public class Migracion {
 	private static final int IND_CATEGORIA = 6;
 
 	public static void main(String[] args) {
+
 		// Leer el fichero con los datos
 		FicheroLectura fDatos = new FicheroLectura();
 		try {
@@ -32,18 +33,86 @@ public class Migracion {
 			System.out.println("Leer fichero");
 
 			// Leer las lineas del fichero
-			String lineaDatos;
-			// Leer la primera linea
-			String primeraLinea = fDatos.leer();
-			System.out.println(primeraLinea);
-			Persona p = new Persona();
+			String linea;
+			String errorDato;
 
-			tratarDatos(primeraLinea, p);
+			// Inicializamos la lista de los PersonaError
+			ListaPersonaError vCorrectos = new ListaPersonaError(false);
+			ListaPersonaError vErroneos = new ListaPersonaError(true);
+			ListaPersonaError vRepetidos = new ListaPersonaError(true);
 
 			// Creamos la Estadistica
 			Estadistica estadistica = new Estadistica();
 			// Inicializamos la Estadistica
 			estadistica.inicializar();
+
+			while ((linea = fDatos.leer()) != null) {
+				System.out.println(linea);
+
+				// Nos creamos una Persona
+				Persona p = new Persona();
+				// Le asignamos los valores
+				errorDato = tratarDatos(linea, p);
+				// Creamos un PersonaError
+				PersonaError pError = new PersonaError(errorDato, p);
+
+				// Aumentamos en uno el numero de registros leidos
+				estadistica.aumentarRegistrosLeidos();
+
+				// Si NO se ha producido un error durante la creacion
+				if (errorDato.isEmpty()) {
+					// Se anade la persona a la lista de las correctas
+					// Si acaso ya esta no lo anadira y devolvera un false
+					boolean bAnadido = vCorrectos.anadirPersona(pError);
+
+					if (bAnadido) {
+						// Debemos comprobar que esa persona no esta en la lista
+						// de los Erroneos
+						PersonaError pExiste = vErroneos.devolverPersona(pError
+								.getPersona().getDni());
+
+						if (pExiste != null) {
+							// Si la persona no esta en la lista de los Erroneos
+							// se anade a los correctos
+							vCorrectos.anadirPersona(pError);
+							estadistica.aumentarRegistrosCorrectos();
+						} else {
+							// Si la persona esta en la lista de los Erroneos
+							// se anade en los repetidos el que es erroneo
+							vRepetidos.anadirPersona(pExiste);
+							// aumentamos el numero de duplicados
+							estadistica.aumentarRegistrosDuplicados();
+
+							// No se anade el que hemos creado por que lo
+							// haremos al final del proceso
+							// TODO: hacerlo!!!!!!
+						}
+
+					} else {
+						// Si ya esta la persona
+						// se añade a la lista de los duplicados
+						vRepetidos.anadirPersona(pError);
+						// aumentamos en uno las personas duplicadas
+						estadistica.aumentarRegistrosDuplicados();
+					}
+
+				} else {
+					// Si se ha producido error durante la creacion
+					vErroneos.anadirPersona(pError);
+					// aumentamos en uno las personas con error
+					estadistica.aumentarRegistrosErroneos();
+				}
+
+			}
+
+			estadistica.finalizar();
+			System.out.println("Leidos: " + estadistica.getRegistrosLeidos());
+			System.out.println("Correctos: "
+					+ estadistica.getRegistrosCorrectos());
+			System.out.println("Erroneos: "
+					+ estadistica.getRegistrosErroneos());
+			System.out.println("Duplicados: "
+					+ estadistica.getRegistrosDuplicados());
 
 		} catch (FileNotFoundException e) {
 			System.out.println("El fichero " + NOMBRE_FICHERO_DATOS
