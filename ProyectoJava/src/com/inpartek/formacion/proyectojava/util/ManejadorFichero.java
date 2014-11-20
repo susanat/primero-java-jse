@@ -1,10 +1,12 @@
 package com.inpartek.formacion.proyectojava.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -23,6 +25,48 @@ public class ManejadorFichero {
 		this.filePath = _filePath;
 		this.fileName = _fileName;
 		this.fileExt = _fileExt;
+	}
+
+	public void addTexttoFile(final String cotent) {
+		FileWriter fileWritter = null;
+		BufferedWriter bufferWritter = null;
+		fichero = new File(filePath + fileName + "." + fileExt);
+
+		// if file doesnt exists, then create it
+		if (!fichero.exists()) {
+			try {
+				fichero.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		// true = append file
+
+		try {
+			fileWritter = new FileWriter(fichero.getName(), true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		bufferWritter = new BufferedWriter(fileWritter);
+
+		try {
+			bufferWritter.write(cotent);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				bufferWritter.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	/**

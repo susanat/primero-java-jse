@@ -10,6 +10,6 @@ public class Main {
 		GeneradorInforme ejercicio = new GeneradorInforme("c:/", "personas",
 				"txt");
 		ejercicio.cargarDatos();
-		ejercicio.exportarDatos();
+		ejercicio.generarDatos();
 	}
 }

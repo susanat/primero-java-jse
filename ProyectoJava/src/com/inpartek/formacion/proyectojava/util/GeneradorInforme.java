@@ -24,16 +24,18 @@ public class GeneradorInforme extends ManejadorFichero {
 	private final static String NOMBRE_FICHERO_DUPLICADO = "personas-repetidas";
 	private final static String NOMBRE_FICHERO_VALIDO = "personas-correctas";
 	String[] lista;
-	HashMap<String, Persona> personas;
-	HashMap<String, Persona> datos_erroneos;
+	HashMap<String, Persona> datos_personas;
 	HashMap<String, Integer> datos_repetidos;
+	HashMap<String, Persona> datos_erroneos;
+	HashMap<String, Persona> datos_cortos;
 	List<String> errores;
 
 	// TODO Sacar las validaciones a clase util
 	public GeneradorInforme(final String _filePath, final String _fileName,
 			final String _fileExt) {
 		super(_filePath, _fileName, _fileExt);
-		personas = new HashMap<String, Persona>();
+		datos_personas = new HashMap<String, Persona>();
+		datos_cortos = new HashMap<String, Persona>();
 		errores = new ArrayList<String>();
 		datos_erroneos = new HashMap<String, Persona>();
 		datos_repetidos = new HashMap<String, Integer>();
@@ -48,11 +50,11 @@ public class GeneradorInforme extends ManejadorFichero {
 		for (String s : lista) {
 			p = toPersona(s);
 			if (p != null) {
-				if (isRepeted(p)) {
+				if (isRepeated(p)) {
 					if (p.isTodo()) {
-						personas.put(p.getDni(), p);
+						datos_personas.put(p.getDni(), p);
 					} else {
-						datos_erroneos.put(p.getDni(), p);
+						datos_cortos.put(p.getDni(), p);
 					}
 				} else {
 					int cont = 0;
@@ -67,44 +69,110 @@ public class GeneradorInforme extends ManejadorFichero {
 		}
 	}
 
-	public void exportarDatos() {
+	private void gArchivoDatosFaltan() {
+		final String ENCABEZADO = "PERSONAS DE LAS QUE FALTAN DATOS:";
+		Persona value = null;
 
-		generarError();
-		generarCorrecto();
-		generarDuplicado();
+		this.fileName = NOMBRE_FICHERO_ERROR;
+		addTexttoFile(ENCABEZADO);
+		for (Map.Entry<String, Persona> entry : datos_cortos.entrySet()) {
+			value = entry.getValue();
+			addTexttoFile(value.toFileString() + value);
+		}
 	}
 
-	private void generarCorrecto() {
+	private void gArchivoDatosInvalido() {
+		// TODO Auto-generated method stub
+		final String ENCABEZADO = "PERSONAS DE LAS QUE TIENEN LOS DATOS MAL ESCRITOS:";
+		Persona value = null;
 
+		this.fileName = NOMBRE_FICHERO_ERROR;
+		addTexttoFile(ENCABEZADO);
+		for (Map.Entry<String, Persona> entry : datos_erroneos.entrySet()) {
+			value = entry.getValue();
+			addTexttoFile(value.toFileString() + value);
+		}
+
+	}
+
+	private void gArchivoDniInvalido() {
+		final String ENCABEZADO = "DATOS CON DNIs MAL INTRODUCIDOS:";
+		this.fileName = NOMBRE_FICHERO_ERROR;
+		addTexttoFile(ENCABEZADO);
+		for (String s : errores) {
+			addTexttoFile(s);
+		}
+
+	}
+
+	private void gDatosArchivoCorrecto() {
+
+		Persona value = null;
 		this.fileName = NOMBRE_FICHERO_VALIDO;
-		crearArchivoTexto("");
+
+		for (Map.Entry<String, Persona> entry : datos_personas.entrySet()) {
+			value = entry.getValue();
+			addTexttoFile(value.toFileString() + value);
+		}
+
 	}
 
-	private void generarDuplicado() {
-		final String ENCABEZADO = "PERSONA\t\t\t\tN VECES";
+	private void gDatosArchivoDuplicado() {
+
 		String key = null;
 		Integer value = null;
 		Persona p = null;
 		this.fileName = NOMBRE_FICHERO_DUPLICADO;
 
-		crearArchivoTexto(ENCABEZADO);
 		for (Map.Entry<String, Integer> entry : datos_repetidos.entrySet()) {
 			key = entry.getKey();
 			value = entry.getValue();
-			p = personas.get(key);
-			crearArchivoTexto(p.toFileString() + value);
+			p = datos_personas.get(key);
+			addTexttoFile(p.toFileString() + value);
 		}
 
 	}
 
-	private void generarError() {
-		this.fileName = NOMBRE_FICHERO_ERROR;
-		crearArchivoTexto("");
+	private void gDatosArchivoError() {
+		// datos_erroneos;
+
+		gArchivoDniInvalido();
+		gArchivoDatosFaltan();
+		gArchivoDatosInvalido();
 	}
 
-	private boolean isRepeted(final Persona p) {
+	private void gEncabezadoArchivoCorrecto() {
+		final String ENCABEZADO = "PERSONAS";
+		this.fileName = NOMBRE_FICHERO_VALIDO;
+		crearArchivoTexto(ENCABEZADO);
+	}
 
-		if (personas.containsKey(p.getDni())
+	private void gEncabezadoArchivoDuplicado() {
+		final String ENCABEZADO = "PERSONA\t\t\t\t\tN VECES";
+		this.fileName = NOMBRE_FICHERO_DUPLICADO;
+		crearArchivoTexto(ENCABEZADO);
+
+	}
+
+	private void gEncabezadoArchivoError() {
+		final String ENCABEZADO = "PERSONAS CON ERRORES EN SUS ARCHIVOS";
+		this.fileName = NOMBRE_FICHERO_ERROR;
+		crearArchivoTexto(ENCABEZADO);
+	}
+
+	public void generarDatos() {
+
+		gEncabezadoArchivoError();
+		gDatosArchivoError();
+		gEncabezadoArchivoCorrecto();
+		gDatosArchivoCorrecto();
+		gEncabezadoArchivoDuplicado();
+		gDatosArchivoDuplicado();
+	}
+
+	private boolean isRepeated(final Persona p) {
+
+		if (datos_personas.containsKey(p.getDni())
 				|| datos_erroneos.containsKey(p.getDni())) {
 			return true;
 		} else {
@@ -144,6 +212,7 @@ public class GeneradorInforme extends ManejadorFichero {
 		p.setNombre(list[NOMBRE_POS]);
 		p.setApellido(list[APELLIDO_POS]);
 		p.setPoblacion(list[POBLACION_POS]);
+		p.setCategoria(list[CATEGORIA_POS]);
 		if (UtilValidacion.IsNumber(list[EDAD_POS])) {
 			p.setEdad(Integer.parseInt(list[EDAD_POS]));
 		} else {
@@ -154,7 +223,6 @@ public class GeneradorInforme extends ManejadorFichero {
 		} else {
 			p.setTodo(false);
 		}
-		p.setCategoria(list[CATEGORIA_POS]);
 		return p;
 	}
 }

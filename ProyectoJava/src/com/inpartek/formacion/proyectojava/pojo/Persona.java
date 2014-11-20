@@ -21,7 +21,7 @@ public class Persona {
 	public Persona(final String _dni) {
 		super();
 		this.dni = _dni;
-		this.todo = true;
+		this.todo = false;
 	}
 
 	public Persona(final String _nombre, final String _apellido,
@@ -74,6 +74,7 @@ public class Persona {
 		if (_apellido != null && _apellido.length() >= Persona.TEXTO_LONG_MIN) {
 			this.apellido = _apellido;
 		} else {
+			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
 					PersonaException.COD_LONG_TEXTO_NO_VALIDA);
 		}
@@ -83,6 +84,7 @@ public class Persona {
 		if (_categoria != null && _categoria.length() >= Persona.TEXTO_LONG_MIN) {
 			this.categoria = _categoria;
 		} else {
+			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
 					PersonaException.COD_LONG_TEXTO_NO_VALIDA);
 		}
@@ -93,6 +95,7 @@ public class Persona {
 		if (UtilValidacion.validarDNI(_dni)) {
 			this.dni = _dni;
 		} else {
+			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_DNI_NO_VALIDO,
 					PersonaException.COD_DNI_NO_VALIDO);
 		}
@@ -102,6 +105,7 @@ public class Persona {
 		if (_edad > EDAD_MIN && _edad <= EDAD_MAX) {
 			this.edad = _edad;
 		} else {
+			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDA,
 					PersonaException.COD_EDAD_NO_VALIDA);
 		}
@@ -115,6 +119,7 @@ public class Persona {
 		if (_nombre != null && _nombre.length() >= Persona.TEXTO_LONG_MIN) {
 			this.nombre = _nombre;
 		} else {
+			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
 					PersonaException.COD_LONG_TEXTO_NO_VALIDA);
 		}
@@ -124,6 +129,7 @@ public class Persona {
 		if (_poblacion != null && _poblacion.length() >= Persona.TEXTO_LONG_MIN) {
 			this.poblacion = _poblacion;
 		} else {
+			this.todo = false;
 			throw new PersonaException(PersonaException.MSG_TEXTO_NO_VALIDO,
 					PersonaException.COD_LONG_TEXTO_NO_VALIDA);
 		}
@@ -135,6 +141,8 @@ public class Persona {
 
 	public String toFileString() {
 
-		return this.dni + " " + this.nombre + " " + this.apellido;
+		return this.dni + " " + this.nombre + " " + this.apellido + " "
+				+ this.edad + " " + this.email + " " + this.poblacion + " "
+				+ this.categoria;
 	}
 }
