@@ -7,9 +7,10 @@ public class Main {
 
 	public static void main(final String[] args) throws NumberFormatException,
 			PersonaException {
-		GeneradorInforme ejercicio = new GeneradorInforme("c:/", "personas",
+		GeneradorInforme ejercicio = new GeneradorInforme("d:/", "personas",
 				"txt");
 		ejercicio.cargarDatos();
+
 		ejercicio.generarDatos();
 	}
 }

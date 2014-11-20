@@ -50,7 +50,7 @@ public class GeneradorInforme extends ManejadorFichero {
 		for (String s : lista) {
 			p = toPersona(s);
 			if (p != null) {
-				if (isRepeated(p)) {
+				if (!isRepeated(p)) {
 					if (p.isTodo()) {
 						datos_personas.put(p.getDni(), p);
 					} else {
@@ -64,9 +64,11 @@ public class GeneradorInforme extends ManejadorFichero {
 					}
 
 					datos_repetidos.put(p.getDni(), cont);
+
 				}
 			}
 		}
+
 	}
 
 	private void gArchivoDatosFaltan() {
@@ -74,10 +76,10 @@ public class GeneradorInforme extends ManejadorFichero {
 		Persona value = null;
 
 		this.fileName = NOMBRE_FICHERO_ERROR;
-		addTexttoFile(ENCABEZADO);
+		addTexttoFile(ENCABEZADO + "\n");
 		for (Map.Entry<String, Persona> entry : datos_cortos.entrySet()) {
 			value = entry.getValue();
-			addTexttoFile(value.toFileString() + value);
+			addTexttoFile(value.toFileString());
 		}
 	}
 
@@ -87,18 +89,18 @@ public class GeneradorInforme extends ManejadorFichero {
 		Persona value = null;
 
 		this.fileName = NOMBRE_FICHERO_ERROR;
-		addTexttoFile(ENCABEZADO);
+		addTexttoFile(ENCABEZADO + "\n");
 		for (Map.Entry<String, Persona> entry : datos_erroneos.entrySet()) {
 			value = entry.getValue();
-			addTexttoFile(value.toFileString() + value);
+			addTexttoFile(value.toFileString());
 		}
 
 	}
 
 	private void gArchivoDniInvalido() {
-		final String ENCABEZADO = "DATOS CON DNIs MAL INTRODUCIDOS:";
+		final String ENCABEZADO = "PERSONAS CON DNI MAL INTRODUCIDO (POSICIÓN O TAMAÑO INCORRECTO):";
 		this.fileName = NOMBRE_FICHERO_ERROR;
-		addTexttoFile(ENCABEZADO);
+		addTexttoFile(ENCABEZADO + "\n");
 		for (String s : errores) {
 			addTexttoFile(s);
 		}
@@ -112,7 +114,7 @@ public class GeneradorInforme extends ManejadorFichero {
 
 		for (Map.Entry<String, Persona> entry : datos_personas.entrySet()) {
 			value = entry.getValue();
-			addTexttoFile(value.toFileString() + value);
+			addTexttoFile(value.toFileString());
 		}
 
 	}
@@ -128,7 +130,7 @@ public class GeneradorInforme extends ManejadorFichero {
 			key = entry.getKey();
 			value = entry.getValue();
 			p = datos_personas.get(key);
-			addTexttoFile(p.toFileString() + value);
+			addTexttoFile(p.toFileString() + "\t\t\t\t\t\t" + value);
 		}
 
 	}
@@ -144,24 +146,27 @@ public class GeneradorInforme extends ManejadorFichero {
 	private void gEncabezadoArchivoCorrecto() {
 		final String ENCABEZADO = "PERSONAS";
 		this.fileName = NOMBRE_FICHERO_VALIDO;
-		crearArchivoTexto(ENCABEZADO);
+		crearArchivoTexto(ENCABEZADO + "\n");
 	}
 
 	private void gEncabezadoArchivoDuplicado() {
-		final String ENCABEZADO = "PERSONA\t\t\t\t\tN VECES";
+		final String ENCABEZADO = "PERSONA\t\t\t\t\t\t\tN VECES";
 		this.fileName = NOMBRE_FICHERO_DUPLICADO;
-		crearArchivoTexto(ENCABEZADO);
-
+		crearArchivoTexto(ENCABEZADO + "\n");
 	}
 
 	private void gEncabezadoArchivoError() {
 		final String ENCABEZADO = "PERSONAS CON ERRORES EN SUS ARCHIVOS";
 		this.fileName = NOMBRE_FICHERO_ERROR;
-		crearArchivoTexto(ENCABEZADO);
+		crearArchivoTexto(ENCABEZADO + "\n");
 	}
 
 	public void generarDatos() {
-
+		/*
+		 * System.out.println("c" + datos_cortos.size() + "-e" +
+		 * datos_erroneos.size() + "-p" + datos_personas.size() + "-r" +
+		 * datos_repetidos.size());
+		 */
 		gEncabezadoArchivoError();
 		gDatosArchivoError();
 		gEncabezadoArchivoCorrecto();
@@ -174,8 +179,10 @@ public class GeneradorInforme extends ManejadorFichero {
 
 		if (datos_personas.containsKey(p.getDni())
 				|| datos_erroneos.containsKey(p.getDni())) {
+
 			return true;
 		} else {
+
 			return false;
 		}
 	}
@@ -209,6 +216,7 @@ public class GeneradorInforme extends ManejadorFichero {
 	private Persona validarDatos(final String[] list)
 			throws NumberFormatException, PersonaException {
 		Persona p = new Persona(list[DNI_POS]);
+		p.setTodo(true);
 		p.setNombre(list[NOMBRE_POS]);
 		p.setApellido(list[APELLIDO_POS]);
 		p.setPoblacion(list[POBLACION_POS]);

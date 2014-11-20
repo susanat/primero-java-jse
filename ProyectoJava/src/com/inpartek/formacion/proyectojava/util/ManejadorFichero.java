@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
@@ -27,9 +28,7 @@ public class ManejadorFichero {
 		this.fileExt = _fileExt;
 	}
 
-	public void addTexttoFile(final String cotent) {
-		FileWriter fileWritter = null;
-		BufferedWriter bufferWritter = null;
+	public void addTexttoFile(final String content) {
 		fichero = new File(filePath + fileName + "." + fileExt);
 
 		// if file doesnt exists, then create it
@@ -41,29 +40,16 @@ public class ManejadorFichero {
 				e.printStackTrace();
 			}
 		}
-
-		// true = append file
-
+		PrintWriter out = null;
 		try {
-			fileWritter = new FileWriter(fichero.getName(), true);
+			out = new PrintWriter(new BufferedWriter(new FileWriter(
+					fichero.getAbsoluteFile(), true)));
+			out.println("\n" + content);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		bufferWritter = new BufferedWriter(fileWritter);
-
-		try {
-			bufferWritter.write(cotent);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(e);
 		} finally {
-			try {
-				bufferWritter.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (out != null) {
+				out.close();
 			}
 		}
 
@@ -74,9 +60,17 @@ public class ManejadorFichero {
 	 * @param content
 	 */
 	public void crearArchivoTexto(final String content) {
-		fichero = new File(filePath + fileName + "." + fileExt);
 		FileOutputStream fos = null;
 		Writer out = null;
+		fichero = new File(filePath + fileName + "." + fileExt);
+		if (!fichero.exists()) {
+			try {
+				fichero.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		try {
 			fos = new FileOutputStream(fichero);
 			out = new OutputStreamWriter(fos, "UTF8");

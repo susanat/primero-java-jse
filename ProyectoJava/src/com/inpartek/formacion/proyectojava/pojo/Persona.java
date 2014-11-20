@@ -35,7 +35,7 @@ public class Persona {
 		this.email = _email;
 		this.dni = _dni;
 		this.categoria = _categoria;
-		this.todo = false;
+		this.todo = true;
 	}
 
 	public String getApellido() {
