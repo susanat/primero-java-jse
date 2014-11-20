@@ -1,6 +1,5 @@
 package com.inpartek.formacion.proyectojava.pojo;
 
-
 public class Estadistica {
 	private int regLeido;
 	private long tiempo;
@@ -26,6 +25,14 @@ public class Estadistica {
 		this.regCorrecto = pregCorrecto;
 		this.regIncorrecto = pregIncorrecto;
 		this.regduplicado = pregEstadistica;
+	}
+
+	public String calculateTime() {
+		int minutes = (int) (tiempo / (60 * 1000));
+		int seconds = (int) (tiempo / 1000 % 60);
+		String str = String.format("%d:%02d", minutes, seconds);
+
+		return str;
 	}
 
 	public int getRegCorrecto() {

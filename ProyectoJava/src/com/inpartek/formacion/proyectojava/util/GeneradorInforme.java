@@ -160,8 +160,7 @@ public class GeneradorInforme extends ManejadorFichero {
 	private void gDatosArchivoEstadistica() {
 
 		addTexttoFile("Registros leidos" + "\t" + estadistica.getRegLeido());
-		addTexttoFile("Minutos Segundos" + "\t"
-				+ UtilTime.calculateTime(estadistica.getTiempo()));
+		addTexttoFile("Minutos Segundos" + "\t" + estadistica.calculateTime());
 		addTexttoFile("Correctos" + "\t" + estadistica.getRegCorrecto());
 		addTexttoFile("Erroneos" + "\t" + estadistica.getRegIncorrecto());
 		addTexttoFile("Duplicados" + "\t" + estadistica.getRegduplicado());
