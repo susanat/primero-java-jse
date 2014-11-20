@@ -5,11 +5,16 @@ import com.ipartek.formacion.migracion.excepciones.PersonaException;
 /**
  * Clase para reprensentar un Alumno, se compone de:
  * <ol>
- * <li>nombre {@code String} obligatorio</li>
+ * <li>nombre {@code String}</li>
+ * <li>apellido1 {@code String}</li>
+ * <li>poblacion {@code String}</li>
+ * <li>edad {@code int}</li>
+ * <li>mail {@code String}</li>
+ * <li>dni {@code String}</li>
+ * <li>categoria {@code String}</li>
  * </ol>
  *
- *
- * @author Ander Uraga Real
+ * @author Aritz Tellaeche
  *
  */
 public class Persona {
@@ -27,7 +32,7 @@ public class Persona {
 	String dni;
 	String categoria;
 
-	// Constructor
+	// Constructores
 	public Persona() {
 		super();
 		this.nombre = "Jhon";
@@ -84,7 +89,8 @@ public class Persona {
 	}
 
 	public void setEdad(int edad) throws PersonaException {
-		if (edad >= MIN_EDAD && edad <= MAX_EDAD) {
+		// if (edad >= MIN_EDAD && edad <= MAX_EDAD) {
+		if (edad >= 18 && edad <= MAX_EDAD) {
 			this.edad = edad;
 		} else {
 			// lanzar PersonaException
