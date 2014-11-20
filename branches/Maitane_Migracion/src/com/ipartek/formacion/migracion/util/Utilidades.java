@@ -6,12 +6,13 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.aeat.valida.Validador;
+import com.ipartek.formacion.migracion.Migracion;
 import com.ipartek.formacion.migracion.bean.Persona;
-import com.ipartek.formacion.migracion.excepciones.PersonaException;
 
 /**
  * Clase con metodos staticos para no tener que crear un objeto al usarlos
@@ -70,17 +71,20 @@ public class Utilidades {
 		return completo;
 	}
 
-	public static boolean edadValida(int edad) throws PersonaException {
+	public static boolean edadValida(int edad) {// throws PersonaException {
 		boolean valida = false;
 
 		if (edad >= Persona.MIN_EDAD && edad <= Persona.MAX_EDAD) {
 			valida = true;
-		} else {
-
-			// lanzar PersonaException
-			throw new PersonaException(PersonaException.MSG_EDAD_NO_VALIDO,
-					PersonaException.CODE_EDAD_NO_VALIDO);
 		}
+
+		/*
+		 * else {
+		 *
+		 * // lanzar PersonaException throw new
+		 * PersonaException(PersonaException.MSG_EDAD_NO_VALIDO,
+		 * PersonaException.CODE_EDAD_NO_VALIDO); }
+		 */
 
 		return valida;
 	}
@@ -121,12 +125,12 @@ public class Utilidades {
 
 	public static boolean estaEnLista(ArrayList<Persona> lista, String _dni) {
 		boolean esta = false;
-		int i = 0;
-		while ((i < lista.size()) || esta == false) {
-			if (lista.get(i).getDni() == _dni) {
+		Iterator<Persona> it = lista.iterator();
+		while (it.hasNext()) {
+			if (_dni.equalsIgnoreCase(it.next().getDni())) {
 				esta = true;
+				break;
 			}
-
 		}
 
 		return esta;
@@ -134,12 +138,15 @@ public class Utilidades {
 
 	public static boolean estaEnLista(ArrayList<Persona> lista, Persona pers) {
 		boolean esta = false;
-		int i = 0;
-		while ((i < lista.size()) || esta == false) {
-			if (lista.get(i) == pers) {
-				esta = true;
-			}
+		Iterator<Persona> it = lista.iterator();
+		if (lista.size() > 0) {
+			while (it.hasNext()) {
 
+				if (pers.equals(it.hasNext())) {
+					esta = true;
+					break;
+				}
+			}
 		}
 
 		return esta;
@@ -147,13 +154,16 @@ public class Utilidades {
 
 	public static Persona devuelveElemLista(ArrayList<Persona> lista,
 			String _dni) {
-		int i = 0;
+
 		Persona per = new Persona();
-		boolean encontrado = false;
-		while ((i < lista.size()) || encontrado == false) {
-			if (lista.get(i).getDni() == _dni) {
-				per = lista.get(i);
-				encontrado = true;
+
+		Iterator<Persona> it = lista.iterator();
+		while (it.hasNext()) {
+
+			if (_dni.equalsIgnoreCase(it.next().getDni())) {
+				per = it.next();
+				break;
+
 			}
 		}
 		return per;
@@ -169,7 +179,8 @@ public class Utilidades {
 	 *
 	 * @return true si se crea el fichero, false en caso contrario
 	 */
-	static public boolean create(String nombreFichero, String contenido) {
+	static public boolean create(String nombreFichero,
+			ArrayList<Persona> listado) {
 		boolean resul = false;
 		Writer writer = null;
 		FileOutputStream ficheroTexto = null;
@@ -184,7 +195,10 @@ public class Utilidades {
 			// mejoramos el rendimiento con un buffer
 			writer = new BufferedWriter(outputStream);
 			// escribir en el fichero a traves del writer
-			writer.write(contenido);
+			for (int i = 0; i < listado.size(); i++) {
+				writer.write(pasarPersonaString(listado.get(i)));
+			}
+
 			resul = true;
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -198,4 +212,31 @@ public class Utilidades {
 		return resul;
 	}
 
+	public static String[] separarSplit(final String cadena,
+			final String separador) {
+
+		String[] elementosCadena = cadena.split(separador);
+
+		return elementosCadena;
+
+	}
+
+	public static String pasarPersonaString(Persona pers) {
+		String rdo = null;
+		if (pers != null) {
+			rdo = pers.getNombre() + pers.getApellido() + pers.getPoblacion()
+					+ pers.getEdad() + pers.getEmail() + pers.getDni()
+					+ pers.getCategoria();
+		}
+		return rdo;
+	}
+
+	public static ArrayList<Persona> pasarHashMapArrayList() {
+		ArrayList<Persona> listaPersona = new ArrayList<Persona>();
+		listaPersona = (ArrayList<Persona>) Migracion.personaCorrecta.values();
+		;
+
+		return listaPersona;
+
+	}
 }

@@ -47,12 +47,12 @@ public class Persona {// implements Comparable<Persona> {
 	 * public Persona(final String nombre, final String apellido1, final String
 	 * dni) throws PersonaException { super(); this.nombre = nombre;
 	 * this.apellido = apellido1; this.dni = dni; }
-	 * 
+	 *
 	 * public Persona(final String _nombre, final String _apellido1, final int
 	 * _edad, final String _dni) throws PersonaException { super(); this.nombre
 	 * = _nombre; this.apellido = _apellido1; setEdad(_edad); this.dni = _dni;
 	 * this.mayorEdad = (this.edad >= 18) ? true : false; }
-	 * 
+	 *
 	 * public Persona(final String nombre, final int edad) throws
 	 * PersonaException { super(); setNombre(nombre); setEdad(edad);
 	 * setApellido1("Doe"); setDni("xxxxxxxx"); }
@@ -76,13 +76,15 @@ public class Persona {// implements Comparable<Persona> {
 		return nombre;
 	}
 
-	public void setNombre(final String _nombre) throws PersonaException {
+	public void setNombre(final String _nombre) {// throws PersonaException {
 
 		if (_nombre == null || _nombre.length() < MIN_LONG_STRING) {
 
-			throw new PersonaException(
-					PersonaException.MSG_LONG_STRING_NO_VALIDO,
-					PersonaException.CODE_LONG_STRING_NO_VALIDO);
+			/*
+			 * throw new PersonaException(
+			 * PersonaException.MSG_LONG_STRING_NO_VALIDO,
+			 * PersonaException.CODE_LONG_STRING_NO_VALIDO);
+			 */
 		} else {
 			this.nombre = _nombre;
 		}
@@ -170,19 +172,19 @@ public class Persona {// implements Comparable<Persona> {
 	 * Collator.getInstance(new Locale("es_ES"));
 	 * collator.setStrength(Collator.PRIMARY); //
 	 * collator.setDecomposition(Collator.CANONICAL_DECOMPOSITION);
-	 *
+	 * 
 	 * // RuleBasedCollator esCollator = new RuleBasedCollator(SPANISH);
-	 *
+	 * 
 	 * // return (this.getNombre().compareTo(o.getNombre()));
-	 *
+	 * 
 	 * return collator.compare(this.getNombre(), o.getNombre()); }
-	 *
+	 * 
 	 * public static class ComparatorEdad implements Comparator<Persona> {
-	 *
+	 * 
 	 * @Override public int compare(final Persona o1, final Persona o2) {
-	 *
+	 * 
 	 * return Integer.compare(o1.getEdad(), o2.getEdad()); }
-	 *
+	 * 
 	 * }
 	 */
 
