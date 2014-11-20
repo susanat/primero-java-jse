@@ -219,6 +219,7 @@ public class Persona {
 	
 	String text = "";
 	
+	//configuramos los errores
 	if (errors != null && errors.size() > 0) {
 	    for (eErrorCause errorCause : errors) {
 		text += errorCause.toString() + ","; 
@@ -229,10 +230,14 @@ public class Persona {
 	    text += " => ";
 	}
 	
-	
+	/*
 	text += "nombre=" + nombre + ", apellido1=" + apellido1
 		+ ", poblacion=" + poblacion + ", edad=" + edad + ", email="
 		+ email + ", dni=" + dni + ", cargo=" + cargo;
+	*/
+	
+	text += nombre + "," + apellido1 + "," + poblacion 
+		+ "," + edad + "," + email + "," + dni + "," + cargo;
 	
 	return text;
     }

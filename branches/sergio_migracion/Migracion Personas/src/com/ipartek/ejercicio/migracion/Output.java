@@ -126,7 +126,7 @@ public final class Output {
 
 	for (Entry<eErrorCause, List<String>> lst : map.entrySet()) {	    	    
 	    for (String linea : lst.getValue()) {
-		aLines.add(lst.getKey().toString() +  " => " + linea);
+		aLines.add( UtilsPrograma.enumToString(lst.getKey()) +  " => " + linea);
 
 	    }
 	}
