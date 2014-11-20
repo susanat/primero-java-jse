@@ -4,11 +4,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-import com.ipartek.formacion.migracion.bean.Cadenas;
+import com.ipartek.formacion.migracion.util.Cadenas;
 
 public class LeerFicheroTexto {
 
-	public static int leerFichero() {
+	public static void main(String[] args) {
+
+		leerFichero();
+	}
+
+	/**
+	 * Lee el fichero personas.txt para obtener sus datos
+	 *
+	 */
+	public static void leerFichero() {
 
 		File archivo = null;
 		FileReader fr = null;
@@ -18,19 +27,29 @@ public class LeerFicheroTexto {
 		try {
 			// Apertura del fichero y creacion de BufferedReader para poder
 			// leerlo
-			archivo = new File("C:/Desarrollo/java/workspace/personas.txt");
+			archivo = new File("personas.txt");
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
 
-			Cadenas c = new Cadenas();
 			// int cont = 0;
 			// Lectura del fichero
 			String linea;
 			while ((linea = br.readLine()) != null) {
-				c.trocearCadenas(linea);
-				// System.out.println(linea);
+				Cadenas.trocearCadenas(linea);
+				/*
+				 * if (bien) {
+				 * CrearFicheroTexto.fichero("Personas-correctas.txt", linea); }
+				 * else if (edad < 18) {
+				 * CrearFicheroTexto.fichero("Personas-error.txt", linea); }
+				 * else if (dniduplicado) {
+				 * CrearFicheroTexto.fichero("Personas-duplicadas.txt", linea);
+				 * }
+				 */
+				CrearFicheroTexto.duplicados("estadisticas.txt", linea);
 				cont++;
 			}
+			String numReg = Integer.toString(cont);
+			CrearFicheroTexto.estadisticas("estadisticas.txt", numReg);
 			System.out.println(cont);
 
 		} catch (Exception e) {
@@ -47,7 +66,6 @@ public class LeerFicheroTexto {
 				e2.printStackTrace();
 			}
 		}
-		return cont;
 
 	}
 }
