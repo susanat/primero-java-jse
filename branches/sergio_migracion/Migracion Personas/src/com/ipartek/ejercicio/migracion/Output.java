@@ -26,12 +26,12 @@ public class Output {
      * @param agrupedLinesByFirstError agrupedLinesByFirstError map with lines group by error
      * @throws IOException Exceptions for files
      */
-    public static void createCorrectFile(final HashMap<eErrorCause, List<String>> agrupedLinesByFirstError) throws IOException
-    {
-	String file = ClsUtilsFicheros.combinarRutas(Constantes.PATH_OUTPUT, Constantes.NAME_FILE_CORRECTAS);
+    public static void createCorrectFile(final HashMap<eErrorCause, List<String>> lstFirstError) throws IOException {
+	final String file = ClsUtilsFicheros.combinarRutas
+		(Constantes.PATH_OUTPUT, Constantes.NAME_FILE_CORRECTAS);
 	
 	//obtengo las correctas
-	List<String> lstCorrectas = agrupedLinesByFirstError.get(eErrorCause.NONE);
+	List<String> lstCorrectas = lstFirstError.get(eErrorCause.NONE);
 	
 	ClsUtilsFicheros.writeSmallTextFile(lstCorrectas, file, Constantes.CHARSET_OUTPUT);
 	
@@ -44,8 +44,9 @@ public class Output {
      * @param objAction Object with all process of checked
      * @throws IOException Exceptions for files
      */
-    public static void createStadisticFile(final Actions objAction) throws IOException{
-	String file = ClsUtilsFicheros.combinarRutas(Constantes.PATH_OUTPUT, Constantes.NAME_FILE_ESTADISTICAS);
+    public static void createStadisticFile(final Actions objAction) throws IOException {
+	final String file = ClsUtilsFicheros.combinarRutas
+		(Constantes.PATH_OUTPUT, Constantes.NAME_FILE_ESTADISTICAS);
 
 	List<String> aLines = new ArrayList<String>();
 	
@@ -57,18 +58,19 @@ public class Output {
 	aLines.add("Lineas con algún fallo: " + lineasInCorrectas);  	    
 	aLines.add("Total analizado: " + (lineasCorrectas + lineasInCorrectas));  	    
 
-	int error_max_fields = objAction.getNumberOfLinesByFirstError(eErrorCause.MAX_FIELDS);
-	int error_min_fields = objAction.getNumberOfLinesByFirstError(eErrorCause.MIN_FIELDS);  	    		
-	int error_utf8 = objAction.getNumberOfLinesByFirstError(eErrorCause.UTF8);
-	int error_email = objAction.getNumberOfLinesByFirstError(eErrorCause.EMAIL);
-	int error_dni = objAction.getNumberOfLinesByFirstError(eErrorCause.DNI);
-	int error_edad = objAction.getNumberOfLinesByFirstError(eErrorCause.EDAD);
-	aLines.add(" - Campos de mas: " + error_max_fields);
-	aLines.add(" - Campos de menos: " + error_min_fields);
-	aLines.add(" - Texto no validos: " + error_utf8);
-	aLines.add(" - EMAIL no valido: " + error_email);
-	aLines.add(" - DNI no valido: " + error_dni);
-	aLines.add(" - Edad no valida: " + error_edad);
+	int errorMaxFields = objAction.getNumberOfLinesByFirstError(eErrorCause.MAX_FIELDS);
+	int errorMinFields = objAction.getNumberOfLinesByFirstError(eErrorCause.MIN_FIELDS);  	    		
+	int errorUtf8 = objAction.getNumberOfLinesByFirstError(eErrorCause.UTF8);
+	int errorEmail = objAction.getNumberOfLinesByFirstError(eErrorCause.EMAIL);
+	int errorDni = objAction.getNumberOfLinesByFirstError(eErrorCause.DNI);
+	int errorEdad = objAction.getNumberOfLinesByFirstError(eErrorCause.EDAD);
+	
+	aLines.add(" - Campos de mas: " + errorMaxFields);
+	aLines.add(" - Campos de menos: " + errorMinFields);
+	aLines.add(" - Texto no validos: " + errorUtf8);
+	aLines.add(" - EMAIL no valido: " + errorEmail);
+	aLines.add(" - DNI no valido: " + errorDni);
+	aLines.add(" - Edad no valida: " + errorEdad);
 	//aLines.add(" - total: " + 
 	//	(error_max_fields + error_min_fields + error_utf8 + error_email + error_dni + error_edad )
 	//	);
@@ -84,18 +86,19 @@ public class Output {
      * @param agrupedLinesByFirstError map with lines group by error
      * @throws IOException Exceptions for files
      */
-    public static void createErrorsFile(final HashMap<eErrorCause, List<String>> agrupedLinesByFirstError) throws IOException{
-	String file = ClsUtilsFicheros.combinarRutas(Constantes.PATH_OUTPUT, Constantes.NAME_FILE_ERRONEAS);
+    public static void createErrorsFile(final HashMap<eErrorCause, List<String>> agrupedLinesByFirstError) throws IOException {
+	
+	final String file = ClsUtilsFicheros.combinarRutas
+		(Constantes.PATH_OUTPUT, Constantes.NAME_FILE_ERRONEAS);
 
-	List<String> aLines = new ArrayList<String>();
+	final List<String> aLines = new ArrayList<String>();
 
 	HashMap<eErrorCause, List<String>> map = new HashMap<eErrorCause, List<String>>(agrupedLinesByFirstError);
 
-	//removemos las correctas:
-	map.remove(eErrorCause.NONE);
-	List<String> lstErrors = new ArrayList<String>();
+	//eliminamos las correctas:
+	map.remove(eErrorCause.NONE);	
 
-	for (Entry<eErrorCause, List<String>> lst : map.entrySet()){	    	    
+	for (Entry<eErrorCause, List<String>> lst : map.entrySet()) {	    	    
 	    for(String linea : lst.getValue()){
 		aLines.add(lst.getKey().toString() +  " => " + linea);
 
@@ -118,7 +121,7 @@ public class Output {
 	List<String> lstDuplicated = new ArrayList<String>();
 
 	//agrupo por DNI
-	HashMap<String, List<Persona>> map = new HashMap<String, List<Persona>>();
+	HashMap<String, List<Persona>> map = new HashMap<String, List<Persona>>();	
 	for (Persona persona : lstPersona) {
 	    String key = persona.getDni();
 	    if (map.get(key) == null) {
@@ -129,6 +132,7 @@ public class Output {
 
 	String text = "";
 	
+	//recorro encontrando duplicados
 	for (Entry<String, List<Persona>> lst : map.entrySet())
 	{
 	    //compruebo si tiene más de un elementos en la lista

@@ -14,42 +14,65 @@ import java.util.regex.Pattern;
  * @version 03.11.2014
  * 
  * - Modificaciones
- * - Casa 04.11.2014
+ * - Casa 20.11.2014
  */
-public class ClsUtilsTextos {
-   
-    public static List<String> getBetweenTwoCharacters(String texto, String a){
-        return getBetweenTwoCharacters(texto, a, a);
+public final class ClsUtilsTextos {
+    
+    /**
+     * Empty constructor.
+     */
+    private ClsUtilsTextos() {
+	
     }
     
-    public static List<String> getBetweenTwoCharacters(String texto, String a, String b)
-    {
+    /**
+     * Obtiene el texto entre dos textos indicados.
+     *    
+     * @param texto String con el texto
+     * @param limitA String texto límite 
+     * @return List<String> con el texto obtenido
+     */
+    public static List<String> getBetweenTwoCharacters(final String texto, 
+	    final String limitA) {
+        return getBetweenTwoCharacters(texto, limitA, limitA);
+    }
+    
+    /**
+     * Obtiene el texto entre dos textos indicados.
+     *    
+     * @param texto String con el texto
+     * @param limitA String texto límite inferior
+     * @param limitB String texto límite superior 
+     * @return List<String> con el texto obtenido
+     */
+    public static List<String> getBetweenTwoCharacters(final String texto, 
+	    final String limitA, final String limitB) {
         List<String> lst = new ArrayList<String>();
-        String start = a;
-        String end = b;
+        String start = limitA;
+        String end = limitB;
         String condition = "(.*?)";
         // "\\([^()]*\\)"
         //String condition = "[^()]*";
         
         @SuppressWarnings("serial")
-		final ArrayList<String> list = new ArrayList<String>() {{
+		final ArrayList<String> list = new ArrayList<String>() { {
             add("(");
             add(")");
             add("[");
             add("]");
             add(".");
-        }};
+        } };
                 
-        if(list.contains(a)){
-            start = "\\" + a;
-        }else{
-            start = a;
+        if (list.contains(limitA)) {
+            start = "\\" + limitA;
+        } else {
+            start = limitA;
         }
         
-        if(list.contains(b)){
-            end = "\\" + b;
-        }else{
-            end = b;
+        if (list.contains(limitB)) {
+            end = "\\" + limitB;
+        } else {
+            end = limitB;
         }
         
 
@@ -73,11 +96,12 @@ public class ClsUtilsTextos {
     /**
      * Obtiene una cadena de caracteres iniciando por la última posición.
      * 
-     * @param inputString
-     * @param subStringLength
-     * @return 
+     * @param inputString String de entrada
+     * @param subStringLength Numero de caracteres a obtener
+     * @return String con los caracteres indicados
      */
-    public static String getLastnCharacters(String inputString, int subStringLength) {
+    public static String getLastnCharacters(final String inputString, 
+	    final int subStringLength) {
         int length = inputString.length();
         if (length <= subStringLength) {
             return inputString;
@@ -87,63 +111,69 @@ public class ClsUtilsTextos {
     }
     
     /**
-     * Añade caracteres a la izquierda del texto hasta llegar a un tamaÃ±o determinado.
+     * Añade caracteres a la izquierda del texto hasta llegar a 
+     * un tamaÃ±o determinado.
      * Si el tamaño total es menor que el del texto, devuelve la cadena intacta.
      * @param texto Texto al que aÃ±adiremos los caracteres
      * @param tamTotal TamaÃ±o total del texto final
      * @param caracter CarÃ¡cter a aÃ±adir
+     * @return String con el texto cumplimentado
      */
     public static String padLeft(final String texto, 
-	    final int tamTotal, final String caracter) 
-    {
+	    final int tamTotal, final String caracter) {
 	String txtTemp = texto;
 	
         if (texto.length() >= tamTotal) {
             return txtTemp;        
-        }
-        else {
+        } else {
             
-            txtTemp = String.format("%1$" + tamTotal + "s",texto);
+            txtTemp = String.format("%1$" + tamTotal + "s", texto);
             txtTemp = txtTemp.replace(" ", caracter);
             
-            //return String.format("%1$" + tamTotal + "s",texto).replace(" ", caracter);
+            //return String.format
+            //("%1$" + tamTotal + "s",texto).replace(" ", caracter);
             return txtTemp;
         }
     }
     
     /**
-     * Añade caracteres a la derecha del texto hasta llegar a un tamaño determinado.
+     * Añade caracteres a la derecha del texto hasta 
+     * llegar a un tamaño determinado.
      * Si el tamaño total es menor que el del texto, devuelve la cadena intacta.
      * @param texto Texto al que añadiremos los caracteres
      * @param tamTotal tamaño total del texto final
      * @param caracter Caracter a añadir
+     * @return String con el texto cumplimentado
      */
-    public static String padRight(String texto, int tamTotal, String caracter) 
-    {   
-        if (texto.length() >= tamTotal)
+    public static String padRight(final String texto, 
+	    final int tamTotal, final String caracter) {   
+        	
+	if (texto.length() >= tamTotal) {
             return texto;        
-        else
+        } else {
             return String.format("%1$-" + tamTotal + "s",texto).replace(" ", caracter);
+        }
     }
-    
+
     /**
      * Desordena un string.
      * 
-     * @param texto
-     * @return
+     * @param texto String con texto a desordenar
+     * @return String con los caracteres desordenados
      */
     @SuppressWarnings("unused")
-	private String desordenarString(String texto)
-	{
-		List<String> letters = Arrays.asList(texto.split(""));
-	    Collections.shuffle(letters);
-	 
-	    String salida = "";
-	    for (String s : letters)
-	        salida += s;
-	 
-	    return salida;		
+    private String desordenarString(final String texto) {
+
+	final List<String> letters = Arrays.asList(texto.split(""));
+	Collections.shuffle(letters);
+
+	StringBuffer salida = new StringBuffer();
+	for (final String letter : letters) {
+	    salida.append(letter);
 	}
+
+	return salida.toString();		
+    }
     
    
 }
