@@ -80,7 +80,7 @@ public class Utilidades {
 
 		/*
 		 * else {
-		 *
+		 * 
 		 * // lanzar PersonaException throw new
 		 * PersonaException(PersonaException.MSG_EDAD_NO_VALIDO,
 		 * PersonaException.CODE_EDAD_NO_VALIDO); }
@@ -142,7 +142,7 @@ public class Utilidades {
 		if (lista.size() > 0) {
 			while (it.hasNext()) {
 
-				if (pers.equals(it.hasNext())) {
+				if (pers.equals(it.next())) {
 					esta = true;
 					break;
 				}
@@ -196,7 +196,8 @@ public class Utilidades {
 			writer = new BufferedWriter(outputStream);
 			// escribir en el fichero a traves del writer
 			for (int i = 0; i < listado.size(); i++) {
-				writer.write(pasarPersonaString(listado.get(i)));
+				writer.write(pasarPersonaString(listado.get(i)) + "\r\n");
+
 			}
 
 			resul = true;
@@ -232,9 +233,15 @@ public class Utilidades {
 	}
 
 	public static ArrayList<Persona> pasarHashMapArrayList() {
-		ArrayList<Persona> listaPersona = new ArrayList<Persona>();
-		listaPersona = (ArrayList<Persona>) Migracion.personaCorrecta.values();
-		;
+		// necesita espacios en el fich d salida
+		ArrayList<Persona> listaPersona = new ArrayList<Persona>(
+				Migracion.personaCorrecta.values());
+		for (Persona temp : listaPersona) {
+			System.out.println(temp);
+		}
+
+		// listaPersona = (ArrayList<Persona>)
+		// Migracion.personaCorrecta.values();
 
 		return listaPersona;
 

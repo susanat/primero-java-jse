@@ -1,10 +1,17 @@
 package com.ipartek.formacion.migracion;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+
+import sun.font.CreatedFontTracker;
 
 import com.ipartek.formacion.migracion.bean.Persona;
 import com.ipartek.formacion.migracion.excepciones.PersonaException;
@@ -23,6 +30,13 @@ public class Migracion {
 	// Atributos
 
 	static final String ASTERISCO = "* ";
+	static final String NOM_FICH_CORR = "doc\\personas-correctas.txt ";
+	static final String NOM_FICH_REPE = "doc\\persona-repetida.txt ";
+	static final String NOM_FICH_ERROR = "doc\\persona-error.txt ";
+	static final String NOM_FICH_LECTURA = "doc\\personas.txt";
+	public static String lineaSeparador = "_________________________";
+	public static String lineaSeparadorPunteado = "---------------------------------------";
+	static final String NOM_FICH_ESTADISTICAS = "doc\\estadisticas.txt";
 	public static HashMap<String, Persona> personaCorrecta = new HashMap<String, Persona>();
 	public static ArrayList<Persona> personaError = new ArrayList<Persona>();
 	public static ArrayList<Persona> personaRepetida = new ArrayList<Persona>();
@@ -33,6 +47,8 @@ public class Migracion {
 	public static ArrayList<String> listaBorrado = new ArrayList<String>();
 	static int contLineasLeidas = 0;
 	static ArrayList<String> listaErroneos = new ArrayList<String>();
+	static long segundos = 0;
+	static long minutos = 0;
 
 	// Metodos estaticos
 
@@ -73,7 +89,7 @@ public class Migracion {
 						// tratarError(pers);
 						listaErroneos.add(sCurrentLine);
 						System.out
-								.println(" **** Linea [" + sCurrentLine + "]");
+						.println(" **** Linea [" + sCurrentLine + "]");
 						System.out.println("faltan campos!!!!!!!");
 					}
 				} catch (Exception e) {
@@ -134,15 +150,15 @@ public class Migracion {
 	public static void isCorrect(Persona pers) {// throws PersonaException {
 
 		if (!Utilidades.camposCompletos(pers)) {
-			tratarError(pers);
+			tratarError(pers, "Faltan campos");
 		} else if (!Utilidades.dniCorrecto(pers.getDni())) {
-			tratarError(pers);
+			tratarError(pers, "DNI invalido");
 		} else if (!Utilidades.edadValida(pers.getEdad())) {
-			tratarError(pers);
+			tratarError(pers, "Edad no valida");
 		} else if (!Utilidades.validateEmail(pers.getEmail())) {
-			tratarError(pers);
+			tratarError(pers, "Email no valido");
 		} else if (!Utilidades.validarCaracteres(pers)) {
-			tratarError(pers);
+			tratarError(pers, "Caracteres no validos");
 		} else if (personaCorrecta.containsKey(pers.getDni())) {
 			// se añade el obejto Persona que estaba en correctos y la persona
 			// pasada como paramtero a personaRepetida.
@@ -170,11 +186,15 @@ public class Migracion {
 	 * @throws PersonaException
 	 */
 
-	public static void tratarError(Persona pers) {// throws PersonaException {
+	public static void tratarError(Persona pers, String tipoError) {// throws
+		// PersonaException
+		// {
+		Persona perError = pers;
+		perError.setNombre(tipoError + "  " + perError.getNombre());
 
 		if (Utilidades.estaEnLista(personaError, pers.getDni())) {
 
-			personaError.add(pers);
+			personaError.add(perError);
 			pers.setNombre(ASTERISCO + pers.getNombre());
 			personaRepetida.add(pers);
 			Persona persAuxiliar = (Utilidades.devuelveElemLista(personaError,
@@ -186,7 +206,7 @@ public class Migracion {
 				personaRepetida.add(persAuxiliar);
 			}
 		} else {
-			personaError.add(pers);
+			personaError.add(perError);
 		}
 
 	}
@@ -235,25 +255,68 @@ public class Migracion {
 		}
 	}
 
+	public static boolean crearEstadisticas(String nomFich) {
+
+		boolean resul = false;
+		Writer writer = null;
+		FileOutputStream ficheroTexto = null;
+		OutputStreamWriter outputStream = null;
+		try {
+			// Creamos el nombre y extension del fichero
+			ficheroTexto = new FileOutputStream(nomFich);
+			// declaramos un Stream para escribir
+			// pasamos como parametros el fichero a escribir y su Charset
+			outputStream = new OutputStreamWriter(ficheroTexto, "utf-8");
+			// objeto Writer para escribir
+			// mejoramos el rendimiento con un buffer
+			writer = new BufferedWriter(outputStream);
+
+			// escribir en el fichero a traves del writer
+
+			writer.write("ESTADISTICAS \r\n");
+			writer.write(lineaSeparador + "\r\n");
+			writer.write(contLineasLeidas + " Registros leidos \r\n");
+			writer.write(minutos + " Minutos " + segundos + " Segundos \r\n");
+			writer.write(lineaSeparadorPunteado + "\r\n");
+			writer.write(personaCorrecta.size() + " Correctos \r\n");
+			writer.write(personaError.size() + " Errores \r\n");
+			writer.write(personaRepetida.size() + " Duplicados \r\n");
+
+			resul = true;
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				writer.close();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		return resul;
+	}
+
 	// Metodo main
 	public static void main(String[] args) throws PersonaException {
 
-		// TODO añadir el fichero de texto a la carpeta
-		// doc y comprobar que la ruta sea correcta
-		// TODO añadir analisis a la carpeta DOC
+		long start = System.currentTimeMillis();
 
-		System.out.println("comezamos");
-		read("doc\\personas.txt");
-		System.out.println("tratadas todas las personas");
+		read(NOM_FICH_LECTURA);
+
 		ArrayList<Persona> persCorr = Utilidades.pasarHashMapArrayList();
-		Utilidades.create("doc\\personas-correctas.txt", persCorr);// TODO
+		Utilidades.create(NOM_FICH_CORR, persCorr);// TODO
 		// listaErroneos
-		Utilidades.create("doc\\personas-error.txt", personaError);
-		Utilidades.create("doc\\personas-repetidas.txt", personaRepetida);
-		// TODO estadisticas.txt
+		Utilidades.create(NOM_FICH_ERROR, personaError);
+		Utilidades.create(NOM_FICH_REPE, personaRepetida);
 		// https://es.answers.yahoo.com/question/index?qid=20120323172702AAi5TA6
 		// http://programador1.blogspot.com.es/2010/12/java-como-calcular-el-tiempo-de.html
-		System.out.println("acabado");
+
+		// calcular tiempo transcurrido
+		long end = System.currentTimeMillis();
+		long res = end - start;
+		minutos = res / (60 * 1000) % 60;
+		segundos = res / 1000 % 60;
+		// http://java-white-box.blogspot.com.es/2013/07/java-code-como-calcular-el-tiempo-que.html
+		crearEstadisticas(NOM_FICH_ESTADISTICAS);
 
 	}
 }
