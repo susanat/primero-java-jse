@@ -17,9 +17,12 @@ public class Utilidades {
 	    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     /**
+     * Funcion que valida si un DNI es correcto o no
      *
      * @param dni
-     * @return
+     *            : un {@code String} que contiene el DNI a evaluar
+     * @return un {@code boolean} que indica si el dni es correcto ({@code true}
+     *         ) o no ({@code false})
      */
     public static boolean validarDNI(String dni) {
 	boolean valido = false;
@@ -39,7 +42,9 @@ public class Utilidades {
      * regular
      *
      * @param email
-     * @return
+     *            : un {@code String} con el email a evaluar
+     * @return un {@code boolean} que indica si el email es valido ({@code true}
+     *         ) o no ({@code false})
      */
     public static boolean validarEmail(String email) {
 	boolean valido = false;
@@ -50,10 +55,12 @@ public class Utilidades {
     }
 
     /**
-     * Funcion que comprueba la correcta codificacion de los carateres
-     * 
+     * Funcion que comprueba la correcta codificacion de los carateres en UTF-8
+     *
      * @param input
-     * @return
+     *            : un {@code String} con la cadena a evaluar
+     * @return un {@code boolean} que indica si la cadena esta correctamente
+     *         codificada ({@code true}) o no ({@code false})
      */
 
     public static boolean isUTF8MisInterpreted(String input) {
@@ -66,8 +73,11 @@ public class Utilidades {
      * Funcion que comprueba la correcta codicicacion de los caracteres
      *
      * @param input
+     *            : un {@code String} con la cadena a evaluar
      * @param encoding
-     * @return
+     *            : un {@code String} con el tipo de codificacion
+     * @return un {@code boolean} que indica si la codificacion es correcta (
+     *         {@code true}) o no ({@code false})
      */
 
     public static boolean isUTF8MisInterpreted(String input, String encoding) {

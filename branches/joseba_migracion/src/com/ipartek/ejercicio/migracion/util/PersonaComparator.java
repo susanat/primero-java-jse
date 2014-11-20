@@ -1,7 +1,9 @@
 package com.ipartek.ejercicio.migracion.util;
 
 import java.util.Comparator;
-
+/**
+ * Clase comparator para comparar dos objetos de la clase persona por su DNI
+ */
 import com.ipartek.ejercicio.migracion.Persona;
 
 public class PersonaComparator implements Comparator<Persona> {

@@ -26,10 +26,13 @@ public class Fichero {
     public static final int NO_ESCRIBIR = -1;
 
     /**
-     * Leer fichero linea por linea y mostrarlo por pantalla
+     * Leer fichero linea por linea y realiza un proceso de selección para
+     * determinar que lineas son correctas y cuales erroneas
      *
      * @param nombreFichero
-     *            path + nombre del fichero
+     *            : un {@code String} con el nombre (ruta incluida) del fichero
+     *            a leer
+     *
      */
     public static void read(String nombreFichero) {
 	BufferedReader br = null; // Buffer para mejorar la lectura, es
@@ -145,7 +148,8 @@ public class Fichero {
      * comas y crea una Lista con los valores
      *
      * @param linea
-     * @return List
+     *            : un {@code String} con la linea a separar
+     * @return un {@code List} con los valores ya separados
      */
     public static List<String> separarValores(String linea) {
 	List<String> valoresPersona = new ArrayList<String>();
@@ -157,7 +161,9 @@ public class Fichero {
      * Funcion que crea un fichero vacio
      *
      * @param nombreFichero
-     * @return un boolean que indica si la creacion del fichero fue exitoso o no
+     *            : un {@code String} con el nombre del fichero a crear
+     * @return un {@code boolean} que indica si la creacion del fichero fue
+     *         exitosa o no
      */
     public static boolean crearFichero(String nombreFichero) {
 	boolean creadoCorrecto = false;
@@ -176,6 +182,17 @@ public class Fichero {
 	return creadoCorrecto;
     }
 
+    /**
+     * Funcion que escribe a los ficheros de correctos y erroneos
+     *
+     * @param nombreFichero
+     *            : un {@code String} con el nombre de fichero (ruta incluida)
+     *            en el que queremos escribir
+     * @param lista
+     *            : un {@code List} con los que queremos escribir en el fichero
+     * @return un {@code boolean} que indica si la escritura al fichero se
+     *         realizó correctamente
+     */
     public static boolean WritetoFileStringBuilder(String nombreFichero,
 	    List lista) {
 	boolean resul = false;
@@ -230,6 +247,29 @@ public class Fichero {
 
     }
 
+    /**
+     * Funcion que escribe al fichero de estadisticas
+     *
+     * @param nombreFichero
+     *            : un {@code String} con el nombre del fichero (ruta incluida)
+     *            en el que vamos a escribir
+     * @param registrosLeidos
+     *            : un {@code int} con el numero total de registros leidos
+     * @param numCorrectos
+     *            : un {@code int} con el numero de registros correctos
+     * @param numErrores
+     *            : un {@code int} con el numero de registros incorrectos
+     * @param numRepetidos
+     *            : un {@code int} con el numero de registros repetidos
+     * @param dateInicio
+     *            : un {@code Date} con el momento en el que se inicio todo el
+     *            proceso
+     * @param dateFinal
+     *            : un {@code Date} con el momento en el que se finalizo el
+     *            proceso
+     * @return un {@code boolean} que indica si el proceso de escritura en el
+     *         fichero se realizo correctamente
+     */
     public static boolean writeStatistics(String nombreFichero,
 	    int registrosLeidos, int numCorrectos, int numErrores,
 	    int numRepetidos, Date dateInicio, Date dateFinal) {
@@ -290,6 +330,17 @@ public class Fichero {
 	return resul;
 
     }
+
+    /**
+     * Funcion que escribe al fichero de repetidos
+     *
+     * @param nombreFichero
+     *            un {@code String} con el nombre del fichero (ruta incluida) al
+     *            que vamos a escribir
+     * @param listaRepetidos
+     *            : un {@code List} con todos los repetidos
+     * @return
+     */
 
     public static boolean WritetoRepetidoFileStringBuilder(
 	    String nombreFichero, List<Persona> listaRepetidos) {
@@ -354,10 +405,11 @@ public class Fichero {
     }
 
     /**
-     * Funcion para encontrar los dni repetidos en nuestro fichero y escribirlos
-     * en nuestro fichero de repetidos
+     * Funcion que obtiene las personas duplicadas mirando su DNI
      *
      * @param listaPersonas
+     *            : un {@code ArrayList} con todas las personas
+     * @return un {@code List} con los duplicados
      */
     public static int checkRepetidos(ArrayList<Persona> listaPersonas) {
 	List<Persona> duplicates = new ArrayList<Persona>();
@@ -377,10 +429,14 @@ public class Fichero {
     }
 
     /**
+     * Funcion que nos obtiene la pareja del duplicado encontrado con la funcion
+     * checkRepetidos
      *
      * @param listaPersonas
+     *            {@code ArrayList} un ArrayList con todas las personas
      * @param dni
-     * @return
+     *            {@code String}: el dni que ya sabemos que esta duplicado
+     * @return un objeto de la clase {@code Persona} con la pareja duplicada
      */
     public static Persona getPrimerDuplicado(ArrayList<Persona> listaPersonas,
 	    String dni) {
