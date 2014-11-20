@@ -14,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import com.aeat.valida.Validador;
 import com.ipartek.ejercicio.migracion.Constantes.eErrorCause;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsNumeros;
+import com.ipartek.ejercicio.migracion.utils.ClsUtilsTextos;
 
 /**
  * This class has function to do some validations.
@@ -70,10 +71,14 @@ public final class Validations {
      */
     public static boolean isValidDNI(final String dni) {
 
+	//completamos el DNI hasta nueve caracteres
+	String dniTemp = ClsUtilsTextos.padLeft(dni, 
+		Constantes.DNI_MIN_SIZE, Constantes.DNI_CARACTER);
+	
 	boolean checkOk = false;
 	
 	Validador validador = new Validador();
-	int e = validador.checkNif(dni);
+	int e = validador.checkNif(dniTemp);
 
 	if (e > 0) {
 	    checkOk = true;
@@ -94,7 +99,7 @@ public final class Validations {
 	byte[] myBytes = null;
 
 	try {
-	    myBytes = input.getBytes("UTF-8");
+	    myBytes = input.getBytes(Constantes.CHARSET_OUTPUT.toString());
 	} catch (UnsupportedEncodingException e) {
 	    return false;
 	}
@@ -127,7 +132,7 @@ public final class Validations {
     public static boolean isUTF8MisInterpreted(final String input,
 	    final String encoding) {
 
-	CharsetDecoder decoder = Charset.forName("UTF-8").newDecoder();
+	CharsetDecoder decoder = Charset.forName(Constantes.CHARSET_OUTPUT.toString()).newDecoder();
 	CharsetEncoder encoder = Charset.forName(encoding).newEncoder();
 	ByteBuffer tmp;
 	try {

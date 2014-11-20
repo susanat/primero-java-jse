@@ -13,6 +13,7 @@ import java.util.Objects;
 
 import com.ipartek.ejercicio.migracion.Constantes.eErrorCause;
 import com.ipartek.ejercicio.migracion.object.Persona;
+import com.ipartek.ejercicio.migracion.utils.ClsUtilsConstantes;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsFechas;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsFicheros;
 
@@ -378,10 +379,7 @@ public class Actions {
 		    Constantes.PATH_SOURCE, Constantes.NAME_FILE_SOURCE));
 	    // iniciamos el proceso
 	    objAction.startProcess();
-
-	    // Creamos el fichero de estadísticas
-	    Output.createStadisticFile(objAction);
-
+	    
 	    // creamos el fichero de líneas Incorrectas
 	    Output.createErrorsFile(objAction.getAgrupedLinesByFirstError());
 
@@ -390,6 +388,11 @@ public class Actions {
 	    
 	    // creamos el fichero de duplicados
 	    Output.createDuplicatedFile(objAction.getLstPersonas());
+
+	    // Creamos el fichero de estadísticas
+	    Output.createStadisticFile(objAction);
+
+	    
 
 	} catch (IOException e) {
 	    
@@ -400,6 +403,42 @@ public class Actions {
 	}
     }
 
+    /**
+     * Crea una lista con los registros duplicados.
+     * 
+     * @param lstPersona List<String> Listado con los objetos de persona
+     * @return HashMap<String, List<String>> 
+     */
+    private HashMap<String, List<Persona>> getListDuplicated(
+	    final List<Persona> lstPersona) {
+
+	HashMap<String, List<Persona>> mapDuplicados = 
+		new HashMap<String, List<Persona>>();
+
+	//agrupo por DNI
+	HashMap<String, List<Persona>> map = new HashMap<String, List<Persona>>();	
+	for (Persona persona : lstPersona) {
+	    String key = persona.getDni();
+	    if (map.get(key) == null) {
+		map.put(key, new ArrayList<Persona>());
+	    }
+	    map.get(key).add(persona);
+	}
+	
+	//recorro encontrando duplicados
+	for (Entry<String, List<Persona>> lst : map.entrySet()) {
+	    //compruebo si tiene más de un elementos en la lista
+	    if (lst.getValue().size() > 1) {
+		//añado al mapa
+		mapDuplicados.put(lst.getKey() , lst.getValue());
+	    }
+	    
+	}
+	
+	return mapDuplicados;
+    }
+    
+   
     
 
 }

@@ -147,5 +147,15 @@ public class Constantes {
      * Const to initialize logs.
      */
     public static final Long INITIALIZE_LONG = 0L;
+    
+    /**
+     * String para cumplimentar el tamaño del dni
+     */
+    public static final String DNI_CARACTER = "0";
+    
+    /**
+     * Tamaño mínimo del DNI (se rellenará con DNI_CARACTER)
+     */
+    public static final int DNI_MIN_SIZE = 9;
 	
 }

@@ -32,12 +32,11 @@ Todos los datos
 Edad entre 18 y 99
 
 Errores posibles:
-Datos Incompletos -> linea
 
+Datos Incompletos -> linea
 Edad -> linea
 Email no valido -> linea
 DNI no valido -> linea
-
 UTF8 -> linea
 
 **Repetida -> linea
@@ -69,10 +68,40 @@ Viernes 10:00
 -----------------------------------------------------
 
 
+Rutas repositorios:
+
+https://primero-java-jse.googlecode.com/svn/
+
+branches/sergio_migracion/Migracion Personas
+
+https://ipformacion.ipartekaula.com/svn/migracion2014/
+
+branches/sergio_migracion/Migracion Personas
 
 
+----------------------------------------
+0.9.1
 
+- Fallos:
 
+FIXED 0.9.2 - Modificar salida fichero de duplicados	
+	- Mostrar la línea en sí
+	
+	
+FIXED 0.9.2 - Modificar salida fichero de erróneos
+	- utilizar, para escritir el error, los datos proporcionados por el cliente
+	Datos Incompletos -> linea
+	Edad -> linea
+	Email no valido -> linea
+	DNI no valido -> linea
+	UTF8 -> linea 
 
+- Mostrar en estadísticas número de duplicados
+
+- Guardar versión correcta de archivo (no interpreta las tildes)
+	https://code.google.com/p/juniversalchardet/
+
+FIXED 0.9.2 - Validar el DNI completandlo con "0"
+	
 
 
