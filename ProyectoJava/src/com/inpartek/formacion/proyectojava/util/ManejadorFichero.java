@@ -30,7 +30,7 @@ public class ManejadorFichero {
 	 * @param content
 	 */
 	public void crearArchivoTexto(final String content) {
-		File fichero = new File(filePath + fileName + "." + fileExt);
+		fichero = new File(filePath + fileName + "." + fileExt);
 		FileOutputStream fos = null;
 		Writer out = null;
 		try {

@@ -24,17 +24,17 @@ public class Persona {
 		this.todo = true;
 	}
 
-	public Persona(final String nombre, final String apellido,
-			final String poblacion, final int _edad, final String email,
-			final String dni, final String categoria) throws PersonaException {
+	public Persona(final String _nombre, final String _apellido,
+			final String _poblacion, final int _edad, final String _email,
+			final String _dni, final String _categoria) throws PersonaException {
 		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
+		this.nombre = _nombre;
+		this.apellido = _apellido;
 		this.poblacion = poblacion;
 		setEdad(_edad);
-		this.email = email;
-		this.dni = dni;
-		this.categoria = categoria;
+		this.email = _email;
+		this.dni = _dni;
+		this.categoria = _categoria;
 		this.todo = false;
 	}
 
