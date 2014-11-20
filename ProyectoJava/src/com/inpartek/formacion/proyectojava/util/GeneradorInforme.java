@@ -3,6 +3,7 @@ package com.inpartek.formacion.proyectojava.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.inpartek.formacion.proyectojava.exception.PersonaException;
 import com.inpartek.formacion.proyectojava.pojo.Persona;
@@ -19,10 +20,13 @@ public class GeneradorInforme extends ManejadorFichero {
 	private final static int DNI_POS = 5;
 	private final static int CATEGORIA_POS = 6;
 	private final static int N_CAMPOS = 7;
+	private final static String NOMBRE_FICHERO_ERROR = "personas-error";
+	private final static String NOMBRE_FICHERO_DUPLICADO = "personas-repetidas";
+	private final static String NOMBRE_FICHERO_VALIDO = "personas-correctas";
 	String[] lista;
 	HashMap<String, Persona> personas;
 	HashMap<String, Persona> datos_erroneos;
-	HashMap<Persona, Integer> datos_repetidos;
+	HashMap<String, Integer> datos_repetidos;
 	List<String> errores;
 
 	// TODO Sacar las validaciones a clase util
@@ -32,7 +36,7 @@ public class GeneradorInforme extends ManejadorFichero {
 		personas = new HashMap<String, Persona>();
 		errores = new ArrayList<String>();
 		datos_erroneos = new HashMap<String, Persona>();
-		datos_repetidos = new HashMap<Persona, Integer>();
+		datos_repetidos = new HashMap<String, Integer>();
 		lista = null;
 	}
 
@@ -57,10 +61,45 @@ public class GeneradorInforme extends ManejadorFichero {
 						cont++;
 					}
 
-					datos_repetidos.put(p, cont);
+					datos_repetidos.put(p.getDni(), cont);
 				}
 			}
 		}
+	}
+
+	public void exportarDatos() {
+
+		generarError();
+		generarCorrecto();
+		generarDuplicado();
+	}
+
+	private void generarCorrecto() {
+
+		this.fileName = NOMBRE_FICHERO_VALIDO;
+		crearArchivoTexto("");
+	}
+
+	private void generarDuplicado() {
+		final String ENCABEZADO = "PERSONA\t\t\t\tN VECES";
+		String key = null;
+		Integer value = null;
+		Persona p = null;
+		this.fileName = NOMBRE_FICHERO_DUPLICADO;
+
+		crearArchivoTexto(ENCABEZADO);
+		for (Map.Entry<String, Integer> entry : datos_repetidos.entrySet()) {
+			key = entry.getKey();
+			value = entry.getValue();
+			p = personas.get(key);
+			crearArchivoTexto(p.toFileString() + value);
+		}
+
+	}
+
+	private void generarError() {
+		this.fileName = NOMBRE_FICHERO_ERROR;
+		crearArchivoTexto("");
 	}
 
 	private boolean isRepeted(final Persona p) {
