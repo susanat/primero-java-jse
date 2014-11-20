@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.inpartek.formacion.proyectojava.exception.PersonaException;
+import com.inpartek.formacion.proyectojava.pojo.Estadistica;
 import com.inpartek.formacion.proyectojava.pojo.Persona;
 
 public class GeneradorInforme extends ManejadorFichero {
@@ -23,7 +24,9 @@ public class GeneradorInforme extends ManejadorFichero {
 	private final static String NOMBRE_FICHERO_ERROR = "personas-error";
 	private final static String NOMBRE_FICHERO_DUPLICADO = "personas-repetidas";
 	private final static String NOMBRE_FICHERO_VALIDO = "personas-correctas";
+	private final static String NOMBRE_FICHERO_ESTADISTICAS = "estadisticas";
 	String[] lista;
+	Estadistica estadistica;
 	HashMap<String, Persona> datosPersonas;
 	HashMap<String, Integer> datosRepetidos;
 	HashMap<String, Persona> datosErroneos;
@@ -40,9 +43,14 @@ public class GeneradorInforme extends ManejadorFichero {
 		datosErroneos = new HashMap<String, Persona>();
 		datosRepetidos = new HashMap<String, Integer>();
 		lista = null;
+		estadistica = null;
 	}
 
 	public void cargarDatos() throws NumberFormatException, PersonaException {
+		long time_start, time_end;
+
+		time_start = System.nanoTime();
+
 		Persona p = null;
 		String contenido = leerFichero();
 
@@ -68,7 +76,13 @@ public class GeneradorInforme extends ManejadorFichero {
 				}
 			}
 		}
+		estadistica = new Estadistica(lista.length, datosPersonas.size(),
+				datosCortos.size() + datosErroneos.size() + errores.size(),
+				datosRepetidos.size());
 
+		time_end = System.nanoTime();
+		long difference = (long) ((time_end - time_start) / 1e6);
+		estadistica.setTiempo(difference);
 	}
 
 	private void gArchivoDatosFaltan() {
@@ -143,36 +157,53 @@ public class GeneradorInforme extends ManejadorFichero {
 		gArchivoDatosInvalido();
 	}
 
+	private void gDatosArchivoEstadistica() {
+
+		addTexttoFile("Registros leidos" + "\t" + estadistica.getRegLeido());
+		addTexttoFile("Minutos Segundos" + "\t"
+				+ UtilTime.calculateTime(estadistica.getTiempo()));
+		addTexttoFile("Correctos" + "\t" + estadistica.getRegCorrecto());
+		addTexttoFile("Erroneos" + "\t" + estadistica.getRegIncorrecto());
+		addTexttoFile("Duplicados" + "\t" + estadistica.getRegduplicado());
+	}
+
 	private void gEncabezadoArchivoCorrecto() {
 		final String ENCABEZADO = "PERSONAS";
 		this.fileName = NOMBRE_FICHERO_VALIDO;
-		crearArchivoTexto(ENCABEZADO + "\n");
+		crearArchivoTexto(ENCABEZADO);
+		addTexttoFile("");
 	}
 
 	private void gEncabezadoArchivoDuplicado() {
 		final String ENCABEZADO = "PERSONA\t\t\t\t\t\t\tN VECES";
 		this.fileName = NOMBRE_FICHERO_DUPLICADO;
-		crearArchivoTexto(ENCABEZADO + "\n");
+		crearArchivoTexto(ENCABEZADO);
+		addTexttoFile("");
 	}
 
 	private void gEncabezadoArchivoError() {
 		final String ENCABEZADO = "PERSONAS CON ERRORES EN SUS ARCHIVOS";
 		this.fileName = NOMBRE_FICHERO_ERROR;
-		crearArchivoTexto(ENCABEZADO + "\n");
+		crearArchivoTexto(ENCABEZADO);
+		addTexttoFile("");
+	}
+
+	private void gEncabezadoArchivoEstadisticas() {
+		final String ENCABEZADO = "ESTADISTICAS";
+		this.fileName = NOMBRE_FICHERO_ESTADISTICAS;
+		crearArchivoTexto(ENCABEZADO);
+		addTexttoFile("");
 	}
 
 	public void generarDatos() {
-		/*
-		 * System.out.println("c" + datos_cortos.size() + "-e" +
-		 * datos_erroneos.size() + "-p" + datos_personas.size() + "-r" +
-		 * datos_repetidos.size());
-		 */
 		gEncabezadoArchivoError();
 		gDatosArchivoError();
 		gEncabezadoArchivoCorrecto();
 		gDatosArchivoCorrecto();
 		gEncabezadoArchivoDuplicado();
 		gDatosArchivoDuplicado();
+		gEncabezadoArchivoEstadisticas();
+		gDatosArchivoEstadistica();
 	}
 
 	private boolean isRepeated(final Persona p) {

@@ -1,15 +1,23 @@
 package com.inpartek.formacion.proyectojava.pojo;
 
-import java.util.GregorianCalendar;
 
 public class Estadistica {
 	private int regLeido;
-	private GregorianCalendar tiempo;
+	private long tiempo;
 	private int regCorrecto;
 	private int regIncorrecto;
-	private int regEstadistica;
+	private int regduplicado;
 
-	public Estadistica(final int pregLeido, final GregorianCalendar ptiempo,
+	public Estadistica(final int pregLeido, final int pregCorrecto,
+			final int pregIncorrecto, final int pregduplicado) {
+		super();
+		this.regLeido = pregLeido;
+		this.regCorrecto = pregCorrecto;
+		this.regIncorrecto = pregIncorrecto;
+		this.regduplicado = pregduplicado;
+	}
+
+	public Estadistica(final int pregLeido, final long ptiempo,
 			final int pregCorrecto, final int pregIncorrecto,
 			final int pregEstadistica) {
 		super();
@@ -17,15 +25,15 @@ public class Estadistica {
 		this.tiempo = ptiempo;
 		this.regCorrecto = pregCorrecto;
 		this.regIncorrecto = pregIncorrecto;
-		this.regEstadistica = pregEstadistica;
+		this.regduplicado = pregEstadistica;
 	}
 
 	public int getRegCorrecto() {
 		return regCorrecto;
 	}
 
-	public int getRegEstadistica() {
-		return regEstadistica;
+	public int getRegduplicado() {
+		return regduplicado;
 	}
 
 	public int getRegIncorrecto() {
@@ -36,7 +44,7 @@ public class Estadistica {
 		return regLeido;
 	}
 
-	public GregorianCalendar getTiempo() {
+	public long getTiempo() {
 		return tiempo;
 	}
 
@@ -44,8 +52,8 @@ public class Estadistica {
 		this.regCorrecto = pregCorrecto;
 	}
 
-	public void setRegEstadistica(final int pregEstadistica) {
-		this.regEstadistica = pregEstadistica;
+	public void setRegduplicado(final int pregduplicado) {
+		this.regduplicado = pregduplicado;
 	}
 
 	public void setRegIncorrecto(final int pregIncorrecto) {
@@ -56,7 +64,7 @@ public class Estadistica {
 		this.regLeido = pregLeido;
 	}
 
-	public void setTiempo(final GregorianCalendar ptiempo) {
+	public void setTiempo(final long ptiempo) {
 		this.tiempo = ptiempo;
 	}
 
