@@ -12,6 +12,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.util.logging.Logger;
 
 public class ManejadorFichero {
 
@@ -36,8 +37,8 @@ public class ManejadorFichero {
 			try {
 				fichero.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Logger.getLogger(e.getMessage());
+				// e.printStackTrace();
 			}
 		}
 		PrintWriter out = null;
@@ -46,7 +47,7 @@ public class ManejadorFichero {
 					fichero.getAbsoluteFile(), true)));
 			out.println("\n" + content);
 		} catch (IOException e) {
-			System.err.println(e);
+			Logger.getLogger(e.getMessage());
 		} finally {
 			if (out != null) {
 				out.close();
@@ -76,16 +77,20 @@ public class ManejadorFichero {
 			out = new OutputStreamWriter(fos, "UTF8");
 			out.write(content);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			Logger.getLogger(e.getMessage());
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			Logger.getLogger(e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			Logger.getLogger(e.getMessage());
 		} finally {
 			try {
 				out.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				// e.printStackTrace();
+				Logger.getLogger(e.getMessage());
 			}
 		}
 	}
@@ -113,14 +118,16 @@ public class ManejadorFichero {
 				sb.append(linea + ";");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
+			Logger.getLogger(e.getMessage());
 		} finally {
 			try {
 				if (null != fr) {
 					fr.close();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				// e.printStackTrace();
+				Logger.getLogger(e.getMessage());
 			}
 		}
 

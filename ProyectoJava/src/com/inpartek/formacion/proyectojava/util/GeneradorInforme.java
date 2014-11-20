@@ -24,21 +24,21 @@ public class GeneradorInforme extends ManejadorFichero {
 	private final static String NOMBRE_FICHERO_DUPLICADO = "personas-repetidas";
 	private final static String NOMBRE_FICHERO_VALIDO = "personas-correctas";
 	String[] lista;
-	HashMap<String, Persona> datos_personas;
-	HashMap<String, Integer> datos_repetidos;
-	HashMap<String, Persona> datos_erroneos;
-	HashMap<String, Persona> datos_cortos;
+	HashMap<String, Persona> datosPersonas;
+	HashMap<String, Integer> datosRepetidos;
+	HashMap<String, Persona> datosErroneos;
+	HashMap<String, Persona> datosCortos;
 	List<String> errores;
 
 	// TODO Sacar las validaciones a clase util
 	public GeneradorInforme(final String _filePath, final String _fileName,
 			final String _fileExt) {
 		super(_filePath, _fileName, _fileExt);
-		datos_personas = new HashMap<String, Persona>();
-		datos_cortos = new HashMap<String, Persona>();
+		datosPersonas = new HashMap<String, Persona>();
+		datosCortos = new HashMap<String, Persona>();
 		errores = new ArrayList<String>();
-		datos_erroneos = new HashMap<String, Persona>();
-		datos_repetidos = new HashMap<String, Integer>();
+		datosErroneos = new HashMap<String, Persona>();
+		datosRepetidos = new HashMap<String, Integer>();
 		lista = null;
 	}
 
@@ -52,18 +52,18 @@ public class GeneradorInforme extends ManejadorFichero {
 			if (p != null) {
 				if (!isRepeated(p)) {
 					if (p.isTodo()) {
-						datos_personas.put(p.getDni(), p);
+						datosPersonas.put(p.getDni(), p);
 					} else {
-						datos_cortos.put(p.getDni(), p);
+						datosCortos.put(p.getDni(), p);
 					}
 				} else {
 					int cont = 0;
-					if (datos_repetidos.get(p) != null) {
-						cont = datos_repetidos.get(p);
+					if (datosRepetidos.get(p) != null) {
+						cont = datosRepetidos.get(p);
 						cont++;
 					}
 
-					datos_repetidos.put(p.getDni(), cont);
+					datosRepetidos.put(p.getDni(), cont);
 
 				}
 			}
@@ -77,7 +77,7 @@ public class GeneradorInforme extends ManejadorFichero {
 
 		this.fileName = NOMBRE_FICHERO_ERROR;
 		addTexttoFile(ENCABEZADO + "\n");
-		for (Map.Entry<String, Persona> entry : datos_cortos.entrySet()) {
+		for (Map.Entry<String, Persona> entry : datosCortos.entrySet()) {
 			value = entry.getValue();
 			addTexttoFile(value.toFileString());
 		}
@@ -90,7 +90,7 @@ public class GeneradorInforme extends ManejadorFichero {
 
 		this.fileName = NOMBRE_FICHERO_ERROR;
 		addTexttoFile(ENCABEZADO + "\n");
-		for (Map.Entry<String, Persona> entry : datos_erroneos.entrySet()) {
+		for (Map.Entry<String, Persona> entry : datosErroneos.entrySet()) {
 			value = entry.getValue();
 			addTexttoFile(value.toFileString());
 		}
@@ -112,7 +112,7 @@ public class GeneradorInforme extends ManejadorFichero {
 		Persona value = null;
 		this.fileName = NOMBRE_FICHERO_VALIDO;
 
-		for (Map.Entry<String, Persona> entry : datos_personas.entrySet()) {
+		for (Map.Entry<String, Persona> entry : datosPersonas.entrySet()) {
 			value = entry.getValue();
 			addTexttoFile(value.toFileString());
 		}
@@ -126,10 +126,10 @@ public class GeneradorInforme extends ManejadorFichero {
 		Persona p = null;
 		this.fileName = NOMBRE_FICHERO_DUPLICADO;
 
-		for (Map.Entry<String, Integer> entry : datos_repetidos.entrySet()) {
+		for (Map.Entry<String, Integer> entry : datosRepetidos.entrySet()) {
 			key = entry.getKey();
 			value = entry.getValue();
-			p = datos_personas.get(key);
+			p = datosPersonas.get(key);
 			addTexttoFile(p.toFileString() + "\t\t\t\t\t\t" + value);
 		}
 
@@ -177,8 +177,8 @@ public class GeneradorInforme extends ManejadorFichero {
 
 	private boolean isRepeated(final Persona p) {
 
-		if (datos_personas.containsKey(p.getDni())
-				|| datos_erroneos.containsKey(p.getDni())) {
+		if (datosPersonas.containsKey(p.getDni())
+				|| datosErroneos.containsKey(p.getDni())) {
 
 			return true;
 		} else {
@@ -221,7 +221,7 @@ public class GeneradorInforme extends ManejadorFichero {
 		p.setApellido(list[APELLIDO_POS]);
 		p.setPoblacion(list[POBLACION_POS]);
 		p.setCategoria(list[CATEGORIA_POS]);
-		if (UtilValidacion.IsNumber(list[EDAD_POS])) {
+		if (UtilValidacion.isNumber(list[EDAD_POS])) {
 			p.setEdad(Integer.parseInt(list[EDAD_POS]));
 		} else {
 			p.setTodo(false);
