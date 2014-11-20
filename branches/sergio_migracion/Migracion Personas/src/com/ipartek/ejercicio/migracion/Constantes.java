@@ -14,9 +14,9 @@ import com.ipartek.ejercicio.migracion.utils.ClsUtilsFicheros;
 public class Constantes {
 	
     /**
-     * Empty constructor
+     * Empty constructor.
      */
-    public Constantes() {
+    private Constantes() {
 	
     };
 
@@ -25,19 +25,42 @@ public class Constantes {
      * @author baskito     
      */
     public enum eErrorCause{
+	/**
+	 * Ningún error.
+	 */
 	NONE,
+	/**
+	 * Error relativo a la edad.
+	 */
 	EDAD,
+	/**
+	 * Error mal formato de email.
+	 */
 	EMAIL,
+	/**
+	 * Error mail formato de DNI.
+	 */
 	DNI,
+	/**
+	 * Error caracteres extraños a UTF8.
+	 */
 	UTF8,
+	/**
+	 * Error mas campos de los esperados.
+	 */
 	MAX_FIELDS,
+	/**
+	 * Error menos campos de los esperados.
+	 */
 	MIN_FIELDS
     }
     
     /**
      * Path source of files.
      */
-    public static final String PATH_SOURCE = ClsUtilsFicheros.combinarRutas(ClsUtilsConstantes.PATH_PROJECT, "source");
+    public static final String PATH_SOURCE = 
+	    ClsUtilsFicheros.combinarRutas(
+		    ClsUtilsConstantes.PATH_PROJECT, "source");
     
     /**
      * Path name of source file.
@@ -47,7 +70,9 @@ public class Constantes {
     /**
      * Path output for files.
      */
-    public static final String PATH_OUTPUT = ClsUtilsFicheros.combinarRutas(ClsUtilsConstantes.PATH_PROJECT, "output");
+    public static final String PATH_OUTPUT = 
+	    ClsUtilsFicheros.combinarRutas(
+		    ClsUtilsConstantes.PATH_PROJECT, "output");
     
     /**
      * Name for file for statistics.

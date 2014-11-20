@@ -1,19 +1,11 @@
 nombre=Raymond, apellido1=Rojas, poblacion=Las Veguillas, edad=37, email=RaymondTRojas@dodgit.com, dni=94387805Z, cargo=TRABAJADOR
-
-nombre=Raymond, apellido1=Rojas, poblacion=Las Veguillas, edad=37, email=RaymondTRojas@dodgit.com, dni=94387805Z, cargo=TRABAJADOR
 nombre=Raymond, apellido1=Rojas, poblacion=Las Veguillas, edad=37, email=RaymondTRojas@dodgit.com, dni=94387805Z, cargo=TRABAJADOR
 
 nombre=James, apellido1=Fuller, poblacion=Noalejo, edad=23, email=JamesBFuller@pookmail.com, dni=65036368G, cargo=CLIENTE
-
-nombre=James, apellido1=Fuller, poblacion=Noalejo, edad=23, email=JamesBFuller@pookmail.com, dni=65036368G, cargo=CLIENTE
 nombre=James, apellido1=Fuller, poblacion=Noalejo, edad=23, email=JamesBFuller@pookmail.com, dni=65036368G, cargo=CLIENTE
 
 UTF8,DNI => nombre=Mark, apellido1=Ellis, poblacion=Gibraleón, edad=21, email=MarkGEllis@dodgit.com, dni=730804W, cargo=JEFE
-
 UTF8,DNI => nombre=Mark, apellido1=Ellis, poblacion=Gibraleón, edad=21, email=MarkGEllis@dodgit.com, dni=730804W, cargo=JEFE
-UTF8,DNI => nombre=Mark, apellido1=Ellis, poblacion=Gibraleón, edad=21, email=MarkGEllis@dodgit.com, dni=730804W, cargo=JEFE
-
-UTF8 => nombre=Anita, apellido1=Morgan, poblacion=Santo Tomé, edad=23, email=AnitaJMorgan@spambob.com, dni=75193179S, cargo=CLIENTE
 
 UTF8 => nombre=Anita, apellido1=Morgan, poblacion=Santo Tomé, edad=23, email=AnitaJMorgan@spambob.com, dni=75193179S, cargo=CLIENTE
 UTF8 => nombre=Anita, apellido1=Morgan, poblacion=Santo Tomé, edad=23, email=AnitaJMorgan@spambob.com, dni=75193179S, cargo=CLIENTE
