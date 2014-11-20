@@ -1,0 +1,7 @@
+10004 - Registros leídos
+0 Minutos - 16Segundos
+----------------
+
+8884 - Correctos
+1116 - Erroneos
+4 - Duplicados
