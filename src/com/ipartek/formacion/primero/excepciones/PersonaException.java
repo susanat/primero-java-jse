@@ -35,6 +35,10 @@ public class PersonaException extends Exception {
 	public static final int COD_LETRA_DNI_INCORRECTA = 5;
 	public static final String MSG_LETRA_DNI_INCORRECTA = "La letra del dni no es correcta";
 
+	// ERROR: la letra del DNI
+	public static final int COD_FORMATO_TEXTO_INCORRECTO = 6;
+	public static final String MSG_FORMATO_TEXTO_INCORRECTO = "El formato del texto es incorrecto";
+
 	// Atributos
 	int codigo;
 

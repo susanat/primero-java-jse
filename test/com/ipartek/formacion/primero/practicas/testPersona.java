@@ -43,13 +43,27 @@ public class testPersona {
 
 	@Test
 	public void testSetEdad() {
+
+		// le asignamos un dato no numerico
+		try {
+			p.setEdad("0.0");
+			fail("NO lanza la excepcion");
+		} catch (PersonaException e) {
+			fail("Lanzo PersonaException");
+		} catch (NumberFormatException e) {
+			assertTrue(true);
+			assertEquals(p.getEdad(), "0.0");
+		} catch (Exception e) {
+			fail("Lanzo otra excepcion");
+		}
+
 		// le asignamos una edad menor a 18
 		try {
-			p.setEdad(0);
+			p.setEdad("0");
 			fail("NO lanza la excepcion");
 		} catch (PersonaException e) {
 			if (PersonaException.MSG_EDAD_NO_VALIDA.equals(e.getMessage())) {
-				assertEquals(p.getEdad(), 0);
+				assertEquals(p.getEdad(), "0");
 			} else {
 				assertEquals(PersonaException.MSG_EDAD_NO_VALIDA,
 						e.getMessage());
@@ -59,6 +73,19 @@ public class testPersona {
 		}
 
 		// le asignamos una edad mayor a 99
+		try {
+			p.setEdad("100");
+			fail("NO lanza la excepcion");
+		} catch (PersonaException e) {
+			if (PersonaException.MSG_EDAD_NO_VALIDA.equals(e.getMessage())) {
+				assertEquals(p.getEdad(), "100");
+			} else {
+				assertEquals(PersonaException.MSG_EDAD_NO_VALIDA,
+						e.getMessage());
+			}
+		} catch (Exception e) {
+			fail("Lanzo otra excepcion");
+		}
 		// le asignamos una edad correcta
 		assertTrue(true);
 
@@ -71,7 +98,42 @@ public class testPersona {
 
 	@Test
 	public void testSetDni() {
-		assertTrue(true);
+		// Formato erroneo del DNI
+		try {
+			p.setDni("1a");
+			fail("NO lanza la excepcion");
+		} catch (PersonaException e) {
+			assertTrue(true);
+			assertEquals(e.getMessage(),
+					PersonaException.MSG_FORMATO_DNI_INCORRECTO);
+			assertEquals(p.getDni(), "1a");
+		} catch (NumberFormatException e) {
+			fail("01- Lanzo la NumberFormatException");
+		}
+
+		// Letra incorrecta del DNI
+		try {
+			p.setDni("22750794a");
+			fail("NO lanza la excepcion");
+
+		} catch (PersonaException e) {
+			assertTrue(true);
+			assertEquals(e.getMessage(),
+					PersonaException.MSG_LETRA_DNI_INCORRECTA);
+			assertEquals(p.getDni(), "22750794A");
+		} catch (NumberFormatException e) {
+			fail("02- Lanzo la NumberFormatException");
+		}
+
+		// DNI correcto
+		try {
+			p.setDni("22750794e");
+			assertEquals(p.getDni(), "22750794E");
+		} catch (PersonaException e) {
+			fail("lanza la PersonaException");
+		} catch (NumberFormatException e) {
+			fail("03- Lanzo la PersonaException");
+		}
 	}
 
 }
