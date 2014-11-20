@@ -33,7 +33,6 @@ public class ManejadorFichero {
 	File fichero = new File(filePath + fileName + "." + fileExt);
 	FileOutputStream fos = null;
 	Writer out = null;
-	String sCurrentLine = null;
 	try {
 	    fos = new FileOutputStream(fichero);
 	    out = new OutputStreamWriter(fos, "UTF8");

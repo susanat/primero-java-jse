@@ -39,6 +39,10 @@ public class UtilValidacion {
 	} else {
 	    return false;
 	}
+    }
 
+    public static boolean validarLinea(final String linea) {
+
+	return false;
     }
 }
