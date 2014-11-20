@@ -1,6 +1,6 @@
 package com.ipartek.formacion.primero.excepciones;
 
-import com.ipartek.formacion.primero.bean.Persona;
+import com.ipartek.formacion.primero.practicas.migracion.Persona;
 
 public class PersonaException extends Exception {
 
@@ -13,10 +13,12 @@ public class PersonaException extends Exception {
 	public static final int COD_EDAD_NO_VALIDA = 0;
 
 	// ERROR: por nombre o apellidos menor a 2 caracteres
-	public static final int COD_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO = 1;
-	public static final String MSG_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO = "El nombre y los apellidos deben de tener como minimo "
-			+ Persona.TAM_MIN_NOMBRE_APELLIDOS + " letras";
-
+	/*
+	 * public static final int COD_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO = 1;
+	 * public static final String MSG_NOMBRE_APELLIDOS_TAMANIO_NO_VALIDO =
+	 * "El nombre y los apellidos deben de tener como minimo " +
+	 * Persona.TAM_MIN_NOMBRE_APELLIDOS + " letras";
+	 */
 	// ERROR: no existe el dato
 	public static final int COD_DATO_INCOMPLETO = 2;
 	public static final String MSG_DATO_INCOMPLETO = "Falta el dato";
