@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *	Funciones útiles para el tratamiendo de texto.
+ * Funciones útiles para el tratamiendo de texto.
  *
  * @author Sergio Rubio
  * @version 03.11.2014
@@ -47,7 +47,7 @@ public final class ClsUtilsTextos {
      */
     public static List<String> getBetweenTwoCharacters(final String texto, 
 	    final String limitA, final String limitB) {
-        List<String> lst = new ArrayList<String>();
+        final List<String> lst = new ArrayList<String>();
         String start = limitA;
         String end = limitB;
         String condition = "(.*?)";
@@ -84,7 +84,7 @@ public final class ClsUtilsTextos {
         //patternStr = "\\((.*?)\\)";
         
         Pattern pattern = Pattern.compile(patternStr);
-        Matcher matcher = pattern.matcher(texto);
+        final Matcher matcher = pattern.matcher(texto);
         while (matcher.find()) {
             //System.out.println(matcher.group(1));
             lst.add(matcher.group(1));
@@ -148,13 +148,19 @@ public final class ClsUtilsTextos {
     public static String padRight(final String texto, 
 	    final int tamTotal, final String caracter) {   
         	
+	String txtTemp = "";
+	
 	if (texto.length() >= tamTotal) {
-            return texto;        
+	    txtTemp =  texto;        
         } else {
-            return String.format("%1$-" + tamTotal + "s",texto).replace(" ", caracter);
+            txtTemp = String.format("%1$-" + tamTotal + "s", texto);
+            txtTemp = txtTemp.replace(" ", caracter);
         }
+	
+	return txtTemp;
     }
 
+    
     /**
      * Desordena un string.
      * 

@@ -1,7 +1,6 @@
 package com.ipartek.ejercicio.migracion.utils;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,24 +14,53 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * Clase de recopilación de funciones útiles para trabajar con ficheros
+ * Clase de recopilación de funciones útiles para trabajar con ficheros.
  * 
  * @author baskito
- * @version 03.11.2014
+ * @version 20.11.2014
  */
-public class ClsUtilsFicheros {
+public final class ClsUtilsFicheros {
+    
+    	/**
+    	 * Empty constructor.
+    	 */
+    	private ClsUtilsFicheros() {
+    	    
+    	}
+    
 
-	private final static String BARRA_PATH_SIMPLE = "/";
-	private final static String BARRA_PATH_DOBLE = "\\";
+    	/**
+    	 * Barra simple.
+    	 */
+	private static final String BARRA_PATH_SIMPLE = "/";
+	
+	/**
+	 * Barra doble.
+	 */
+	private static final String BARRA_PATH_DOBLE = "\\";
 
-	public static boolean existeFichero(String path) {
+	/**
+	 * Comprueba si existe un fichero.
+	 * @param path path y nombre del fichero
+	 * @return true if exists, false if not
+	 */
+	public static boolean existeFichero(final String path) {
 
 		File fFile = new File(path);
 		return (fFile.exists() ? true : false);
 	}
 
+	/**
+	 * Combina dos rutas.
+	 * 
+	 * @param path1 string con la Ruta inicial
+	 * @param path2 string con la Ruta a añadir
+	 * @return String con la ruta completa
+	 */
 	public static String combinarRutas(final String path1, final String path2) {
 
 		File file1 = new File(path1);
@@ -41,35 +69,48 @@ public class ClsUtilsFicheros {
 
 	}
 
+	/**
+	 * Muestra el espacion libre de una unidad.
+	 * @param unidad String unidad indicada.
+	 * @return Long con el espacion libre
+	 */
 	private static long espacioLibre(final String unidad) {
 		File drive = new File(unidad);
 		return drive.getFreeSpace();
 	}
-
-	public static boolean existeExpacioLibre(final String unidad, final Long mayorQue) {
-		if (espacioLibre(unidad) > mayorQue) {
-			return true;
-		} else {
-			return false;
-		}
+	/**
+	 * Comprueba si existe espacion libre en una unidad.
+	 * 
+	 * @param unidad Unidad a comprobar
+	 * @param mayorQue Espacion libre necesario
+	 * @return true si existe espacio libre, false si no
+	 */
+	public static boolean existeExpacioLibre(
+		final String unidad, final Long mayorQue) {
+		return espacioLibre(unidad) > mayorQue;
 	}
 
+	/**
+	 * Comprueba si existe espacio libre en la unidad.
+	 * @param unidad unidad a comprobar
+	 * @return true si existe espacio libre, false si no
+	 */
 	public static boolean existeExpacioLibre(final String unidad) {
-		if (espacioLibre(unidad) > 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return espacioLibre(unidad) > 0;
 	}
 
+	/**
+	 * Comprueba si un path tiene la barra final.
+	 * @param path String path a comprobar
+	 * @return String con el path más la barra al final
+	 */
 	public static String checkBarraFinal(final String path) {
 	    	String localPath = path;
 		String barra = "";
 		// comprobamos el tipo de ruta:
 		if (localPath.contains(BARRA_PATH_SIMPLE)) {
 			barra = BARRA_PATH_SIMPLE;
-		}
-		else if (localPath.contains(BARRA_PATH_DOBLE)) {
+		} else if (localPath.contains(BARRA_PATH_DOBLE)) {
 			barra = BARRA_PATH_DOBLE;
 		}
 		
@@ -79,6 +120,11 @@ public class ClsUtilsFicheros {
 		return localPath;
 	}
 
+	/**
+	 * Obtiene el path absoluto de un path relativo.
+	 * @param relativePath String path relativo
+	 * @return String con el path absoluto
+	 */
 	public static String getAbsolutePath(final String relativePath) {
 		Path path = Paths.get(relativePath);
 		String spath = path.toAbsolutePath().toString();
@@ -87,7 +133,7 @@ public class ClsUtilsFicheros {
 	}
 
 	/**
-	 * Lee un fichero y devuelve un string. </p>
+	 * Lee un fichero y devuelve un string. <br>
 	 * 
 	 * Ejemplos: The StandardCharsets class define some constants for the
 	 * encodings required of all Java runtimes: - String content =
@@ -100,7 +146,7 @@ public class ClsUtilsFicheros {
 	 *            Ruta del fichero
 	 * @param encoding
 	 *            Codificación
-	 * @return
+	 * @return String con el fichero leído
 	 * @throws IOException
 	 */
 	public static String readFile1(final String path, final Charset encoding)
@@ -109,7 +155,15 @@ public class ClsUtilsFicheros {
 		return encoding.decode(ByteBuffer.wrap(encoded)).toString();
 	}
 
-	public static String readFile2(final String path) throws FileNotFoundException {
+	/**
+	 * Otra forma de leer un fichero usando scanner.
+	 * @param path
+	 *            Ruta del fichero	
+	 * @return String con el fichero leído
+	 * @throws FileNotFoundException Excepción relativa a los ficheros
+	 */
+	public static String readFile2(final String path) 
+		throws FileNotFoundException {
 
 		String content = "";
 		content = new Scanner(new File(path)).useDelimiter("\\Z").next();
@@ -119,13 +173,13 @@ public class ClsUtilsFicheros {
 	}
 
 	/**
-	 * 
+	 * Lee un fichero usando FileInputStream.
 	 * 
 	 * - orientado a ficheros pequeños.
 	 * 
-	 * @param path
-	 * @param encoding
-	 * @return
+	 * @param path Ruta del fichero
+	 * @param encoding Tipo de codificación
+	 * @return String con los datos del fichero
 	 */
 	public static String readFile3(final String path, final Charset encoding) {
 		FileInputStream fis = null;
@@ -141,17 +195,17 @@ public class ClsUtilsFicheros {
 			content = new String(data, encoding);
 
 		} catch (FileNotFoundException ex) {
-			// Logger.getLogger(this.class.getName()).log(Level.SEVERE, null,
-			// ex);
+		    Logger.getLogger(ClsUtilsFicheros.class.getName()).log(
+				Level.SEVERE, null, ex);
 		} catch (IOException ex) {
-			// Logger.getLogger(ClsFicheros.class.getName()).log(Level.SEVERE,
-			// null, ex);
+		    Logger.getLogger(ClsUtilsFicheros.class.getName()).log(
+				Level.SEVERE, null, ex);
 		} finally {
 			try {
 				fis.close();
 			} catch (IOException ex) {
-				// Logger.getLogger(ClsFicheros.class.getName()).log(Level.SEVERE,
-				// null, ex);
+				Logger.getLogger(ClsUtilsFicheros.class.getName()).log(
+					Level.SEVERE, null, ex);
 			}
 		}
 		return content;
@@ -163,15 +217,27 @@ public class ClsUtilsFicheros {
 	 * of Files.readAllLines says it's intended for small files. But its
 	 * implementation uses buffering, so it's likely good even for fairly large
 	 * files.
+	 * @param aFileName string con el path y nombre del fichero
+	 * @param encoding Charset con la codificación
+	 * @return List<String> Lista con las líneas del fichero
+	 * @throws IOException Excepción en lectura/escritura del fichero
 	 */
-	public static List<String> readSmallTextFile(String aFileName,
-			Charset encoding) throws IOException {
+	public static List<String> readSmallTextFile(final String aFileName,
+			final Charset encoding) 
+				throws IOException {
 		Path path = Paths.get(aFileName);
 		return Files.readAllLines(path, encoding);
 	}
 
-	public static void writeSmallTextFile(List<String> aLines,
-			String aFileName, Charset encoding) throws IOException {
+	/**
+	 * 
+	 * @param aLines List<String> con lineas a escribir en el fichero
+	 * @param aFileName String Nombre del fichero
+	 * @param encoding Charset codificación del fichero
+	 * @throws IOException Excepción en lectura/escritura del fichero
+	 */
+	public static void writeSmallTextFile(final List<String> aLines,
+			final String aFileName, final Charset encoding) throws IOException {
 		Path path = Paths.get(aFileName);
 		Files.write(path, aLines, encoding);
 	}
@@ -237,8 +303,17 @@ public class ClsUtilsFicheros {
 	}
 	*/
 
+	/**
+	 * Lee un fichero utilizando scanner.
+	 * 
+	 * @param path String ruta del fichero
+	 * @param encoding Charset codificación del fichero 
+	 * @return List<String> lineas del fichero
+	 * @throws IOException Excepción en lectura/escritura del fichero 
+	 */
 	public static List<String> readWithScanerToList(final String path,
-			final Charset encoding) throws IOException {
+			final Charset encoding) 
+				throws IOException {
 		Path fFilePath = Paths.get(path);
 		List<String> texto = new ArrayList<String>();
 
@@ -253,15 +328,20 @@ public class ClsUtilsFicheros {
 		return texto;
 	}
 	
+	/**
+	 * Lee un fichero utilizando bufferedReader.
+	 * @param filename String nombre y path del fichero a leer
+	 * @return List<String> con las líneas del fichero
+	 * @throws Exception Excepción general
+	 */
 	public static List<String> readFile(final String filename)
-		throws Exception
-		{
+		throws Exception {
 		    String line = null;
 		    List<String> records = new ArrayList<String>();
 		 
 		    // wrap a BufferedReader around FileReader
-		    BufferedReader bufferedReader = new BufferedReader
-			    (new FileReader(filename));
+		    BufferedReader bufferedReader = new BufferedReader(
+			    new FileReader(filename));
 		 
 		    // use the readLine method of the BufferedReader 
 		    // to read one line at a time.

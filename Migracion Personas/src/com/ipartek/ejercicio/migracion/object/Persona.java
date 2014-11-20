@@ -6,68 +6,117 @@ import com.ipartek.ejercicio.migracion.Constantes;
 import com.ipartek.ejercicio.migracion.Validations;
 import com.ipartek.ejercicio.migracion.Constantes.eErrorCause;
 
+/**
+ * Objeto que guardará los datos de un registro.
+ * 
+ * @author Sergio Rubio Nieto
+ *
+ */
 public class Persona {
     
     /**
      * Save the posible errors in data.
      */
     private LinkedList<eErrorCause> errors = null;
-    
-    
+        
 
+    /**
+     * Variable que guardará el nombre.
+     */
     private String nombre;
+    
+    /**
+     * Variable que guardará el apellido1.
+     */
     private String apellido1;
+    
+    /**
+     * Variable que guardará la población.
+     */
     private String poblacion;
+    
+    /**
+     * Variable que guardará la edad (-1 si es errónea).  
+     */
     private int edad;
+    
+    /**
+     * Variable que guardará el dni.
+     */
     private String email;
+    
+    /**
+     * Variable que guardará el DNI.
+     */
     private String dni;
+    
+    /**
+     * Variable que guardará el cargo.
+     */
     private String cargo;
     
     /**
      * Get all type errors ocurred in object.
-     * @return
+     * @return eErrorCause error
      */
-    public LinkedList<eErrorCause> getErrors(){
+    public LinkedList<eErrorCause> getErrors() {
 	return errors;
     }
     
     
+    /**
+     * Get the value for nombre.
+     * @return String with value
+     */
     public String getNombre() {
 	return nombre;
     }
 
     public void setNombre(String nombre) {
-	if(!Validations.isValidUTF8(nombre)){
+	if (!Validations.isValidUTF8(nombre)) {
 	    errors.add(eErrorCause.UTF8);
 	}
 		
 	this.nombre = nombre;
     }
 
+    /**
+     * Get the value for apellido1.
+     * @return String with value
+     */
     public String getApellido1() {
 	return apellido1;
     }
 
     public void setApellido1(String apellido1) {
-	if(!Validations.isUTF8MisInterpreted(apellido1)){
+	if (!Validations.isUTF8MisInterpreted(apellido1)) {
 	    errors.add(eErrorCause.UTF8);
 	}
 		
 	this.apellido1 = apellido1;
     }
 
+    /**
+     * Get the value for población.
+     * @return String with value
+     */
     public String getPoblacion() {
 	return poblacion;
     }
 
+    
     public void setPoblacion(String poblacion) {
-	if(!Validations.isUTF8MisInterpreted(poblacion)){
+	if (!Validations.isUTF8MisInterpreted(poblacion)) {
 	    errors.add(eErrorCause.UTF8);
 	}
 		
 	this.poblacion = poblacion;
     }
 
+    /**
+     * Get the value for edad.
+     * @return String with value
+     */
     public int getEdad() {
 	return edad;
     }
@@ -76,74 +125,69 @@ public class Persona {
 	
 	try {
 	    //check validations 
-	    if(!Validations.isValidEdad(edad)) {
+	    if (!Validations.isValidEdad(edad)) {
 		errors.add(eErrorCause.EDAD);		
 	    }
 	    //save the edad
 	    this.edad = Integer.valueOf(edad);
-	} catch(Exception ex) {
+	} catch (Exception ex) {
 	    //error in edad passed, save -1
 	    this.edad = -1;
 	}	
 	
     }
 
+    /**
+     * Get the value for email.
+     * @return String with value
+     */
     public String getEmail() {
 	return email;
     }
 
     public void setEmail(final String email) {
 	
-	if(!Validations.isValidEmail(email)){
+	if (!Validations.isValidEmail(email)) {
 	    errors.add(eErrorCause.EMAIL);
 	}
 	
 	this.email = email;
     }
 
+    /**
+     * Get the value for DNI.
+     * @return String with value
+     */
     public String getDni() {
 	return dni;
     }
 
     public void setDni(String dni) {
-	if(!Validations.isValidDNI(dni)){
+	if (!Validations.isValidDNI(dni)) {
 	    errors.add(eErrorCause.DNI);
 	}
 	
 	this.dni = dni;
     }
 
+    /**
+     * Get the value for Cargo.
+     * @return String with value
+     */
     public String getCargo() {
 	return cargo;
     }
 
+    
     public void setCargo(String cargo) {
 	
-	if(!Validations.isUTF8MisInterpreted(cargo)){
+	if (!Validations.isUTF8MisInterpreted(cargo)) {
 	    errors.add(eErrorCause.UTF8);
 	}
 		
 	this.cargo = cargo;	
     }
 
-    /*
-    public Personas(String nombre, String apellido1, String poblacion,
-	    String edad, String email, String dni, String cargo) {
-	super();
-	
-	//initialize list of errors
-	errors = new LinkedList<eErrorCause>();
-	
-	
-	this.setNombre(nombre);
-	this.setApellido1(apellido1);
-	this.setPoblacion(poblacion);
-	this.setEdad(edad);
-	this.setEmail(email);
-	this.setDni(dni);
-	this.setCargo(cargo);
-    }
-    */
     
     /**
      * Create a new object empty.
@@ -160,8 +204,10 @@ public class Persona {
      */
     public boolean hasErrors() {
 	
-	if(errors != null) {
-	    if(errors.size() > 0) return true;
+	if (errors != null) {
+	    if (errors.size() > 0) { 
+		return true; 
+	    }
 	}	
 		
 	return false;		
@@ -173,12 +219,12 @@ public class Persona {
 	
 	String text = "";
 	
-	if(errors != null && errors.size() > 0){
-	    for(eErrorCause errorCause : errors){
+	if (errors != null && errors.size() > 0) {
+	    for (eErrorCause errorCause : errors) {
 		text += errorCause.toString() + ","; 
 	    }
 	}
-	if(text.length() > 0) {
+	if (text.length() > 0) {
 	    text = text.substring(0, text.length() - 1);
 	    text += " => ";
 	}

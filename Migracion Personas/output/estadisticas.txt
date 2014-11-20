@@ -8,5 +8,5 @@ Total analizado: 10004
  - EMAIL no valido: 1
  - DNI no valido: 506
  - Edad no valida: 2328
-Tiempo de proceso: 578 milisegundos
+Tiempo de proceso: 500 milisegundos
 Tiempo de proceso: 00:00

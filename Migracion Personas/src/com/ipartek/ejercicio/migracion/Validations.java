@@ -155,7 +155,8 @@ public final class Validations {
      * 
      * @throws Exception number format exceptions
      */
-    public static boolean isValidEdad(final String edad) throws NumberFormatException {
+    public static boolean isValidEdad(final String edad) 
+	    throws NumberFormatException {
 
 	if (!ClsUtilsNumeros.isNumeric(edad)) {
 	    throw new NumberFormatException();
