@@ -92,6 +92,7 @@ public class Constantes {
 	 
     /**
      * Map with the relation field - function of set in object persona.
+     * TODO: 2.0 carga desde xml
      */
     public static final HashMap<Integer, String> MAP_CAMPOS_POS;
     static

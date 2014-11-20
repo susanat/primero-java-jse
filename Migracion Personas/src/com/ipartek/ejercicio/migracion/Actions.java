@@ -56,8 +56,7 @@ public class Actions {
      * Get the list with objects of Persona.
      * @return List with Persona objects
      */
-    private List<Persona> getLstPersonas() 
-    {	
+    private List<Persona> getLstPersonas() {	
 	return lstPersonas;
     }
     
@@ -239,7 +238,7 @@ public class Actions {
      * Crea un objeto con los datos de la linea y comprueba si éstos tienen
      * algún error.
      * 
-     * (versión utilizando reflection)
+     * (versión utilizando reflection, como pruebas)
      * @see 
      * http://www.mkyong.com/java/how-to-use-reflection-to-call-java-method-at-runtime/
      * @param line String with line
@@ -247,27 +246,25 @@ public class Actions {
      */
     private void createObject(final String line) {
 	
+	String[] splitLine = line.split(Constantes.STR_SEPARATOR);	
 
-	String[] splitLine = line.split(Constantes.STR_SEPARATOR);
-
-	//
-	// String parameter
+	// String parameter para añadir en caso que se pase valores tipo string
 	Class[] paramString = new Class[1];
 	paramString[0] = String.class;
 
-	// creamos el objeto
-	Class cls = null;
-	Object obj = null;
-	Method method = null;
-	String functionName = null;
-	String parameter = "";
+	
+	Class cls = null; //clase dinámica
+	Object obj = null; //objeto que se creará
+	Method method = null; //contendrá el método a invocar
+	String functionName = null; //nombre de la función
+	String parameter = ""; //parámetros a pasar en la función
 
 	try {
 	    // creamos el objeto por su nombre.
 	    cls = Class.forName(Constantes.PATH_OBJECT_PERSONAS);
 	    obj = cls.newInstance();
 	    for (int i = 0; i < Constantes.NUM_EXPECTED_FIELDS; i++) {
-		// functon name
+		//obtenemos la función relativa al índice
 		functionName = Constantes.MAP_CAMPOS_POS.get(i + 1);
 		parameter = splitLine[i];
 
