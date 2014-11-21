@@ -33,14 +33,23 @@ public class PersonaException extends Exception {
      * Codigo de error para el EMAIL
      */
     public static final int COD_EMAIL_NO_VALIDO = 30;
-
+    /**
+     * Mensaje de texto para tamaño de texto no valido
+     */
     public static final String MSG_TEXTO_NO_VALIDO = "EL TEXTO INTRODUCIDO DEBE DE TENER ALMENOS "
 	    + Persona.TEXTO_LONG_MIN + " CARACTERES";
-
+    /**
+     * Mensaje de texto para el rango de edad no valida
+     */
     public static final String MSG_EDAD_NO_VALIDA = "LA EDAD INTRODUCIDA DEBE DE ESTAR COMPRENDIDA ENTRE "
 	    + Persona.EDAD_MIN + " Y " + Persona.EDAD_MAX;
-
-    public static final String MSG_DNI_NO_VALIDO = "EL TEXTO INTRODUCIDO DEBE DE CONSTAR DE 8 NUMEROS Y UNA LETRA";
+    /**
+     * Mensaje de texto para error en el DNI
+     */
+    public static final String MSG_DNI_NO_VALIDO = "EL TEXTO INTRODUCIDO DEBE DE CONSTAR DE 8 NUMEROS Y UNA LETRA COMO CARACTER DE CONTROL";
+    /**
+     * Mensaje de texto para el error del EMAIL
+     */
     public static final String MSG_EMAIL_NO_VALIDA = "EL EMAIL DE CONSTAR DE UNA ID @ Y NOMBRE DE DOMINIO";
 
     public PersonaException() {
