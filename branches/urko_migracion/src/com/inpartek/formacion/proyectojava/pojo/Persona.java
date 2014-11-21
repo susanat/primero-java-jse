@@ -4,7 +4,7 @@ import com.inpartek.formacion.proyectojava.exception.PersonaException;
 import com.inpartek.formacion.proyectojava.util.UtilValidacion;
 
 /**
- * Clase que agrupa los datos de la personas y
+ * Clase que agrupa los datos de la personas y sus metodos
  *
  * @author Urko Villanueva
  *
@@ -133,7 +133,6 @@ public class Persona {
 	    throw new PersonaException(PersonaException.MSG_EMAIL_NO_VALIDA,
 		    PersonaException.COD_EMAIL_NO_VALIDO);
 	}
-
     }
 
     public void setNombre(final String pnombre) throws PersonaException {
