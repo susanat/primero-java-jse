@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import com.inpartek.formacion.proyectojava.pojo.Persona;
 
 //TODO implementar las validaciones en la clase Persona
-public class UtilValidacion {
+public final class UtilValidacion {
 
     private final static String DNI_PATTERN = "(\\d{1,8})([A-Z])";
     private final static String NUMBER_PATTERN = "^\\d+$";
