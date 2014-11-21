@@ -18,6 +18,7 @@ import java.util.TreeSet;
 
 import com.ipartek.ejercicio.migracion.Constantes;
 import com.ipartek.ejercicio.migracion.Persona;
+import com.ipartek.ejercicio.migracion.excepciones.PersonaException;
 
 public class Fichero {
 
@@ -36,7 +37,7 @@ public class Fichero {
      */
     public static void read(String nombreFichero) {
 	BufferedReader br = null; // Buffer para mejorar la lectura, es
-	// opcional, mnejora el rendimiento
+	// opcional, mejora el rendimiento
 	FileReader reader = null;
 	List<String> lista = new ArrayList<String>();
 	ArrayList<Persona> listaDePersonas = new ArrayList<Persona>();
@@ -104,7 +105,7 @@ public class Fichero {
 		    // correctos
 		    listaDePersonas.add(new Persona(lista.get(0), lista.get(1),
 			    lista.get(2), Integer.parseInt(lista.get(3)), lista
-			    .get(4), lista.get(5), lista.get(6), true));
+				    .get(4), lista.get(5), lista.get(6), true));
 
 		}
 		// Escribimos las lineas a los ficheros correspondientes
@@ -119,7 +120,8 @@ public class Fichero {
 		    escribir = NO_ESCRIBIR;
 		}
 	    }
-
+	    // comprobamos las personas que tengan DNI Repetido y guardamos la
+	    // lista de repetidos en una variable
 	    numRepetidos = checkRepetidos(listaDePersonas);
 
 	} catch (IOException e) {
@@ -128,6 +130,8 @@ public class Fichero {
 	    try {
 		if (br != null) {
 		    br.close();
+		    // Generamos el momento en el que hemos terminado el proceso
+		    // (a excepcion de escribir en el fichero de estadisticas)
 		    Date dateFinal = new Date();
 		    // Escribimos en el fichero de estadisticas
 
@@ -342,7 +346,7 @@ public class Fichero {
      * @return
      */
 
-    public static boolean WritetoRepetidoFileStringBuilder(
+    public static boolean writetoRepetidoFileStringBuilder(
 	    String nombreFichero, List<Persona> listaRepetidos) {
 	boolean resul = false;
 	Writer writer = null;
@@ -414,18 +418,44 @@ public class Fichero {
     public static int checkRepetidos(ArrayList<Persona> listaPersonas) {
 	List<Persona> duplicates = new ArrayList<Persona>();
 	Set<Persona> personaSet = new TreeSet<Persona>(new PersonaComparator());
+	Persona p1;
 	for (Persona p : listaPersonas) {
-	    if (!personaSet.add(p)) {
-		// intentamos añadir la persona a nuestro TreeSet, si falla es
+	    if (!personaSet.add(p)) {// intentamos añadir la persona a nuestro
+		// TreeSet, si falla es
 		// que ya hay una persona con ese dni
+
+		// Comprobamos si, ademas de repetida, es erronea para ponerle
+		// un asterisco
+		p = checkDuplicadoErroneo(p);
+
+		// La añadimos a nuestra lista de repetidas
 		duplicates.add(getPrimerDuplicado(listaPersonas, p.getDni()));
 		duplicates.add(p);
 	    }
 	}
-	WritetoRepetidoFileStringBuilder(Constantes.FICHERO_REPETIDOS,
+	writetoRepetidoFileStringBuilder(Constantes.FICHERO_REPETIDOS,
 		duplicates);
 	return (duplicates.size());
 
+    }
+
+    /**
+     * Funcion que comprueba si la persona, además de repetida es erronea
+     *
+     * @param p
+     *            la {@code Persona} repetida que vamos a comprobar
+     * @return la {@code Persona} repetida con un asterisco al final para
+     *         indicar que es erronea
+     */
+    public static Persona checkDuplicadoErroneo(Persona p) {
+	Persona p1;
+	try {
+	    p1 = new Persona(p.getNombre(), p.getApellido(), p.getPoblacion(),
+		    p.getEdad(), p.getMail(), p.getDni(), p.getCategoria());
+	} catch (PersonaException e) {
+	    p.setCategoriaNoCheck(p.getCategoria() + " *");
+	}
+	return p;
     }
 
     /**

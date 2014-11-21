@@ -1,5 +1,5 @@
 Numero de registros leidos: 10004
-Duracion del proceso: 00:17
+Duracion del proceso: 00:16
 Correctos: 5235
 Errores: 4769
 Repetidos: 8
