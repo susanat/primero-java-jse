@@ -1,6 +1,25 @@
 
 <project>
-	<delete includeemptydirs="true">  
-	    <fileset dir="Ficheros/output" includes="**/*"/>  
-	</delete> 
+	<property name="dir.javadoc" location="doc"/>
+	<property name="dir.source"  location="src"/>
+	
+	 <target name="clean All" description="delete output and javadoc files">
+	 	<delete includeemptydirs="true">  
+	 		    <fileset dir="Ficheros/output" includes="**/*"/>  
+	 	</delete> 
+	 	<delete includeemptydirs="true">  
+	 		 		    <fileset dir="doc" includes="**/*"/>  
+	 </delete>
+	  </target>
+	
+	<target name="Clear Output" description="delete output files">
+		<delete includeemptydirs="true">  
+			 		    <fileset dir="Ficheros/output" includes="**/*"/>  
+			 	</delete> 
+	</target>
+	
+	<target name="doc" depends="clean All" description="generate documentation">
+	    <javadoc sourcepath="${dir.source}" destdir="${dir.javadoc}"/>
+	</target>
+	
 </project>

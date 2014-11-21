@@ -2,6 +2,12 @@ package com.ipartek.ejercicio.migracion;
 
 import com.ipartek.ejercicio.migracion.util.Fichero;
 
+/**
+ * Clase Migración con metodo main para poder arrancar el proceso
+ *
+ * @author Joseba Carrión Blanco
+ *
+ */
 public class Migracion {
 
     public static void main(String[] args) {

@@ -1,5 +1,12 @@
 package com.ipartek.ejercicio.migracion;
 
+/**
+ * Clase que contiene ciertas constantes usadas a lo largo de todo el proyecto
+ * 
+ * @author Joseba Carrión Blanco
+ *
+ */
+
 public final class Constantes {
 
     private Constantes() {

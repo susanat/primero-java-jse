@@ -165,4 +165,8 @@ public class Persona {
 
     }
 
+    public void setCategoriaNoCheck(String categoria) {
+	this.categoria = categoria;
+    }
+
 }
