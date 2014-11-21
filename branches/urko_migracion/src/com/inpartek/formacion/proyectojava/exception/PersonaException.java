@@ -22,10 +22,16 @@ public class PersonaException extends Exception {
      */
     public static final int COD_EDAD_NO_VALIDA = 0;
     /**
-     * Codigo de error para el
+     * Codigo de error para la longitud de texto
      */
     public static final int COD_LONG_TEXTO_NO_VALIDA = 10;
+    /**
+     * Codigo de error para error en el DNI
+     */
     public static final int COD_DNI_NO_VALIDO = 20;
+    /**
+     * Codigo de error para el EMAIL
+     */
     public static final int COD_EMAIL_NO_VALIDO = 30;
 
     public static final String MSG_TEXTO_NO_VALIDO = "EL TEXTO INTRODUCIDO DEBE DE TENER ALMENOS "
