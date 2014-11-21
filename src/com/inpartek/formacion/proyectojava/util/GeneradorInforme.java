@@ -10,7 +10,7 @@ import com.inpartek.formacion.proyectojava.exception.PersonaException;
 import com.inpartek.formacion.proyectojava.pojo.Estadistica;
 import com.inpartek.formacion.proyectojava.pojo.Persona;
 
-public class GeneradorInforme {
+public final class GeneradorInforme {
     private final static String P_PATTERN = ";";
     private final static String A_PATTERN = ",";
 
