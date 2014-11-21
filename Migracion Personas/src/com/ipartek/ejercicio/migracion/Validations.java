@@ -95,6 +95,8 @@ public final class Validations {
      * @return boolean True if is valid, false if not 
      */
     public static boolean isValidUTF8(final String input) {
+	
+	/*
 	@SuppressWarnings("unused")
 	byte[] myBytes = null;
 
@@ -104,6 +106,8 @@ public final class Validations {
 	    return false;
 	}
 
+	return true;
+	*/
 	return true;
     }
 

@@ -1,8 +1,8 @@
-Anita,Morgan,Santo Tomé,23,AnitaJMorgan@spambob.com,75193179S,CLIENTE
-Anita,Morgan,Santo Tomé,23,AnitaJMorgan@spambob.com,75193179S,CLIENTE
+UTF8 => Anita,Morgan,Santo Tomé,23,AnitaJMorgan@spambob.com,75193179S,CLIENTE
+UTF8 => Anita,Morgan,Santo Tomé,23,AnitaJMorgan@spambob.com,75193179S,CLIENTE
 Raymond,Rojas,Las Veguillas,37,RaymondTRojas@dodgit.com,94387805Z,TRABAJADOR
 Raymond,Rojas,Las Veguillas,37,RaymondTRojas@dodgit.com,94387805Z,TRABAJADOR
-Mark,Ellis,Gibraleón,21,MarkGEllis@dodgit.com,730804W,JEFE
-Mark,Ellis,Gibraleón,21,MarkGEllis@dodgit.com,730804W,JEFE
+UTF8 => Mark,Ellis,Gibraleón,21,MarkGEllis@dodgit.com,730804W,JEFE
+UTF8 => Mark,Ellis,Gibraleón,21,MarkGEllis@dodgit.com,730804W,JEFE
 James,Fuller,Noalejo,23,JamesBFuller@pookmail.com,65036368G,CLIENTE
 James,Fuller,Noalejo,23,JamesBFuller@pookmail.com,65036368G,CLIENTE
