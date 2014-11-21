@@ -6,12 +6,12 @@ import java.util.regex.Pattern;
 //TODO implementar las validaciones en la clase Persona
 public class UtilValidacion {
 
-    private final static String DNI_PATTERN = "(\\d{1,8}[A-Z])";
+    private final static String DNI_PATTERN = "\\d{1,8}[A-Z]";
     private final static String NUMBER_PATTERN = "^\\d+$";
     private final static String EMAIL_PATTERN = "^[\\w\\.=-]+@[\\w\\.-]+\\.[\\w]{2,3}$";
 
     /**
-     * Función que valida si el numero que se manda es
+     * Función que valida si el numero que se manda es un numero entero
      *
      * @param edad
      * @return
@@ -28,7 +28,8 @@ public class UtilValidacion {
     }
 
     /**
-     * Funcion que valida el dni que se envia
+     * Funcion que valida el dni que se envia tiene el formato adecuado 8
+     * numeros y una letra
      *
      * @param dni
      *            {@code String} el DNI a validar
@@ -39,7 +40,7 @@ public class UtilValidacion {
 	Pattern dniPattern = null;
 	Matcher m = null;
 	dniPattern = Pattern.compile(DNI_PATTERN);
-	m = dniPattern.matcher(dni);
+	m = dniPattern.matcher(dni.toUpperCase());
 	if (m.matches()) {
 	    valido = true;
 	}
@@ -47,14 +48,21 @@ public class UtilValidacion {
 	return valido;
     }
 
+    /***
+     * Funcion que valida si el email tiene un formato valido
+     *
+     * @param email
+     *            {@code String} la cadena de texto a validar
+     * @return {@code boolean} si tiene un formato valido o no
+     */
     public static boolean validarEmail(final String email) {
+	boolean valido = false;
 	Pattern emailPattern = Pattern.compile(EMAIL_PATTERN);
 	Matcher m = emailPattern.matcher(email);
 
 	if (m.matches()) {
-	    return true;
-	} else {
-	    return false;
+	    valido = true;
 	}
+	return valido;
     }
 }
