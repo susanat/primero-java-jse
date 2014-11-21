@@ -10,6 +10,12 @@ import com.inpartek.formacion.proyectojava.exception.PersonaException;
 import com.inpartek.formacion.proyectojava.pojo.Estadistica;
 import com.inpartek.formacion.proyectojava.pojo.Persona;
 
+/**
+ * Es la clase que se encarga de la lectura y de la escritura
+ * 
+ * @author Urko Villanueva
+ *
+ */
 public final class GeneradorInforme {
     private final static String P_PATTERN = ";";
     private final static String A_PATTERN = ",";
