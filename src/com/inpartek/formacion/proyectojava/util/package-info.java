@@ -1,5 +1,5 @@
 /**
- * Es el paquete donde se guardan
+ * Es el paquete donde se guardan las utilidades del proyecto
  */
 /**
  * @author Urko Villanueva
