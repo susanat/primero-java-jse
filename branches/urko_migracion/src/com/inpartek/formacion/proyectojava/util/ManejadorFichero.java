@@ -14,11 +14,11 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.logging.Logger;
 
-public class ManejadorFichero {
+public final class ManejadorFichero {
     /*
      * protected String filePath; protected String fileName; protected String
      * fileExt; protected File fichero;
-     *
+     * 
      * public ManejadorFichero(final String pfilePath, final String pfileName,
      * final String pfileExt) { super(); this.filePath = pfilePath;
      * this.fileName = pfileName; this.fileExt = pfileExt; }
