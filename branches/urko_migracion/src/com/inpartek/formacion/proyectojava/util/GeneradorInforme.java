@@ -1,5 +1,6 @@
 package com.inpartek.formacion.proyectojava.util;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,11 @@ public class GeneradorInforme extends ManejadorFichero {
     private final static int DNI_POS = 5;
     private final static int CATEGORIA_POS = 6;
     private final static int N_CAMPOS = 7;
+    private final static String FILE_PATH = new File("").getAbsolutePath()
+	    + System.getProperty("file.separator") + "files"
+	    + System.getProperty("file.separator");
+    private final static String NOMBRE_FICHERO_DATOS = "personas";
+    private final static String EXTENSION_FICHERO = "txt";
     private final static String NOMBRE_FICHERO_ERROR = "personas-error";
     private final static String NOMBRE_FICHERO_DUPLICADO = "personas-repetidas";
     private final static String NOMBRE_FICHERO_VALIDO = "personas-correctas";
@@ -33,9 +39,9 @@ public class GeneradorInforme extends ManejadorFichero {
     HashMap<String, Persona> datosCortos;
     List<String> errores;
 
-    public GeneradorInforme(final String pfilePath, final String pfileName,
-	    final String pfileExt) {
-	super(pfilePath, pfileName, pfileExt);
+    public GeneradorInforme() {
+
+	super(FILE_PATH, NOMBRE_FICHERO_DATOS, EXTENSION_FICHERO);
 	datosPersonas = new HashMap<String, Persona>();
 	datosCortos = new HashMap<String, Persona>();
 	errores = new ArrayList<String>();
@@ -47,7 +53,6 @@ public class GeneradorInforme extends ManejadorFichero {
 
     public void cargarDatos() throws NumberFormatException, PersonaException {
 	long timeStart;
-
 	timeStart = System.nanoTime();
 
 	Persona p = null;
