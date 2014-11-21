@@ -65,51 +65,53 @@ public class Estadistica {
      *
      * @return el tiempo {@code String} en el formato deseado
      */
-    public String calculateTime() {
-	final int minutes = (int) (tiempo / (60 * 1000));
-	final int seconds = (int) (tiempo / 1000 % 60);
+    public final String calculateTime() {
+	final int DECIMAL = 1000;
+	final int GRADE = 60;
+	final int minutes = (int) (tiempo / (GRADE * DECIMAL));
+	final int seconds = (int) (tiempo / DECIMAL % GRADE);
 	final String str = String.format("%d:%02d", minutes, seconds);
 
 	return str;
     }
 
-    public int getRegCorrecto() {
+    public final int getRegCorrecto() {
 	return regCorrecto;
     }
 
-    public int getRegduplicado() {
+    public final int getRegduplicado() {
 	return regduplicado;
     }
 
-    public int getRegIncorrecto() {
+    public final int getRegIncorrecto() {
 	return regIncorrecto;
     }
 
-    public int getRegLeido() {
+    public final int getRegLeido() {
 	return regLeido;
     }
 
-    public long getTiempo() {
+    public final long getTiempo() {
 	return tiempo;
     }
 
-    public void setRegCorrecto(final int pregCorrecto) {
+    public final void setRegCorrecto(final int pregCorrecto) {
 	this.regCorrecto = pregCorrecto;
     }
 
-    public void setRegduplicado(final int pregduplicado) {
+    public final void setRegduplicado(final int pregduplicado) {
 	this.regduplicado = pregduplicado;
     }
 
-    public void setRegIncorrecto(final int pregIncorrecto) {
+    public final void setRegIncorrecto(final int pregIncorrecto) {
 	this.regIncorrecto = pregIncorrecto;
     }
 
-    public void setRegLeido(final int pregLeido) {
+    public final void setRegLeido(final int pregLeido) {
 	this.regLeido = pregLeido;
     }
 
-    public void setTiempo(final long ptiempo) {
+    public final void setTiempo(final long ptiempo) {
 	this.tiempo = ptiempo;
     }
 

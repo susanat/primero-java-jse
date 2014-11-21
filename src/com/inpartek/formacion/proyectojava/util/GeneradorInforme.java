@@ -12,31 +12,31 @@ import com.inpartek.formacion.proyectojava.pojo.Persona;
 
 /**
  * Es la clase que se encarga de la lectura y de la escritura
- * 
+ *
  * @author Urko Villanueva
  *
  */
 public final class GeneradorInforme {
-    private final static String P_PATTERN = ";";
-    private final static String A_PATTERN = ",";
+    private static final String P_PATTERN = ";";
+    private static final String A_PATTERN = ",";
 
-    private final static int NOMBRE_POS = 0;
-    private final static int APELLIDO_POS = 1;
-    private final static int POBLACION_POS = 2;
-    private final static int EDAD_POS = 3;
-    private final static int EMAIL_POS = 4;
-    private final static int DNI_POS = 5;
-    private final static int CATEGORIA_POS = 6;
-    private final static int N_CAMPOS = 7;
-    private final static String FILE_PATH = new File("").getAbsolutePath()
+    private static final int NOMBRE_POS = 0;
+    private static final int APELLIDO_POS = 1;
+    private static final int POBLACION_POS = 2;
+    private static final int EDAD_POS = 3;
+    private static final int EMAIL_POS = 4;
+    private static final int DNI_POS = 5;
+    private static final int CATEGORIA_POS = 6;
+    private static final int N_CAMPOS = 7;
+    private static final String FILE_PATH = new File("").getAbsolutePath()
 	    + System.getProperty("file.separator") + "files"
 	    + System.getProperty("file.separator");
-    private final static String NOMBRE_FICHERO_DATOS = "personas";
-    private final static String EXTENSION_FICHERO = "txt";
-    private final static String NOMBRE_FICHERO_ERROR = "personas-error";
-    private final static String NOMBRE_FICHERO_DUPLICADO = "personas-repetidas";
-    private final static String NOMBRE_FICHERO_VALIDO = "personas-correctas";
-    private final static String NOMBRE_FICHERO_ESTADISTICAS = "estadisticas";
+    private static final String NOMBRE_FICHERO_DATOS = "personas";
+    private static final String EXTENSION_FICHERO = "txt";
+    private static final String NOMBRE_FICHERO_ERROR = "personas-error";
+    private static final String NOMBRE_FICHERO_DUPLICADO = "personas-repetidas";
+    private static final String NOMBRE_FICHERO_VALIDO = "personas-correctas";
+    private static final String NOMBRE_FICHERO_ESTADISTICAS = "estadisticas";
 
     private static Estadistica estadistica;
     private static HashMap<String, Persona> datosPersonas;
@@ -180,8 +180,9 @@ public final class GeneradorInforme {
     }
 
     private static void gDatosArchivoEstadistica() {
+	final long EXP = (long) 1e6;
 	long timeEnd = System.nanoTime();
-	long difference = (long) ((timeEnd - estadistica.getTiempo()) / 1e6);
+	long difference = (timeEnd - estadistica.getTiempo()) / EXP;
 	estadistica.setTiempo(difference);
 	ManejadorFichero.addTexttoFile(
 		"Registros leidos" + "\t" + estadistica.getRegLeido(),

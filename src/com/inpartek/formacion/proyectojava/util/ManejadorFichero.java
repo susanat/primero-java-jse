@@ -26,11 +26,16 @@ public final class ManejadorFichero {
     private ManejadorFichero() {
     }
 
-    /**
+    /*
      * función que añade texto a un fichero ya existente
-     *
-     * @param content
-     *            {@code String} el contenido a añadir al fichero
+     * 
+     * @param content {@code String}
+     * 
+     * @param filePath {@code String}
+     * 
+     * @param fileName {@code String}
+     * 
+     * @param fileExt {@code String}
      */
     public static void addTexttoFile(final String content,
 	    final String filePath, final String fileName, final String fileExt) {
@@ -61,6 +66,13 @@ public final class ManejadorFichero {
     /**
      *
      * @param content
+     *            {@code String}
+     * @param filePath
+     *            {@code String}
+     * @param fileName
+     *            {@code String}
+     * @param fileExt
+     *            {@code String}
      */
     public static void crearArchivoTexto(final String content,
 	    final String filePath, final String fileName, final String fileExt) {
@@ -100,7 +112,16 @@ public final class ManejadorFichero {
 
     /**
      *
-     * @return
+     *
+     *
+     * @param filePath
+     *            {@code String}
+     * @param fileName
+     *            {@code String}
+     * @param fileExt
+     *            {@code String}
+     *
+     * @return {@code String}
      */
     public static String leerFichero(final String filePath,
 	    final String fileName, final String fileExt) {
