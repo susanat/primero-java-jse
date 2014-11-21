@@ -12,40 +12,42 @@ import com.ipartek.formacion.proyectoclase.excepciones.PersonaException;
  *
  */
 public class Alumno extends Persona {
-	/**
+    /**
  *
  */
-	private Map<String, Integer> calificaciones;
+    private Map<String, Integer> calificaciones;
 
-	/**
-	 *
-	 * @throws PersonaException
-	 */
-	public Alumno() throws PersonaException {
-		super();
-	}
+    /**
+     *
+     * @throws PersonaException
+     */
+    public Alumno() throws PersonaException {
+	super();
+    }
 
-	public Alumno(String nombre, String papellido, String sapellido,
-			String dni, String telefono) {
-		super(nombre, papellido, sapellido, dni, telefono);
+    public Alumno(final String nombre, final String papellido,
+	    final String sapellido, final String dni, final String telefono) {
+	super(nombre, papellido, sapellido, dni, telefono);
 
-	}
+    }
 
-	public Alumno(String nombre, String papellido, String sapellido,
-			String dni, String poblacion, Calendar fnacimiento,
-			String telefono, char sexo, Boolean trabajando, Integer nhermanos,
-			Libro libro, HashMap<String, Integer> calificaciones)
-			throws PersonaException {
-		super(nombre, papellido, sapellido, dni, poblacion, fnacimiento,
-				telefono, sexo, trabajando, nhermanos, libro);
-		setCalificaciones(calificaciones);
-	}
+    public Alumno(final String pnombre, final String ppapellido,
+	    final String psapellido, final String dni, final String ppoblacion,
+	    final Calendar pfnacimiento, final String ptelefono,
+	    final char psexo, final Boolean ptrabajando,
+	    final Integer pnhermanos, final Libro plibro,
+	    final HashMap<String, Integer> pcalificaciones)
+	    throws PersonaException {
+	super(pnombre, ppapellido, psapellido, dni, ppoblacion, pfnacimiento,
+		ptelefono, psexo, ptrabajando, pnhermanos, plibro);
+	setCalificaciones(pcalificaciones);
+    }
 
-	public Map<String, Integer> getCalificaciones() {
-		return calificaciones;
-	}
+    public Map<String, Integer> getCalificaciones() {
+	return calificaciones;
+    }
 
-	public void setCalificaciones(HashMap<String, Integer> calificaciones) {
-		this.calificaciones = calificaciones;
-	}
+    public void setCalificaciones(final HashMap<String, Integer> pcalificaciones) {
+	this.calificaciones = pcalificaciones;
+    }
 }

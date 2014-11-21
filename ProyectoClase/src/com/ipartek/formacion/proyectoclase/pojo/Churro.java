@@ -2,35 +2,35 @@ package com.ipartek.formacion.proyectoclase.pojo;
 
 public class Churro implements Comparable<Churro>, IOrdenable {
 
-	private Double caloria;
+    private Double caloria;
 
-	public Churro() {
-		super();
-	}
+    public Churro() {
+	super();
+    }
 
-	public Churro(Double caloria) {
-		super();
-		this.caloria = caloria;
-	}
+    public Churro(final Double pcaloria) {
+	super();
+	this.caloria = pcaloria;
+    }
 
-	@Override
-	public int compareTo(Churro o) {
-		// TODO Auto-generated method stub
-		return Double.compare(this.caloria, o.getCaloria());
-	}
+    @Override
+    public int compareTo(final Churro o) {
+	// TODO Auto-generated method stub
+	return Double.compare(this.caloria, o.getCaloria());
+    }
 
-	public Double getCaloria() {
-		return caloria;
-	}
+    public Double getCaloria() {
+	return caloria;
+    }
 
-	public void setCaloria(Double caloria) {
-		this.caloria = caloria;
-	}
+    public void setCaloria(final Double pcaloria) {
+	this.caloria = pcaloria;
+    }
 
-	@Override
-	public Double getPeso() {
-		// TODO Auto-generated method stub
-		return this.caloria;
-	}
+    @Override
+    public Double getPeso() {
+	// TODO Auto-generated method stub
+	return this.caloria;
+    }
 
 }
