@@ -31,29 +31,39 @@ public class GeneradorInforme {
     private final static String NOMBRE_FICHERO_DUPLICADO = "personas-repetidas";
     private final static String NOMBRE_FICHERO_VALIDO = "personas-correctas";
     private final static String NOMBRE_FICHERO_ESTADISTICAS = "estadisticas";
-    String[] lista;
-    Estadistica estadistica;
-    HashMap<String, Persona> datosPersonas;
-    HashMap<String, Integer> datosRepetidos;
-    HashMap<String, Persona> datosErroneos;
-    HashMap<String, Persona> datosCortos;
-    List<String> errores;
 
-    public GeneradorInforme() {
+    private static Estadistica estadistica;
+    private static HashMap<String, Persona> datosPersonas;
+    private static HashMap<String, Integer> datosRepetidos;
+    private static HashMap<String, Persona> datosErroneos;
+    private static HashMap<String, Persona> datosCortos;
+    private static List<String> errores;
 
-	//
+    private GeneradorInforme() {
+    }
+
+    private static void init() {
 	datosPersonas = new HashMap<String, Persona>();
 	datosCortos = new HashMap<String, Persona>();
 	errores = new ArrayList<String>();
 	datosErroneos = new HashMap<String, Persona>();
 	datosRepetidos = new HashMap<String, Integer>();
-	lista = null;
-	estadistica = null;
+	estadistica = new Estadistica();
+	estadistica.setTiempo(System.currentTimeMillis());
     }
 
-    public void cargarDatos() throws NumberFormatException, PersonaException {
-	long timeStart;
-	timeStart = System.nanoTime();
+    public static void generarMigracion() throws NumberFormatException,
+	    PersonaException {
+	init();
+	cargarDatos();
+	generarDatos();
+
+    }
+
+    private static void cargarDatos() throws NumberFormatException,
+	    PersonaException {
+
+	String[] lista = null;
 
 	Persona p = null;
 	String contenido = ManejadorFichero.leerFichero(FILE_PATH,
@@ -84,10 +94,9 @@ public class GeneradorInforme {
 	estadistica = new Estadistica(lista.length, datosPersonas.size(),
 		datosCortos.size() + datosErroneos.size() + errores.size(),
 		datosRepetidos.size());
-	estadistica.setTiempo(timeStart);
     }
 
-    private void gArchivoDatosFaltan() {
+    private static void gArchivoDatosFaltan() {
 	final String ENCABEZADO = "PERSONAS DE LAS QUE FALTAN DATOS:";
 	Persona value = null;
 
@@ -100,7 +109,7 @@ public class GeneradorInforme {
 	}
     }
 
-    private void gArchivoDatosInvalido() {
+    private static void gArchivoDatosInvalido() {
 	final String ENCABEZADO = "PERSONAS DE LAS QUE TIENEN LOS DATOS MAL ESCRITOS:";
 	Persona value = null;
 
@@ -115,7 +124,7 @@ public class GeneradorInforme {
 
     }
 
-    private void gArchivoDniInvalido() {
+    private static void gArchivoDniInvalido() {
 	final String ENCABEZADO = "PERSONAS CON DNI MAL INTRODUCIDO (POSICIÓN O TAMAÑO INCORRECTO):";
 
 	ManejadorFichero.addTexttoFile(ENCABEZADO, FILE_PATH,
@@ -128,7 +137,7 @@ public class GeneradorInforme {
 
     }
 
-    private void gDatosArchivoCorrecto() {
+    private static void gDatosArchivoCorrecto() {
 	Persona value = null;
 
 	for (Map.Entry<String, Persona> entry : datosPersonas.entrySet()) {
@@ -139,7 +148,7 @@ public class GeneradorInforme {
 
     }
 
-    private void gDatosArchivoDuplicado() {
+    private static void gDatosArchivoDuplicado() {
 
 	String key = null;
 	Integer value = null;
@@ -156,7 +165,7 @@ public class GeneradorInforme {
 
     }
 
-    private void gDatosArchivoError() {
+    private static void gDatosArchivoError() {
 	// datos_erroneos;
 
 	gArchivoDniInvalido();
@@ -164,7 +173,7 @@ public class GeneradorInforme {
 	gArchivoDatosInvalido();
     }
 
-    private void gDatosArchivoEstadistica() {
+    private static void gDatosArchivoEstadistica() {
 	long timeEnd = System.nanoTime();
 	long difference = (long) ((timeEnd - estadistica.getTiempo()) / 1e6);
 	estadistica.setTiempo(difference);
@@ -185,7 +194,7 @@ public class GeneradorInforme {
 		NOMBRE_FICHERO_ESTADISTICAS, EXTENSION_FICHERO);
     }
 
-    private void gEncabezadoArchivoCorrecto() {
+    private static void gEncabezadoArchivoCorrecto() {
 	final String ENCABEZADO = "PERSONAS";
 
 	ManejadorFichero.crearArchivoTexto(ENCABEZADO, FILE_PATH,
@@ -194,7 +203,7 @@ public class GeneradorInforme {
 		EXTENSION_FICHERO);
     }
 
-    private void gEncabezadoArchivoDuplicado() {
+    private static void gEncabezadoArchivoDuplicado() {
 	final String ENCABEZADO = "PERSONA\t\t\t\t\t\t\tN VECES";
 
 	ManejadorFichero.crearArchivoTexto(ENCABEZADO, FILE_PATH,
@@ -203,7 +212,7 @@ public class GeneradorInforme {
 		EXTENSION_FICHERO);
     }
 
-    private void gEncabezadoArchivoError() {
+    private static void gEncabezadoArchivoError() {
 	final String ENCABEZADO = "PERSONAS CON ERRORES EN SUS ARCHIVOS";
 	ManejadorFichero.crearArchivoTexto(ENCABEZADO, FILE_PATH,
 		NOMBRE_FICHERO_ERROR, EXTENSION_FICHERO);
@@ -211,7 +220,7 @@ public class GeneradorInforme {
 		EXTENSION_FICHERO);
     }
 
-    private void gEncabezadoArchivoEstadisticas() {
+    private static void gEncabezadoArchivoEstadisticas() {
 	final String ENCABEZADO = "ESTADISTICAS";
 	ManejadorFichero.crearArchivoTexto(ENCABEZADO, FILE_PATH,
 		NOMBRE_FICHERO_ESTADISTICAS, EXTENSION_FICHERO);
@@ -219,7 +228,7 @@ public class GeneradorInforme {
 		NOMBRE_FICHERO_ESTADISTICAS, EXTENSION_FICHERO);
     }
 
-    public void generarDatos() {
+    private static void generarDatos() {
 	gEncabezadoArchivoError();
 	gDatosArchivoError();
 	gEncabezadoArchivoCorrecto();
@@ -230,26 +239,23 @@ public class GeneradorInforme {
 	gDatosArchivoEstadistica();
     }
 
-    private boolean isRepeated(final Persona p) {
-
+    private static boolean isRepeated(final Persona p) {
+	boolean repeated = false;
 	if (datosPersonas.containsKey(p.getDni())
 		|| datosErroneos.containsKey(p.getDni())) {
-
-	    return true;
-	} else {
-
-	    return false;
+	    repeated = true;
 	}
+	return repeated;
     }
 
-    private String[] toLine(final String pline) {
+    private static String[] toLine(final String pline) {
 	String[] list = null;
 	list = pline.split(P_PATTERN);
 
 	return list;
     }
 
-    private Persona toPersona(final String text) throws PersonaException {
+    private static Persona toPersona(final String text) throws PersonaException {
 
 	Persona persona = null;
 	String[] list = null;
@@ -268,7 +274,7 @@ public class GeneradorInforme {
 	return persona;
     }
 
-    private Persona validarDatos(final String[] list)
+    private static Persona validarDatos(final String[] list)
 	    throws NumberFormatException, PersonaException {
 	Persona p = new Persona(list[DNI_POS]);
 	p.setTodo(true);

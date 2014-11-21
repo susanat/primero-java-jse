@@ -14,6 +14,15 @@ public class Estadistica {
     private int regIncorrecto;
     private int regduplicado;
 
+    public Estadistica() {
+	super();
+	this.regLeido = 0;
+	this.regCorrecto = 0;
+	this.regIncorrecto = 0;
+	this.regduplicado = 0;
+	this.tiempo = 0;
+    }
+
     /**
      *
      * @param pregLeido
@@ -28,6 +37,7 @@ public class Estadistica {
 	this.regCorrecto = pregCorrecto;
 	this.regIncorrecto = pregIncorrecto;
 	this.regduplicado = pregduplicado;
+	this.tiempo = 0;
     }
 
     /**
@@ -52,7 +62,7 @@ public class Estadistica {
     /**
      * función que se encarga de calcular el tiempo en milisengundos en el
      * formato hh:mm
-     * 
+     *
      * @return el tiempo {@code String} en el formato deseado
      */
     public String calculateTime() {

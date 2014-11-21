@@ -12,10 +12,13 @@ public class UtilValidacion {
     private final static String NUMBER_PATTERN = "^\\d+$";
     private final static String EMAIL_PATTERN = "^[\\w\\.=-]+@[\\w\\.-]+\\.[\\w]{2,3}$";
 
+    private UtilValidacion() {
+    }
+
     /**
      * Valida si las edad del fichero cumple las normas de intervalos y que sea
      * numero
-     * 
+     *
      * @param pedad
      *            {@code String} la edad en texto
      * @return
