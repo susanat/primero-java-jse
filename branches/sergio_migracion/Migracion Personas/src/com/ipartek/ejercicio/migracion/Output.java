@@ -127,6 +127,11 @@ public final class Output {
 	//ClsUtilsFicheros.writeSmallTextFile(aLines, 
 	//	file, Constantes.CHARSET_OUTPUT);
 	write(file, aLines, Charset.forName("UTF-8"));
+	
+	//TODO: sacar todo de aquí y crear las estadísitcas en otra función a parte para poder acceder a ellas
+	
+	
+	
     }
     
     /**

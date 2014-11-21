@@ -106,4 +106,7 @@ FIXED 0.9.3 - Guardar versión correcta de archivo (no interpreta algunos caracte
 	- Añadidos mensajes de información y alerta para el usuario
 	- Control de errores fallo de carga de fichero entrada
 	- Añadida clase Utils para Interfaz de Usuario
+	
+0.9.5
+	- Añadida lógica para fichero log
 
