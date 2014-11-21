@@ -100,4 +100,10 @@ FIXED 0.9.2 - Null exception cuando no había datos en los ficheros
 
 FIXED 0.9.3 - Guardar versión correcta de archivo (no interpreta algunos caracteres latinos)
 	
+0.9.4
+	- Añadido control estructura del proyecto
+	- Corregidos Blocker y Critical violations PMD
+	- Añadidos mensajes de información y alerta para el usuario
+	- Control de errores fallo de carga de fichero entrada
+	- Añadida clase Utils para Interfaz de Usuario
 

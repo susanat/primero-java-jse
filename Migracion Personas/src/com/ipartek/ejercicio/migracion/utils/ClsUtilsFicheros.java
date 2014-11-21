@@ -459,4 +459,28 @@ public final class ClsUtilsFicheros {
 
 	    osw.close();
 	}
+	
+	/**
+	 * Create a foleder if not exist.
+	 * 
+	 * @param path String path to locate folder
+	 * @param name Name for folder
+	 * @return File folder path. If not creted return null
+	 */
+	public static File createFolder(final String path, final String name) {
+	    
+	    File filePath = new File(path);
+	    File theDir = new File(filePath, name);
+	    	    // if the directory does not exist, create it
+	    if (!theDir.exists()) {		
+		try {
+		    theDir.mkdir();		    
+		} catch (SecurityException se) {
+		    theDir = null;
+		}
+	    }
+	    
+	    return theDir;	    
+	}
+	
 }

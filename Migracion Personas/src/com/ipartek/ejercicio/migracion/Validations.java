@@ -1,6 +1,5 @@
 package com.ipartek.ejercicio.migracion;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -136,7 +135,8 @@ public final class Validations {
     public static boolean isUTF8MisInterpreted(final String input,
 	    final String encoding) {
 
-	CharsetDecoder decoder = Charset.forName(Constantes.CHARSET_OUTPUT.toString()).newDecoder();
+	CharsetDecoder decoder = Charset.forName(
+		Constantes.CHARSET_OUTPUT.toString()).newDecoder();
 	CharsetEncoder encoder = Charset.forName(encoding).newEncoder();
 	ByteBuffer tmp;
 	try {

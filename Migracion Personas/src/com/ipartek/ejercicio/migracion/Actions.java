@@ -1,6 +1,5 @@
 package com.ipartek.ejercicio.migracion;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
@@ -13,8 +12,11 @@ import java.util.Map.Entry;
 
 import com.ipartek.ejercicio.migracion.Constantes.eErrorCause;
 import com.ipartek.ejercicio.migracion.object.Persona;
+import com.ipartek.ejercicio.migracion.utils.ClsUtilsConstantes;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsFechas;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsFicheros;
+import com.ipartek.ejercicio.migracion.utils.ClsUtilsUI;
+
 
 /**
  * Lógica del proceso de checkeo de datos.
@@ -46,35 +48,47 @@ public class Actions {
      * más de un error.
      */
     private HashMap<eErrorCause, List<String>> groupByAllErr = null;
-    
+
     /**
      * Agrupa los duplicados por DNI.
      */
     private HashMap<String, List<Persona>> groupDuplicated = null;
-    
+
     /**
      * Guarda el tiempo del proceso.
      */
     private Long miliseconds = Constantes.INITIALIZE_LONG;
 
     /**
+     * Constructor for object Actions.
+     * @throws Exception 
+     */
+    public Actions() throws Exception {
+	if (!checkFolders()) {
+	    throw new Exception("No se ha podido crear la estructura del proyecto");
+	}
+    }
+
+
+
+    /**
      * Get the list with objects of Persona.
      * @return List with Persona objects
-     */
-    private List<Persona> getLstPersonas() {	
+     */    
+    public List<Persona> getLstPersonas() {	
 	return lstPersonas;
     }
-    
+
     /**
-     * Obtiene la lista de duplicados agrupados por dni
+     * Obtiene la lista de duplicados agrupados por dni.
      * 
      * @return HashMap<String, List<Persona>> con la lista de duplicados 
      * agrupados por DNI
      */
     public HashMap<String, List<Persona>> getGroupDuplicated() {
-	return groupDuplicated;
+	return new HashMap<String, List<Persona>>(groupDuplicated);
     }
-    
+
     /**
      * Get the time of process.
      * 
@@ -90,11 +104,13 @@ public class Actions {
      * @return Integer number of lines or null if not yet read;
      */
     public Integer getCountLines() {
+	int count = 0;		
+
 	if (strFile != null) {
-	    return strFile.size();
-	} else {
-	    return null;
+	    count =  strFile.size();
 	}
+
+	return count;
     }
 
     /**
@@ -173,7 +189,7 @@ public class Actions {
     public Integer getCountLinesWithErrors() {
 	HashMap<eErrorCause, List<String>> map = 
 		new HashMap<eErrorCause, List<String>>(
-		groupByFirstErr);
+			groupByFirstErr);
 
 	// removemos las correctas:
 	map.remove(eErrorCause.NONE);
@@ -194,21 +210,23 @@ public class Actions {
      * @param filePath path and name for file
      */
     public void readFile(final String filePath) throws Exception {
-
-	try {
+	try {	        
 	    //strFile = ClsUtilsFicheros.readFile(filePath);
-	    strFile = ClsUtilsFicheros.readWithScanerToList(filePath, Charset.forName("UTF-8"));
-	} catch (Exception e) {
-	    // TODO Auto-generated catch block
-	    throw e;
+	    strFile = ClsUtilsFicheros.readWithScanerToList(filePath, 
+		    Charset.forName("UTF-8"));
+	} catch (Exception e) {	    
+	    throw e;	      
 	}
 
+	//TODO: fichero de entrada tiene que estar codificado en UTF-8 no Bounds
+	
     }
 
     /**
      * Start process to read list file.
+     * @throws InterruptedException 
      */
-    public void startProcess() {
+    public void startProcess() throws InterruptedException {
 
 	final Date fInicial = new Date();
 
@@ -220,14 +238,22 @@ public class Actions {
 		createObject(line);
 	    }
 	}
-	
+
 	//creamos los duplicados si existen datos de persona
-	if(lstPersonas != null)
+	if(lstPersonas != null) {
 	    groupDuplicated = getListDuplicated(lstPersonas);
+	}
 
 	//System.out.println("finanl proceso");
 	miliseconds = ClsUtilsFechas.diferenciaHoras(fInicial, new Date())
 		.getDiffMilisegundos();
+
+	try {
+	    ClsUtilsUI.showNoModalInformation(
+		    "Migración finalizada", "Migración");
+	} catch (InterruptedException e) {
+	    ClsUtilsUI.showNoModalAlert(e.getMessage(), "Migración");		    
+	} 
     }
 
     /**
@@ -265,14 +291,14 @@ public class Actions {
      * 
      */
     private void createObject(final String line) {
-	
+
 	String[] splitLine = line.split(Constantes.STR_SEPARATOR);	
 
 	// String parameter para añadir en caso que se pase valores tipo string
 	Class[] paramString = new Class[1];
 	paramString[0] = String.class;
 
-	
+
 	Class cls = null; //clase dinámica
 	Object obj = null; //objeto que se creará
 	Method method = null; //contendrá el método a invocar
@@ -293,16 +319,16 @@ public class Actions {
 		method.invoke(obj, parameter);
 	    }
 
-	    
+
 	    //Se ha creado el objeto
 	    if (lstPersonas == null) {
 		lstPersonas = new ArrayList<Persona>();
 	    }
-	    
+
 	    //añadimos el objeto a la lista
 	    lstPersonas.add((Persona) obj);
-	    
-	    
+
+
 	    // no paramater
 	    Class[] noparams = {};
 
@@ -385,78 +411,49 @@ public class Actions {
     }
 
     /**
-     * Initial main for actions.
-     * 
-     * @param args Argumentos de entrada
+     * Crea las carpetas necesarias para el programa.
+     * @return false si ha habido error
      */
-    public static void main(final String[] args) {
-	final Actions objAction = new Actions();
+    private boolean checkFolders() {
+	Boolean res = true;	
 
-	try {
-	    
-	    //Abrimos el fichero como UTF-8 y lo volvemos a guardar
-	    /*
-	    File file = new File(Constantes.PATH_SOURCE, 
-	    Constantes.NAME_FILE_SOURCE);
-	    String content = ClsUtilsFicheros.readFile2(file.getAbsolutePath());
-	    ClsUtilsFicheros.writeFile4(file.getAbsolutePath(), content);
-	    */
-	    
-	    
-	    // Abrimos el fichero
-	    objAction.readFile(ClsUtilsFicheros.combinarRutas(
-	    	    Constantes.PATH_SOURCE, Constantes.NAME_FILE_SOURCE));
-	    //objAction.readFile(file.getAbsolutePath());
-	    
-	    
-	    // iniciamos el proceso
-	    objAction.startProcess();
-	    
-	    // creamos el fichero de líneas Incorrectas
-	    Output.createErrorsFile(objAction.getAgrupedLinesByFirstError());
-
-	    // creamos el fichero con las correctas
-	    Output.createCorrectFile(objAction);
-	    
-	    // creamos el fichero de duplicados
-	    Output.createDuplicatedFile(objAction);
-
-	    // Creamos el fichero de estadísticas
-	    Output.createStadisticFile(objAction);
-	    
-
-	} catch (IOException e) {
-	    
-	    e.printStackTrace();
-	} catch (Exception e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	//carpeta de entrada
+	if (null == ClsUtilsFicheros.createFolder(ClsUtilsConstantes.PATH_PROJECT, 
+		Constantes.NAME_FOLDER_SOURCE)) {
+	    res = false;
 	}
-	
+
+	//carpeta de salida
+	if (null == ClsUtilsFicheros.createFolder(ClsUtilsConstantes.PATH_PROJECT, 
+		Constantes.NAME_FOLDER_OUTPUT)) {
+	    res = false;
+	}
+
+	return res;
     }
 
     /**
      * Crea una lista con los registros duplicados.
      * 
-     * @param lstPersona List<String> Listado con los objetos de persona
+     * @param lstPersonas List<String> Listado con los objetos de persona
      * @return HashMap<String, List<String>> vacío si no hay duplicados
      */
     private HashMap<String, List<Persona>> getListDuplicated(
-	    final List<Persona> lstPersonas) {
+	    final List<Persona> lstObjPersonas) {
 
 	HashMap<String, List<Persona>> mapDuplicados = 
 		new HashMap<String, List<Persona>>();
 
 	//agrupo por DNI
 	HashMap<String, List<Persona>> map = new HashMap<String, List<Persona>>();	
-	for (Persona persona : lstPersonas) {
+	for (Persona persona : lstObjPersonas) {
 	    String key = persona.getDni();
 	    if (map.get(key) == null) {
 		map.put(key, new ArrayList<Persona>());
 	    }
 	    map.get(key).add(persona);
 	}
-	
+
 	//recorro encontrando duplicados
 	for (Entry<String, List<Persona>> lst : map.entrySet()) {
 	    //compruebo si tiene más de un elementos en la lista
@@ -464,13 +461,93 @@ public class Actions {
 		//añado al mapa
 		mapDuplicados.put(lst.getKey() , lst.getValue());
 	    }
-	    
+
 	}
-	
+
 	return mapDuplicados;
     }
-    
-   
-    
+
+    /**
+     * Initial main for actions.
+     * 
+     * @param args Argumentos de entrada
+     * @throws Exception 
+     */
+    public static void main(final String[] args) {
+	Actions objAction = null;
+	Boolean continuar = false;
+
+	//instanciamos la lógica
+	try {
+	    objAction = new Actions();
+	} catch (Exception e2) {
+	    try {
+		ClsUtilsUI.showNoModalAlert(
+			e2.getMessage(), "Migración");
+	    } catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	}
+
+	//construimos la ruta del fichero de entrada
+	String filePath = ClsUtilsFicheros.combinarRutas(
+		Constantes.PATH_SOURCE, Constantes.NAME_FILE_SOURCE);
+
+	//Abrimos el fichero
+	if (objAction != null) {
+	    try {
+
+		ClsUtilsUI.showNoModalInformation(
+			"Se procesará el fichero: " + filePath, "Migración");
+
+		objAction.readFile(filePath);
+		continuar = true;
+
+	    } catch (Exception e1) {
+		try {
+		    
+		    ClsUtilsUI.showNoModalAlert(
+			    "No se ha podido cargar el fichero de entrada.", "Migración");
+		    
+		} catch (InterruptedException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    }
+
+	    //continuamos con el proceso
+	    if (continuar) {
+		try {
+
+
+		    // iniciamos el proceso
+		    objAction.startProcess();
+
+		    // creamos el fichero de líneas Incorrectas
+		    Output.createErrorsFile(objAction.getAgrupedLinesByFirstError());
+
+		    // creamos el fichero con las correctas
+		    Output.createCorrectFile(objAction);
+
+		    // creamos el fichero de duplicados
+		    Output.createDuplicatedFile(objAction);
+
+		    // Creamos el fichero de estadísticas
+		    Output.createStadisticFile(objAction);
+
+
+		} catch (Exception e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+
+	    }
+
+
+	}
+
+    }
+
 
 }

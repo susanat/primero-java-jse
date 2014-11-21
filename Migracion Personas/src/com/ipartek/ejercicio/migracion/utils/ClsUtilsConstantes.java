@@ -26,4 +26,11 @@ public final class ClsUtilsConstantes {
      */
     public static final String PATH_PROJECT = 
 	    System.getProperty("user.dir");
+    
+    
+    /**
+     * La coma
+     */
+    public static final String STR_COMMA = ",";
+    
 }
