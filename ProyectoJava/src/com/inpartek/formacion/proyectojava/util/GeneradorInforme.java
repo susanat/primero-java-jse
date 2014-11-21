@@ -250,7 +250,7 @@ public class GeneradorInforme extends ManejadorFichero {
 	p.setApellido(list[APELLIDO_POS]);
 	p.setPoblacion(list[POBLACION_POS]);
 	p.setCategoria(list[CATEGORIA_POS]);
-	if (UtilValidacion.isNumber(list[EDAD_POS])) {
+	if (UtilValidacion.edadIsValid(list[EDAD_POS])) {
 	    p.setEdad(Integer.parseInt(list[EDAD_POS]));
 	} else {
 	    p.setTodo(false);

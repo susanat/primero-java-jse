@@ -3,6 +3,8 @@ package com.inpartek.formacion.proyectojava.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.inpartek.formacion.proyectojava.pojo.Persona;
+
 //TODO implementar las validaciones en la clase Persona
 public class UtilValidacion {
 
@@ -10,11 +12,37 @@ public class UtilValidacion {
     private final static String NUMBER_PATTERN = "^\\d+$";
     private final static String EMAIL_PATTERN = "^[\\w\\.=-]+@[\\w\\.-]+\\.[\\w]{2,3}$";
 
+    public static boolean edadIsValid(final String pedad) {
+	boolean exito = false;
+	if (isNumber(pedad)) {
+	    int edad = Integer.parseInt(pedad);
+	    exito = edadValidRange(edad);
+	}
+	return exito;
+    }
+
     /**
-     * Función que valida si el numero que se manda es un numero entero
-     *
+     * Comprueba que lad
+     * 
      * @param edad
+     *            {@code int} la edad a validar en rango
      * @return
+     */
+    public static boolean edadValidRange(final int edad) {
+	boolean exito = false;
+	if (edad <= Persona.EDAD_MAX && edad >= Persona.EDAD_MIN) {
+	    exito = true;
+	}
+	return exito;
+    }
+
+    /**
+     * Función que valida si un texto introducido es un numero entero
+     *
+     * @param number
+     *            {@code String} el numero a validar
+     *
+     * @return {@code boolean} si es cierto o no
      */
     public static boolean isNumber(final String number) {
 	boolean exito = false;
@@ -48,9 +76,13 @@ public class UtilValidacion {
 
 	if (m.matches()) {
 	    letra = m.group(2);
+
 	    nDni = Integer.parseInt(m.group(1));
+	    // System.out.println(nDni);
 	    nDni = nDni % 23;
+
 	    reference = LETRAS.substring(nDni, nDni + 1);
+	    // System.out.println(reference + "-" + letra);
 	    if (reference.equalsIgnoreCase(letra)) {
 		valido = true;
 	    }
