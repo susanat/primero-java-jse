@@ -46,7 +46,7 @@ public class GeneradorInforme extends ManejadorFichero {
     }
 
     public void cargarDatos() throws NumberFormatException, PersonaException {
-	long timeStart, timeEnd;
+	long timeStart;
 
 	timeStart = System.nanoTime();
 
@@ -64,7 +64,7 @@ public class GeneradorInforme extends ManejadorFichero {
 			datosCortos.put(p.getDni(), p);
 		    }
 		} else {
-		    int cont = 0;
+		    int cont = 1;
 		    if (datosRepetidos.get(p) != null) {
 			cont = datosRepetidos.get(p);
 			cont++;
@@ -78,10 +78,7 @@ public class GeneradorInforme extends ManejadorFichero {
 	estadistica = new Estadistica(lista.length, datosPersonas.size(),
 		datosCortos.size() + datosErroneos.size() + errores.size(),
 		datosRepetidos.size());
-
-	timeEnd = System.nanoTime();
-	long difference = (long) ((timeEnd - timeStart) / 1e6);
-	estadistica.setTiempo(difference);
+	estadistica.setTiempo(timeStart);
     }
 
     private void gArchivoDatosFaltan() {
@@ -157,7 +154,9 @@ public class GeneradorInforme extends ManejadorFichero {
     }
 
     private void gDatosArchivoEstadistica() {
-
+	long timeEnd = System.nanoTime();
+	long difference = (long) ((timeEnd - estadistica.getTiempo()) / 1e6);
+	estadistica.setTiempo(difference);
 	addTexttoFile("Registros leidos" + "\t" + estadistica.getRegLeido());
 	addTexttoFile("Minutos Segundos" + "\t" + estadistica.calculateTime());
 	addTexttoFile("Correctos" + "\t" + estadistica.getRegCorrecto());

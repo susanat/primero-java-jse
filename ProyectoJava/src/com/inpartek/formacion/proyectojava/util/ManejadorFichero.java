@@ -29,10 +29,14 @@ public class ManejadorFichero {
 	this.fileExt = pfileExt;
     }
 
+    /**
+     * función que añade texto a un fichero ya existente
+     * 
+     * @param content
+     *            {@code String} el contenido a añadir al fichero
+     */
     public void addTexttoFile(final String content) {
 	fichero = new File(filePath + fileName + "." + fileExt);
-
-	// if file doesnt exists, then create it
 	if (!fichero.exists()) {
 	    try {
 		fichero.createNewFile();
