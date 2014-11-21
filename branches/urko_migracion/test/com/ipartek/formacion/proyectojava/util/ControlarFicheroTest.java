@@ -1,6 +1,6 @@
 package com.ipartek.formacion.proyectojava.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -27,17 +27,17 @@ public class ControlarFicheroTest {
     }
 
     @Test
-    public void testManejadorFichero() {
+    public final void testManejadorFichero() {
 	fail("Not yet implemented");
     }
 
     @Test
-    public void testCrearArchivoTexto() {
+    public final void testCrearArchivoTexto() {
 	fail("Not yet implemented");
     }
 
     @Test
-    public void testLeerFichero() {
+    public final void testLeerFichero() {
 	fail("Not yet implemented");
     }
 

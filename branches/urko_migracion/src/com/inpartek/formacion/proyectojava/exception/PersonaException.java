@@ -78,7 +78,7 @@ public class PersonaException extends Exception {
 	super(cause);
     }
 
-    public int getCodigo() {
+    public final int getCodigo() {
 	return codigo;
     }
 

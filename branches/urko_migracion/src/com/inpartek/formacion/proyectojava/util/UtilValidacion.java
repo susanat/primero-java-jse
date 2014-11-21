@@ -90,7 +90,7 @@ public final class UtilValidacion {
 
 	    nDni = Integer.parseInt(m.group(1));
 	    // System.out.println(nDni);
-	    nDni = nDni % 23;
+	    nDni = nDni % LETRAS.length();
 
 	    reference = LETRAS.substring(nDni, nDni + 1);
 	    // System.out.println(reference + "-" + letra);

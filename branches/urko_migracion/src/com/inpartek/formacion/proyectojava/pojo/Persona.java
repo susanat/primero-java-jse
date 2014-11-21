@@ -52,39 +52,40 @@ public class Persona {
 	setTodo(true);
     }
 
-    public String getApellido() {
+    public final String getApellido() {
 	return apellido;
     }
 
-    public String getCategoria() {
+    public final String getCategoria() {
 	return categoria;
     }
 
-    public String getDni() {
+    public final String getDni() {
 	return dni;
     }
 
-    public int getEdad() {
+    public final int getEdad() {
 	return edad;
     }
 
-    public String getEmail() {
+    public final String getEmail() {
 	return email;
     }
 
-    public String getNombre() {
+    public final String getNombre() {
 	return nombre;
     }
 
-    public String getPoblacion() {
+    public final String getPoblacion() {
 	return poblacion;
     }
 
-    public boolean isTodo() {
+    public final boolean isTodo() {
 	return todo;
     }
 
-    public void setApellido(final String papellido) throws PersonaException {
+    public final void setApellido(final String papellido)
+	    throws PersonaException {
 	if (papellido != null && papellido.length() >= Persona.TEXTO_LONG_MIN) {
 	    this.apellido = papellido;
 	} else {
@@ -94,7 +95,8 @@ public class Persona {
 	}
     }
 
-    public void setCategoria(final String pcategoria) throws PersonaException {
+    public final void setCategoria(final String pcategoria)
+	    throws PersonaException {
 	if (pcategoria != null && pcategoria.length() >= Persona.TEXTO_LONG_MIN) {
 	    this.categoria = pcategoria;
 	} else {
@@ -105,7 +107,7 @@ public class Persona {
 
     }
 
-    public void setDni(final String pdni) throws PersonaException {
+    public final void setDni(final String pdni) throws PersonaException {
 	if (UtilValidacion.validarDNI(pdni)) {
 	    this.dni = pdni;
 	} else {
@@ -115,7 +117,7 @@ public class Persona {
 	}
     }
 
-    public void setEdad(final int pedad) throws PersonaException {
+    public final void setEdad(final int pedad) throws PersonaException {
 	if (UtilValidacion.edadValidRange(pedad)) {
 	    this.edad = pedad;
 	} else {
@@ -125,7 +127,7 @@ public class Persona {
 	}
     }
 
-    public void setEmail(final String pemail) throws PersonaException {
+    public final void setEmail(final String pemail) throws PersonaException {
 	if (UtilValidacion.validarEmail(pemail)) {
 	    this.email = pemail;
 	} else {
@@ -135,7 +137,7 @@ public class Persona {
 	}
     }
 
-    public void setNombre(final String pnombre) throws PersonaException {
+    public final void setNombre(final String pnombre) throws PersonaException {
 	if (pnombre != null && pnombre.length() >= Persona.TEXTO_LONG_MIN) {
 	    this.nombre = pnombre;
 	} else {
@@ -145,7 +147,8 @@ public class Persona {
 	}
     }
 
-    public void setPoblacion(final String ppoblacion) throws PersonaException {
+    public final void setPoblacion(final String ppoblacion)
+	    throws PersonaException {
 	if (ppoblacion != null && ppoblacion.length() >= Persona.TEXTO_LONG_MIN) {
 	    this.poblacion = ppoblacion;
 	} else {
@@ -155,11 +158,11 @@ public class Persona {
 	}
     }
 
-    public void setTodo(final boolean ptodo) {
+    public final void setTodo(final boolean ptodo) {
 	this.todo = ptodo;
     }
 
-    public String toFileString() {
+    public final String toFileString() {
 
 	return this.dni + " " + this.nombre + " " + this.apellido + " "
 		+ this.edad + " " + this.email + " " + this.poblacion + " "
