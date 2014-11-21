@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 //TODO implementar las validaciones en la clase Persona
 public class UtilValidacion {
 
-    private final static String DNI_PATTERN = "\\d{1,8}[A-Z]";
+    private final static String DNI_PATTERN = "(\\d{1,8})([A-Z])";
     private final static String NUMBER_PATTERN = "^\\d+$";
     private final static String EMAIL_PATTERN = "^[\\w\\.=-]+@[\\w\\.-]+\\.[\\w]{2,3}$";
 
@@ -36,13 +36,24 @@ public class UtilValidacion {
      * @return {@code boolean} si es correcto o incorrecto
      */
     public static boolean validarDNI(final String dni) {
+	final String LETRAS = "TRWAGMYFPDXBNJZSQVHLCKE";
+	int nDni;
+	String letra = null;
+	String reference = null;
 	boolean valido = false;
 	Pattern dniPattern = null;
 	Matcher m = null;
 	dniPattern = Pattern.compile(DNI_PATTERN);
 	m = dniPattern.matcher(dni.toUpperCase());
+
 	if (m.matches()) {
-	    valido = true;
+	    letra = m.group(2);
+	    nDni = Integer.parseInt(m.group(1));
+	    nDni = nDni % 23;
+	    reference = LETRAS.substring(nDni, nDni + 1);
+	    if (reference.equalsIgnoreCase(letra)) {
+		valido = true;
+	    }
 	}
 
 	return valido;

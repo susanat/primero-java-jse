@@ -33,7 +33,6 @@ public class GeneradorInforme extends ManejadorFichero {
     HashMap<String, Persona> datosCortos;
     List<String> errores;
 
-    // TODO Sacar las validaciones a clase util
     public GeneradorInforme(final String pfilePath, final String pfileName,
 	    final String pfileExt) {
 	super(pfilePath, pfileName, pfileExt);
