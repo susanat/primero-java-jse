@@ -31,7 +31,7 @@ public class ManejadorFichero {
 
     /**
      * función que añade texto a un fichero ya existente
-     * 
+     *
      * @param content
      *            {@code String} el contenido a añadir al fichero
      */
@@ -106,7 +106,6 @@ public class ManejadorFichero {
 	StringBuilder sb = null;
 	FileReader fr = null;
 	BufferedReader br = null;
-
 	try {
 	    // Apertura del fichero y creacion de BufferedReader para poder
 	    // hacer una lectura comoda (disponer del metodo readLine()).
@@ -119,6 +118,7 @@ public class ManejadorFichero {
 	    // Lectura del fichero
 	    while ((linea = br.readLine()) != null) {
 		sb.append(linea + ";");
+
 	    }
 	} catch (Exception e) {
 	    // e.printStackTrace();
