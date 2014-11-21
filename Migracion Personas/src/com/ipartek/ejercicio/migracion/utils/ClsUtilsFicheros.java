@@ -30,6 +30,10 @@ import java.util.logging.Logger;
  */
 public final class ClsUtilsFicheros {
     
+        static {
+            System.out.println("This is first static block");
+        }
+        
     	/**
     	 * Empty constructor.
     	 */

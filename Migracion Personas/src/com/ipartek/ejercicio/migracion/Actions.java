@@ -10,8 +10,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Category;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import com.ipartek.ejercicio.migracion.Constantes.eErrorCause;
 import com.ipartek.ejercicio.migracion.object.Persona;
+import com.ipartek.ejercicio.migracion.utils.C_LOG;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsConstantes;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsFechas;
 import com.ipartek.ejercicio.migracion.utils.ClsUtilsFicheros;
@@ -467,6 +473,11 @@ public class Actions {
 	return mapDuplicados;
     }
 
+    
+    
+    
+    
+    
     /**
      * Initial main for actions.
      * 
@@ -474,20 +485,18 @@ public class Actions {
      * @throws Exception 
      */
     public static void main(final String[] args) {
+	
+	
+        
+	
 	Actions objAction = null;
 	Boolean continuar = false;
 
 	//instanciamos la lógica
-	try {
+	try {	    
 	    objAction = new Actions();
 	} catch (Exception e2) {
-	    try {
-		ClsUtilsUI.showNoModalAlert(
-			e2.getMessage(), "Migración");
-	    } catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
+	    C_LOG.showFail(e2, true);
 	}
 
 	//construimos la ruta del fichero de entrada
@@ -498,29 +507,23 @@ public class Actions {
 	if (objAction != null) {
 	    try {
 
-		ClsUtilsUI.showNoModalInformation(
-			"Se procesará el fichero: " + filePath, "Migración");
 
+		//informamos
+		ClsUtilsUI.showNoModalInformation("Se procesará el fichero: " + filePath, "Migración");
+
+		//actuamos		
 		objAction.readFile(filePath);
+		
+		//si no hay exception, continuamos con el proceso
 		continuar = true;
 
 	    } catch (Exception e1) {
-		try {
-		    
-		    ClsUtilsUI.showNoModalAlert(
-			    "No se ha podido cargar el fichero de entrada.", "Migración");
-		    
-		} catch (InterruptedException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
+		C_LOG.showFail("No se ha podido cargar el fichero de entrada",e1, true);
 	    }
 
 	    //continuamos con el proceso
 	    if (continuar) {
 		try {
-
-
 		    // iniciamos el proceso
 		    objAction.startProcess();
 
@@ -536,10 +539,14 @@ public class Actions {
 		    // Creamos el fichero de estadísticas
 		    Output.createStadisticFile(objAction);
 
+		    C_LOG.SetLOG("Migración finalizada.", Level.INFO);
+		    
+		    String path = ClsUtilsFicheros.combinarRutas(Constantes.PATH_OUTPUT, Constantes.NAME_FILE_ESTADISTICAS);
+		    
+		    C_LOG.SetLOG(ClsUtilsFicheros.readFile2(path), Level.INFO);
 
 		} catch (Exception e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
+		   C_LOG.showFail(e, true);
 		}
 
 	    }
@@ -548,6 +555,15 @@ public class Actions {
 	}
 
     }
+    
+    
+    
+    
+   
+    
+    
+    
+    
 
 
 }
