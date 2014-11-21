@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.inpartek.formacion.proyectojava.exception.PersonaException;
+import com.inpartek.formacion.proyectojava.pojo.DatoFichero;
 import com.inpartek.formacion.proyectojava.pojo.Estadistica;
 import com.inpartek.formacion.proyectojava.pojo.Persona;
 
@@ -38,6 +39,12 @@ public final class GeneradorInforme {
     private static final String NOMBRE_FICHERO_VALIDO = "personas-correctas";
     private static final String NOMBRE_FICHERO_ESTADISTICAS = "estadisticas";
 
+    private static DatoFichero fPersona;
+    private static DatoFichero fError;
+    private static DatoFichero fValido;
+    private static DatoFichero fDuplicado;
+    private static DatoFichero fEstadistica;
+
     private static Estadistica estadistica;
     private static HashMap<String, Persona> datosPersonas;
     private static HashMap<String, Integer> datosRepetidos;
@@ -55,6 +62,16 @@ public final class GeneradorInforme {
 	datosErroneos = new HashMap<String, Persona>();
 	datosRepetidos = new HashMap<String, Integer>();
 	estadistica = new Estadistica();
+	fPersona = new DatoFichero(FILE_PATH, NOMBRE_FICHERO_DATOS,
+		EXTENSION_FICHERO);
+	fError = new DatoFichero(FILE_PATH, NOMBRE_FICHERO_ERROR,
+		EXTENSION_FICHERO);
+	fValido = new DatoFichero(FILE_PATH, NOMBRE_FICHERO_VALIDO,
+		EXTENSION_FICHERO);
+	fDuplicado = new DatoFichero(FILE_PATH, NOMBRE_FICHERO_DUPLICADO,
+		EXTENSION_FICHERO);
+	fEstadistica = new DatoFichero(FILE_PATH, NOMBRE_FICHERO_ESTADISTICAS,
+		EXTENSION_FICHERO);
 	estadistica.setTiempo(System.currentTimeMillis());
     }
 
@@ -72,8 +89,7 @@ public final class GeneradorInforme {
 	String[] lista = null;
 
 	Persona p = null;
-	String contenido = ManejadorFichero.leerFichero(FILE_PATH,
-		NOMBRE_FICHERO_DATOS, EXTENSION_FICHERO);
+	String contenido = ManejadorFichero.leerFichero(fPersona);
 
 	lista = toLine(contenido);
 	for (String s : lista) {
@@ -106,12 +122,10 @@ public final class GeneradorInforme {
 	final String ENCABEZADO = "PERSONAS DE LAS QUE FALTAN DATOS:";
 	Persona value = null;
 
-	ManejadorFichero.addTexttoFile(ENCABEZADO, FILE_PATH,
-		NOMBRE_FICHERO_ERROR, EXTENSION_FICHERO);
+	ManejadorFichero.addTexttoFile(ENCABEZADO, fError);
 	for (Map.Entry<String, Persona> entry : datosCortos.entrySet()) {
 	    value = entry.getValue();
-	    ManejadorFichero.addTexttoFile(value.toFileString(), FILE_PATH,
-		    NOMBRE_FICHERO_ERROR, EXTENSION_FICHERO);
+	    ManejadorFichero.addTexttoFile(value.toFileString(), fError);
 	}
     }
 
@@ -119,13 +133,11 @@ public final class GeneradorInforme {
 	final String ENCABEZADO = "PERSONAS DE LAS QUE TIENEN LOS DATOS MAL ESCRITOS:";
 	Persona value = null;
 
-	ManejadorFichero.addTexttoFile(ENCABEZADO, FILE_PATH,
-		NOMBRE_FICHERO_ERROR, EXTENSION_FICHERO);
+	ManejadorFichero.addTexttoFile(ENCABEZADO, fError);
 
 	for (Map.Entry<String, Persona> entry : datosErroneos.entrySet()) {
 	    value = entry.getValue();
-	    ManejadorFichero.addTexttoFile(value.toFileString(), FILE_PATH,
-		    NOMBRE_FICHERO_ERROR, EXTENSION_FICHERO);
+	    ManejadorFichero.addTexttoFile(value.toFileString(), fError);
 	}
 
     }
@@ -133,12 +145,10 @@ public final class GeneradorInforme {
     private static void gArchivoDniInvalido() {
 	final String ENCABEZADO = "PERSONAS CON DNI MAL INTRODUCIDO (POSICIÓN O TAMAÑO INCORRECTO):";
 
-	ManejadorFichero.addTexttoFile(ENCABEZADO, FILE_PATH,
-		NOMBRE_FICHERO_ERROR, EXTENSION_FICHERO);
+	ManejadorFichero.addTexttoFile(ENCABEZADO, fError);
 
 	for (String s : errores) {
-	    ManejadorFichero.addTexttoFile(s, FILE_PATH, NOMBRE_FICHERO_ERROR,
-		    EXTENSION_FICHERO);
+	    ManejadorFichero.addTexttoFile(s, fError);
 	}
 
     }
@@ -148,8 +158,7 @@ public final class GeneradorInforme {
 
 	for (Map.Entry<String, Persona> entry : datosPersonas.entrySet()) {
 	    value = entry.getValue();
-	    ManejadorFichero.addTexttoFile(value.toFileString(), FILE_PATH,
-		    NOMBRE_FICHERO_VALIDO, EXTENSION_FICHERO);
+	    ManejadorFichero.addTexttoFile(value.toFileString(), fValido);
 	}
 
     }
@@ -165,8 +174,7 @@ public final class GeneradorInforme {
 	    value = entry.getValue();
 	    p = datosPersonas.get(key);
 	    ManejadorFichero.addTexttoFile(p.toFileString() + "\t\t\t\t\t\t"
-		    + value, FILE_PATH, NOMBRE_FICHERO_DUPLICADO,
-		    EXTENSION_FICHERO);
+		    + value, fDuplicado);
 	}
 
     }
@@ -186,53 +194,46 @@ public final class GeneradorInforme {
 	estadistica.setTiempo(difference);
 	ManejadorFichero.addTexttoFile(
 		"Registros leidos" + "\t" + estadistica.getRegLeido(),
-		FILE_PATH, NOMBRE_FICHERO_ESTADISTICAS, EXTENSION_FICHERO);
+		fEstadistica);
 	ManejadorFichero.addTexttoFile(
 		"Minutos Segundos" + "\t" + estadistica.calculateTime(),
-		FILE_PATH, NOMBRE_FICHERO_ESTADISTICAS, EXTENSION_FICHERO);
+		fEstadistica);
+	ManejadorFichero
+		.addTexttoFile(
+			"Correctos" + "\t" + estadistica.getRegCorrecto(),
+			fEstadistica);
 	ManejadorFichero.addTexttoFile(
-		"Correctos" + "\t" + estadistica.getRegCorrecto(), FILE_PATH,
-		NOMBRE_FICHERO_ESTADISTICAS, EXTENSION_FICHERO);
+		"Erroneos" + "\t" + estadistica.getRegIncorrecto(),
+		fEstadistica);
 	ManejadorFichero.addTexttoFile(
-		"Erroneos" + "\t" + estadistica.getRegIncorrecto(), FILE_PATH,
-		NOMBRE_FICHERO_ESTADISTICAS, EXTENSION_FICHERO);
-	ManejadorFichero.addTexttoFile(
-		"Duplicados" + "\t" + estadistica.getRegduplicado(), FILE_PATH,
-		NOMBRE_FICHERO_ESTADISTICAS, EXTENSION_FICHERO);
+		"Duplicados" + "\t" + estadistica.getRegduplicado(),
+		fEstadistica);
     }
 
     private static void gEncabezadoArchivoCorrecto() {
 	final String ENCABEZADO = "PERSONAS";
 
-	ManejadorFichero.crearArchivoTexto(ENCABEZADO, FILE_PATH,
-		NOMBRE_FICHERO_VALIDO, EXTENSION_FICHERO);
-	ManejadorFichero.addTexttoFile("", FILE_PATH, NOMBRE_FICHERO_VALIDO,
-		EXTENSION_FICHERO);
+	ManejadorFichero.crearArchivoTexto(ENCABEZADO, fValido);
+	ManejadorFichero.addTexttoFile("", fValido);
     }
 
     private static void gEncabezadoArchivoDuplicado() {
 	final String ENCABEZADO = "PERSONA\t\t\t\t\t\t\tN VECES";
 
-	ManejadorFichero.crearArchivoTexto(ENCABEZADO, FILE_PATH,
-		NOMBRE_FICHERO_DUPLICADO, EXTENSION_FICHERO);
-	ManejadorFichero.addTexttoFile("", FILE_PATH, NOMBRE_FICHERO_DUPLICADO,
-		EXTENSION_FICHERO);
+	ManejadorFichero.crearArchivoTexto(ENCABEZADO, fDuplicado);
+	ManejadorFichero.addTexttoFile("", fDuplicado);
     }
 
     private static void gEncabezadoArchivoError() {
 	final String ENCABEZADO = "PERSONAS CON ERRORES EN SUS ARCHIVOS";
-	ManejadorFichero.crearArchivoTexto(ENCABEZADO, FILE_PATH,
-		NOMBRE_FICHERO_ERROR, EXTENSION_FICHERO);
-	ManejadorFichero.addTexttoFile("", FILE_PATH, NOMBRE_FICHERO_ERROR,
-		EXTENSION_FICHERO);
+	ManejadorFichero.crearArchivoTexto(ENCABEZADO, fError);
+	ManejadorFichero.addTexttoFile("", fError);
     }
 
     private static void gEncabezadoArchivoEstadisticas() {
 	final String ENCABEZADO = "ESTADISTICAS";
-	ManejadorFichero.crearArchivoTexto(ENCABEZADO, FILE_PATH,
-		NOMBRE_FICHERO_ESTADISTICAS, EXTENSION_FICHERO);
-	ManejadorFichero.addTexttoFile("", FILE_PATH,
-		NOMBRE_FICHERO_ESTADISTICAS, EXTENSION_FICHERO);
+	ManejadorFichero.crearArchivoTexto(ENCABEZADO, fEstadistica);
+	ManejadorFichero.addTexttoFile("", fEstadistica);
     }
 
     private static void generarDatos() {

@@ -14,32 +14,22 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.logging.Logger;
 
+import com.inpartek.formacion.proyectojava.pojo.DatoFichero;
+
 public final class ManejadorFichero {
-    /*
-     * protected String filePath; protected String fileName; protected String
-     * fileExt; protected File fichero;
-     * 
-     * public ManejadorFichero(final String pfilePath, final String pfileName,
-     * final String pfileExt) { super(); this.filePath = pfilePath;
-     * this.fileName = pfileName; this.fileExt = pfileExt; }
-     */
+
     private ManejadorFichero() {
     }
 
-    /*
-     * función que añade texto a un fichero ya existente
-     * 
-     * @param content {@code String}
-     * 
-     * @param filePath {@code String}
-     * 
-     * @param fileName {@code String}
-     * 
-     * @param fileExt {@code String}
+    /**
+     *
+     * @param content
+     * @param dato
      */
     public static void addTexttoFile(final String content,
-	    final String filePath, final String fileName, final String fileExt) {
-	File fichero = new File(filePath + fileName + "." + fileExt);
+	    final DatoFichero dato) {
+	File fichero = new File(dato.getFilePath() + dato.getFileName() + "."
+		+ dato.getFileExt());
 	if (!fichero.exists()) {
 	    try {
 		fichero.createNewFile();
@@ -66,20 +56,15 @@ public final class ManejadorFichero {
     /**
      *
      * @param content
-     *            {@code String}
-     * @param filePath
-     *            {@code String}
-     * @param fileName
-     *            {@code String}
-     * @param fileExt
-     *            {@code String}
+     * @param dato
      */
     public static void crearArchivoTexto(final String content,
-	    final String filePath, final String fileName, final String fileExt) {
-	File fichero = new File(filePath + fileName + "." + fileExt);
+	    final DatoFichero dato) {
+	File fichero = new File(dato.getFilePath() + dato.getFileName() + "."
+		+ dato.getFileExt());
 	FileOutputStream fos = null;
 	Writer out = null;
-	fichero = new File(filePath + fileName + "." + fileExt);
+
 	if (!fichero.exists()) {
 	    try {
 		fichero.createNewFile();
@@ -110,27 +95,14 @@ public final class ManejadorFichero {
 	}
     }
 
-    /**
-     *
-     *
-     *
-     * @param filePath
-     *            {@code String}
-     * @param fileName
-     *            {@code String}
-     * @param fileExt
-     *            {@code String}
-     *
-     * @return {@code String}
-     */
-    public static String leerFichero(final String filePath,
-	    final String fileName, final String fileExt) {
+    public static String leerFichero(final DatoFichero dato) {
 	File fichero = null;
 	StringBuilder sb = null;
 	FileReader fr = null;
 	BufferedReader br = null;
 	try {
-	    fichero = new File(filePath + fileName + "." + fileExt);
+	    fichero = new File(dato.getFilePath() + dato.getFileName() + "."
+		    + dato.getFileExt());
 	    fr = new FileReader(fichero);
 	    br = new BufferedReader(fr);
 	    sb = new StringBuilder();
