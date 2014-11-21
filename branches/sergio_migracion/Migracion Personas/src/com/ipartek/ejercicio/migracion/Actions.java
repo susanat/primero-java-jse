@@ -1,6 +1,5 @@
 package com.ipartek.ejercicio.migracion;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -197,8 +196,8 @@ public class Actions {
     public void readFile(final String filePath) throws Exception {
 
 	try {
-	    strFile = ClsUtilsFicheros.readFile(filePath);
-	    //strFile = ClsUtilsFicheros.readWithScanerToList(filePath, Charset.forName("UTF-8"));
+	    //strFile = ClsUtilsFicheros.readFile(filePath);
+	    strFile = ClsUtilsFicheros.readWithScanerToList(filePath, Charset.forName("UTF-8"));
 	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    throw e;
@@ -397,7 +396,8 @@ public class Actions {
 	    
 	    //Abrimos el fichero como UTF-8 y lo volvemos a guardar
 	    /*
-	    File file = new File(Constantes.PATH_SOURCE, Constantes.NAME_FILE_SOURCE);
+	    File file = new File(Constantes.PATH_SOURCE, 
+	    Constantes.NAME_FILE_SOURCE);
 	    String content = ClsUtilsFicheros.readFile2(file.getAbsolutePath());
 	    ClsUtilsFicheros.writeFile4(file.getAbsolutePath(), content);
 	    */

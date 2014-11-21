@@ -1,6 +1,7 @@
 package com.ipartek.ejercicio.migracion;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,9 +81,9 @@ public final class Output {
 	
 	int lineasInCorrectas = objAction.getCountLinesWithErrors();
 
-	aLines.add("Lineas Totales: " + objAction.getCountLines());
-	aLines.add("Lineas Correctas: " + lineasCorrectas);
-	aLines.add("Lineas con algún fallo: " + lineasInCorrectas);  	    
+	aLines.add("Líneas Totales: " + objAction.getCountLines());
+	aLines.add("Líneas Correctas: " + lineasCorrectas);
+	aLines.add("Líneas con algún fallo: " + lineasInCorrectas);  	    
 	aLines.add("Total analizado: " 
 		+ (lineasCorrectas + lineasInCorrectas));  	    
 
@@ -125,7 +126,7 @@ public final class Output {
 
 	//ClsUtilsFicheros.writeSmallTextFile(aLines, 
 	//	file, Constantes.CHARSET_OUTPUT);
-	write(file, aLines);
+	write(file, aLines, Charset.forName("UTF-8"));
     }
     
     /**
@@ -150,7 +151,8 @@ public final class Output {
 
 	for (Entry<eErrorCause, List<String>> lst : map.entrySet()) {	    	    
 	    for (String linea : lst.getValue()) {
-		aLines.add( UtilsPrograma.enumToString(lst.getKey()) +  " => " + linea);
+		//aLines.add(UtilsPrograma.enumToString(lst.getKey()) +  " => " + linea);
+		aLines.add(linea);
 
 	    }
 	}
@@ -158,7 +160,7 @@ public final class Output {
 
 	//ClsUtilsFicheros.writeSmallTextFile(aLines, file, 
 	//	Constantes.CHARSET_OUTPUT);
-	write(file, aLines);
+	write(file, aLines, Charset.forName("UTF-8"));
     }
     
     
@@ -186,14 +188,29 @@ public final class Output {
 	}
 	
 	
-	write(file, aLines);
-	
-	
+	write(file, aLines, Charset.forName("UTF-8"));	
 	
     }
     
-    private static void write(String file, List<String> aLines) throws IOException{
-	ClsUtilsFicheros.writeFile1(file, aLines);
+    /**
+     * Write a text in file.
+     * @param file String path and name of file
+     * @param aLines List<String> with lines
+     * @throws IOException Exceptions for file
+     */
+    private static void write(final String file, final List<String> aLines, Charset encoding) 
+	    throws IOException {
+	
+	if (encoding == null) {
+	    ClsUtilsFicheros.writeFile1(file, aLines);
+	} else {
+	    ClsUtilsFicheros.writeSmallTextFile(aLines, file, encoding);
+	}
+	
+    }
+    
+    private static void write(final String file, final List<String> aLines) throws IOException {
+	write(file, aLines, null);
     }
 
 }
