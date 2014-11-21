@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import com.ipartek.ejercicio.migracion.Constantes;
 import com.ipartek.ejercicio.migracion.Validations;
 import com.ipartek.ejercicio.migracion.Constantes.eErrorCause;
+import com.ipartek.ejercicio.migracion.utils.ClsUtilsConstantes;
 
 /**
  * Objeto que guardará los datos de un registro.
@@ -17,7 +18,8 @@ public class Persona {
     /**
      * Save the posible errors in data.
      */
-    private LinkedList<eErrorCause> errors = null;
+    private final LinkedList<eErrorCause> errors; 
+    //inicializado en el constructor
         
 
     /**
@@ -72,12 +74,16 @@ public class Persona {
 	return nombre;
     }
 
-    public void setNombre(String nombre) {
-	if (!Validations.isValidUTF8(nombre)) {
+    /**
+     * Set value in nombre.
+     * @param vNombre String
+     */
+    public void setNombre(final String vNombre) {
+	if (!Validations.isValidUTF8(vNombre)) {
 	    errors.add(eErrorCause.UTF8);
 	}
 		
-	this.nombre = nombre;
+	this.nombre = vNombre;
     }
 
     /**
@@ -88,7 +94,12 @@ public class Persona {
 	return apellido1;
     }
 
-    public void setApellido1(String apellido1) {
+    /**
+     * Set value in apellido1.
+     * 
+     * @param apellido1 String
+     */
+    public void setApellido1(final String apellido1) {
 	if (!Validations.isUTF8MisInterpreted(apellido1)) {
 	    errors.add(eErrorCause.UTF8);
 	}
@@ -105,8 +116,12 @@ public class Persona {
     }
 
     
-    public void setPoblacion(String poblacion) {
-	if (!Validations.isUTF8MisInterpreted(poblacion)) {
+    /**
+     * Set value in poblacion.
+     * @param poblacion String
+     */
+    public void setPoblacion(final String vPoblacion) {
+	if (!Validations.isUTF8MisInterpreted(vPoblacion)) {
 	    errors.add(eErrorCause.UTF8);
 	}
 		
@@ -217,29 +232,30 @@ public class Persona {
     @Override
     public String toString() {
 	
-	String text = "";
+	StringBuffer text = new StringBuffer();
 	
 	//configuramos los errores
 	if (errors != null && errors.size() > 0) {
 	    for (eErrorCause errorCause : errors) {
-		text += errorCause.toString() + ","; 
+		text.append(errorCause.toString()).append(ClsUtilsConstantes.STR_COMMA); 
 	    }
 	}
+	//quitamos la última coma
 	if (text.length() > 0) {
-	    text = text.substring(0, text.length() - 1);
-	    text += " => ";
+	   text = new StringBuffer(text.substring(0,text.length() - 1));
+	   text.append("=>");
 	}
 	
-	/*
-	text += "nombre=" + nombre + ", apellido1=" + apellido1
-		+ ", poblacion=" + poblacion + ", edad=" + edad + ", email="
-		+ email + ", dni=" + dni + ", cargo=" + cargo;
-	*/
+	text.append(nombre).append(ClsUtilsConstantes.STR_COMMA);
+	text.append(apellido1).append(ClsUtilsConstantes.STR_COMMA);
+	text.append(poblacion).append(ClsUtilsConstantes.STR_COMMA);
+	text.append(edad).append(ClsUtilsConstantes.STR_COMMA);
+	text.append(email).append(ClsUtilsConstantes.STR_COMMA);
+	text.append(dni).append(ClsUtilsConstantes.STR_COMMA);
+	text.append(cargo).append(ClsUtilsConstantes.STR_COMMA);
 	
-	text += nombre + "," + apellido1 + "," + poblacion 
-		+ "," + edad + "," + email + "," + dni + "," + cargo;
-	
-	return text;
+		
+	return text.toString();
     }
 
 }

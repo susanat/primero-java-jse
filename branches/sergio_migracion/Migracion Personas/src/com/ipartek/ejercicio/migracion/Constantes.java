@@ -11,7 +11,7 @@ import com.ipartek.ejercicio.migracion.utils.ClsUtilsFicheros;
  * @author baskito
  *
  */
-public class Constantes {
+public final class Constantes {
 	
     /**
      * Empty constructor.
@@ -55,24 +55,40 @@ public class Constantes {
 	MIN_FIELDS
     }
     
+    
+    /**
+     * Name for source folder.
+     */
+    public static final String NAME_FOLDER_SOURCE = "source";
+    
+    
     /**
      * Path source of files.
      */
     public static final String PATH_SOURCE = 
 	    ClsUtilsFicheros.combinarRutas(
-		    ClsUtilsConstantes.PATH_PROJECT, "source");
+		    ClsUtilsConstantes.PATH_PROJECT, NAME_FOLDER_SOURCE);    
+   
     
     /**
      * Path name of source file.
      */
     public static final String NAME_FILE_SOURCE = "personas.txt";
     
+    
+    /**
+     * Name for output folder.
+     */
+    public static final String NAME_FOLDER_OUTPUT = "output";
+    
     /**
      * Path output for files.
      */
     public static final String PATH_OUTPUT = 
 	    ClsUtilsFicheros.combinarRutas(
-		    ClsUtilsConstantes.PATH_PROJECT, "output");
+		    ClsUtilsConstantes.PATH_PROJECT, NAME_FOLDER_OUTPUT);
+    
+   
     
     /**
      * Name for file for statistics.
@@ -149,12 +165,12 @@ public class Constantes {
     public static final Long INITIALIZE_LONG = 0L;
     
     /**
-     * String para cumplimentar el tamaño del dni
+     * String para cumplimentar el tamaño del dni.
      */
     public static final String DNI_CARACTER = "0";
     
     /**
-     * Tamaño mínimo del DNI (se rellenará con DNI_CARACTER)
+     * Tamaño mínimo del DNI (se rellenará con DNI_CARACTER).
      */
     public static final int DNI_MIN_SIZE = 9;
 	

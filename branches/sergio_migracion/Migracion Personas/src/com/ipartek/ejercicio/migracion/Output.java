@@ -151,8 +151,8 @@ public final class Output {
 
 	for (Entry<eErrorCause, List<String>> lst : map.entrySet()) {	    	    
 	    for (String linea : lst.getValue()) {
-		//aLines.add(UtilsPrograma.enumToString(lst.getKey()) +  " => " + linea);
-		aLines.add(linea);
+		aLines.add(UtilsPrograma.enumToString(lst.getKey()) +  " => " + linea);
+		//aLines.add(linea);
 
 	    }
 	}
