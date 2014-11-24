@@ -1,7 +1,6 @@
 package com.ipartek.formacion.primero.bean.herencia;
 
-public class VehiculoElectrico extends Vehiculo implements Arrancable,
-		Ordenable {
+public class VehiculoElectrico extends Vehiculo implements Arrancable, Ordenable, Cloneable {
 	// Atributos
 	private float capacidadBaterias;
 
@@ -40,12 +39,6 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 	}
 
 	// Métodos
-	@Override
-	public String toString() {
-		return "VehiculoElectrico [capacidadBaterias=" + capacidadBaterias
-				+ ", numPlazas=" + numPlazas + ", dimensiones=" + dimensiones
-				+ ", potencia=" + potencia + "]";
-	}
 
 	@Override
 	public final boolean arrancar() {
@@ -55,6 +48,17 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 	@Override
 	public final float getPeso() {
 		return super.getPotencia();
+	}
+
+	@Override
+	public String toString() {
+		return "VehiculoElectrico [capacidadBaterias=" + capacidadBaterias + ", numPlazas=" + numPlazas
+				+ ", dimensiones=" + dimensiones + ", potencia=" + potencia + "]";
+	}
+
+	@Override
+	public VehiculoElectrico clone() throws CloneNotSupportedException {
+		return (VehiculoElectrico) super.clone();
 	}
 
 }
