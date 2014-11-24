@@ -15,42 +15,29 @@ public class Dado {
 		return (int) (Math.random() * ALUMNOS_TIRADA.length);
 	}
 
-	
-
 	/**
 	 * Muestra por pantalla una tabla con todos los participantes y el numero de
 	 * veces que han salido elegidos
-	 *  
-	 *      --------------------------------------
-	 *      Participantes          |      Tiradas
-	 *      --------------------------------------
-	 *      Susana                             12
-	 *      Zuahitz                            98
-	 *      Fran                            1.112
-	 *      etc                               etc
-	 *      -------------------------------------
-	 *      13 Participantes                2.345  
-	 *      -------------------------------------
-	 * 
+	 *
+	 * -------------------------------------- Participantes | Tiradas
+	 * -------------------------------------- Susana 12 Zuahitz 98 Fran 1.112
+	 * etc etc ------------------------------------- 13 Participantes 2.345
+	 * -------------------------------------
+	 *
 	 * @param numTiradas
 	 *            numero de veces a tirar el Dado
 	 */
-	
-	
-	
-	
+
 	public static void estatidisticas(int numTiradas) {
- 
-		//TODO usar un HashMap 
+
+		// TODO usar un HashMap
 		System.out.println("Estadisticas");
 	}
-	
-	
+
 	public static void main(String[] args) {
 		tirar();
 		estatidisticas(1);
 
 	}
-	
 
 }

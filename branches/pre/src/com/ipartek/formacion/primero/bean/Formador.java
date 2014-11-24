@@ -8,7 +8,7 @@ public class Formador extends Persona {
 
 	public Formador() {
 		super();
-		setSueldo (SUELDO_MIN);
+		setSueldo(SUELDO_MIN);
 	}
 
 	public float getSueldo() {

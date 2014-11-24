@@ -12,8 +12,8 @@ public class VariablesNumericas {
 		
 		Utilidades.pintarLinea('*', 85);
 		
-		System.out.println("byte   " + Byte.SIZE/8 + 
-				"     byte                 " + Byte.MIN_VALUE + " a " + Byte.MAX_VALUE);
+		System.out.println("byte   " + Byte.SIZE/8 
+				+	"     byte                 " + Byte.MIN_VALUE + " a " + Byte.MAX_VALUE);
 		
 		System.out.println("short  " + Short.SIZE/8 + 
 				"     entero corto         " + Short.MIN_VALUE + " a " + Short.MAX_VALUE);
