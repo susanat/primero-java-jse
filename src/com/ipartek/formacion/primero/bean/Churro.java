@@ -6,8 +6,8 @@ public class Churro implements IOrdenable {
 
 	private int calorias;
 
-	public Churro(int calorias) {
-		this.calorias = calorias;
+	public Churro(final int _calorias) {
+		this.calorias = _calorias;
 	}
 
 	public int getCalorias() {

@@ -104,8 +104,7 @@ public class ConcesionarioTest {
 
 		// ventas Globales
 		assertSame("Ventas Gloables", 8, Concesionario.getVentasGlobales());
-		assertSame("Ventas Gloables", 8, c2.getVentasGlobales());
-		assertSame("Ventas Gloables", 8, c1.getVentasGlobales());
+		
 
 	}
 }

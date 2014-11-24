@@ -53,7 +53,7 @@ public class DadoTest {
 
 	@Test
 	public void testTodosLosParticipantes() {
-		HashSet hs = new HashSet<Integer>();
+		HashSet<Integer> hs = new HashSet<Integer>();
 		for (int i = 0; i < TIRADAS; i++) {
 			hs.add(Dado.getTirada());
 		}

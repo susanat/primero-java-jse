@@ -53,9 +53,7 @@ Arrancable2, Serializable, IOrdenable {
 
 	@Override
 	public boolean arrancar() {
-		int vab1 = Arrancable.VAR;
-		int vab2 = Arrancable2.VAR;
-
+		
 		return true;
 	}
 
