@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+import com.ipartek.formacion.primero.util.Fecha;
+import com.ipartek.formacion.primero.util.Idioma;
+
 /**
  * Clase para trabajar con ficheros
  * 
@@ -69,7 +72,7 @@ public class Fichero {
 	 * Leer un fichero y mostrar el contenido por pantalla
 	 * 
 	 * @param fichero
-	 *            nombre del fichero a borrar
+	 *            nombre del fichero
 	 */
 	public void read(String fichero) {
 		BufferedReader br = null;
@@ -91,5 +94,56 @@ public class Fichero {
 				ex.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * Dibuja la estructura de carpetas y archivos a partir de una ruta dada.
+	 * 
+	 * @param path
+	 *            Ruta de la estructura de carpetas.
+	 */
+	public void dibujarCarpetas(String path, String sep) {
+		String separador = "  " + sep;
+		File archivo = new File(path);
+		if (archivo.isDirectory()) {
+			System.out.println(separador + "+" + archivo.getName());
+			String[] subArchivos = archivo.list();
+			for (int i = 0; i < subArchivos.length; i++) {
+				dibujarCarpetas(path + "/" + subArchivos[i], "|" + separador);
+			}
+		} else {
+			System.out
+			.println(separador
+							+ "-"
+							+ archivo.getName()
+					+ " "
+					+ archivo.length()
+							+ " Bytes"
+					+ " "
+					+ Fecha.getString(archivo.lastModified(),
+							Idioma.CASTELLANO));
+		}
+	}
+
+	/**
+	 * Elimina un directorio y todo su contenido
+	 * 
+	 * @param directory
+	 * @return
+	 */
+	public boolean deleteDirectory(File directory) {
+		if (directory.exists()) {
+			File[] files = directory.listFiles();
+			if (null != files) {
+				for (int i = 0; i < files.length; i++) {
+					if (files[i].isDirectory()) {
+						deleteDirectory(files[i]);
+					} else {
+						files[i].delete();
+					}
+				}
+			}
+		}
+		return (directory.delete());
 	}
 }

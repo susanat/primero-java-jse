@@ -92,8 +92,7 @@ public class Utilidades {
 		while (flag) {
 			flag = false; // set flag to false awaiting a possible swap
 			for (int j = 0; j < array.length - 1; j++) {
-				if (array[j] > array[j + 1]) // change to > for ascending sort
-				{
+				if (array[j] > array[j + 1]) { // change to > for ascending sort
 					temp = array[j]; // swap elements
 					array[j] = array[j + 1];
 					array[j + 1] = temp;
@@ -151,11 +150,10 @@ public class Utilidades {
 		while (flag) {
 			flag = false; // set flag to false awaiting a possible swap
 			for (int j = 0; j < array.length - 1; j++) {
-				if (array[j].getPeso() > array[j + 1].getPeso()) // change to >
-																	// for
-																	// ascending
-																	// sort
-				{
+				if (array[j].getPeso() > array[j + 1].getPeso()) {// change to >
+					// for
+					// ascending
+					// sort
 					temp = array[j]; // swap elements
 					array[j] = array[j + 1];
 					array[j + 1] = temp;
