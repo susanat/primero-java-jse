@@ -18,7 +18,6 @@ import com.inpartek.formacion.proyectojava.pojo.Persona;
  *
  */
 public final class GeneradorInforme {
-    private static final String P_PATTERN = ";";
     private static final String A_PATTERN = ",";
 
     private static final int NOMBRE_POS = 0;
@@ -86,12 +85,11 @@ public final class GeneradorInforme {
     private static void cargarDatos() throws NumberFormatException,
 	    PersonaException {
 
-	String[] lista = null;
+	List<String> lista = null;
 
 	Persona p = null;
-	String contenido = ManejadorFichero.leerFichero(fPersona);
+	lista = ManejadorFichero.leerFichero(fPersona);
 
-	lista = toLine(contenido);
 	for (String s : lista) {
 	    p = toPersona(s);
 	    if (p != null) {
@@ -113,7 +111,7 @@ public final class GeneradorInforme {
 		}
 	    }
 	}
-	estadistica = new Estadistica(lista.length, datosPersonas.size(),
+	estadistica = new Estadistica(lista.size(), datosPersonas.size(),
 		datosCortos.size() + datosErroneos.size() + errores.size(),
 		datosRepetidos.size());
     }
@@ -254,13 +252,6 @@ public final class GeneradorInforme {
 	    repeated = true;
 	}
 	return repeated;
-    }
-
-    private static String[] toLine(final String pline) {
-	String[] list = null;
-	list = pline.split(P_PATTERN);
-
-	return list;
     }
 
     private static Persona toPersona(final String text) throws PersonaException {
