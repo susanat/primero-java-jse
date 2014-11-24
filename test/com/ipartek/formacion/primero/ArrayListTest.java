@@ -121,7 +121,7 @@ public class ArrayListTest {
 	@Test
 	public void testEliminarIntegers() throws Exception {
 		// remover por indice
-		int index = 1;
+		final int index = 1;
 		listaNumeros.remove(index);
 		assertSame(3, listaNumeros.size());
 		assertSame(1, listaNumeros.get(0));
@@ -129,7 +129,7 @@ public class ArrayListTest {
 		assertSame(1, listaNumeros.get(2));
 
 		// remover por objeto
-		Integer object = new Integer(1);
+		final Integer object = Integer.valueOf(1);
 		listaNumeros.remove(object);
 		assertSame(2, listaNumeros.size());
 		assertSame(3, listaNumeros.get(0));
@@ -141,51 +141,35 @@ public class ArrayListTest {
 		// Ordenar alfabéticamente Strings
 		Collections.sort(listaPaisesDesordenada);
 		// TODO comprobar con acentos, ñ, mayúsculas y minúsculas
-		assertSame("La lista de paises no está ordenada.", ESPANA,
-				listaPaisesDesordenada.get(0));
-		assertSame("La lista de paises no está ordenada.", EUSKADI,
-				listaPaisesDesordenada.get(1));
-		assertSame("La lista de paises no está ordenada.", PORTUGAL,
-				listaPaisesDesordenada.get(2));
+		assertSame("La lista de paises no está ordenada.", ESPANA, listaPaisesDesordenada.get(0));
+		assertSame("La lista de paises no está ordenada.", EUSKADI, listaPaisesDesordenada.get(1));
+		assertSame("La lista de paises no está ordenada.", PORTUGAL, listaPaisesDesordenada.get(2));
 
 		// Ordenar al revés
 		Collections.reverse(listaPaisesDesordenada);
-		assertSame("La lista de paises no está ordenada.", PORTUGAL,
-				listaPaisesDesordenada.get(0));
-		assertSame("La lista de paises no está ordenada.", EUSKADI,
-				listaPaisesDesordenada.get(1));
-		assertSame("La lista de paises no está ordenada.", ESPANA,
-				listaPaisesDesordenada.get(2));
+		assertSame("La lista de paises no está ordenada.", PORTUGAL, listaPaisesDesordenada.get(0));
+		assertSame("La lista de paises no está ordenada.", EUSKADI, listaPaisesDesordenada.get(1));
+		assertSame("La lista de paises no está ordenada.", ESPANA, listaPaisesDesordenada.get(2));
 
 		// Ordenar de menor a mayor int
 		Collections.sort(listaNumeros);
-		assertSame("La lista de números no está ordenada.", 1,
-				listaNumeros.get(0));
-		assertSame("La lista de números no está ordenada.", 1,
-				listaNumeros.get(1));
-		assertSame("La lista de números no está ordenada.", 2,
-				listaNumeros.get(2));
-		assertSame("La lista de números no está ordenada.", 3,
-				listaNumeros.get(3));
+		assertSame("La lista de números no está ordenada.", 1, listaNumeros.get(0));
+		assertSame("La lista de números no está ordenada.", 1, listaNumeros.get(1));
+		assertSame("La lista de números no está ordenada.", 2, listaNumeros.get(2));
+		assertSame("La lista de números no está ordenada.", 3, listaNumeros.get(3));
 	}
 
 	@Test
 	public void testCollectionSortClases() throws Exception {
 		Collections.sort(listaVehiculos);
-		assertEquals("La lista de vehículos no está ordenada.", 50f,
-				listaVehiculos.get(0).getPotencia(), 0f);
-		assertEquals("La lista de vehículos no está ordenada.", 150f,
-				listaVehiculos.get(1).getPotencia(), 0f);
-		assertEquals("La lista de vehículos no está ordenada.", 350f,
-				listaVehiculos.get(2).getPotencia(), 0f);
+		assertEquals("La lista de vehículos no está ordenada.", 50f, listaVehiculos.get(0).getPotencia(), 0f);
+		assertEquals("La lista de vehículos no está ordenada.", 150f, listaVehiculos.get(1).getPotencia(), 0f);
+		assertEquals("La lista de vehículos no está ordenada.", 350f, listaVehiculos.get(2).getPotencia(), 0f);
 
 		Collections.sort(listaVehiculos, new ComparatorNumPlazas());
-		assertEquals("La lista de vehículos no está ordenada.", 2,
-				listaVehiculos.get(0).getNumPlazas());
-		assertEquals("La lista de vehículos no está ordenada.", 4,
-				listaVehiculos.get(1).getNumPlazas());
-		assertEquals("La lista de vehículos no está ordenada.", 5,
-				listaVehiculos.get(2).getNumPlazas());
+		assertEquals("La lista de vehículos no está ordenada.", 2, listaVehiculos.get(0).getNumPlazas());
+		assertEquals("La lista de vehículos no está ordenada.", 4, listaVehiculos.get(1).getNumPlazas());
+		assertEquals("La lista de vehículos no está ordenada.", 5, listaVehiculos.get(2).getNumPlazas());
 
 	}
 }

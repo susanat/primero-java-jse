@@ -89,7 +89,7 @@ public class Fichero {
 	}
 
 	/**
-	 * Muestra el árbol de ficheros del path pasado como parámetro
+	 * Muestra el árbol de ficheros del path pasado como parámetro.
 	 *
 	 * @param path
 	 *            Path
@@ -114,6 +114,13 @@ public class Fichero {
 		}
 	}
 
+	/**
+	 * Borra de forma recursiva todo lo que haya en el directorio recibido como
+	 * parámetro.
+	 *
+	 * @param root
+	 *            Directorio a borrar
+	 */
 	public static void delete(final File root) {
 		if (root.isDirectory()) {
 			if (root.list().length == 0) {
