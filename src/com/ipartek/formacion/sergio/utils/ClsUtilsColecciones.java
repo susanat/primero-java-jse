@@ -1,5 +1,6 @@
 package com.ipartek.formacion.sergio.utils;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -162,6 +163,8 @@ public class ClsUtilsColecciones {
 		return false;
 	}
 
+	
+	
 	/**
 	 * Paramterized method to sort Map e.g. HashMap or Hashtable in Java throw
 	 * NullPointerException if Map contains null key
@@ -274,5 +277,6 @@ public class ClsUtilsColecciones {
 			Map<K, V> map) {
 		return mapSortByValues(map, false);
 	}
+
 
 }

@@ -75,4 +75,28 @@ public class ClsUtilsUI {
     {
         JOptionPane.showMessageDialog(null, texto,titulo,JOptionPane.ERROR_MESSAGE);
     }
+    
+    
+    public static Thread showNoModalAlert(final String message, final String title) throws InterruptedException{
+	Thread t = new Thread(new Runnable(){
+	        public void run(){
+	            JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
+	        }
+	    });
+	    t.start();
+	    t.join();
+	    
+	    return t;
+    }
+    
+    public static Thread showNoModalInformation(final String message, final String title) throws InterruptedException{
+	Thread t = new Thread(new Runnable(){
+	        public void run(){
+	            JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+	        }
+	    });
+	    t.start();
+	    t.join();
+	return t;
+    }
 }
