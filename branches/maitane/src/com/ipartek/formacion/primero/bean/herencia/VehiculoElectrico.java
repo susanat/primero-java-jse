@@ -3,7 +3,7 @@ package com.ipartek.formacion.primero.bean.herencia;
 import java.io.Serializable;
 
 public class VehiculoElectrico extends Vehiculo implements Arrancable,
-		Serializable, Ordenable {
+Serializable, Ordenable, Cloneable {
 
 	/**
 	 *
@@ -63,4 +63,8 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 		return this.getPotencia();
 	}
 
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }
