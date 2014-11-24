@@ -12,6 +12,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.inpartek.formacion.proyectojava.pojo.DatoFichero;
@@ -95,21 +97,21 @@ public final class ManejadorFichero {
 	}
     }
 
-    public static String leerFichero(final DatoFichero dato) {
+    public static List<String> leerFichero(final DatoFichero dato) {
 	File fichero = null;
-	StringBuilder sb = null;
+	List<String> list = null;
 	FileReader fr = null;
 	BufferedReader br = null;
 	try {
 	    fichero = new File(dato.getFilePath() + dato.getFileName() + "."
 		    + dato.getFileExt());
 	    fr = new FileReader(fichero);
-	    br = new BufferedReader(fr);
-	    sb = new StringBuilder();
+	    list = new ArrayList<String>();
 	    String linea = null;
 
 	    while ((linea = br.readLine()) != null) {
-		sb.append(linea + ";");
+		// sb.append(linea + ";");
+		list.add(linea);
 	    }
 	} catch (Exception e) {
 	    // e.printStackTrace();
@@ -125,7 +127,7 @@ public final class ManejadorFichero {
 	    }
 	}
 
-	return sb.toString();
+	return list;
     }
 
 }
