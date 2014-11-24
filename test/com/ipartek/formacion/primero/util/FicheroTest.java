@@ -21,7 +21,7 @@ public class FicheroTest {
 
     // directorioa a crear
     static final String DIR_ROOT = "tmp";
-    static final String DIR1 = "tmp/mp3";
+    static final String DIR1 = DIR_ROOT + "/mp3";
     static final String DIR2 = DIR1 + "/CelineDion";
     static final String DIR3 = DIR1 + "/SUtagAR";
 
@@ -102,6 +102,12 @@ public class FicheroTest {
 	Fichero.create(FICHERO_NAME_TEST1, sbContent.toString());
 	// Fichero.read(FICHERO_NAME_TEST1);
 	assertTrue(Fichero.remove(FICHERO_NAME_TEST1));
+    }
+
+    @Test
+    public void testDibujarDirectorio() {
+	Fichero.mostrarDirectory(new File(DIR_ROOT));
+
     }
 
 }
