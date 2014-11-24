@@ -1,13 +1,36 @@
 package com.ipartek.formacion.sergio.utils;
 /**
- * Clase de recopilación de constantes útiles para proyectos
+ * Clase de recopilación de constantes útiles para proyectos.
  * 
  * @author baskito
- * @version 03.11.2014
+ * @version 20.11.2014
  */
-public class ClsUtilsConstantes {
+public final class ClsUtilsConstantes {
+    
     /**
-     * Salto de lÃ­nea genÃ©rico independiente del S.O. (uso de System.getProperty)
+     * Empty constructor.
      */
-    public static final String SALTO_DE_LINEA = System.getProperty("line.separator");
+    private ClsUtilsConstantes() {
+	
+    }
+    
+    /**
+     * Salto de lÃ­nea genÃ©rico independiente del S.O. 
+     * (uso de System.getProperty).
+     */
+    public static final String SALTO_DE_LINEA = 
+	    System.getProperty("line.separator");
+    
+    /**
+     * El path del proyecto.
+     */
+    public static final String PATH_PROJECT = 
+	    System.getProperty("user.dir");
+    
+    
+    /**
+     * La coma
+     */
+    public static final String STR_COMMA = ",";
+    
 }

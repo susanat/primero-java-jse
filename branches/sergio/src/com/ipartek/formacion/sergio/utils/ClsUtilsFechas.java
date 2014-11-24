@@ -16,82 +16,121 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 /**
- * Clase de recopilación de funciones útiles para trabajar con fechas
+ * Clase de recopilación de funciones útiles para trabajar con fechas.
  * 
  * @author baskito
- * @version 03.11.2014
+ * @version 24.11.2014
  */
 public final class ClsUtilsFechas {
 
+    	/**
+    	 * Constructor vacío.
+    	 */
 	private ClsUtilsFechas() {
 		// Utility classes should always be final and have an private
 		// constructor
 	}
 
 	/**
-	 * Formato utilizado para las fechas en sqlite
+	 * Formato utilizado para las fechas en sqlite.
 	 */
-	public static SimpleDateFormat formatoDeFechaSQLite = new SimpleDateFormat(
-			"yyyy-MM-dd HH:mm:ss.SSS");
+	private static final SimpleDateFormat FORM_FECH_SQLITE = 
+		new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
+	
 	/**
-	 * Convierte una fecha en formato sqllite a timestamp
-	 * 
-	 * @param fecha
-	 * @return
+	 * Devuelve el momento actual en el formato especificado.
+	 * @param format
+	 * formato requerido.
+	 * @return Momento actual.
 	 */
-	public static Timestamp sqlLiteDateToSql(final Date fecha) {
-		final Timestamp timeStampDate = new Timestamp(fecha.getTime());
-		return timeStampDate;
+	public static String getTodayAs (final String format) {
+	    SimpleDateFormat sdf = new SimpleDateFormat (format);
+	    Calendar cal = new GregorianCalendar ();
+	    return sdf.format (cal.getTime ());
 	}
-
-	public static Date sqlLiteSqlToDate(String fecha) {
-		try {
-			// return new
-			// SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(fecha);
-			return formatoDeFechaSQLite.parse(fecha);
-		} catch (ParseException ex) {
-			return null;
-		}
-	}
-
+	
 	/**
-	 * Metodo usado para obtener la fecha actual
+	 * Metodo usado para obtener la fecha actual.
 	 * 
 	 * @return Retorna un <b>STRING</b> con la fecha actual formato "dd-MM-yyyy"
 	 */
-	public static String getFechaActual() {
+	public static String getToday() {
 		final Date ahora = new Date();
 		SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
 		return formateador.format(ahora);
 	}
-
-	// Metodo usado para obtener la hora actual del sistema
-	// @return Retorna un <b>STRING</b> con la hora actual formato "hh:mm:ss"
+	
+	/**
+	 * Metodo usado para obtener la hora actual del sistema.
+	 * @return Retorna un <b>STRING</b> con la hora actual formato "hh:mm:ss"
+	 */
 	public static String getHoraActual() {
 		Date ahora = new Date();
 		SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
 		return formateador.format(ahora);
 	}
+	    
+	    
+	/**
+	 * Convierte una fecha en formato sqlite a timestamp.
+	 * 
+	 * @param fecha Date fecha a convertir
+	 * @return Timestap con la echa
+	 */
+	public static Timestamp sqlLiteDateToSql(final Date fecha) {
+		final Timestamp timeStampDate = new Timestamp(fecha.getTime());
+		return timeStampDate;
+	}
+	
+	
 
-	// Sumarle dias a una fecha determinada
-	// @param fch La fecha para sumarle los dias
-	// @param dias Numero de dias a agregar
-	// @return La fecha agregando los dias
-	public static java.sql.Date sumarFechasDias(java.sql.Date fch, int dias) {
+	/**
+	 * Convierte una fecha de string a date.
+	 * @param fecha String fecha a convertir
+	 * @return Date con la fecha
+	 */
+	public static Date sqlLiteSqlToDate(final String fecha) {
+		try {
+			// return new
+			// SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(fecha);
+			return FORM_FECH_SQLITE.parse(fecha);
+		} catch (ParseException ex) {
+			return null;
+		}
+	}
+
+	
+
+	
+
+	/**
+	 * Sumarle dias a una fecha determinada.
+	 * @param fch La fecha para sumarle los dias
+	 * @param dias Numero de dias a agregar
+	 * @return La fecha agregando los dias
+	 */ 
+	public static java.sql.Date sumarFechasDias(final java.sql.Date fch, 
+		final int dias) {
 		Calendar cal = new GregorianCalendar();
 		cal.setTimeInMillis(fch.getTime());
 		cal.add(Calendar.DATE, dias);
 		return new java.sql.Date(cal.getTimeInMillis());
 	}
 
-	// Restarle dias a una fecha determinada
-	// @param fch La fecha
-	// @param dias Dias a restar
-	// @return La fecha restando los dias
+	/**
+	* Restarle dias a una fecha determinada.
+	* @param fch La fecha
+	* @param dias Dias a restar
+	* @return La fecha restando los dias
+	*/
 	public static synchronized java.sql.Date restarFechasDias(
-			java.sql.Date fch, int dias) {
+			final Date fch, final int dias) {
 		final Calendar cal = new GregorianCalendar();
 
 		cal.setTimeInMillis(fch.getTime());
@@ -100,10 +139,12 @@ public final class ClsUtilsFechas {
 		return new java.sql.Date(cal.getTimeInMillis());
 	}
 
-	// Diferencias entre dos fechas
-	// @param fechaInicial La fecha de inicio
-	// @param fechaFinal La fecha de fin
-	// @return Retorna el numero de dias entre dos fechas
+	/**
+	* Diferencias entre dos fechas.
+	* @param fechaInicial La fecha de inicio
+	* @param fechaFinal La fecha de fin
+	* @return Retorna el numero de dias entre dos fechas
+	*/
 	public static synchronized int diferenciasDeFechas(final Date fechaInicial,
 			final Date fechaFinal) {
 
@@ -135,10 +176,12 @@ public final class ClsUtilsFechas {
 		return ((int) dias);
 	}
 
-	// Devuele un java.util.Date desde un String en formato dd-MM-yyyy
-	// @param La fecha a convertir a formato date
-	// @return Retorna la fecha en formato Date
-	public static synchronized Date deStringToDate(String fecha) {
+	/**
+	* Devuele un java.util.Date desde un String en formato dd-MM-yyyy.
+	* @param fecha fecha a convertir a formato date
+	* @return Retorna la fecha en formato Date
+	*/
+	public static synchronized Date deStringToDate(final String fecha) {
 		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
 		Date fechaEnviar = null;
 
@@ -153,11 +196,11 @@ public final class ClsUtilsFechas {
 	}
 
 	/**
-	 * Calcula la diferencia entre dos horas
+	 * Calcula la diferencia entre dos horas.
 	 * 
-	 * @param fInicial
-	 * @param fFinal
-	 * @return
+	 * @param fInicial fecha inicial
+	 * @param fFinal fecha final
+	 * @return timeLapse objeto con los datos de la diferencia
 	 */
 	public static timeLapse diferenciaHoras(final Date fInicial,
 			final Date fFinal) {
@@ -319,7 +362,7 @@ public final class ClsUtilsFechas {
 	}
 
 	/**
-	 * Devuelve la fecha pasada dependiendo de la zona temporal
+	 * Devuelve la fecha pasada dependiendo de la zona temporal.
 	 * 
 	 * @param strTimeZone
 	 *            String con el time zone
@@ -372,9 +415,12 @@ public final class ClsUtilsFechas {
 								.toHours(milliseconds)));
 		return formateado;
 	}
+	
+	
 
 	/**
-	 * Get a hashMap with Key string TimeZoneId and String with offset and TimeZone name value.
+	 * Get a hashMap with Key string TimeZoneId 
+	 * and String with offset and TimeZone name value.
 	 * 
 	 * @return hashMap
 	 */
@@ -402,11 +448,12 @@ public final class ClsUtilsFechas {
 	/** 
 	 * Filter for Timezones.	 
 	 */
-	private static final String TZ_ID_PREF = "^(Africa|America|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*";
+	private static final String TZ_ID_PREF 
+	= "^(Africa|America|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*";
 
 	/**
 	 * Return a collection with timeZones. Ordena primero por el offset y luego
-	 * por nombre
+	 * por nombre.
 	 * 
 	 * (filtradas por
 	 * "^(Africa|America|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*"
@@ -484,5 +531,32 @@ public final class ClsUtilsFechas {
 
 	    return strMilliOffSet;
 	}
+	
+	 /**
+	     * Convierte un objeto de tipo Date en un XMLGregorianCalendar.
+	     * @param date the date
+	     * @return the xML gregorian calendar
+	     */
+	    public static XMLGregorianCalendar date2Gregorian(final Date date) {
+	        DatatypeFactory dataTypeFactory;
+	        try {
+	            dataTypeFactory = DatatypeFactory.newInstance();
+	            GregorianCalendar gc = new GregorianCalendar();
+	            gc.setTime(date);
+	            return dataTypeFactory.newXMLGregorianCalendar(gc);
+	        } catch (DatatypeConfigurationException e) {
+	            e.printStackTrace();
+	        }
+	        return null;
+	    }
+
+	    /**
+	     * Convierte un objeto de tipo XMLGregorianCalendar en un objeto de tipo Date.
+	     * @param cal the cal
+	     * @return the date
+	     */
+	    public static Date gregorian2Date(final XMLGregorianCalendar cal) {
+	        return cal.toGregorianCalendar().getTime();
+	    }
 
 }

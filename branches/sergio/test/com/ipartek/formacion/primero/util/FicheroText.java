@@ -1,9 +1,13 @@
 package com.ipartek.formacion.primero.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Date;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -13,6 +17,7 @@ import org.junit.Test;
 
 import com.ipartek.formacion.sergio.utils.ClsUtilsConstantes;
 import com.ipartek.formacion.sergio.utils.ClsUtilsFechas;
+import com.ipartek.formacion.sergio.utils.ClsUtilsFicheros;
 
 public class FicheroText {
 
@@ -115,6 +120,85 @@ public class FicheroText {
 		
 		System.out.println("Tiempo con StringBuilder con " + LINEAS_FICHERO + " líneas: " + ClsUtilsFechas.diferenciaHoras(fInicial, new Date()).getDiffMilisegundos() + ClsUtilsConstantes.SALTO_DE_LINEA + " milisegundos") ;
 		System.out.println (ClsUtilsFechas.milisegundosToTimeString(ClsUtilsFechas.diferenciaHoras(fInicial, new Date()).getDiffMilisegundos()));
+	}
+	
+	@Test
+	public void testListFolder() throws IOException{
+	    
+	    String path = ClsUtilsFicheros.combinarRutas (ClsUtilsConstantes.PATH_PROJECT, "tmp");
+	    
+	    //crearArbolArchivos(path);
+	    
+	    //path = ClsUtilsFicheros.combinarRutas(path, "mp3");
+	    
+	    try {
+		//String path = "C:\\desarrollo\\java";
+		    for(String str : ClsUtilsFicheros.ListResursiveFolder(path)) {
+			//System.out.println(str);
+			showFiles(str);
+		    }
+		
+	    }catch (Exception ex){
+		ex.printStackTrace();
+	    }
+	    
+	    
+	    
+	    //destruirArbolArchivos(path);
+	    
+	}
+	
+	public void showFiles(String path) throws IOException{
+	    System.out.println("*****" + path);
+	    //creamos el fichero:
+	    File file = new File(path);
+	    if (file.isDirectory()) {
+		System.out.println("Directorio: " + file.getName());
+	    } else {
+		System.out.println("Fichero: " + file.getName());
+	    }
+	
+	    Path pathObj = file.toPath();
+	    System.out.println("Nombre: " + file.getName());
+	    System.out.println("Tamaño: " + file.length());
+	    System.out.println("Ultima Modificación: " + file.lastModified());
+	    
+	    for(Map.Entry<String, Object> attr : Files.readAttributes(new File(path).toPath(),"*").entrySet()) {
+		System.out.println(attr.getKey());
+	    }
+	    
+	    
+	}
+	
+	public void crearArbolArchivos(String pathInitial) throws IOException{
+	    
+	    Path path = new File(pathInitial).toPath();
+	    Path dir = null;
+	    	    
+	    if(!Files.exists(path)){
+		dir = Files.createDirectories(path);
+	    }else{
+		dir = path;
+	    }
+	    
+	    Path root = ClsUtilsFicheros.createFolder(dir.toString(), "mp3").toPath();
+	    
+	    
+	    Path celindion = ClsUtilsFicheros.createFolder(root.toString(), "celindion").toPath();
+	    Fichero.create(ClsUtilsFicheros.combinarRutas(celindion.toString(),"mp31.mp3"), "");
+	    Fichero.create(ClsUtilsFicheros.combinarRutas(celindion.toString(),"mp32.mp3"), "");
+	    Fichero.create(ClsUtilsFicheros.combinarRutas(celindion.toString(),"mp33.mp3"), "");
+	    
+	    Path sutagar = ClsUtilsFicheros.createFolder(root.toString(), "sutagar").toPath();	    
+	    Fichero.create(ClsUtilsFicheros.combinarRutas(sutagar.toString(),"mp41.mp3"), "");
+	    Fichero.create(ClsUtilsFicheros.combinarRutas(sutagar.toString(),"mp42.mp3"), "");
+	    Fichero.create(ClsUtilsFicheros.combinarRutas(sutagar.toString(),"mp43.mp3"), "");
+	    
+	    
+	}
+	
+	public void destruirArbolArchivos(String pathInicial) throws IOException {
+	    
 	}
 	
 
