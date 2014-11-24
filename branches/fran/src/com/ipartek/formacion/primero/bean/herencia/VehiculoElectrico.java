@@ -7,7 +7,7 @@ package com.ipartek.formacion.primero.bean.herencia;
  *
  */
 public class VehiculoElectrico extends Vehiculo implements Arrancable,
-		Ordenable {
+Ordenable, Cloneable {
 	private float capacidadBaterias;
 	/**
 	 * Capacidad de batería mínima que debe tener un vehículo eléctrico
@@ -62,6 +62,12 @@ public class VehiculoElectrico extends Vehiculo implements Arrancable,
 	public float getPeso() {
 		float resul = getPotencia();
 		return resul;
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
 	}
 
 }

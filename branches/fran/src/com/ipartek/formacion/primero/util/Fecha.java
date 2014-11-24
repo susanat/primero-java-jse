@@ -18,11 +18,13 @@ public class Fecha {
 	 *            fecha a formatear
 	 * @param idioma
 	 *            idioma que determina el formato
+	 * @see com.ipartek.formacion.primero.util.Idioma
 	 * @return string con la fecha
 	 */
 	public static String getString(Date hoyDate, Idioma idioma) {
 		String resul = "";
 		String formatoString = "";
+
 		switch (idioma) {
 		case CASTELLANO:
 			formatoString = "dd/MM/YYYY";
@@ -44,6 +46,7 @@ public class Fecha {
 	 *            fecha a formatear
 	 * @param idioma
 	 *            idioma que determina el formato
+	 * @see com.ipartek.formacion.primero.util.Idioma
 	 * @return string con la fecha
 	 */
 	public static String getString(long hoyDate, Idioma idioma) {

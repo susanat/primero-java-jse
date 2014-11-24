@@ -3,7 +3,6 @@ package com.ipartek.formacion.primero.util;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
-import java.util.Formatter;
 import java.util.GregorianCalendar;
 
 import org.junit.After;
@@ -68,17 +67,18 @@ public class FechaTest {
 	public void testFechaTodosMeses() throws Exception {
 		int anno = hoyDate.get(GregorianCalendar.YEAR);
 
-		String hoyStringCas = "01/" + "MES" + "/" + anno;
-		String hoyStringEus = anno + "/" + "MES" + "/01";
+		String plantillaCas = "01/" + "MES" + "/" + anno;
+		String plantillaEus = anno + "/" + "MES" + "/01";
+
+		String hoyStringCas = "";
+		String hoyStringEus = "";
 		GregorianCalendar fecha = new GregorianCalendar();
 
-		Formatter fmt = new Formatter();
-
 		for (int i = 1; i < 13; i++) {
-			hoyStringCas = hoyStringCas.replace("MES", fmt.format("%02d", 1)
-					.toString());
-			hoyStringEus = hoyStringEus.replace("MES", fmt.format("%02d", 1)
-					.toString());
+			hoyStringCas = plantillaCas
+					.replace("MES", String.format("%02d", i));
+			hoyStringEus = plantillaEus
+					.replace("MES", String.format("%02d", i));
 
 			fecha.set(anno, i - 1, 1);
 
@@ -87,7 +87,6 @@ public class FechaTest {
 			assertEquals(hoyStringEus,
 					Fecha.getString(fecha.getTime(), Idioma.EUSKARA));
 		}
-		fmt.close();
 	}
 
 }

@@ -111,7 +111,6 @@ public class ArrayListTest {
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testIndexException() {
-
 		listaPaises.get(3);
 	}
 

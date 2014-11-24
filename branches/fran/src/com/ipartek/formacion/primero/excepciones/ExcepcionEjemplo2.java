@@ -2,13 +2,13 @@ package com.ipartek.formacion.primero.excepciones;
 
 public class ExcepcionEjemplo2 {
 	// propiedades necesarias
-	static int array_corto[] = new int[5];
+	static int arrayCorto[] = new int[5];
 
 	public static void main(String args[]) {
 		try {
 			System.out.println();
 			System.out.println(".antes de la excepcion");
-			array_corto[10] = 10;
+			arrayCorto[10] = 10;
 			System.out.println(".no hay una excepcion");
 		} catch (ArrayIndexOutOfBoundsException e) {
 			// se captura una excepción por intentar acceder a una posición
