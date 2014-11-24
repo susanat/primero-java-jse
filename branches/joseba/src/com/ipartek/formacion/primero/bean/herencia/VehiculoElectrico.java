@@ -13,67 +13,72 @@ import com.ipartek.formacion.primero.bean.interfaces.IOrdenable;
  */
 
 public class VehiculoElectrico extends Vehiculo implements Arrancable,
-		Serializable, IOrdenable {
+	Serializable, IOrdenable, Cloneable {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	private float capacidadBaterias;
+    private float capacidadBaterias;
 
-	/**
-	 * Capacidad minima para una bateria
-	 */
-	public static final float MIN_CAP_BATERIA = 0;
-	public static final float MIN_POTENCIA = 150;
+    /**
+     * Capacidad minima para una bateria
+     */
+    public static final float MIN_CAP_BATERIA = 0;
+    public static final float MIN_POTENCIA = 150;
 
-	// Constructores
+    // Constructores
 
-	public VehiculoElectrico() {
-		super();
-		setCapacidadBaterias(MIN_CAP_BATERIA);
-		setPotencia(MIN_POTENCIA);
+    public VehiculoElectrico() {
+	super();
+	setCapacidadBaterias(MIN_CAP_BATERIA);
+	setPotencia(MIN_POTENCIA);
 
-	}
+    }
 
-	public VehiculoElectrico(float bateria, float potencia) {
-		super();
-		setCapacidadBaterias(bateria);
-		setPotencia(potencia);
-	}
+    public VehiculoElectrico(float bateria, float potencia) {
+	super();
+	setCapacidadBaterias(bateria);
+	setPotencia(potencia);
+    }
 
-	// Setters y getters
+    // Setters y getters
 
-	@Override
-	public void setPotencia(float potencia) {
-		super.setPotencia(potencia);
-	}
+    @Override
+    public void setPotencia(float potencia) {
+	super.setPotencia(potencia);
+    }
 
-	public float getCapacidadBaterias() {
-		return capacidadBaterias;
-	}
+    public float getCapacidadBaterias() {
+	return capacidadBaterias;
+    }
 
-	public void setCapacidadBaterias(float capacidadBaterias) {
-		this.capacidadBaterias = capacidadBaterias;
-	}
+    public void setCapacidadBaterias(float capacidadBaterias) {
+	this.capacidadBaterias = capacidadBaterias;
+    }
 
-	@Override
-	public String toString() {
-		return "VehiculoElectrico [capacidadBaterias=" + capacidadBaterias
-				+ ", numPlazas=" + numPlazas + ", dimensiones=" + dimensiones
-				+ ", potencia=" + potencia + "]";
-	}
+    @Override
+    public String toString() {
+	return "VehiculoElectrico [capacidadBaterias=" + capacidadBaterias
+		+ ", numPlazas=" + numPlazas + ", dimensiones=" + dimensiones
+		+ ", potencia=" + potencia + "]";
+    }
 
-	@Override
-	public boolean arrancar() {
+    @Override
+    public boolean arrancar() {
 
-		return true;
-	}
+	return true;
+    }
 
-	@Override
-	public float getPeso() {
-		return (this.getPotencia());
-	}
+    @Override
+    public float getPeso() {
+	return (this.getPotencia());
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+	return super.clone();
+    }
 
 }

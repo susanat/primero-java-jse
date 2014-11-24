@@ -33,7 +33,6 @@ public class Excepcion1 {
 			Vehiculo vg = new VehiculoElectrico();
 			((VehiculoGasolina) vg).isGasolina();
 			System.out.println(".no hay una excepcion");
-
 		}
 
 		catch (ArrayIndexOutOfBoundsException e) {
