@@ -107,23 +107,69 @@ public class Fichero {
 
     /**
      * Elimina un directorio y todo su contenido
-     * 
+     *
      * @param directory
      * @return
      */
     public static boolean deleteDirectory(File directory) {
+	// comprobar que exista
 	if (directory.exists()) {
+	    // obtener todos los path hijos de este directorio
 	    File[] files = directory.listFiles();
 	    if (null != files) {
 		for (int i = 0; i < files.length; i++) {
+		    // es un direcotorio
 		    if (files[i].isDirectory()) {
-			deleteDirectory(files[i]);
+			deleteDirectory(files[i]); // llamada recursiva
+			// es un fichero
 		    } else {
 			files[i].delete();
 		    }
 		}
 	    }
 	}
+	// eliminar el directorio solicitado
 	return (directory.delete());
+    }
+
+    /**
+     * Muestra por pantalla el direcotio con todas las subcarpetas
+     *
+     * @param directory
+     */
+    public static void mostrarDirectory(File directory) {
+	// comprobar que exista
+	if (directory.exists()) {
+	    // obtener todos los path hijos de este directorio
+	    File[] files = directory.listFiles();
+	    if (null != files) {
+		for (int i = 0; i < files.length; i++) {
+		    // es un direcotorio
+		    if (files[i].isDirectory()) {
+			mostrarFichero(files[i]);
+			mostrarDirectory(files[i]); // llamada recursiva
+			// es un fichero
+		    } else {
+			// mostrar por pantalla
+			mostrarFichero(files[i]);
+		    }
+		}
+	    }
+	}
+    }
+
+    private static void mostrarFichero(File ficheroPintar) {
+	if (ficheroPintar.isDirectory()) {
+	    System.out.println("+" + ficheroPintar.getName());
+	} else {
+	    System.out.println(" "
+		    + ficheroPintar.getName()
+		    + " "
+		    + ficheroPintar.length()
+		    + " bytes "
+		    + Fecha.getString(ficheroPintar.lastModified(),
+			    Idioma.CASTELLANO));
+
+	}
     }
 }
