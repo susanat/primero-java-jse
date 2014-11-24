@@ -1,6 +1,7 @@
 package com.ipartek.formacion.primero.util;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,10 +31,10 @@ public class FicheroTest {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
-	/*
-	 * assertTrue(FICHERO_NAME_TEST1 + " no se pudo eliminar ",
-	 * Fichero.remove(FICHERO_NAME_TEST1));
-	 */
+
+	assertTrue(FICHERO_NAME_TEST1 + " no se pudo eliminar ",
+		Fichero.remove(FICHERO_NAME_TEST1));
+
     }
 
     @Before
@@ -51,32 +52,45 @@ public class FicheroTest {
 
     }
 
-    /*
-     * @Test public void testRead() {
-     *
-     * try { assertTrue(Fichero .create(FICHERO_NAME_TEST1,
-     * FICHERO_CONTENT_TEST2)); Fichero.read(FICHERO_NAME_TEST1); } catch
-     * (Exception e) { fail("Exception leyendo fichero"); }
-     *
-     * }
-     *
-     * @Test(timeout = 500 * 3) public void testWriteString() { String content =
-     * "";
-     *
-     * for (int i = 0; i < BUCLE; i++) { content += "Linea" + i + "\n"; }
-     * Fichero.create(FICHERO_NAME_TEST1, content);
-     * Fichero.read(FICHERO_NAME_TEST1); assertTrue(FICHERO_NAME_TEST1 +
-     * " no se pudo eliminar ", Fichero.remove(FICHERO_NAME_TEST1));
-     *
-     * }
-     *
-     * @Test(timeout = 1000 * 3) public void testWriteStringBuilder() {
-     * StringBuilder sbContent = new StringBuilder(); for (int i = 0; i < BUCLE;
-     * i++) { sbContent.append("Linea" + i + "\n"); }
-     * Fichero.create(FICHERO_NAME_TEST1, sbContent.toString());
-     * Fichero.read(FICHERO_NAME_TEST1); assertTrue(FICHERO_NAME_TEST1 +
-     * " no se pudo eliminar ", Fichero.remove(FICHERO_NAME_TEST1)); }
-     */
+    @Test
+    public void testRead() {
+
+	try {
+	    assertTrue(Fichero
+		    .create(FICHERO_NAME_TEST1, FICHERO_CONTENT_TEST2));
+	    Fichero.read(FICHERO_NAME_TEST1);
+	} catch (Exception e) {
+	    fail("Exception leyendo fichero");
+	}
+
+    }
+
+    @Test(timeout = 500 * 3)
+    public void testWriteString() {
+	String content = "";
+
+	for (int i = 0; i < BUCLE; i++) {
+	    content += "Linea" + i + "\n";
+	}
+	Fichero.create(FICHERO_NAME_TEST1, content);
+	Fichero.read(FICHERO_NAME_TEST1);
+	assertTrue(FICHERO_NAME_TEST1 + " no se pudo eliminar ",
+		Fichero.remove(FICHERO_NAME_TEST1));
+
+    }
+
+    @Test(timeout = 1000 * 3)
+    public void testWriteStringBuilder() {
+	StringBuilder sbContent = new StringBuilder();
+	for (int i = 0; i < BUCLE; i++) {
+	    sbContent.append("Linea" + i + "\n");
+	}
+	Fichero.create(FICHERO_NAME_TEST1, sbContent.toString());
+	Fichero.read(FICHERO_NAME_TEST1);
+	assertTrue(FICHERO_NAME_TEST1 + " no se pudo eliminar ",
+		Fichero.remove(FICHERO_NAME_TEST1));
+    }
+
     @Test
     public void testDibujarDirectorio() {
 
