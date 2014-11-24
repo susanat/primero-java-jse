@@ -4,20 +4,30 @@ import com.ipartek.formacion.primero.bean.herencia.Vehiculo;
 import com.ipartek.formacion.primero.bean.herencia.VehiculoElectrico;
 import com.ipartek.formacion.primero.bean.herencia.VehiculoGasolina;
 
-public class ExceptionEjemplo2 {
+/**
+ * Diferentes tipos de Exception.
+ *
+ * @author Curso
+ *
+ */
+public final class ExceptionEjemplo2 {
 
-	// propiedades necesarias
+	/**
+	 * Constructor privado para que no se pueda instanciar la clase
+	 */
+	private ExceptionEjemplo2() {
+	}
 
-	static int arrayCorto[] = new int[5];
+	public static void main(final String[] args) {
+		final int[] arrayCorto = new int[5];
 
-	public static void main(final String args[]) {
 		try {
 			System.out.println();
 			System.out.println("Antes de la excepción");
-			// array_corto[10] = 10;
+			arrayCorto[10] = 10;
 
-			final Vehiculo vg = new VehiculoElectrico();
-			((VehiculoGasolina) vg).isGasolina();
+			final Vehiculo vehiculoElectrico = new VehiculoElectrico();
+			((VehiculoGasolina) vehiculoElectrico).isGasolina();
 
 			System.out.println("No hay una excepción");
 		} catch (final ArrayIndexOutOfBoundsException e) {
