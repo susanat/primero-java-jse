@@ -13,47 +13,47 @@ import org.junit.Test;
 
 public class FechaTest {
 
-	GregorianCalendar hoyDate = new GregorianCalendar();
+    GregorianCalendar hoyDate = new GregorianCalendar();
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+    }
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {
+    }
 
-	@Before
-	public void setUp() throws Exception {
-		hoyDate = new GregorianCalendar();
-		hoyDate.setTime(new Date());
-	}
+    @Before
+    public void setUp() throws Exception {
+	hoyDate = new GregorianCalendar();
+	hoyDate.setTime(new Date());
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		hoyDate = null;
-	}
+    @After
+    public void tearDown() throws Exception {
+	hoyDate = null;
+    }
 
-	@Test
-	public void testFecha() {
+    @Test
+    public void testFecha() {
 
-		String hoyCastellano = hoyDate.get(GregorianCalendar.DAY_OF_MONTH)
-				+ "/" + (hoyDate.get(GregorianCalendar.MONTH) + 1) + "/"
-				+ hoyDate.get(GregorianCalendar.YEAR);
+	String hoyCastellano = hoyDate.get(GregorianCalendar.DAY_OF_MONTH)
+		+ "/" + (hoyDate.get(GregorianCalendar.MONTH) + 1) + "/"
+		+ hoyDate.get(GregorianCalendar.YEAR);
 
-		String hoyEuskera = hoyDate.get(GregorianCalendar.YEAR) + "/"
-				+ (hoyDate.get(GregorianCalendar.MONTH) + 1) + "/"
-				+ hoyDate.get(GregorianCalendar.DAY_OF_MONTH);
+	String hoyEuskera = hoyDate.get(GregorianCalendar.YEAR) + "/"
+		+ (hoyDate.get(GregorianCalendar.MONTH) + 1) + "/"
+		+ hoyDate.get(GregorianCalendar.DAY_OF_MONTH);
 
-		// Comprueba la fecha pasandole la fecha entera con hoyDate
-		assertEquals(hoyCastellano, Fecha.getString(hoyDate, Idioma.CASTELLANO));
-		assertEquals(hoyEuskera, Fecha.getString(hoyDate, Idioma.EUSKERA));
+	// Comprueba la fecha pasandole la fecha entera con hoyDate
+	assertEquals(hoyCastellano, Fecha.getString(hoyDate, Idioma.CASTELLANO));
+	assertEquals(hoyEuskera, Fecha.getString(hoyDate, Idioma.EUSKERA));
 
-		// Comprueba la fecha pasandole la fecha en milisegundos
-		assertEquals(hoyCastellano,
-				Fecha.getString(hoyDate.getTimeInMillis(), Idioma.CASTELLANO));
-		assertEquals(hoyEuskera,
-				Fecha.getString(hoyDate.getTimeInMillis(), Idioma.EUSKERA));
-	}
+	// Comprueba la fecha pasandole la fecha en milisegundos
+	assertEquals(hoyCastellano,
+		Fecha.getString(hoyDate.getTimeInMillis(), Idioma.CASTELLANO));
+	assertEquals(hoyEuskera,
+		Fecha.getString(hoyDate.getTimeInMillis(), Idioma.EUSKERA));
+    }
 
 }
