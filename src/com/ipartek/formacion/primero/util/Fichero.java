@@ -5,9 +5,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 
 public class Fichero {
 
@@ -86,6 +88,19 @@ public class Fichero {
 		}
 	}
 
+	public static void writeFile(String fichName, ArrayList<String> contenido) {
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter(fichName,
+					true));
+			for (int i = 0; i < contenido.size(); i++) {
+				out.write(contenido.get(i));
+			}
+
+			out.close();
+		} catch (IOException e) {
+		}
+	}
+
 	/**
 	 * Eliminar Fichero
 	 *
@@ -103,5 +118,71 @@ public class Fichero {
 		}
 		return resul;
 
+	}
+
+	/**
+	 * Metodo para listar por pantalla una carpeta con los ficheros que tiene
+	 * dentro
+	 *
+	 * @param path
+	 *            path del directorio a listar
+	 */
+
+	public static void listarCarpeta(File directory) {
+		// comprobar que exista
+		if (directory.exists()) {
+			// obtener todos los path hijos de este directorio
+			File[] files = directory.listFiles();
+			if (null != files) {
+				for (int i = 0; i < files.length; i++) {
+					// es un direcotorio
+					if (files[i].isDirectory()) {
+						mostrarFichero(files[i]);
+						listarCarpeta(files[i]); // llamada recursiva
+						// es un fichero
+					} else {
+						// mostrar por pantalla
+						mostrarFichero(files[i]);
+					}
+				}
+			}
+		}
+	}
+
+	private static void mostrarFichero(File ficheroPintar) {
+		if (ficheroPintar.isDirectory()) {
+			System.out.println("+" + ficheroPintar.getName());
+		} else {
+			System.out.println("\t"
+					+ ficheroPintar.getName()
+					+ " "
+					+ ficheroPintar.length()
+					+ " bytes "
+					+ Fecha.getString(ficheroPintar.lastModified(),
+							Idioma.CASTELLANO));
+
+		}
+	}
+
+	/**
+	 * Elimina un directorio y todo su contenido
+	 *
+	 * @param directory
+	 * @return
+	 */
+	public static boolean deleteDirectory(File directory) {
+		if (directory.exists()) {
+			File[] files = directory.listFiles();
+			if (null != files) {
+				for (int i = 0; i < files.length; i++) {
+					if (files[i].isDirectory()) {
+						deleteDirectory(files[i]);
+					} else {
+						files[i].delete();
+					}
+				}
+			}
+		}
+		return (directory.delete());
 	}
 }
